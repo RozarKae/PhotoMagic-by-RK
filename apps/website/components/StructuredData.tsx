@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const StructuredData: React.FC = () => {
-  const jsonLd = {
+  const businessJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'PhotographyBusiness',
     name: 'PhotoMagic Studio',
@@ -32,10 +32,47 @@ export const StructuredData: React.FC = () => {
     sameAs: ['https://instagram.com/photomagicstudio', 'https://facebook.com/photomagicstudio'],
   };
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://photomagic.studio',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Portfolio',
+        item: 'https://photomagic.studio/portfolio',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Services',
+        item: 'https://photomagic.studio/services',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Investment',
+        item: 'https://photomagic.studio/packages',
+      },
+    ],
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+    </>
   );
 };

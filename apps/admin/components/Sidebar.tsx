@@ -16,6 +16,18 @@ import {
   Radio,
   ShieldCheck,
   Server,
+  Bot,
+  Wand2,
+  SlidersHorizontal,
+  BookMarked,
+  CheckCircle2,
+  Megaphone,
+  BarChart2,
+  GitBranch,
+  Building2,
+  Globe,
+  Sliders,
+  ScanFace,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -26,6 +38,22 @@ export const Sidebar: React.FC = () => {
 
   const navItems = [
     { label: 'Command Center', href: '/admin', icon: LayoutDashboard },
+    { label: 'Album Studio', href: '/album-studio', icon: BookOpen },
+    { label: 'Delivery Center', href: '/delivery-center', icon: ImageIcon },
+    { label: 'Studio Workflow', href: '/studio-workflow', icon: GitBranch },
+    { label: 'AI Face Enhancer', href: '/ai-face-enhancement', icon: ScanFace },
+    { label: 'AI Editing Engine', href: '/ai-editing-foundation', icon: Sliders },
+    { label: 'AI Post-Production Studio', href: '/ai-editing-studio', icon: Wand2 },
+    { label: 'SaaS Platform Engine', href: '/platform', icon: Globe },
+    { label: 'Enterprise & Branches', href: '/enterprise', icon: Building2 },
+    { label: 'Studio Automation', href: '/automation', icon: GitBranch },
+    { label: 'Business Intelligence', href: '/analytics', icon: BarChart2 },
+    { label: 'AI Marketing Studio', href: '/ai-marketing', icon: Megaphone },
+    { label: 'AI Client Proofing', href: '/ai-proofing', icon: CheckCircle2 },
+    { label: 'AI Album Designer', href: '/ai-album-designer', icon: BookMarked },
+    { label: 'AI Photo Editor', href: '/ai-editor', icon: SlidersHorizontal },
+    { label: 'AI Photo Generator', href: '/ai-generator', icon: Wand2 },
+    { label: 'AI Studio Hub', href: '/ai-studio', icon: Bot },
     { label: 'DevOps & Deploy', href: '/devops', icon: Server },
     { label: 'AI Assistant', href: '/ai-assistant', icon: Sparkles },
     { label: 'Integrations Hub', href: '/integrations', icon: Radio },
@@ -53,9 +81,7 @@ export const Sidebar: React.FC = () => {
           {!isCollapsed && (
             <div className="flex flex-col">
               <span className="font-bold text-text-primary text-sm tracking-tight">PHOTOMAGIC</span>
-              <span className="text-[10px] text-gold-500 uppercase tracking-widest font-semibold">
-                Studio OS
-              </span>
+              <span className="text-[10px] text-gold-500 uppercase tracking-widest font-semibold">Studio OS</span>
             </div>
           )}
         </div>
@@ -73,8 +99,7 @@ export const Sidebar: React.FC = () => {
       <nav className="flex-1 px-3 py-6 flex flex-col gap-1.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive =
-            pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href));
 
           return (
             <Link
