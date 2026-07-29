@@ -1,0 +1,7 @@
+{
+  "name": "@photomagic/tailwind-config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "tailwind.config.ts",
+  "license": "MIT"
+}

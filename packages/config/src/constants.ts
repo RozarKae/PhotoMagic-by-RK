@@ -1,0 +1,24 @@
+export const ERROR_CODES = {
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  FORBIDDEN: 'FORBIDDEN',
+  RESOURCE_NOT_FOUND: 'RESOURCE_NOT_FOUND',
+  SELECTION_LIMIT_EXCEEDED: 'SELECTION_LIMIT_EXCEEDED',
+  PAYMENT_SIGNATURE_INVALID: 'PAYMENT_SIGNATURE_INVALID',
+  RATE_LIMIT_EXCEEDED: 'RATE_LIMIT_EXCEEDED',
+  INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
+} as const;
+
+export const MAX_FILE_SIZES = {
+  RAW_PHOTO: 100 * 1024 * 1024, // 100MB
+  PROOF_PHOTO: 10 * 1024 * 1024, // 10MB
+  AVATAR: 5 * 1024 * 1024, // 5MB
+} as const;
+
+export const ALLOWED_IMAGE_MIME_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/x-canon-cr3',
+  'image/x-nikon-nef',
+  'image/x-sony-arw',
+] as const;

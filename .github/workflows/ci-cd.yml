@@ -1,0 +1,35 @@
+name: PhotoMagic CI/CD Production Pipeline
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Type Check
+        run: pnpm type-check
+
+      - name: Run ESLint
+        run: pnpm lint
+
+      - name: Build All Monorepo Applications
+        run: pnpm build

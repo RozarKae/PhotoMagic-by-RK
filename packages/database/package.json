@@ -1,0 +1,20 @@
+{
+  "name": "@photomagic/database",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.42.0"
+  },
+  "devDependencies": {
+    "@photomagic/typescript-config": "workspace:*",
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.5"
+  }
+}
