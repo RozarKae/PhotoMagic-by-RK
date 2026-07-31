@@ -22,7 +22,9 @@ export const AiSkinRetouchControlPanel: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 4.5 AI Skin Retouch & Natural Portrait Controls</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 4.5 AI Skin Retouch & Natural Portrait Controls
+          </h3>
         </div>
         <Badge variant="success">Pore Texture Lock Active (Zero Plastic Look)</Badge>
       </div>

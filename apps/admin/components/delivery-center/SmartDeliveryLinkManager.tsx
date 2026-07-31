@@ -2,10 +2,22 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Link2, QrCode, Lock, Send, ShieldCheck, Copy, CheckCircle2, MessageSquare, Mail } from 'lucide-react';
+import {
+  Link2,
+  QrCode,
+  Lock,
+  Send,
+  ShieldCheck,
+  Copy,
+  CheckCircle2,
+  MessageSquare,
+  Mail,
+} from 'lucide-react';
 
 export const SmartDeliveryLinkManager: React.FC = () => {
-  const [deliveryChannel, setDeliveryChannel] = useState<'private_gallery' | 'secure_link' | 'qr_code' | 'whatsapp' | 'sms'>('private_gallery');
+  const [deliveryChannel, setDeliveryChannel] = useState<
+    'private_gallery' | 'secure_link' | 'qr_code' | 'whatsapp' | 'sms'
+  >('private_gallery');
   const [downloadLimit, setDownloadLimit] = useState(100);
   const [expiryDays, setExpiryDays] = useState(30);
   const [copied, setCopied] = useState(false);
@@ -22,7 +34,9 @@ export const SmartDeliveryLinkManager: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Link2 size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 8.1 Smart Branded Delivery Link Generator</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 8.1 Smart Branded Delivery Link Generator
+          </h3>
         </div>
         <Badge variant="gold">Cloudflare R2 Encrypted Pipeline</Badge>
       </div>
@@ -33,23 +47,27 @@ export const SmartDeliveryLinkManager: React.FC = () => {
           <div className="flex flex-col gap-2">
             <label className="font-bold text-text-primary">Select Delivery Dispatch Method</label>
             <div className="grid grid-cols-2 gap-2">
-              {(['private_gallery', 'secure_link', 'qr_code', 'whatsapp', 'sms'] as const).map((ch) => (
-                <Button
-                  key={ch}
-                  variant={deliveryChannel === ch ? 'primary' : 'secondary'}
-                  size="sm"
-                  onClick={() => setDeliveryChannel(ch)}
-                  className="capitalize text-xs flex items-center justify-center gap-1.5"
-                >
-                  <Send size={12} /> {ch.replace('_', ' ')}
-                </Button>
-              ))}
+              {(['private_gallery', 'secure_link', 'qr_code', 'whatsapp', 'sms'] as const).map(
+                (ch) => (
+                  <Button
+                    key={ch}
+                    variant={deliveryChannel === ch ? 'primary' : 'secondary'}
+                    size="sm"
+                    onClick={() => setDeliveryChannel(ch)}
+                    className="capitalize text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Send size={12} /> {ch.replace('_', ' ')}
+                  </Button>
+                ),
+              )}
             </div>
           </div>
 
           <div className="flex flex-col gap-3 pt-2 border-t border-border-subtle">
             <div className="flex flex-col gap-1">
-              <label className="font-semibold text-text-secondary">Download Limit per Client (Max Files)</label>
+              <label className="font-semibold text-text-secondary">
+                Download Limit per Client (Max Files)
+              </label>
               <input
                 type="number"
                 value={downloadLimit}
@@ -73,11 +91,17 @@ export const SmartDeliveryLinkManager: React.FC = () => {
         {/* Secure Link Preview & Quick Actions */}
         <div className="flex flex-col gap-4 justify-between p-4 rounded-xl bg-surface-base border border-border-subtle">
           <div className="flex flex-col gap-2">
-            <span className="text-text-tertiary font-semibold">Generated Secure Client Access Link</span>
+            <span className="text-text-tertiary font-semibold">
+              Generated Secure Client Access Link
+            </span>
             <div className="p-3 rounded-lg bg-surface-elevated border border-border-subtle font-mono text-[11px] text-gold-500 break-all flex justify-between items-center">
               <span>{deliveryUrl}</span>
               <Button variant="ghost" size="sm" onClick={handleCopyLink} className="flex-shrink-0">
-                {copied ? <CheckCircle2 size={14} className="text-status-success" /> : <Copy size={14} />}
+                {copied ? (
+                  <CheckCircle2 size={14} className="text-status-success" />
+                ) : (
+                  <Copy size={14} />
+                )}
               </Button>
             </div>
           </div>
@@ -87,7 +111,11 @@ export const SmartDeliveryLinkManager: React.FC = () => {
               <Lock size={12} className="text-gold-500" />
               <span>AES-256 Encrypted • Dynamic PIN Verification Active</span>
             </div>
-            <Button variant="primary" size="lg" className="w-full font-bold flex items-center justify-center gap-2">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full font-bold flex items-center justify-center gap-2"
+            >
               <Send size={16} /> Dispatch Direct WhatsApp & Email Notification
             </Button>
           </div>

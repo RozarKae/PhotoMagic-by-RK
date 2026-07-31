@@ -15,8 +15,13 @@ export default function StudioAutomationPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.7 Studio Automation Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Studio Automation & Workflow Engine</h1>
-          <p className="text-sm text-text-secondary">No-code visual workflow builder, automated AI culling & album dispatch triggers, execution monitors, and executive approval queues.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Studio Automation & Workflow Engine
+          </h1>
+          <p className="text-sm text-text-secondary">
+            No-code visual workflow builder, automated AI culling & album dispatch triggers,
+            execution monitors, and executive approval queues.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -38,7 +43,9 @@ export default function StudioAutomationPage() {
 
       {/* Execution Monitoring Logs */}
       <Card variant="glass" className="p-6">
-        <h3 className="text-lg font-bold text-text-primary mb-4">Real-Time Execution Logs & Telemetry</h3>
+        <h3 className="text-lg font-bold text-text-primary mb-4">
+          Real-Time Execution Logs & Telemetry
+        </h3>
         <ExecutionMonitorLogs />
       </Card>
     </main>

@@ -17,7 +17,7 @@ export const StudioEventProvisioningV9Schema = z.object({
     'client_review',
     'printing',
     'delivery',
-    'archive'
+    'archive',
   ]),
 });
 

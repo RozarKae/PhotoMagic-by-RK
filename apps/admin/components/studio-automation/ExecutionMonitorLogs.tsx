@@ -37,7 +37,9 @@ export const ExecutionMonitorLogs: React.FC = () => {
       accessorKey: (row: WorkflowRunRecord) => (
         <div className="flex flex-col">
           <span className="font-bold text-text-primary text-xs">{row.workflowName}</span>
-          <span className="text-[10px] text-gold-500 font-mono font-semibold">{row.triggerEvent}</span>
+          <span className="text-[10px] text-gold-500 font-mono font-semibold">
+            {row.triggerEvent}
+          </span>
         </div>
       ),
     },

@@ -16,8 +16,13 @@ export default function EnterpriseManagementPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.8 Multi-Branch & Enterprise Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Multi-Branch & Enterprise Management</h1>
-          <p className="text-sm text-text-secondary">Centralized enterprise command platform for multi-branch studio locations, corporate hierarchy, inter-branch gear transfers, and inventory tracking.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Multi-Branch & Enterprise Management
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Centralized enterprise command platform for multi-branch studio locations, corporate
+            hierarchy, inter-branch gear transfers, and inventory tracking.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

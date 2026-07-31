@@ -11,7 +11,15 @@ export const AiColorMatchingHarmonizer: React.FC = () => {
   const [tintShift, setTintShift] = useState(-5);
 
   const presets = [
-    'Wedding Warm', 'Luxury Gold', 'Moody', 'Cinematic', 'Editorial', 'Natural', 'Vintage', 'Film', 'Premium Studio'
+    'Wedding Warm',
+    'Luxury Gold',
+    'Moody',
+    'Cinematic',
+    'Editorial',
+    'Natural',
+    'Vintage',
+    'Film',
+    'Premium Studio',
   ];
 
   return (
@@ -19,7 +27,9 @@ export const AiColorMatchingHarmonizer: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sliders size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 4.6 AI Color Harmonization & Reference Matching</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 4.6 AI Color Harmonization & Reference Matching
+          </h3>
         </div>
         <Badge variant="gold">Scene: Golden Hour Outdoor Detected</Badge>
       </div>
@@ -48,7 +58,9 @@ export const AiColorMatchingHarmonizer: React.FC = () => {
           <div className="p-3 rounded-xl bg-surface-base border border-border-subtle flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ImageIcon size={16} className="text-gold-500" />
-              <span className="font-semibold text-text-primary">Copy Color Grade from Reference Photo</span>
+              <span className="font-semibold text-text-primary">
+                Copy Color Grade from Reference Photo
+              </span>
             </div>
             <Button variant="secondary" size="sm" className="text-xs">
               Upload Reference

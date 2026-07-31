@@ -3,7 +3,15 @@ import { z } from 'zod';
 export const createWorkflowSchema = z.object({
   name: z.string().min(2, 'Workflow name is required'),
   description: z.string().optional(),
-  triggerType: z.enum(['lead.received', 'booking.confirmed', 'payment.success', 'album.approved', 'cron.scheduled']).default('lead.received'),
+  triggerType: z
+    .enum([
+      'lead.received',
+      'booking.confirmed',
+      'payment.success',
+      'album.approved',
+      'cron.scheduled',
+    ])
+    .default('lead.received'),
   isActive: z.boolean().default(true),
 });
 

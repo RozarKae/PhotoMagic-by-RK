@@ -13,7 +13,9 @@ export const ApprovalDownloadCenter: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ShieldCheck size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Digital Signature Approval & ZIP Download Center</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Digital Signature Approval & ZIP Download Center
+          </h3>
         </div>
         <Badge variant={isApproved ? 'success' : 'gold'}>
           {isApproved ? 'Gallery Approved' : 'Pending Signature'}
@@ -22,7 +24,9 @@ export const ApprovalDownloadCenter: React.FC = () => {
 
       {/* Signature Approval Panel */}
       <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col gap-3 text-xs">
-        <span className="font-bold text-text-primary">Client Final Album & Gallery Signature Approval</span>
+        <span className="font-bold text-text-primary">
+          Client Final Album & Gallery Signature Approval
+        </span>
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <input
             type="text"
@@ -45,7 +49,11 @@ export const ApprovalDownloadCenter: React.FC = () => {
 
       {/* Resolution Download Center */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <Download size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Original RAW ZIP</span>
@@ -53,7 +61,11 @@ export const ApprovalDownloadCenter: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <Download size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Web Proofs ZIP</span>
@@ -61,7 +73,11 @@ export const ApprovalDownloadCenter: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <Download size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Social Media Kit</span>

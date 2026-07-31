@@ -24,7 +24,9 @@ export const CameraSimulationControls: React.FC<CameraSimulationControlsProps> =
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Camera size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Optical & Lighting Camera Simulation</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Optical & Lighting Camera Simulation
+          </h3>
         </div>
         <Badge variant="gold">Leica / ARRI Optical Engine</Badge>
       </div>

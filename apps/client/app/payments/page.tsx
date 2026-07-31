@@ -14,8 +14,13 @@ export default function ClientPaymentsPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C9 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Payments & Official Invoices</h1>
-          <p className="text-sm text-text-secondary">Track retainer advances, download official GST invoices & payment receipts, and make secure online payments.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Payments & Official Invoices
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Track retainer advances, download official GST invoices & payment receipts, and make
+            secure online payments.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

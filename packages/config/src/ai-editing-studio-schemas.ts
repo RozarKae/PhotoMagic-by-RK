@@ -2,9 +2,25 @@ import { z } from 'zod';
 
 export const AiObjectRemovalSchema = z.object({
   imageUrl: z.string().url(),
-  selectionTool: z.enum(['brush', 'smart_lasso', 'rectangle', 'circle', 'magic_select', 'auto_detect']),
+  selectionTool: z.enum([
+    'brush',
+    'smart_lasso',
+    'rectangle',
+    'circle',
+    'magic_select',
+    'auto_detect',
+  ]),
   qualityMode: z.enum(['fast', 'balanced', 'high_quality', 'maximum_quality']),
-  targetType: z.enum(['people', 'photobombers', 'vehicles', 'wires', 'poles', 'trash', 'reflections', 'shadows']),
+  targetType: z.enum([
+    'people',
+    'photobombers',
+    'vehicles',
+    'wires',
+    'poles',
+    'trash',
+    'reflections',
+    'shadows',
+  ]),
   preserveTexture: z.boolean().default(true),
 });
 
@@ -25,7 +41,17 @@ export const AiColorMatchingSchema = z.object({
   sceneType: z.enum(['indoor', 'outdoor', 'golden_hour', 'night', 'flash', 'studio', 'cloudy']),
   warmthShift: z.number().min(-100).max(100),
   tintShift: z.number().min(-100).max(100),
-  presetCategory: z.enum(['Wedding Warm', 'Luxury Gold', 'Moody', 'Cinematic', 'Editorial', 'Natural', 'Vintage', 'Film', 'Premium Studio']),
+  presetCategory: z.enum([
+    'Wedding Warm',
+    'Luxury Gold',
+    'Moody',
+    'Cinematic',
+    'Editorial',
+    'Natural',
+    'Vintage',
+    'Film',
+    'Premium Studio',
+  ]),
 });
 
 export type AiObjectRemoval = z.infer<typeof AiObjectRemovalSchema>;

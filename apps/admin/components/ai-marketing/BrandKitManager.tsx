@@ -10,7 +10,9 @@ export const BrandKitManager: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Palette size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Studio Brand Kit & Watermark Manager</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Studio Brand Kit & Watermark Manager
+          </h3>
         </div>
         <Badge variant="gold">Auto Branding Applied</Badge>
       </div>
@@ -31,13 +33,17 @@ export const BrandKitManager: React.FC = () => {
           <span className="font-semibold text-text-tertiary">Studio Watermark PNG</span>
           <div className="flex items-center justify-between">
             <span className="font-mono text-gold-500 font-bold">PhotoMagic_Gold.png</span>
-            <Button variant="ghost" size="sm"><Upload size={14} /></Button>
+            <Button variant="ghost" size="sm">
+              <Upload size={14} />
+            </Button>
           </div>
         </div>
 
         <div className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex flex-col gap-2">
           <span className="font-semibold text-text-tertiary">Typography Preset</span>
-          <span className="font-serif font-bold text-text-primary text-sm">Cinematic Serif Header</span>
+          <span className="font-serif font-bold text-text-primary text-sm">
+            Cinematic Serif Header
+          </span>
         </div>
       </div>
     </Card>

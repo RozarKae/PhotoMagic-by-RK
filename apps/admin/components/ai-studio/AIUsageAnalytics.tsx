@@ -7,7 +7,9 @@ export const AIUsageAnalytics: React.FC = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <Card variant="glass" className="p-6 flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-semibold uppercase text-text-tertiary">Today's Generation Count</span>
+          <span className="text-xs font-semibold uppercase text-text-tertiary">
+            Today's Generation Count
+          </span>
           <div className="p-2 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20">
             <Activity size={18} />
           </div>
@@ -18,7 +20,9 @@ export const AIUsageAnalytics: React.FC = () => {
 
       <Card variant="glass" className="p-6 flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-semibold uppercase text-text-tertiary">Monthly API Cost</span>
+          <span className="text-xs font-semibold uppercase text-text-tertiary">
+            Monthly API Cost
+          </span>
           <div className="p-2 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20">
             <DollarSign size={18} />
           </div>
@@ -29,7 +33,9 @@ export const AIUsageAnalytics: React.FC = () => {
 
       <Card variant="glass" className="p-6 flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-semibold uppercase text-text-tertiary">Avg. Processing Time</span>
+          <span className="text-xs font-semibold uppercase text-text-tertiary">
+            Avg. Processing Time
+          </span>
           <div className="p-2 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20">
             <Clock size={18} />
           </div>
@@ -40,7 +46,9 @@ export const AIUsageAnalytics: React.FC = () => {
 
       <Card variant="glass" className="p-6 flex flex-col justify-between">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-xs font-semibold uppercase text-text-tertiary">Credits Consumed</span>
+          <span className="text-xs font-semibold uppercase text-text-tertiary">
+            Credits Consumed
+          </span>
           <div className="p-2 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20">
             <Coins size={18} />
           </div>

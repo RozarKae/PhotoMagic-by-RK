@@ -10,13 +10,19 @@ export const AIBackgroundObjectTools: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Scissors size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Background Tools & Object Cleanup</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Background Tools & Object Cleanup
+          </h3>
         </div>
         <Badge variant="gold">Content-Aware Segmentation</Badge>
       </div>
 
       <div className="grid grid-cols-2 gap-3 text-xs">
-        <Button variant="secondary" size="sm" className="flex items-center justify-start gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-start gap-2 p-3 h-auto"
+        >
           <Scissors size={16} className="text-gold-500 flex-shrink-0" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Remove Background</span>
@@ -24,7 +30,11 @@ export const AIBackgroundObjectTools: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-start gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-start gap-2 p-3 h-auto"
+        >
           <CloudSun size={16} className="text-gold-500 flex-shrink-0" />
           <div className="flex flex-col text-left">
             <span className="font-bold">AI Sky Replacement</span>
@@ -32,7 +42,11 @@ export const AIBackgroundObjectTools: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-start gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-start gap-2 p-3 h-auto"
+        >
           <Eraser size={16} className="text-gold-500 flex-shrink-0" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Object Eraser Brush</span>
@@ -40,7 +54,11 @@ export const AIBackgroundObjectTools: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-start gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-start gap-2 p-3 h-auto"
+        >
           <Sparkles size={16} className="text-gold-500 flex-shrink-0" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Bokeh Lens Blur</span>

@@ -46,9 +46,7 @@ export const MarketplacePluginHub: React.FC = () => {
   ]);
 
   const handleInstall = (id: string) => {
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, installed: true } : item))
-    );
+    setItems((prev) => prev.map((item) => (item.id === id ? { ...item, installed: true } : item)));
   };
 
   return (
@@ -56,17 +54,24 @@ export const MarketplacePluginHub: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Store size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">PhotoMagic Studio OS Marketplace & Extension Hub</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            PhotoMagic Studio OS Marketplace & Extension Hub
+          </h3>
         </div>
         <Badge variant="gold">Plugins & LUT Packs</Badge>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
         {items.map((item) => (
-          <div key={item.id} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between gap-3">
+          <div
+            key={item.id}
+            className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between gap-3"
+          >
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-center">
-                <Badge variant="gold" className="text-[9px]">{item.category}</Badge>
+                <Badge variant="gold" className="text-[9px]">
+                  {item.category}
+                </Badge>
                 <div className="flex items-center gap-1 text-gold-500 font-bold text-[11px]">
                   <Star size={12} fill="currentColor" /> {item.rating}
                 </div>

@@ -3,7 +3,14 @@ import { z } from 'zod';
 export const AiUpscalingSchema = z.object({
   imageUrl: z.string().url(),
   scaleFactor: z.enum(['2x', '4x', '6x', '8x', 'custom']),
-  enhancementMode: z.enum(['photo', 'portrait', 'landscape', 'architecture', 'artwork', 'low_res_recovery']),
+  enhancementMode: z.enum([
+    'photo',
+    'portrait',
+    'landscape',
+    'architecture',
+    'artwork',
+    'low_res_recovery',
+  ]),
   faceReconstruction: z.boolean().default(true),
   fabricDetailRecovery: z.boolean().default(true),
   noiseReductionLevel: z.number().min(0).max(100).default(50),
@@ -12,7 +19,16 @@ export const AiUpscalingSchema = z.object({
 export const AiBatchProcessingSchema = z.object({
   batchName: z.string().min(2),
   totalImages: z.number().min(1),
-  operations: z.array(z.enum(['background_removal', 'object_removal', 'skin_retouch', 'color_match', 'upscaling', 'watermark'])),
+  operations: z.array(
+    z.enum([
+      'background_removal',
+      'object_removal',
+      'skin_retouch',
+      'color_match',
+      'upscaling',
+      'watermark',
+    ]),
+  ),
   gpuAcceleration: z.boolean().default(true),
 });
 

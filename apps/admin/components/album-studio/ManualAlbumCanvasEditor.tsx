@@ -2,7 +2,22 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Sliders, RotateCw, ZoomIn, ZoomOut, Move, Scissors, Trash2, Plus, Copy, Undo, Redo, ShieldAlert, CheckCircle2, Lock } from 'lucide-react';
+import {
+  Sliders,
+  RotateCw,
+  ZoomIn,
+  ZoomOut,
+  Move,
+  Scissors,
+  Trash2,
+  Plus,
+  Copy,
+  Undo,
+  Redo,
+  ShieldAlert,
+  CheckCircle2,
+  Lock,
+} from 'lucide-react';
 
 export const ManualAlbumCanvasEditor: React.FC = () => {
   const [currentSpread, setCurrentSpread] = useState(1);
@@ -11,8 +26,16 @@ export const ManualAlbumCanvasEditor: React.FC = () => {
   const [showBleedGuides, setShowBleedGuides] = useState(true);
 
   const imagesOnSpread = [
-    { id: 'img-1', url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', label: 'Mandap Vows (Hero)' },
-    { id: 'img-2', url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', label: 'Ring Exchange' },
+    {
+      id: 'img-1',
+      url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
+      label: 'Mandap Vows (Hero)',
+    },
+    {
+      id: 'img-2',
+      url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
+      label: 'Ring Exchange',
+    },
   ];
 
   return (
@@ -20,23 +43,36 @@ export const ManualAlbumCanvasEditor: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-3 border-b border-border-subtle">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-mono font-bold text-gold-500 text-sm">Spread #{currentSpread} of 15</span>
+            <span className="font-mono font-bold text-gold-500 text-sm">
+              Spread #{currentSpread} of 15
+            </span>
             <Badge variant="gold">12x18 Inches • 300 DPI Master</Badge>
           </div>
         </div>
 
         {/* Canvas Toolbar Controls */}
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <Button variant="ghost" size="sm" onClick={() => setZoomLevel((z) => Math.max(50, z - 10))}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setZoomLevel((z) => Math.max(50, z - 10))}
+          >
             <ZoomOut size={14} />
           </Button>
           <span className="font-mono text-[10px] text-text-tertiary">{zoomLevel}%</span>
-          <Button variant="ghost" size="sm" onClick={() => setZoomLevel((z) => Math.min(150, z + 10))}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setZoomLevel((z) => Math.min(150, z + 10))}
+          >
             <ZoomIn size={14} />
           </Button>
           <span className="h-4 w-px bg-border-subtle mx-1" />
           <Button variant="ghost" size="sm" onClick={() => setShowBleedGuides(!showBleedGuides)}>
-            <ShieldAlert size={14} className={showBleedGuides ? 'text-gold-500' : 'text-text-tertiary'} />
+            <ShieldAlert
+              size={14}
+              className={showBleedGuides ? 'text-gold-500' : 'text-text-tertiary'}
+            />
             {showBleedGuides ? 'Bleed Guides On' : 'Guides Off'}
           </Button>
           <span className="h-4 w-px bg-border-subtle mx-1" />
@@ -65,7 +101,11 @@ export const ManualAlbumCanvasEditor: React.FC = () => {
 
           {/* Left Page (Page A) */}
           <div className="flex-1 border-r border-border-subtle p-4 relative group cursor-move flex flex-col justify-center items-center overflow-hidden">
-            <img src={imagesOnSpread[0].url} alt="Left" className="w-full h-full object-cover rounded-md" />
+            <img
+              src={imagesOnSpread[0].url}
+              alt="Left"
+              className="w-full h-full object-cover rounded-md"
+            />
             <div className="absolute bottom-3 left-3 bg-canvas/90 backdrop-blur-md px-2 py-1 rounded text-[9px] text-gold-500 font-mono">
               Left Page (300 DPI)
             </div>
@@ -80,7 +120,11 @@ export const ManualAlbumCanvasEditor: React.FC = () => {
 
           {/* Right Page (Page B) */}
           <div className="flex-1 p-4 relative group cursor-move flex flex-col justify-center items-center overflow-hidden">
-            <img src={imagesOnSpread[1].url} alt="Right" className="w-full h-full object-cover rounded-md" />
+            <img
+              src={imagesOnSpread[1].url}
+              alt="Right"
+              className="w-full h-full object-cover rounded-md"
+            />
             <div className="absolute bottom-3 right-3 bg-canvas/90 backdrop-blur-md px-2 py-1 rounded text-[9px] text-gold-500 font-mono">
               Right Page (300 DPI)
             </div>

@@ -54,12 +54,15 @@ export default function PackagesPage() {
       <main className="flex-1 py-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Transparent Investment</Badge>
+            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+              Transparent Investment
+            </Badge>
             <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-2">
               Curated Collections & Pricing
             </h1>
             <p className="text-sm text-text-secondary mt-2 font-light">
-              Bespoke photography and cinema collections crafted for extraordinary celebrations worldwide.
+              Bespoke photography and cinema collections crafted for extraordinary celebrations
+              worldwide.
             </p>
           </div>
 
@@ -80,11 +83,15 @@ export default function PackagesPage() {
                 )}
                 <div>
                   <h3 className="text-xl font-bold text-text-primary mb-1">{tier.title}</h3>
-                  <div className="text-3xl font-extrabold text-gold-500 mb-2 font-mono">{tier.price}</div>
-                  
+                  <div className="text-3xl font-extrabold text-gold-500 mb-2 font-mono">
+                    {tier.price}
+                  </div>
+
                   <div className="p-3 rounded-xl bg-surface-base border border-border-subtle mb-6 flex items-start gap-2 text-xs">
                     <UserCheck size={14} className="text-gold-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-text-secondary font-light text-[11px] leading-relaxed">{tier.audience}</span>
+                    <span className="text-text-secondary font-light text-[11px] leading-relaxed">
+                      {tier.audience}
+                    </span>
                   </div>
 
                   <ul className="flex flex-col gap-3 mb-8">

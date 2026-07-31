@@ -16,8 +16,13 @@ export default function AIEditingFoundationPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 4.0 AI Editing Engine Foundation</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Editing Engine Foundation Workspace</h1>
-          <p className="text-sm text-text-secondary">Non-destructive editing infrastructure, interactive Before/After split slider stage, undo/redo state stacks, non-destructive versioning, and async job queues.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Editing Engine Foundation Workspace
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Non-destructive editing infrastructure, interactive Before/After split slider stage,
+            undo/redo state stacks, non-destructive versioning, and async job queues.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

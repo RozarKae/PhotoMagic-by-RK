@@ -62,7 +62,7 @@ export default function PortfolioPage() {
       }
       if (e.key === 'ArrowLeft') {
         setSelectedImageIndex((prev) =>
-          prev !== null ? (prev - 1 + filteredStories.length) % filteredStories.length : 0
+          prev !== null ? (prev - 1 + filteredStories.length) % filteredStories.length : 0,
         );
       }
     };
@@ -77,7 +77,9 @@ export default function PortfolioPage() {
       <main className="flex-1 py-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Cinematic Visual Portfolio</Badge>
+            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+              Cinematic Visual Portfolio
+            </Badge>
             <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-2">
               Curated Masterpiece Stories
             </h1>
@@ -132,7 +134,9 @@ export default function PortfolioPage() {
                   <span className="text-xs text-gold-500 font-mono flex items-center gap-1">
                     <MapPin size={12} /> {story.location}
                   </span>
-                  <p className="text-xs text-text-secondary font-light leading-relaxed pt-1">{story.desc}</p>
+                  <p className="text-xs text-text-secondary font-light leading-relaxed pt-1">
+                    {story.desc}
+                  </p>
                 </div>
               </Card>
             ))}
@@ -160,7 +164,7 @@ export default function PortfolioPage() {
           <button
             onClick={() =>
               setSelectedImageIndex(
-                (selectedImageIndex - 1 + filteredStories.length) % filteredStories.length
+                (selectedImageIndex - 1 + filteredStories.length) % filteredStories.length,
               )
             }
             className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-surface-elevated/80 backdrop-blur-md text-text-secondary hover:text-gold-500 border border-border-subtle transition-colors"
@@ -169,9 +173,7 @@ export default function PortfolioPage() {
           </button>
 
           <button
-            onClick={() =>
-              setSelectedImageIndex((selectedImageIndex + 1) % filteredStories.length)
-            }
+            onClick={() => setSelectedImageIndex((selectedImageIndex + 1) % filteredStories.length)}
             className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-surface-elevated/80 backdrop-blur-md text-text-secondary hover:text-gold-500 border border-border-subtle transition-colors"
           >
             <ChevronRight size={24} />

@@ -16,7 +16,11 @@ export const CustomReportExporter: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <Download size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Full Executive PDF Report</span>
@@ -24,7 +28,11 @@ export const CustomReportExporter: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <FileSpreadsheet size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Excel Revenue Ledger</span>
@@ -32,7 +40,11 @@ export const CustomReportExporter: React.FC = () => {
           </div>
         </Button>
 
-        <Button variant="secondary" size="sm" className="flex items-center justify-center gap-2 p-3 h-auto">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center justify-center gap-2 p-3 h-auto"
+        >
           <Printer size={14} className="text-gold-500" />
           <div className="flex flex-col text-left">
             <span className="font-bold">Printable Summary</span>

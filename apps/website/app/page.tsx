@@ -7,7 +7,17 @@ import { Footer } from '../components/Footer';
 import { StructuredData } from '../components/StructuredData';
 import { InquiryForm } from '../components/InquiryForm';
 import { Button, Card, Badge, Container, Grid, Stack, FadeIn } from '@photomagic/ui';
-import { Camera, Star, Award, ShieldCheck, Heart, Crown, Sparkles, Gem, Compass } from 'lucide-react';
+import {
+  Camera,
+  Star,
+  Award,
+  ShieldCheck,
+  Heart,
+  Crown,
+  Sparkles,
+  Gem,
+  Compass,
+} from 'lucide-react';
 import { ROUTES } from '@photomagic/config';
 
 export default function HomePage() {
@@ -100,7 +110,11 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={ROUTES.PUBLIC.BOOKING}>
-                <Button variant="primary" size="lg" className="w-full sm:w-auto font-bold tracking-wide">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="w-full sm:w-auto font-bold tracking-wide"
+                >
                   Request Concierge Consultation
                 </Button>
               </Link>
@@ -117,10 +131,16 @@ export default function HomePage() {
       {/* Storytelling Heritage Block */}
       <section className="py-16 bg-surface-base/60 border-y border-border-subtle">
         <Container className="max-w-4xl text-center">
-          <Badge variant="gold" className="mb-3 uppercase tracking-widest text-[10px]">Our Legacy & Philosophy</Badge>
-          <h2 className="text-3xl font-extrabold text-text-primary mb-4">Where Emotion Meets Fine Art</h2>
+          <Badge variant="gold" className="mb-3 uppercase tracking-widest text-[10px]">
+            Our Legacy & Philosophy
+          </Badge>
+          <h2 className="text-3xl font-extrabold text-text-primary mb-4">
+            Where Emotion Meets Fine Art
+          </h2>
           <p className="text-sm md:text-base text-text-secondary leading-relaxed font-light italic">
-            "Founded on the philosophy that true luxury lies in emotion, light, and timeless permanence, PhotoMagic Studio brings a cinematic, fine-art perspective to life's grandest celebrations. Every frame is handcrafted to endure for generations."
+            "Founded on the philosophy that true luxury lies in emotion, light, and timeless
+            permanence, PhotoMagic Studio brings a cinematic, fine-art perspective to life's
+            grandest celebrations. Every frame is handcrafted to endure for generations."
           </p>
         </Container>
       </section>
@@ -130,7 +150,9 @@ export default function HomePage() {
         <Container>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
             <div>
-              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Curated Stories</Badge>
+              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+                Curated Stories
+              </Badge>
               <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
                 Featured Portfolio Chapters
               </h2>
@@ -175,10 +197,15 @@ export default function HomePage() {
       <section className="py-24 bg-surface-base/40 border-y border-border-subtle">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Craftsmanship & Artistry</Badge>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">Bespoke Concierge Offerings</h2>
+            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+              Craftsmanship & Artistry
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
+              Bespoke Concierge Offerings
+            </h2>
             <p className="text-sm text-text-secondary mt-2 font-light">
-              Tailored multi-crew collections engineered for world-class celebrations and high-fashion portraiture.
+              Tailored multi-crew collections engineered for world-class celebrations and
+              high-fashion portraiture.
             </p>
           </div>
 
@@ -186,13 +213,19 @@ export default function HomePage() {
             {services.map((srv, idx) => {
               const IconComponent = srv.icon;
               return (
-                <Card key={idx} variant="glass" className="p-8 flex flex-col justify-between hover:border-gold-500/30 transition-all">
+                <Card
+                  key={idx}
+                  variant="glass"
+                  className="p-8 flex flex-col justify-between hover:border-gold-500/30 transition-all"
+                >
                   <div>
                     <div className="rounded-full bg-gold-500/10 w-14 h-14 flex items-center justify-center text-gold-500 mb-6 border border-gold-500/20">
                       <IconComponent size={26} />
                     </div>
                     <h3 className="text-2xl font-bold text-text-primary mb-3">{srv.title}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed font-light">{srv.desc}</p>
+                    <p className="text-sm text-text-secondary leading-relaxed font-light">
+                      {srv.desc}
+                    </p>
                   </div>
                 </Card>
               );
@@ -205,20 +238,30 @@ export default function HomePage() {
       <section className="py-24">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Client Acclaim</Badge>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">Praise From Distinguishing Clients</h2>
+            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+              Client Acclaim
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
+              Praise From Distinguishing Clients
+            </h2>
           </div>
 
           <Grid cols={2}>
             {testimonials.map((item, idx) => (
-              <Card key={idx} variant="glass" className="p-8 flex flex-col justify-between border-border-subtle">
+              <Card
+                key={idx}
+                variant="glass"
+                className="p-8 flex flex-col justify-between border-border-subtle"
+              >
                 <div>
                   <div className="flex gap-1 text-gold-500 mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <p className="text-sm md:text-base text-text-secondary italic mb-6 leading-relaxed font-light">"{item.quote}"</p>
+                  <p className="text-sm md:text-base text-text-secondary italic mb-6 leading-relaxed font-light">
+                    "{item.quote}"
+                  </p>
                 </div>
                 <div className="pt-4 border-t border-border-subtle">
                   <h4 className="text-sm font-bold text-text-primary">{item.client}</h4>
@@ -235,12 +278,16 @@ export default function HomePage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Private Consultation</Badge>
+              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+                Private Consultation
+              </Badge>
               <h2 className="text-4xl font-extrabold text-text-primary mt-2 mb-4">
                 Initiate Your Studio Consultation
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed mb-8 font-light">
-                Share your upcoming wedding date, celebration venue, or editorial project details. Our Studio Director personally responds within 24 hours to confirm date availability and provide a tailored collection proposal.
+                Share your upcoming wedding date, celebration venue, or editorial project details.
+                Our Studio Director personally responds within 24 hours to confirm date availability
+                and provide a tailored collection proposal.
               </p>
               <div className="flex flex-col gap-4 text-xs text-text-secondary">
                 <div className="flex items-center gap-3">
@@ -249,7 +296,10 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <ShieldCheck className="text-gold-500 flex-shrink-0" size={22} />
-                  <span>Private client web proofing, 3D pin comments & Italian flush-mount album co-design</span>
+                  <span>
+                    Private client web proofing, 3D pin comments & Italian flush-mount album
+                    co-design
+                  </span>
                 </div>
               </div>
             </div>

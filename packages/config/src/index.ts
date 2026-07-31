@@ -34,3 +34,5 @@ export * from './album-print-delivery-schemas';
 export * from './delivery-center-v8-schemas';
 export * from './delivery-archive-v8-schemas';
 export * from './studio-workflow-v9-schemas';
+export * from './workflow-completion-v9-schemas';
+export * from './business-growth-v10-schemas';

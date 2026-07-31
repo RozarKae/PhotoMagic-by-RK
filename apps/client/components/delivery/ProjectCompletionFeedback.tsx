@@ -7,7 +7,7 @@ import { Star, Heart, CheckCircle2, MessageSquare } from 'lucide-react';
 export const ProjectCompletionFeedback: React.FC = () => {
   const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState(
-    'PhotoMagic Studio exceeded all our expectations! The 8K cinematic film and Italian gold-foil album are true masterpieces.'
+    'PhotoMagic Studio exceeded all our expectations! The 8K cinematic film and Italian gold-foil album are true masterpieces.',
   );
 
   return (
@@ -15,7 +15,9 @@ export const ProjectCompletionFeedback: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Heart size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Project Completion & Client Testimonial</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Project Completion & Client Testimonial
+          </h3>
         </div>
         <Badge variant="gold">★★★★★ 5.0 Rating Submitted</Badge>
       </div>
@@ -47,7 +49,9 @@ export const ProjectCompletionFeedback: React.FC = () => {
         </div>
 
         <div className="flex justify-between items-center pt-2">
-          <span className="text-[10px] text-text-tertiary">Thank you for letting us capture your royal wedding story!</span>
+          <span className="text-[10px] text-text-tertiary">
+            Thank you for letting us capture your royal wedding story!
+          </span>
           <Button variant="primary" size="sm">
             Submit Testimonial & Review
           </Button>

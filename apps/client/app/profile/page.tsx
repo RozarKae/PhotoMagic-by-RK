@@ -2,7 +2,17 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { User, Mail, Phone, MapPin, Calendar, ShieldCheck, Lock, FileText, Activity } from 'lucide-react';
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  ShieldCheck,
+  Lock,
+  FileText,
+  Activity,
+} from 'lucide-react';
 
 export default function ClientProfilePage() {
   const [name, setName] = useState('Eleanor Vance');
@@ -16,8 +26,13 @@ export default function ClientProfilePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C11 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Client Profile & Account Management</h1>
-          <p className="text-sm text-text-secondary">Manage your personal information, read-only event details, security settings, and legal booking documents.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Client Profile & Account Management
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Manage your personal information, read-only event details, security settings, and legal
+            booking documents.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -28,7 +43,10 @@ export default function ClientProfilePage() {
       </div>
 
       {/* Profile Header Summary */}
-      <Card variant="glass" className="p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+      <Card
+        variant="glass"
+        className="p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6"
+      >
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-gold-500/20 border-2 border-gold-500 flex items-center justify-center font-extrabold text-gold-500 text-xl">
             EV
@@ -38,8 +56,12 @@ export default function ClientProfilePage() {
               <h2 className="text-xl font-extrabold text-text-primary">{name}</h2>
               <Badge variant="gold">Verified Client</Badge>
             </div>
-            <span className="text-xs text-text-secondary">Royal Udaipur Destination Wedding (Jul 2026)</span>
-            <span className="text-[10px] text-text-tertiary font-mono">Client ID: CLT-UDPR-2026-088</span>
+            <span className="text-xs text-text-secondary">
+              Royal Udaipur Destination Wedding (Jul 2026)
+            </span>
+            <span className="text-[10px] text-text-tertiary font-mono">
+              Client ID: CLT-UDPR-2026-088
+            </span>
           </div>
         </div>
 
@@ -52,7 +74,9 @@ export default function ClientProfilePage() {
       {/* Personal Info Form & Read-Only Event Details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card variant="glass" className="p-6 flex flex-col gap-4 text-xs">
-          <h3 className="text-sm font-bold text-text-primary border-b border-border-subtle pb-2">Personal Contact Details</h3>
+          <h3 className="text-sm font-bold text-text-primary border-b border-border-subtle pb-2">
+            Personal Contact Details
+          </h3>
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1">
               <label className="font-semibold text-text-secondary">Full Name</label>
@@ -85,7 +109,9 @@ export default function ClientProfilePage() {
         </Card>
 
         <Card variant="glass" className="p-6 flex flex-col gap-4 text-xs">
-          <h3 className="text-sm font-bold text-text-primary border-b border-border-subtle pb-2">Event & Package Details (Read-Only)</h3>
+          <h3 className="text-sm font-bold text-text-primary border-b border-border-subtle pb-2">
+            Event & Package Details (Read-Only)
+          </h3>
           <div className="flex flex-col gap-2.5">
             <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-base border border-border-subtle">
               <span className="text-text-tertiary">Event Name</span>
@@ -97,11 +123,15 @@ export default function ClientProfilePage() {
             </div>
             <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-base border border-border-subtle">
               <span className="text-text-tertiary">Selected Package</span>
-              <span className="font-bold text-text-primary">Royal Destination Package ($9,000)</span>
+              <span className="font-bold text-text-primary">
+                Royal Destination Package ($9,000)
+              </span>
             </div>
             <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-base border border-border-subtle">
               <span className="text-text-tertiary">Lead Photographer</span>
-              <span className="font-bold text-text-primary">Vikram Sethi (Master Photographer)</span>
+              <span className="font-bold text-text-primary">
+                Vikram Sethi (Master Photographer)
+              </span>
             </div>
           </div>
         </Card>

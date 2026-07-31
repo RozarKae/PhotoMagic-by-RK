@@ -16,8 +16,13 @@ export default function AIProofingSuitePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.4 AI Client Proofing Suite</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Client Selection & Proofing Suite</h1>
-          <p className="text-sm text-text-secondary">Smart photo star ratings, synchronized side-by-side comparison, edit request workflow, and digital signature approvals.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Client Selection & Proofing Suite
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Smart photo star ratings, synchronized side-by-side comparison, edit request workflow,
+            and digital signature approvals.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

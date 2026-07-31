@@ -42,9 +42,7 @@ export const SmartGalleryMasonry: React.FC = () => {
   ]);
 
   const toggleFavorite = (id: string) => {
-    setPhotos((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, isFavorite: !p.isFavorite } : p))
-    );
+    setPhotos((prev) => prev.map((p) => (p.id === id ? { ...p, isFavorite: !p.isFavorite } : p)));
   };
 
   return (
@@ -52,21 +50,32 @@ export const SmartGalleryMasonry: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Smart AI Proofing Gallery & Star Ratings</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Smart AI Proofing Gallery & Star Ratings
+          </h3>
         </div>
         <Badge variant="gold">{photos.length} High-Res Photos Loaded</Badge>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {photos.map((photo) => (
-          <div key={photo.id} className="group relative rounded-xl overflow-hidden bg-surface-base border border-border-subtle hover:border-gold-500/50 transition-all">
+          <div
+            key={photo.id}
+            className="group relative rounded-xl overflow-hidden bg-surface-base border border-border-subtle hover:border-gold-500/50 transition-all"
+          >
             <div className="aspect-[4/3] overflow-hidden relative">
-              <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <img
+                src={photo.url}
+                alt={photo.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
 
               {/* AI Recommendation Badge */}
               {photo.aiBadge && (
                 <div className="absolute top-3 left-3 z-10">
-                  <Badge variant="gold" className="text-[9px] shadow-lg">{photo.aiBadge}</Badge>
+                  <Badge variant="gold" className="text-[9px] shadow-lg">
+                    {photo.aiBadge}
+                  </Badge>
                 </div>
               )}
 
@@ -74,7 +83,9 @@ export const SmartGalleryMasonry: React.FC = () => {
               <button
                 onClick={() => toggleFavorite(photo.id)}
                 className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md border border-white/20 transition-all z-10 ${
-                  photo.isFavorite ? 'bg-gold-500/80 text-surface-base' : 'bg-black/40 text-white hover:text-gold-500'
+                  photo.isFavorite
+                    ? 'bg-gold-500/80 text-surface-base'
+                    : 'bg-black/40 text-white hover:text-gold-500'
                 }`}
               >
                 <Heart size={14} fill={photo.isFavorite ? 'currentColor' : 'none'} />

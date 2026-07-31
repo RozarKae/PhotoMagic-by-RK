@@ -53,7 +53,9 @@ export const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold tracking-tight text-lg leading-none">PHOTOMAGIC</span>
-            <span className="text-[9px] uppercase tracking-widest text-gold-500 font-semibold mt-0.5">Luxury Studio</span>
+            <span className="text-[9px] uppercase tracking-widest text-gold-500 font-semibold mt-0.5">
+              Luxury Studio
+            </span>
           </div>
         </Link>
 
@@ -66,9 +68,7 @@ export const Navbar: React.FC = () => {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-medium transition-all relative py-1 ${
-                  isActive
-                    ? 'text-gold-500 font-bold'
-                    : 'text-text-secondary hover:text-gold-500'
+                  isActive ? 'text-gold-500 font-bold' : 'text-text-secondary hover:text-gold-500'
                 }`}
               >
                 {link.label}

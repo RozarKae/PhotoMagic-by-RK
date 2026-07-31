@@ -12,7 +12,9 @@ export const AlbumCanvasEditor: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-3">
           <BookOpen size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">12x18 Spread Canvas Editor (Pages {currentPage}–{currentPage + 1})</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            12x18 Spread Canvas Editor (Pages {currentPage}–{currentPage + 1})
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="gold">CMYK 300 DPI Validated</Badge>
@@ -29,7 +31,9 @@ export const AlbumCanvasEditor: React.FC = () => {
             alt="Left Spread"
             className="w-full h-full object-cover rounded-lg"
           />
-          <span className="absolute bottom-4 left-4 font-mono text-[10px] text-white/80 bg-black/60 px-2 py-1 rounded">Page 12</span>
+          <span className="absolute bottom-4 left-4 font-mono text-[10px] text-white/80 bg-black/60 px-2 py-1 rounded">
+            Page 12
+          </span>
         </div>
 
         {/* Right Page (Page 13) */}
@@ -39,7 +43,9 @@ export const AlbumCanvasEditor: React.FC = () => {
             alt="Right Spread"
             className="w-full h-full object-cover rounded-lg"
           />
-          <span className="absolute bottom-4 right-4 font-mono text-[10px] text-white/80 bg-black/60 px-2 py-1 rounded">Page 13</span>
+          <span className="absolute bottom-4 right-4 font-mono text-[10px] text-white/80 bg-black/60 px-2 py-1 rounded">
+            Page 13
+          </span>
         </div>
       </div>
     </Card>

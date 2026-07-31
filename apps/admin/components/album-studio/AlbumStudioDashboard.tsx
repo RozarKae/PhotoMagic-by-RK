@@ -2,7 +2,19 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { BookOpen, Search, Plus, Filter, Calendar, User, SlidersHorizontal, CheckCircle2, Clock, Printer, Eye } from 'lucide-react';
+import {
+  BookOpen,
+  Search,
+  Plus,
+  Filter,
+  Calendar,
+  User,
+  SlidersHorizontal,
+  CheckCircle2,
+  Clock,
+  Printer,
+  Eye,
+} from 'lucide-react';
 
 export interface AlbumProjectItem {
   id: string;
@@ -25,7 +37,9 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
   onSelectProject,
   onOpenAutoBuilder,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'in_progress' | 'awaiting_approval' | 'approved' | 'ready_for_print' | 'delivered'>('all');
+  const [activeTab, setActiveTab] = useState<
+    'all' | 'in_progress' | 'awaiting_approval' | 'approved' | 'ready_for_print' | 'delivered'
+  >('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const projects: AlbumProjectItem[] = [
@@ -36,7 +50,8 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
       albumSize: '12x18 Inches',
       totalPages: 30,
       status: 'awaiting_approval',
-      coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
+      coverImage:
+        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
       assignedDesigner: 'Vikram Sethi (Lead Designer)',
       lastUpdated: '10 mins ago',
     },
@@ -47,7 +62,8 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
       albumSize: '10x14 Inches',
       totalPages: 24,
       status: 'approved',
-      coverImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
+      coverImage:
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
       assignedDesigner: 'Ananya Roy (Senior Editor)',
       lastUpdated: '2 hours ago',
     },
@@ -58,7 +74,8 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
       albumSize: '12x18 Inches',
       totalPages: 40,
       status: 'ready_for_print',
-      coverImage: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80',
+      coverImage:
+        'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80',
       assignedDesigner: 'Master Print Director',
       lastUpdated: 'Yesterday',
     },
@@ -69,7 +86,8 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
       albumSize: '12x12 Inches Square',
       totalPages: 20,
       status: 'in_progress',
-      coverImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+      coverImage:
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
       assignedDesigner: 'Vikram Sethi (Lead Designer)',
       lastUpdated: '3 hours ago',
     },
@@ -92,13 +110,23 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
             <BookOpen size={22} />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-text-primary">Professional Album Studio Dashboard</h2>
-            <p className="text-xs text-text-secondary">Manage album projects, AI auto-builders, spread layouts, print orders & client approvals.</p>
+            <h2 className="text-xl font-extrabold text-text-primary">
+              Professional Album Studio Dashboard
+            </h2>
+            <p className="text-xs text-text-secondary">
+              Manage album projects, AI auto-builders, spread layouts, print orders & client
+              approvals.
+            </p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="secondary" size="sm" onClick={onOpenAutoBuilder} className="flex items-center gap-1 text-xs">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={onOpenAutoBuilder}
+            className="flex items-center gap-1 text-xs"
+          >
             <SlidersHorizontal size={14} /> AI Auto Album Builder
           </Button>
           <Button variant="primary" size="sm" className="flex items-center gap-1 text-xs">
@@ -110,7 +138,16 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
       {/* Filter Tabs & Search */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex flex-wrap gap-2 text-xs">
-          {(['all', 'in_progress', 'awaiting_approval', 'approved', 'ready_for_print', 'delivered'] as const).map((tab) => (
+          {(
+            [
+              'all',
+              'in_progress',
+              'awaiting_approval',
+              'approved',
+              'ready_for_print',
+              'delivered',
+            ] as const
+          ).map((tab) => (
             <Button
               key={tab}
               variant={activeTab === tab ? 'primary' : 'secondary'}
@@ -155,8 +192,8 @@ export const AlbumStudioDashboard: React.FC<AlbumStudioDashboardProps> = ({
                   project.status === 'approved'
                     ? 'success'
                     : project.status === 'ready_for_print'
-                    ? 'gold'
-                    : 'info'
+                      ? 'gold'
+                      : 'info'
                 }
                 className="absolute top-3 right-3 text-[9px] uppercase tracking-wider font-bold"
               >

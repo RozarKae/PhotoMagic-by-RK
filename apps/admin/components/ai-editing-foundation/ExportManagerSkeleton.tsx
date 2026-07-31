@@ -13,7 +13,9 @@ export const ExportManagerSkeleton: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Download size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">High-Res Image Export Manager Skeleton</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            High-Res Image Export Manager Skeleton
+          </h3>
         </div>
         <Badge variant="gold">300 DPI Export Ready</Badge>
       </div>

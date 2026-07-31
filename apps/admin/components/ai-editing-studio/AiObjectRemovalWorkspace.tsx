@@ -2,10 +2,24 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Wand2, Brush, Crop, Sparkles, Sliders, Undo, Redo, ShieldCheck, RefreshCw, Eye, Move } from 'lucide-react';
+import {
+  Wand2,
+  Brush,
+  Crop,
+  Sparkles,
+  Sliders,
+  Undo,
+  Redo,
+  ShieldCheck,
+  RefreshCw,
+  Eye,
+  Move,
+} from 'lucide-react';
 
 export const AiObjectRemovalWorkspace: React.FC = () => {
-  const [selectedTool, setSelectedTool] = useState<'brush' | 'smart_lasso' | 'rectangle' | 'magic_select' | 'auto_detect'>('smart_lasso');
+  const [selectedTool, setSelectedTool] = useState<
+    'brush' | 'smart_lasso' | 'rectangle' | 'magic_select' | 'auto_detect'
+  >('smart_lasso');
   const [targetType, setTargetType] = useState('photobomber');
   const [qualityMode, setQualityMode] = useState('maximum_quality');
   const [isRemoving, setIsRemoving] = useState(false);
@@ -30,7 +44,9 @@ export const AiObjectRemovalWorkspace: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Wand2 size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 4.4 AI Generative Object Removal Studio</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 4.4 AI Generative Object Removal Studio
+          </h3>
         </div>
         <Badge variant="gold">Content-Aware Edge Preservation Active</Badge>
       </div>
@@ -41,22 +57,26 @@ export const AiObjectRemovalWorkspace: React.FC = () => {
           <div className="flex flex-col gap-2">
             <label className="font-bold text-text-primary">Interactive Selection Tools</label>
             <div className="grid grid-cols-2 gap-2">
-              {(['brush', 'smart_lasso', 'rectangle', 'magic_select', 'auto_detect'] as const).map((tool) => (
-                <Button
-                  key={tool}
-                  variant={selectedTool === tool ? 'primary' : 'secondary'}
-                  size="sm"
-                  onClick={() => setSelectedTool(tool)}
-                  className="capitalize text-xs flex items-center justify-center gap-1.5"
-                >
-                  <Brush size={12} /> {tool.replace('_', ' ')}
-                </Button>
-              ))}
+              {(['brush', 'smart_lasso', 'rectangle', 'magic_select', 'auto_detect'] as const).map(
+                (tool) => (
+                  <Button
+                    key={tool}
+                    variant={selectedTool === tool ? 'primary' : 'secondary'}
+                    size="sm"
+                    onClick={() => setSelectedTool(tool)}
+                    className="capitalize text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Brush size={12} /> {tool.replace('_', ' ')}
+                  </Button>
+                ),
+              )}
             </div>
           </div>
 
           <div className="flex flex-col gap-2 pt-2 border-t border-border-subtle">
-            <label className="font-semibold text-text-secondary">Brush Mask Thickness ({brushSize}px)</label>
+            <label className="font-semibold text-text-secondary">
+              Brush Mask Thickness ({brushSize}px)
+            </label>
             <input
               type="range"
               min={5}
@@ -68,7 +88,9 @@ export const AiObjectRemovalWorkspace: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-2 pt-2 border-t border-border-subtle">
-            <label className="font-semibold text-text-secondary">Target Object Classification</label>
+            <label className="font-semibold text-text-secondary">
+              Target Object Classification
+            </label>
             <select
               value={targetType}
               onChange={(e) => setTargetType(e.target.value)}
@@ -83,7 +105,9 @@ export const AiObjectRemovalWorkspace: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-2 pt-2 border-t border-border-subtle">
-            <label className="font-semibold text-text-secondary">AI Generative Fill Quality Mode</label>
+            <label className="font-semibold text-text-secondary">
+              AI Generative Fill Quality Mode
+            </label>
             <div className="grid grid-cols-2 gap-2">
               {(['fast', 'balanced', 'high_quality', 'maximum_quality'] as const).map((qm) => (
                 <Button
@@ -129,7 +153,9 @@ export const AiObjectRemovalWorkspace: React.FC = () => {
           </div>
 
           <div className="flex justify-between items-center w-full pt-4 text-xs">
-            <span className="text-[10px] text-text-tertiary font-mono">Texture Continuation • Edge Lock Enabled</span>
+            <span className="text-[10px] text-text-tertiary font-mono">
+              Texture Continuation • Edge Lock Enabled
+            </span>
             <div className="flex gap-2">
               <Button variant="secondary" size="sm" className="text-xs">
                 <Eye size={12} /> Toggle Before/After

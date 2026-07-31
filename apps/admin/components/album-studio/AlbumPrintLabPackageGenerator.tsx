@@ -2,7 +2,16 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Printer, Download, CheckCircle2, ShieldCheck, FileArchive, Layers, HardDrive, FileText } from 'lucide-react';
+import {
+  Printer,
+  Download,
+  CheckCircle2,
+  ShieldCheck,
+  FileArchive,
+  Layers,
+  HardDrive,
+  FileText,
+} from 'lucide-react';
 
 export const AlbumPrintLabPackageGenerator: React.FC = () => {
   const [labPreset, setLabPreset] = useState('graphistudio');
@@ -28,7 +37,9 @@ export const AlbumPrintLabPackageGenerator: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Printer size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 7.7 Professional Print Lab Package Generator</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 7.7 Professional Print Lab Package Generator
+          </h3>
         </div>
         <Badge variant="success">600 DPI CMYK Pre-Flight Passed</Badge>
       </div>
@@ -92,9 +103,15 @@ export const AlbumPrintLabPackageGenerator: React.FC = () => {
           <label className="font-bold text-text-primary">Package Package Asset Checklist</label>
           <div className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex flex-col gap-1">
             <span className="text-text-tertiary">Package Includes:</span>
-            <span className="font-mono text-[10px] text-text-primary">✔ 30 High-Res Spreads (600 DPI TIFF)</span>
-            <span className="font-mono text-[10px] text-text-primary">✔ 24K Gold Cover & Spine Artwork</span>
-            <span className="font-mono text-[10px] text-text-primary">✔ Print Bleed & Margin Spec File</span>
+            <span className="font-mono text-[10px] text-text-primary">
+              ✔ 30 High-Res Spreads (600 DPI TIFF)
+            </span>
+            <span className="font-mono text-[10px] text-text-primary">
+              ✔ 24K Gold Cover & Spine Artwork
+            </span>
+            <span className="font-mono text-[10px] text-text-primary">
+              ✔ Print Bleed & Margin Spec File
+            </span>
           </div>
 
           <Button
@@ -105,7 +122,9 @@ export const AlbumPrintLabPackageGenerator: React.FC = () => {
             className="w-full mt-2 font-bold flex items-center justify-center gap-2"
           >
             <Download size={16} />
-            {isGenerating ? 'Building Lab Package...' : `Generate ${labPreset.toUpperCase()} Print Package`}
+            {isGenerating
+              ? 'Building Lab Package...'
+              : `Generate ${labPreset.toUpperCase()} Print Package`}
           </Button>
         </div>
       </div>

@@ -12,7 +12,9 @@ export const PosterDesignerCanvas: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ImageIcon size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Promotional Poster & Banner Designer</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Promotional Poster & Banner Designer
+          </h3>
         </div>
         <Badge variant="gold">300 DPI Print Ready</Badge>
       </div>
@@ -27,14 +29,21 @@ export const PosterDesignerCanvas: React.FC = () => {
           />
 
           <div className="relative z-10 flex justify-between items-center">
-            <span className="font-extrabold tracking-widest text-gold-500 font-mono text-xs uppercase">PHOTOMAGIC STUDIO OS</span>
+            <span className="font-extrabold tracking-widest text-gold-500 font-mono text-xs uppercase">
+              PHOTOMAGIC STUDIO OS
+            </span>
             <Badge variant="gold">2026-2027 Season</Badge>
           </div>
 
           <div className="relative z-10 flex flex-col items-center gap-2 my-auto">
-            <span className="text-gold-500 uppercase tracking-widest text-xs font-semibold">ROYAL DESTINATION WEDDINGS</span>
+            <span className="text-gold-500 uppercase tracking-widest text-xs font-semibold">
+              ROYAL DESTINATION WEDDINGS
+            </span>
             <h2 className="text-3xl font-extrabold tracking-tight">CRAFTING TIMELESS ELEGANCE</h2>
-            <p className="text-xs text-white/80 max-w-sm">Fine-art luxury wedding photography & cinematic 8K films across Udaipur, Jaipur & Europe.</p>
+            <p className="text-xs text-white/80 max-w-sm">
+              Fine-art luxury wedding photography & cinematic 8K films across Udaipur, Jaipur &
+              Europe.
+            </p>
           </div>
 
           <div className="relative z-10 flex justify-between items-center pt-4 border-t border-white/20 text-[10px]">

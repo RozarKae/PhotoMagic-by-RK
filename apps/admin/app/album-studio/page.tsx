@@ -2,7 +2,10 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { AlbumStudioDashboard, AlbumProjectItem } from '../../components/album-studio/AlbumStudioDashboard';
+import {
+  AlbumStudioDashboard,
+  AlbumProjectItem,
+} from '../../components/album-studio/AlbumStudioDashboard';
 import { AutoAlbumBuilderModal } from '../../components/album-studio/AutoAlbumBuilderModal';
 import { ManualAlbumCanvasEditor } from '../../components/album-studio/ManualAlbumCanvasEditor';
 import { AlbumReviewSystemModal } from '../../components/album-studio/AlbumReviewSystemModal';
@@ -23,7 +26,8 @@ export default function AlbumStudioPage() {
     albumSize: '12x18 Inches',
     totalPages: 30,
     status: 'awaiting_approval',
-    coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
+    coverImage:
+      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
     assignedDesigner: 'Vikram Sethi (Lead Designer)',
     lastUpdated: '10 mins ago',
   });
@@ -37,15 +41,29 @@ export default function AlbumStudioPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phases 6.1 – 7.9 Complete Master Album Studio Suite</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Professional Album Studio Workspace</h1>
-          <p className="text-sm text-text-secondary">AI auto-layout builder, 12x18 spread canvas, 3D cover designer with 24K gold foil stamping, client digital proof review, approval workflow locking, 600 DPI CMYK print lab export engine, version history timeline, and delivery certificate verification.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Professional Album Studio Workspace
+          </h1>
+          <p className="text-sm text-text-secondary">
+            AI auto-layout builder, 12x18 spread canvas, 3D cover designer with 24K gold foil
+            stamping, client digital proof review, approval workflow locking, 600 DPI CMYK print lab
+            export engine, version history timeline, and delivery certificate verification.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="secondary" onClick={() => setReviewModalOpen(true)} className="flex items-center gap-2">
+          <Button
+            variant="secondary"
+            onClick={() => setReviewModalOpen(true)}
+            className="flex items-center gap-2"
+          >
             <Eye size={16} /> Open Review Proofing Hub
           </Button>
-          <Button variant="primary" onClick={() => setAutoBuilderOpen(true)} className="flex items-center gap-2 font-bold">
+          <Button
+            variant="primary"
+            onClick={() => setAutoBuilderOpen(true)}
+            className="flex items-center gap-2 font-bold"
+          >
             <Wand2 size={16} /> AI Auto Album Builder
           </Button>
         </div>
@@ -88,10 +106,7 @@ export default function AlbumStudioPage() {
         onGenerate={(config) => console.log('Auto generated:', config)}
       />
 
-      <AlbumReviewSystemModal
-        isOpen={reviewModalOpen}
-        onClose={() => setReviewModalOpen(false)}
-      />
+      <AlbumReviewSystemModal isOpen={reviewModalOpen} onClose={() => setReviewModalOpen(false)} />
     </main>
   );
 }

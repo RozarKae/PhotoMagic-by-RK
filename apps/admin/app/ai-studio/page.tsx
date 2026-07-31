@@ -17,8 +17,13 @@ export default function AIStudioFoundationPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.0 AI Infrastructure Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Studio Foundation Hub</h1>
-          <p className="text-sm text-text-secondary">Manage multi-provider AI model connectors, background worker queues, prompt template versioning, and asset libraries.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Studio Foundation Hub
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Manage multi-provider AI model connectors, background worker queues, prompt template
+            versioning, and asset libraries.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

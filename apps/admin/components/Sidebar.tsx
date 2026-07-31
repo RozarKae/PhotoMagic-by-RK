@@ -21,6 +21,7 @@ import {
   SlidersHorizontal,
   BookMarked,
   CheckCircle2,
+  TrendingUp,
   Megaphone,
   BarChart2,
   GitBranch,
@@ -38,7 +39,9 @@ export const Sidebar: React.FC = () => {
 
   const navItems = [
     { label: 'Command Center', href: '/admin', icon: LayoutDashboard },
+    { label: 'Business Growth Hub', href: '/business-growth', icon: TrendingUp },
     { label: 'Album Studio', href: '/album-studio', icon: BookOpen },
+
     { label: 'Delivery Center', href: '/delivery-center', icon: ImageIcon },
     { label: 'Studio Workflow', href: '/studio-workflow', icon: GitBranch },
     { label: 'AI Face Enhancer', href: '/ai-face-enhancement', icon: ScanFace },
@@ -81,7 +84,9 @@ export const Sidebar: React.FC = () => {
           {!isCollapsed && (
             <div className="flex flex-col">
               <span className="font-bold text-text-primary text-sm tracking-tight">PHOTOMAGIC</span>
-              <span className="text-[10px] text-gold-500 uppercase tracking-widest font-semibold">Studio OS</span>
+              <span className="text-[10px] text-gold-500 uppercase tracking-widest font-semibold">
+                Studio OS
+              </span>
             </div>
           )}
         </div>
@@ -99,7 +104,8 @@ export const Sidebar: React.FC = () => {
       <nav className="flex-1 px-3 py-6 flex flex-col gap-1.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href));
+          const isActive =
+            pathname === item.href || (item.href !== '/admin' && pathname?.startsWith(item.href));
 
           return (
             <Link

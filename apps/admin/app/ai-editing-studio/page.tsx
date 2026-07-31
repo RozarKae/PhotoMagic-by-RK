@@ -17,8 +17,13 @@ export default function AiEditingStudioPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phases 4.4 – 4.9 Master AI Editing Studio Suite</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Professional AI Post-Production Workspace</h1>
-          <p className="text-sm text-text-secondary">Generative object removal, non-destructive skin retouching, color grade matching, 8K super-resolution upscaling, batch processing queue, and master export center.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Professional AI Post-Production Workspace
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Generative object removal, non-destructive skin retouching, color grade matching, 8K
+            super-resolution upscaling, batch processing queue, and master export center.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

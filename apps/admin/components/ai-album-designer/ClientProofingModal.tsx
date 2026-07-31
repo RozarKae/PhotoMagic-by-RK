@@ -19,7 +19,9 @@ export const ClientProofingModal: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Lock size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Client Digital Proofing & Approval Portal</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Client Digital Proofing & Approval Portal
+          </h3>
         </div>
         <Badge variant="success">Password Protected</Badge>
       </div>
@@ -33,7 +35,12 @@ export const ClientProofingModal: React.FC = () => {
             value={proofUrl}
             className="flex-1 h-8 px-3 rounded-lg bg-surface-elevated border border-border-subtle text-xs text-gold-500 font-mono"
           />
-          <Button variant="secondary" size="sm" onClick={handleCopy} className="flex items-center gap-1">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleCopy}
+            className="flex items-center gap-1"
+          >
             <Copy size={12} />
             {copied ? 'Copied' : 'Copy Link'}
           </Button>

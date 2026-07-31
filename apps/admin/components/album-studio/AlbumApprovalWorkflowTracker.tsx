@@ -2,10 +2,26 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { CheckCircle2, Lock, Clock, Send, AlertTriangle, ShieldCheck, RefreshCw } from 'lucide-react';
+import {
+  CheckCircle2,
+  Lock,
+  Clock,
+  Send,
+  AlertTriangle,
+  ShieldCheck,
+  RefreshCw,
+} from 'lucide-react';
 
 export const AlbumApprovalWorkflowTracker: React.FC = () => {
-  const [currentStage, setCurrentStage] = useState<'draft' | 'sent_for_review' | 'client_reviewing' | 'revision_requested' | 'designer_updating' | 'final_approval' | 'locked_for_print'>('client_reviewing');
+  const [currentStage, setCurrentStage] = useState<
+    | 'draft'
+    | 'sent_for_review'
+    | 'client_reviewing'
+    | 'revision_requested'
+    | 'designer_updating'
+    | 'final_approval'
+    | 'locked_for_print'
+  >('client_reviewing');
   const [revisionCount, setRevisionCount] = useState(1);
 
   const stages = [
@@ -23,7 +39,9 @@ export const AlbumApprovalWorkflowTracker: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ShieldCheck size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 7.5 Client Approval Workflow & Lock Engine</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 7.5 Client Approval Workflow & Lock Engine
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant={currentStage === 'locked_for_print' ? 'success' : 'gold'}>
@@ -62,14 +80,24 @@ export const AlbumApprovalWorkflowTracker: React.FC = () => {
         <div className="p-4 rounded-xl bg-gold-500/10 border border-gold-500/40 flex items-center justify-between text-xs text-gold-500">
           <div className="flex items-center gap-2">
             <Lock size={18} />
-            <span className="font-bold">Album Project Locked for Print Production. All further manual & AI layout edits disabled.</span>
+            <span className="font-bold">
+              Album Project Locked for Print Production. All further manual & AI layout edits
+              disabled.
+            </span>
           </div>
           <Badge variant="gold">Immutable State</Badge>
         </div>
       ) : (
         <div className="flex justify-between items-center pt-2 text-xs">
-          <span className="text-[10px] text-text-tertiary font-mono">Last stage transition: Today 10:45 AM • Audit Log Synced</span>
-          <Button variant="primary" size="sm" onClick={() => setCurrentStage('locked_for_print')} className="flex items-center gap-1 font-bold">
+          <span className="text-[10px] text-text-tertiary font-mono">
+            Last stage transition: Today 10:45 AM • Audit Log Synced
+          </span>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setCurrentStage('locked_for_print')}
+            className="flex items-center gap-1 font-bold"
+          >
             <Lock size={14} /> Lock Album for Print Production
           </Button>
         </div>

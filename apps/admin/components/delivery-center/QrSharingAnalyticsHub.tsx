@@ -5,7 +5,9 @@ import { Card, Badge, Button } from '@photomagic/ui';
 import { QrCode, Share2, BarChart2, Eye, Download, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export const QrSharingAnalyticsHub: React.FC = () => {
-  const [shareScope, setShareScope] = useState<'entire_gallery' | 'albums' | 'favorites' | 'videos' | 'downloads'>('entire_gallery');
+  const [shareScope, setShareScope] = useState<
+    'entire_gallery' | 'albums' | 'favorites' | 'videos' | 'downloads'
+  >('entire_gallery');
   const [expiryDays, setExpiryDays] = useState(30);
 
   const scopes = [
@@ -20,7 +22,9 @@ export const QrSharingAnalyticsHub: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <QrCode size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 8.6 Instant QR Code Sharing & Scan Telemetry</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 8.6 Instant QR Code Sharing & Scan Telemetry
+          </h3>
         </div>
         <Badge variant="gold">482 Total Scans Tracked</Badge>
       </div>
@@ -46,7 +50,9 @@ export const QrSharingAnalyticsHub: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1 pt-2 border-t border-border-subtle">
-            <label className="font-semibold text-text-secondary">Custom QR Access Expiry (Days)</label>
+            <label className="font-semibold text-text-secondary">
+              Custom QR Access Expiry (Days)
+            </label>
             <input
               type="number"
               value={expiryDays}
@@ -68,9 +74,15 @@ export const QrSharingAnalyticsHub: React.FC = () => {
 
           <div className="flex flex-col gap-2 text-xs">
             <span className="font-bold text-text-primary">Live Scan Telemetry</span>
-            <span className="text-[10px] text-text-secondary">Scan Location: Udaipur, Rajasthan (84%)</span>
+            <span className="text-[10px] text-text-secondary">
+              Scan Location: Udaipur, Rajasthan (84%)
+            </span>
             <span className="text-[10px] text-text-secondary">Device: iOS Safari (92%)</span>
-            <Button variant="secondary" size="sm" className="mt-1 flex items-center gap-1 text-[11px]">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="mt-1 flex items-center gap-1 text-[11px]"
+            >
               <Download size={12} /> Download Vector Vector QR SVG
             </Button>
           </div>

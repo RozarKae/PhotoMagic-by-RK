@@ -2,12 +2,28 @@
 
 import React from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { HelpCircle, Video, Search, Ticket, PhoneCall, MessageSquare, BookOpen } from 'lucide-react';
+import {
+  HelpCircle,
+  Video,
+  Search,
+  Ticket,
+  PhoneCall,
+  MessageSquare,
+  BookOpen,
+} from 'lucide-react';
 
 export default function ClientHelpCenterPage() {
   const videoGuides = [
-    { title: 'How to Mark Favorites in Smart Proofing Gallery', duration: '2 mins', category: 'Gallery' },
-    { title: 'How to Review & Approve Italian Album Spreads', duration: '3 mins', category: 'Album' },
+    {
+      title: 'How to Mark Favorites in Smart Proofing Gallery',
+      duration: '2 mins',
+      category: 'Gallery',
+    },
+    {
+      title: 'How to Review & Approve Italian Album Spreads',
+      duration: '3 mins',
+      category: 'Album',
+    },
     { title: 'How to Download High-Res RAW ZIP Archives', duration: '1 min', category: 'Delivery' },
   ];
 
@@ -17,8 +33,13 @@ export default function ClientHelpCenterPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C13 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Help Center & Knowledge Base</h1>
-          <p className="text-sm text-text-secondary">Smart FAQ search, video guides, support ticket creation, and direct studio concierge contacts.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Help Center & Knowledge Base
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Smart FAQ search, video guides, support ticket creation, and direct studio concierge
+            contacts.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -40,13 +61,22 @@ export default function ClientHelpCenterPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           {videoGuides.map((guide, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between gap-3">
+            <div
+              key={idx}
+              className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between gap-3"
+            >
               <div className="flex flex-col gap-1">
-                <Badge variant="gold" className="text-[9px] w-fit">{guide.category}</Badge>
+                <Badge variant="gold" className="text-[9px] w-fit">
+                  {guide.category}
+                </Badge>
                 <span className="font-bold text-text-primary text-sm pt-1">{guide.title}</span>
                 <span className="text-[10px] text-text-tertiary">Duration: {guide.duration}</span>
               </div>
-              <Button variant="secondary" size="sm" className="w-full flex items-center justify-center gap-1">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="w-full flex items-center justify-center gap-1"
+              >
                 <Video size={12} /> Watch Video Guide
               </Button>
             </div>

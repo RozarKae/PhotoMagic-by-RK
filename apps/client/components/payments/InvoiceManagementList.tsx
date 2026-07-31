@@ -6,8 +6,20 @@ import { FileText, Download, CreditCard, ShieldCheck } from 'lucide-react';
 
 export const InvoiceManagementList: React.FC = () => {
   const invoices = [
-    { number: 'INV-2026-088', issueDate: 'Jul 01, 2026', dueDate: 'Jul 01, 2026', amount: '$4,500', status: 'paid' },
-    { number: 'INV-2026-089', issueDate: 'Jul 01, 2026', dueDate: 'Aug 06, 2026', amount: '$4,500', status: 'pending' },
+    {
+      number: 'INV-2026-088',
+      issueDate: 'Jul 01, 2026',
+      dueDate: 'Jul 01, 2026',
+      amount: '$4,500',
+      status: 'paid',
+    },
+    {
+      number: 'INV-2026-089',
+      issueDate: 'Jul 01, 2026',
+      dueDate: 'Aug 06, 2026',
+      amount: '$4,500',
+      status: 'pending',
+    },
   ];
 
   return (
@@ -22,17 +34,24 @@ export const InvoiceManagementList: React.FC = () => {
 
       <div className="flex flex-col gap-3 text-xs">
         {invoices.map((inv, idx) => (
-          <div key={idx} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center">
+          <div
+            key={idx}
+            className="p-4 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center"
+          >
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
                 <span className="font-bold font-mono text-text-primary text-xs">{inv.number}</span>
                 <Badge variant={inv.status === 'paid' ? 'success' : 'gold'}>{inv.status}</Badge>
               </div>
-              <span className="text-[10px] text-text-tertiary">Issued: {inv.issueDate} • Due: {inv.dueDate}</span>
+              <span className="text-[10px] text-text-tertiary">
+                Issued: {inv.issueDate} • Due: {inv.dueDate}
+              </span>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="font-mono font-extrabold text-text-primary text-base">{inv.amount}</span>
+              <span className="font-mono font-extrabold text-text-primary text-base">
+                {inv.amount}
+              </span>
               <Button variant="secondary" size="sm" className="flex items-center gap-1 text-[11px]">
                 <Download size={12} /> Download PDF
               </Button>

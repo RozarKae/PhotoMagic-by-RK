@@ -5,7 +5,9 @@ import { Card, Badge, Button } from '@photomagic/ui';
 import { ShieldCheck, Eye, Sparkles, Image as ImageIcon, CheckCircle2 } from 'lucide-react';
 
 export const WatermarkPreviewEngine: React.FC = () => {
-  const [watermarkStyle, setWatermarkStyle] = useState<'logo' | 'text' | 'qr' | 'dynamic'>('dynamic');
+  const [watermarkStyle, setWatermarkStyle] = useState<'logo' | 'text' | 'qr' | 'dynamic'>(
+    'dynamic',
+  );
   const [opacity, setOpacity] = useState(45);
 
   return (
@@ -13,7 +15,9 @@ export const WatermarkPreviewEngine: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ShieldCheck size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 8.3 Dynamic Watermark Protection Engine</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 8.3 Dynamic Watermark Protection Engine
+          </h3>
         </div>
         <Badge variant="gold">Auto-Remove on Full Invoice Payment</Badge>
       </div>
@@ -40,7 +44,9 @@ export const WatermarkPreviewEngine: React.FC = () => {
 
           <div className="flex flex-col gap-2 pt-2 border-t border-border-subtle">
             <div className="flex justify-between items-center">
-              <span className="font-semibold text-text-secondary">Watermark Opacity ({opacity}%)</span>
+              <span className="font-semibold text-text-secondary">
+                Watermark Opacity ({opacity}%)
+              </span>
             </div>
             <input
               type="range"

@@ -13,7 +13,16 @@ export const AlbumStudioProjectSchema = z.object({
 });
 
 export const AutoAlbumBuilderSchema = z.object({
-  stylePreset: z.enum(['Minimal', 'Classic', 'Luxury', 'Cinematic', 'Storytelling', 'Magazine', 'Traditional Wedding', 'Modern Wedding']),
+  stylePreset: z.enum([
+    'Minimal',
+    'Classic',
+    'Luxury',
+    'Cinematic',
+    'Storytelling',
+    'Magazine',
+    'Traditional Wedding',
+    'Modern Wedding',
+  ]),
   targetSpreads: z.number().min(5).max(50),
   balanceOrientation: z.boolean().default(true),
   avoidDuplicates: z.boolean().default(true),

@@ -2,7 +2,15 @@
 
 import React from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { CheckCircle2, Award, FileText, BarChart2, ShieldCheck, Download, Check } from 'lucide-react';
+import {
+  CheckCircle2,
+  Award,
+  FileText,
+  BarChart2,
+  ShieldCheck,
+  Download,
+  Check,
+} from 'lucide-react';
 
 export const DeliveryCompletionChecklist: React.FC = () => {
   const checklistItems = [
@@ -19,7 +27,9 @@ export const DeliveryCompletionChecklist: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <CheckCircle2 size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 8.9 Automated Delivery Completion & Studio Analytics</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 8.9 Automated Delivery Completion & Studio Analytics
+          </h3>
         </div>
         <Badge variant="success">100% Delivery Verified</Badge>
       </div>
@@ -29,7 +39,10 @@ export const DeliveryCompletionChecklist: React.FC = () => {
         <div className="flex flex-col gap-2.5">
           <span className="font-bold text-text-primary">Project Closeout Checklist</span>
           {checklistItems.map((item, idx) => (
-            <div key={idx} className="p-3 rounded-lg bg-surface-base border border-border-subtle flex items-center justify-between">
+            <div
+              key={idx}
+              className="p-3 rounded-lg bg-surface-base border border-border-subtle flex items-center justify-between"
+            >
               <span className="text-text-primary font-medium">{item.label}</span>
               <div className="flex items-center gap-1.5 text-status-success font-bold text-[11px]">
                 <Check size={14} /> Passed
@@ -53,10 +66,18 @@ export const DeliveryCompletionChecklist: React.FC = () => {
           </div>
 
           <div className="flex gap-2">
-            <Button variant="secondary" size="sm" className="w-full flex items-center justify-center gap-1 text-xs">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="w-full flex items-center justify-center gap-1 text-xs"
+            >
               <FileText size={14} /> Export Delivery Report
             </Button>
-            <Button variant="primary" size="sm" className="w-full flex items-center justify-center gap-1 text-xs font-bold">
+            <Button
+              variant="primary"
+              size="sm"
+              className="w-full flex items-center justify-center gap-1 text-xs font-bold"
+            >
               <BarChart2 size={14} /> View Studio Analytics
             </Button>
           </div>

@@ -16,25 +16,33 @@ export const EditHistoryUndoRedo: React.FC = () => {
   const [history, setHistory] = useState<EditHistoryItem[]>([
     { id: 'h-1', step: 1, action: 'Initial RAW Import', active: false, time: '10:00 AM' },
     { id: 'h-2', step: 2, action: 'Crop 16:9 Aspect Ratio', active: false, time: '10:02 AM' },
-    { id: 'h-3', step: 3, action: 'Auto White Balance & Exposure', active: false, time: '10:05 AM' },
-    { id: 'h-4', step: 4, action: 'Royal Gold Skin Tone Retouching', active: true, time: '10:08 AM' },
+    {
+      id: 'h-3',
+      step: 3,
+      action: 'Auto White Balance & Exposure',
+      active: false,
+      time: '10:05 AM',
+    },
+    {
+      id: 'h-4',
+      step: 4,
+      action: 'Royal Gold Skin Tone Retouching',
+      active: true,
+      time: '10:08 AM',
+    },
   ]);
 
   const handleUndo = () => {
     const activeIdx = history.findIndex((h) => h.active);
     if (activeIdx > 0) {
-      setHistory((prev) =>
-        prev.map((item, idx) => ({ ...item, active: idx === activeIdx - 1 }))
-      );
+      setHistory((prev) => prev.map((item, idx) => ({ ...item, active: idx === activeIdx - 1 })));
     }
   };
 
   const handleRedo = () => {
     const activeIdx = history.findIndex((h) => h.active);
     if (activeIdx < history.length - 1) {
-      setHistory((prev) =>
-        prev.map((item, idx) => ({ ...item, active: idx === activeIdx + 1 }))
-      );
+      setHistory((prev) => prev.map((item, idx) => ({ ...item, active: idx === activeIdx + 1 })));
     }
   };
 
@@ -43,13 +51,25 @@ export const EditHistoryUndoRedo: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <History size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Edit History & State Stack (Undo / Redo)</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Edit History & State Stack (Undo / Redo)
+          </h3>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={handleUndo} className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleUndo}
+            className="flex items-center gap-1"
+          >
             <Undo2 size={14} /> Undo
           </Button>
-          <Button variant="ghost" size="sm" onClick={handleRedo} className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleRedo}
+            className="flex items-center gap-1"
+          >
             <Redo2 size={14} /> Redo
           </Button>
         </div>

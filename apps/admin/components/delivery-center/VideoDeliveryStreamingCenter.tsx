@@ -8,10 +8,34 @@ export const VideoDeliveryStreamingCenter: React.FC = () => {
   const [selectedVideo, setSelectedVideo] = useState('Wedding Film (4K Master)');
 
   const videos = [
-    { title: 'Wedding Film (4K Master)', type: 'Full Feature Film', duration: '45 mins', size: '4.8 GB', res: '4K UHD' },
-    { title: 'Cinematic Highlight Reel', type: 'Highlight Reel', duration: '6 mins', size: '850 MB', res: '4K UHD' },
-    { title: 'Teaser Trailer (Vertical)', type: 'Instagram Reels', duration: '60 secs', size: '120 MB', res: '1080p Vertical' },
-    { title: '4K Aerial Drone Footage', type: 'Raw Footage', duration: '18 mins', size: '2.4 GB', res: '4K DCI' },
+    {
+      title: 'Wedding Film (4K Master)',
+      type: 'Full Feature Film',
+      duration: '45 mins',
+      size: '4.8 GB',
+      res: '4K UHD',
+    },
+    {
+      title: 'Cinematic Highlight Reel',
+      type: 'Highlight Reel',
+      duration: '6 mins',
+      size: '850 MB',
+      res: '4K UHD',
+    },
+    {
+      title: 'Teaser Trailer (Vertical)',
+      type: 'Instagram Reels',
+      duration: '60 secs',
+      size: '120 MB',
+      res: '1080p Vertical',
+    },
+    {
+      title: '4K Aerial Drone Footage',
+      type: 'Raw Footage',
+      duration: '18 mins',
+      size: '2.4 GB',
+      res: '4K DCI',
+    },
   ];
 
   return (
@@ -19,7 +43,9 @@ export const VideoDeliveryStreamingCenter: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Film size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 8.5 Video Delivery & Adaptive HLS Streaming Platform</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 8.5 Video Delivery & Adaptive HLS Streaming Platform
+          </h3>
         </div>
         <Badge variant="success">Adaptive Bitrate Streaming Active</Badge>
       </div>
@@ -43,10 +69,14 @@ export const VideoDeliveryStreamingCenter: React.FC = () => {
                   <Play size={16} className="text-gold-500" />
                   <div className="flex flex-col">
                     <span className="font-bold text-text-primary text-xs">{vid.title}</span>
-                    <span className="text-[10px] text-text-tertiary">{vid.duration} • {vid.res}</span>
+                    <span className="text-[10px] text-text-tertiary">
+                      {vid.duration} • {vid.res}
+                    </span>
                   </div>
                 </div>
-                <Badge variant="gold" className="text-[9px]">{vid.size}</Badge>
+                <Badge variant="gold" className="text-[9px]">
+                  {vid.size}
+                </Badge>
               </div>
             ))}
           </div>

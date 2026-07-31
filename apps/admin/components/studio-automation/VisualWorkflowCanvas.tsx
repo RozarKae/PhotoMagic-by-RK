@@ -34,7 +34,9 @@ export const VisualWorkflowCanvas: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <GitBranch size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">No-Code Visual Workflow Builder Stage</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            No-Code Visual Workflow Builder Stage
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="gold">v1.2 Active Flow</Badge>
@@ -48,9 +50,13 @@ export const VisualWorkflowCanvas: React.FC = () => {
       <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4 relative overflow-x-auto">
         {nodes.map((node, idx) => (
           <React.Fragment key={idx}>
-            <div className={`p-4 rounded-xl bg-surface-elevated border-2 ${node.color} flex flex-col gap-2 min-w-[240px] shadow-xl`}>
+            <div
+              className={`p-4 rounded-xl bg-surface-elevated border-2 ${node.color} flex flex-col gap-2 min-w-[240px] shadow-xl`}
+            >
               <div className="flex justify-between items-center">
-                <Badge variant="gold" className="text-[9px]">{node.badge}</Badge>
+                <Badge variant="gold" className="text-[9px]">
+                  {node.badge}
+                </Badge>
                 <Zap size={14} className="text-gold-500" />
               </div>
               <span className="font-bold text-text-primary text-xs">{node.title}</span>

@@ -26,10 +26,19 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
     { name: 'Classic', desc: 'Balanced grid alignments with traditional margin borders.' },
     { name: 'Luxury', desc: 'Full-bleed hero spreads with gold foil accents & 300 DPI clarity.' },
     { name: 'Cinematic', desc: 'Panoramic 12x18 widescreen spreads with 8K film grain overlays.' },
-    { name: 'Storytelling', desc: 'Sequential chronological moment grouping from prep to fireworks.' },
+    {
+      name: 'Storytelling',
+      desc: 'Sequential chronological moment grouping from prep to fireworks.',
+    },
     { name: 'Magazine', desc: 'Editorial Vogue-style text overlays & dynamic asymmetric frames.' },
-    { name: 'Traditional Wedding', desc: 'Heritage courtyard mandap focus with ceremonial detail spreads.' },
-    { name: 'Modern Wedding', desc: 'High-contrast fashion portraiture with dynamic spread breaks.' },
+    {
+      name: 'Traditional Wedding',
+      desc: 'Heritage courtyard mandap focus with ceremonial detail spreads.',
+    },
+    {
+      name: 'Modern Wedding',
+      desc: 'High-contrast fashion portraiture with dynamic spread breaks.',
+    },
   ];
 
   const handleBuild = async () => {
@@ -47,12 +56,16 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
       <div className="flex flex-col gap-6 p-2 text-xs">
         <div className="flex items-center gap-2 p-3 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-500">
           <Wand2 size={18} />
-          <span>Analyzing 120 client favorite photos for orientation, lighting & chronological grouping.</span>
+          <span>
+            Analyzing 120 client favorite photos for orientation, lighting & chronological grouping.
+          </span>
         </div>
 
         {/* Style Presets */}
         <div className="flex flex-col gap-2">
-          <label className="font-bold text-text-primary text-xs">Select Album Design Aesthetic Style</label>
+          <label className="font-bold text-text-primary text-xs">
+            Select Album Design Aesthetic Style
+          </label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {stylePresets.map((style) => (
               <div
@@ -77,7 +90,9 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
         {/* Configuration Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-border-subtle">
           <div className="flex flex-col gap-1">
-            <label className="font-semibold text-text-secondary">Target Spreads (2 Pages per Spread)</label>
+            <label className="font-semibold text-text-secondary">
+              Target Spreads (2 Pages per Spread)
+            </label>
             <input
               type="number"
               value={targetSpreads}
@@ -96,7 +111,9 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
                 onChange={(e) => setAvoidDuplicates(e.target.checked)}
                 className="accent-gold-500"
               />
-              <span className="text-text-primary font-medium">Automatically Filter Near-Duplicates</span>
+              <span className="text-text-primary font-medium">
+                Automatically Filter Near-Duplicates
+              </span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -105,7 +122,9 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
                 onChange={(e) => setBalanceOrientation(e.target.checked)}
                 className="accent-gold-500"
               />
-              <span className="text-text-primary font-medium">Balance Portrait vs Landscape Layouts</span>
+              <span className="text-text-primary font-medium">
+                Balance Portrait vs Landscape Layouts
+              </span>
             </label>
           </div>
         </div>
@@ -114,7 +133,13 @@ export const AutoAlbumBuilderModal: React.FC<AutoAlbumBuilderModalProps> = ({
           <Button variant="secondary" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button variant="primary" size="sm" onClick={handleBuild} disabled={isBuilding} className="flex items-center gap-1.5 font-bold">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={handleBuild}
+            disabled={isBuilding}
+            className="flex items-center gap-1.5 font-bold"
+          >
             {isBuilding ? <RefreshCw size={14} className="animate-spin" /> : <Wand2 size={14} />}
             {isBuilding ? 'Synthesizing Spreads...' : 'Generate Auto Album Layout'}
           </Button>

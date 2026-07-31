@@ -16,8 +16,13 @@ export default function AIMarketingStudioPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.5 AI Marketing & Content Studio</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Marketing & Content Studio</h1>
-          <p className="text-sm text-text-secondary">Synthesize social media captions, design 300 DPI promotional posters, plan viral Reels storyboards, and schedule content calendars.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Marketing & Content Studio
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Synthesize social media captions, design 300 DPI promotional posters, plan viral Reels
+            storyboards, and schedule content calendars.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

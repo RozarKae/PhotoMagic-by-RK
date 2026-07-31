@@ -15,8 +15,13 @@ export default function AIFaceEnhancementPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 4.1 AI Face Enhancement Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Face Enhancement Engine</h1>
-          <p className="text-sm text-text-secondary">68-point facial landmark mesh detection, non-destructive pore texture preservation, single & multi-face group portrait retouching, and CUDA GPU acceleration.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Face Enhancement Engine
+          </h1>
+          <p className="text-sm text-text-secondary">
+            68-point facial landmark mesh detection, non-destructive pore texture preservation,
+            single & multi-face group portrait retouching, and CUDA GPU acceleration.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

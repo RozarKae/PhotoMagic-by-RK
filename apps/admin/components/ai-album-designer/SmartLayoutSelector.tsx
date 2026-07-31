@@ -24,12 +24,17 @@ export const SmartLayoutSelector: React.FC = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
         {layouts.map((l) => (
-          <div key={l.id} className="p-3 rounded-xl bg-surface-base border border-border-subtle hover:border-gold-500/50 transition-all cursor-pointer flex flex-col justify-between gap-2">
+          <div
+            key={l.id}
+            className="p-3 rounded-xl bg-surface-base border border-border-subtle hover:border-gold-500/50 transition-all cursor-pointer flex flex-col justify-between gap-2"
+          >
             <div className="flex flex-col">
               <span className="font-bold text-text-primary text-[11px]">{l.name}</span>
               <span className="text-[9px] text-text-tertiary">{l.count}</span>
             </div>
-            <Badge variant="gold" className="text-[9px]">{l.tag}</Badge>
+            <Badge variant="gold" className="text-[9px]">
+              {l.tag}
+            </Badge>
           </div>
         ))}
       </div>

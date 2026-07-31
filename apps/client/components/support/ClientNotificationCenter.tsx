@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Bell, Image as ImageIcon, BookOpen, DollarSign, MessageSquare, Settings, CheckCircle2 } from 'lucide-react';
+import {
+  Bell,
+  Image as ImageIcon,
+  BookOpen,
+  DollarSign,
+  MessageSquare,
+  Settings,
+  CheckCircle2,
+} from 'lucide-react';
 
 export interface NotificationItem {
   id: string;
@@ -16,9 +24,30 @@ export interface NotificationItem {
 export const ClientNotificationCenter: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'unread' | 'today'>('all');
   const [notifications, setNotifications] = useState<NotificationItem[]>([
-    { id: 'n-1', category: 'gallery', title: 'Smart Proofing Gallery Ready', description: 'Your 300 RAW wedding photos are live for selection.', timestamp: '10:15 AM', read: false },
-    { id: 'n-2', category: 'payments', title: 'Retainer Payment Receipt Generated', description: 'Invoice #INV-2026-088 payment ($4,500) confirmed.', timestamp: 'Yesterday', read: true },
-    { id: 'n-3', category: 'album', title: 'Album Design Proof Preview', description: 'Chapter 4 Mandap Vows spread layout updated.', timestamp: '2 days ago', read: true },
+    {
+      id: 'n-1',
+      category: 'gallery',
+      title: 'Smart Proofing Gallery Ready',
+      description: 'Your 300 RAW wedding photos are live for selection.',
+      timestamp: '10:15 AM',
+      read: false,
+    },
+    {
+      id: 'n-2',
+      category: 'payments',
+      title: 'Retainer Payment Receipt Generated',
+      description: 'Invoice #INV-2026-088 payment ($4,500) confirmed.',
+      timestamp: 'Yesterday',
+      read: true,
+    },
+    {
+      id: 'n-3',
+      category: 'album',
+      title: 'Album Design Proof Preview',
+      description: 'Chapter 4 Mandap Vows spread layout updated.',
+      timestamp: '2 days ago',
+      read: true,
+    },
   ]);
 
   const filtered = notifications.filter((n) => {
@@ -77,7 +106,9 @@ export const ClientNotificationCenter: React.FC = () => {
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-text-primary">{item.title}</span>
-                  <Badge variant="gold" className="text-[9px] uppercase">{item.category}</Badge>
+                  <Badge variant="gold" className="text-[9px] uppercase">
+                    {item.category}
+                  </Badge>
                 </div>
                 <p className="text-[11px] text-text-secondary">{item.description}</p>
               </div>

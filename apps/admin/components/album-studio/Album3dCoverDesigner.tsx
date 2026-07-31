@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { BookOpen, Sparkles, Layers, ShieldCheck, Eye, RefreshCw, CheckCircle2 } from 'lucide-react';
+import {
+  BookOpen,
+  Sparkles,
+  Layers,
+  ShieldCheck,
+  Eye,
+  RefreshCw,
+  CheckCircle2,
+} from 'lucide-react';
 
 export const Album3dCoverDesigner: React.FC = () => {
   const [coverMaterial, setCoverMaterial] = useState('leather');
@@ -31,7 +39,9 @@ export const Album3dCoverDesigner: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <BookOpen size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 7.3 3D Album Cover Designer & Foil Embossing Studio</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 7.3 3D Album Cover Designer & Foil Embossing Studio
+          </h3>
         </div>
         <Badge variant="gold">Italian Handcrafted Specs • 3D Real-Time Render</Badge>
       </div>
@@ -100,13 +110,21 @@ export const Album3dCoverDesigner: React.FC = () => {
         <div className="relative min-h-[300px] rounded-2xl bg-canvas border border-border-subtle p-6 flex flex-col justify-center items-center overflow-hidden">
           <div className="relative w-full max-w-sm h-64 rounded-2xl bg-surface-base border-2 border-gold-500/50 shadow-2xl flex flex-col justify-between p-6 transition-all duration-500">
             <div className="flex justify-between items-start">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-gold-500 font-bold">PhotoMagic Atelier</span>
-              <Badge variant="gold" className="text-[8px]">3D Preview</Badge>
+              <span className="text-[10px] uppercase font-mono tracking-widest text-gold-500 font-bold">
+                PhotoMagic Atelier
+              </span>
+              <Badge variant="gold" className="text-[8px]">
+                3D Preview
+              </Badge>
             </div>
 
             <div className="flex flex-col items-center text-center gap-1.5 my-auto">
-              <span className="text-2xl font-extrabold tracking-tight text-text-primary font-mono">{coverTitle}</span>
-              <span className="text-xs text-gold-500 font-light tracking-widest uppercase">{eventDate}</span>
+              <span className="text-2xl font-extrabold tracking-tight text-text-primary font-mono">
+                {coverTitle}
+              </span>
+              <span className="text-xs text-gold-500 font-light tracking-widest uppercase">
+                {eventDate}
+              </span>
             </div>
 
             <div className="text-center pt-2 border-t border-border-subtle text-[9px] text-text-tertiary font-mono">

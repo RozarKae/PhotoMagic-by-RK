@@ -12,7 +12,9 @@ export const SideBySideCompare: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Columns size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Side-by-Side Synchronized Comparison Stage</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Side-by-Side Synchronized Comparison Stage
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="gold">Synchronized Pan & Zoom</Badge>
@@ -30,7 +32,9 @@ export const SideBySideCompare: React.FC = () => {
             className="w-full h-full object-cover transition-transform duration-200"
             style={{ transform: `scale(${zoomLevel / 100})` }}
           />
-          <span className="absolute top-3 left-3 bg-black/70 text-gold-500 px-2 py-1 rounded font-mono text-[10px] font-bold">Option A (F/1.4 Soft)</span>
+          <span className="absolute top-3 left-3 bg-black/70 text-gold-500 px-2 py-1 rounded font-mono text-[10px] font-bold">
+            Option A (F/1.4 Soft)
+          </span>
         </div>
 
         <div className="aspect-[4/3] rounded-xl overflow-hidden bg-surface-base border border-border-subtle relative group">
@@ -40,7 +44,9 @@ export const SideBySideCompare: React.FC = () => {
             className="w-full h-full object-cover transition-transform duration-200"
             style={{ transform: `scale(${zoomLevel / 100})` }}
           />
-          <span className="absolute top-3 left-3 bg-black/70 text-gold-500 px-2 py-1 rounded font-mono text-[10px] font-bold">Option B (F/2.8 Sharp)</span>
+          <span className="absolute top-3 left-3 bg-black/70 text-gold-500 px-2 py-1 rounded font-mono text-[10px] font-bold">
+            Option B (F/2.8 Sharp)
+          </span>
         </div>
       </div>
     </Card>

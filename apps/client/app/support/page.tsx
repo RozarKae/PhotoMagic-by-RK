@@ -17,8 +17,13 @@ export default function ClientSupportTimelinePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C8 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Project Timeline, Notifications & Support</h1>
-          <p className="text-sm text-text-secondary">Stay informed with live 15-stage project tracking, direct studio chat, announcements, and FAQs.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Project Timeline, Notifications & Support
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Stay informed with live 15-stage project tracking, direct studio chat, announcements,
+            and FAQs.
+          </p>
         </div>
       </div>
 

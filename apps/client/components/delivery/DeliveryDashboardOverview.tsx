@@ -8,7 +8,9 @@ export const DeliveryDashboardOverview: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Download size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Final Deliverables & Resolution Download Center</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Final Deliverables & Resolution Download Center
+          </h3>
         </div>
         <Badge variant="success">All Files Approved & Ready</Badge>
       </div>
@@ -16,7 +18,9 @@ export const DeliveryDashboardOverview: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
         <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between">
           <span className="text-text-tertiary">Total Files Delivered</span>
-          <span className="text-2xl font-extrabold text-text-primary font-mono mt-1">1,420 Files</span>
+          <span className="text-2xl font-extrabold text-text-primary font-mono mt-1">
+            1,420 Files
+          </span>
           <span className="text-[10px] text-gold-500 font-semibold mt-2">RAW + Color Mastered</span>
         </div>
 
@@ -28,8 +32,12 @@ export const DeliveryDashboardOverview: React.FC = () => {
 
         <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between">
           <span className="text-text-tertiary">Download Access Expiry</span>
-          <span className="text-2xl font-extrabold text-status-success font-mono mt-1">Unlimited</span>
-          <span className="text-[10px] text-status-success font-semibold mt-2">Lifetime Studio Archive</span>
+          <span className="text-2xl font-extrabold text-status-success font-mono mt-1">
+            Unlimited
+          </span>
+          <span className="text-[10px] text-status-success font-semibold mt-2">
+            Lifetime Studio Archive
+          </span>
         </div>
 
         <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col justify-between">

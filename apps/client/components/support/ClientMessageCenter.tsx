@@ -6,9 +6,24 @@ import { MessageSquare, Send, Paperclip, CheckCheck } from 'lucide-react';
 
 export const ClientMessageCenter: React.FC = () => {
   const [messages, setMessages] = useState([
-    { sender: 'Studio Concierge', text: 'Hello Eleanor! We have uploaded your Mandap Vows preview batch. Please let us know if you need any color adjustments.', time: '10:30 AM', isStudio: true },
-    { sender: 'You', text: 'Thank you! The skin tones look amazing. Can we smooth the background wire in Photo #042?', time: '10:45 AM', isStudio: false },
-    { sender: 'Studio Concierge', text: 'Absolutely! Adding that to our AI retouching queue now.', time: '11:00 AM', isStudio: true },
+    {
+      sender: 'Studio Concierge',
+      text: 'Hello Eleanor! We have uploaded your Mandap Vows preview batch. Please let us know if you need any color adjustments.',
+      time: '10:30 AM',
+      isStudio: true,
+    },
+    {
+      sender: 'You',
+      text: 'Thank you! The skin tones look amazing. Can we smooth the background wire in Photo #042?',
+      time: '10:45 AM',
+      isStudio: false,
+    },
+    {
+      sender: 'Studio Concierge',
+      text: 'Absolutely! Adding that to our AI retouching queue now.',
+      time: '11:00 AM',
+      isStudio: true,
+    },
   ]);
   const [inputText, setInputText] = useState('');
 
@@ -26,7 +41,9 @@ export const ClientMessageCenter: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <MessageSquare size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Direct Studio Concierge Message Thread</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Direct Studio Concierge Message Thread
+          </h3>
         </div>
         <Badge variant="success">Online • Typing Response</Badge>
       </div>
@@ -58,7 +75,12 @@ export const ClientMessageCenter: React.FC = () => {
           placeholder="Type message to studio concierge..."
           className="flex-1 h-9 px-3 rounded-lg bg-surface-base border border-border-subtle text-xs text-text-primary font-mono focus:outline-none focus:ring-1 focus:ring-gold-500"
         />
-        <Button variant="primary" size="sm" onClick={handleSend} className="flex items-center gap-1">
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={handleSend}
+          className="flex items-center gap-1"
+        >
           <Send size={14} /> Send
         </Button>
       </div>

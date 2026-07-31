@@ -82,9 +82,7 @@ export const AIModelManager: React.FC = () => {
   ]);
 
   const handleToggle = (id: string) => {
-    setModels((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, enabled: !m.enabled } : m))
-    );
+    setModels((prev) => prev.map((m) => (m.id === id ? { ...m, enabled: !m.enabled } : m)));
   };
 
   return (
@@ -92,14 +90,19 @@ export const AIModelManager: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Cpu size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Multi-Provider AI Model Manager & API Keys</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Multi-Provider AI Model Manager & API Keys
+          </h3>
         </div>
         <Badge variant="gold">7 Provider Connectors Registered</Badge>
       </div>
 
       <div className="flex flex-col gap-3">
         {models.map((model) => (
-          <div key={model.id} className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center text-xs">
+          <div
+            key={model.id}
+            className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center text-xs"
+          >
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-surface-elevated text-gold-500 border border-border-subtle">
                 <Sparkles size={16} />
@@ -107,9 +110,15 @@ export const AIModelManager: React.FC = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-text-primary">{model.name}</span>
-                  {model.isDefault && <Badge variant="gold" className="text-[9px]">Default Model</Badge>}
+                  {model.isDefault && (
+                    <Badge variant="gold" className="text-[9px]">
+                      Default Model
+                    </Badge>
+                  )}
                 </div>
-                <span className="text-text-tertiary">${model.costPerRequest.toFixed(3)} per request • Health: {model.healthStatus}</span>
+                <span className="text-text-tertiary">
+                  ${model.costPerRequest.toFixed(3)} per request • Health: {model.healthStatus}
+                </span>
               </div>
             </div>
 

@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Download, FileArchive, Layers, ShieldCheck, HardDrive, FileText, CheckCircle2 } from 'lucide-react';
+import {
+  Download,
+  FileArchive,
+  Layers,
+  ShieldCheck,
+  HardDrive,
+  FileText,
+  CheckCircle2,
+} from 'lucide-react';
 
 export const AiExportCenterHub: React.FC = () => {
   const [exportFormat, setExportFormat] = useState('jpeg');
@@ -25,7 +33,9 @@ export const AiExportCenterHub: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Download size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 4.9 Professional AI Master Export Center & Cloud Manager</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 4.9 Professional AI Master Export Center & Cloud Manager
+          </h3>
         </div>
         <Badge variant="success">Cloudflare R2 High-Speed CDN Ready</Badge>
       </div>
@@ -90,9 +100,13 @@ export const AiExportCenterHub: React.FC = () => {
                 onChange={(e) => setWatermarkEnabled(e.target.checked)}
                 className="accent-gold-500"
               />
-              <span className="text-text-primary font-medium">Apply Transparent Studio Watermark</span>
+              <span className="text-text-primary font-medium">
+                Apply Transparent Studio Watermark
+              </span>
             </label>
-            <span className="text-[10px] text-text-tertiary">Copyright: PhotoMagic Studio © 2026</span>
+            <span className="text-[10px] text-text-tertiary">
+              Copyright: PhotoMagic Studio © 2026
+            </span>
           </div>
         </div>
 
@@ -115,7 +129,9 @@ export const AiExportCenterHub: React.FC = () => {
             className="w-full mt-2 font-bold flex items-center justify-center gap-2"
           >
             <Download size={16} />
-            {isExporting ? 'Packaging Export Assets...' : `Export Master ${exportFormat.toUpperCase()} Package`}
+            {isExporting
+              ? 'Packaging Export Assets...'
+              : `Export Master ${exportFormat.toUpperCase()} Package`}
           </Button>
         </div>
       </div>

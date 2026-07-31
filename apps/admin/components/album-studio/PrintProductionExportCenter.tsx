@@ -2,7 +2,16 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { Printer, Download, CheckCircle2, ShieldCheck, FileText, FileArchive, Layers, HardDrive } from 'lucide-react';
+import {
+  Printer,
+  Download,
+  CheckCircle2,
+  ShieldCheck,
+  FileText,
+  FileArchive,
+  Layers,
+  HardDrive,
+} from 'lucide-react';
 
 export const PrintProductionExportCenter: React.FC = () => {
   const [albumSize, setAlbumSize] = useState('12x18 Inches');
@@ -27,7 +36,9 @@ export const PrintProductionExportCenter: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Printer size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Print Lab Production Settings & High-Res Export Hub</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Print Lab Production Settings & High-Res Export Hub
+          </h3>
         </div>
         <Badge variant="success">300 DPI CMYK Pre-Flight Validation Passed</Badge>
       </div>
@@ -35,7 +46,9 @@ export const PrintProductionExportCenter: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
         {/* Album Sizes & Paper Specifications */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">Album Dimensions & Paper</h4>
+          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">
+            Album Dimensions & Paper
+          </h4>
           <div className="flex flex-col gap-1">
             <label className="font-semibold text-text-secondary">Target Album Trim Size</label>
             <select
@@ -67,7 +80,9 @@ export const PrintProductionExportCenter: React.FC = () => {
 
         {/* Cover Materials & Spine Thickness */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">Cover Material & Spine Calculator</h4>
+          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">
+            Cover Material & Spine Calculator
+          </h4>
           <div className="flex flex-col gap-1">
             <label className="font-semibold text-text-secondary">Cover Binding Material</label>
             <select
@@ -75,7 +90,9 @@ export const PrintProductionExportCenter: React.FC = () => {
               onChange={(e) => setCoverType(e.target.value)}
               className="h-9 px-3 rounded-lg bg-surface-base border border-border-subtle text-xs text-text-primary font-mono focus:outline-none"
             >
-              <option value="Italian Genuine Leather">Italian Genuine Leather (Gold Stamped)</option>
+              <option value="Italian Genuine Leather">
+                Italian Genuine Leather (Gold Stamped)
+              </option>
               <option value="Royal Velvet Plush">Royal Velvet Plush (Embossed)</option>
               <option value="Acrylic Crystal Glass">Acrylic Crystal Glass (High-Gloss)</option>
               <option value="Fine Linen Fabric">Fine Linen Fabric (Textured)</option>
@@ -84,14 +101,20 @@ export const PrintProductionExportCenter: React.FC = () => {
 
           <div className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex flex-col gap-1">
             <span className="text-text-tertiary">Calculated Spine Width</span>
-            <span className="font-bold font-mono text-gold-500 text-sm">{calculateSpineThickness()}</span>
-            <span className="text-[10px] text-text-tertiary font-mono">30 Pages @ 0.40mm per Sheet</span>
+            <span className="font-bold font-mono text-gold-500 text-sm">
+              {calculateSpineThickness()}
+            </span>
+            <span className="text-[10px] text-text-tertiary font-mono">
+              30 Pages @ 0.40mm per Sheet
+            </span>
           </div>
         </div>
 
         {/* Export Engine Format Selection */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">Export Package Formats</h4>
+          <h4 className="font-bold text-text-primary border-b border-border-subtle pb-1">
+            Export Package Formats
+          </h4>
           <div className="grid grid-cols-2 gap-2">
             {(['pdf', 'tiff', 'jpeg', 'zip'] as const).map((fmt) => (
               <Button
@@ -114,7 +137,9 @@ export const PrintProductionExportCenter: React.FC = () => {
             className="w-full mt-2 font-bold flex items-center justify-center gap-2"
           >
             <Download size={16} />
-            {isExporting ? 'Generating 300 DPI Export...' : `Export ${exportFormat.toUpperCase()} Print Package`}
+            {isExporting
+              ? 'Generating 300 DPI Export...'
+              : `Export ${exportFormat.toUpperCase()} Print Package`}
           </Button>
         </div>
       </div>

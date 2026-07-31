@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
-import { SlidersHorizontal, ZoomIn, ZoomOut, RotateCw, Crop, SplitSquareVertical, BarChart2 } from 'lucide-react';
+import {
+  SlidersHorizontal,
+  ZoomIn,
+  ZoomOut,
+  RotateCw,
+  Crop,
+  SplitSquareVertical,
+  BarChart2,
+} from 'lucide-react';
 
 interface EditingCanvasStageProps {
   originalUrl: string;
@@ -33,11 +41,19 @@ export const EditingCanvasStage: React.FC<EditingCanvasStageProps> = ({
           </Button>
 
           <div className="flex items-center gap-1 bg-surface-base px-2 py-1 rounded-lg border border-border-subtle">
-            <button onClick={() => setZoomLevel(Math.max(10, zoomLevel - 25))} className="p-1 text-text-tertiary hover:text-text-primary">
+            <button
+              onClick={() => setZoomLevel(Math.max(10, zoomLevel - 25))}
+              className="p-1 text-text-tertiary hover:text-text-primary"
+            >
               <ZoomOut size={14} />
             </button>
-            <span className="font-mono text-[11px] font-bold text-text-primary w-12 text-center">{zoomLevel}%</span>
-            <button onClick={() => setZoomLevel(Math.min(800, zoomLevel + 25))} className="p-1 text-text-tertiary hover:text-text-primary">
+            <span className="font-mono text-[11px] font-bold text-text-primary w-12 text-center">
+              {zoomLevel}%
+            </span>
+            <button
+              onClick={() => setZoomLevel(Math.min(800, zoomLevel + 25))}
+              className="p-1 text-text-tertiary hover:text-text-primary"
+            >
               <ZoomIn size={14} />
             </button>
           </div>
@@ -58,14 +74,22 @@ export const EditingCanvasStage: React.FC<EditingCanvasStageProps> = ({
           {isSplitView ? (
             <div className="relative w-full h-full">
               {/* Original Layer */}
-              <img src={originalUrl} alt="Original" className="absolute inset-0 w-full h-full object-cover" />
+              <img
+                src={originalUrl}
+                alt="Original"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
 
               {/* Edited Layer Clip */}
               <div
                 className="absolute inset-0 overflow-hidden border-r-2 border-gold-500 shadow-2xl"
                 style={{ width: `${splitPos}%` }}
               >
-                <img src={editedUrl} alt="Edited" className="absolute inset-0 w-full h-full object-cover max-w-none" />
+                <img
+                  src={editedUrl}
+                  alt="Edited"
+                  className="absolute inset-0 w-full h-full object-cover max-w-none"
+                />
               </div>
 
               {/* Split Slider Handle */}

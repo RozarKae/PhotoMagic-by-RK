@@ -39,7 +39,8 @@ export const InquiryForm: React.FC = () => {
         </div>
         <h3 className="text-2xl font-bold text-text-primary">Inquiry Confirmed, {clientName}!</h3>
         <p className="text-xs text-text-secondary leading-relaxed max-w-md">
-          Thank you for choosing PhotoMagic Studio. Our Studio Director will review your date availability and respond within 24 hours with a customized proposal.
+          Thank you for choosing PhotoMagic Studio. Our Studio Director will review your date
+          availability and respond within 24 hours with a customized proposal.
         </p>
         <div className="flex items-center gap-2 text-[10px] text-gold-500 font-mono pt-2 border-t border-gold-500/20">
           <Clock size={12} /> Priority Lead Tracking ID: #L-UDPR-2026-088
@@ -58,7 +59,9 @@ export const InquiryForm: React.FC = () => {
           <Sparkles size={18} className="text-gold-500" />
           <h3 className="text-sm font-bold text-text-primary">Private Studio Inquiry Form</h3>
         </div>
-        <Badge variant="gold" className="text-[10px] uppercase">24-Hour Guarantee</Badge>
+        <Badge variant="gold" className="text-[10px] uppercase">
+          24-Hour Guarantee
+        </Badge>
       </div>
 
       {/* Step 1: Contact Details */}

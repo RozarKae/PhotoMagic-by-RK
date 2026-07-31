@@ -8,7 +8,9 @@ export const toggleFavoriteSchema = z.object({
 
 export const createEditRequestSchema = z.object({
   photoId: z.string().min(1, 'Photo ID is required'),
-  requestType: z.enum(['skin_retouching', 'object_removal', 'background_replacement', 'color_adjustment']).default('skin_retouching'),
+  requestType: z
+    .enum(['skin_retouching', 'object_removal', 'background_replacement', 'color_adjustment'])
+    .default('skin_retouching'),
   priorityLevel: z.enum(['low', 'normal', 'high', 'urgent']).default('normal'),
   instructions: z.string().min(5, 'Instructions are required'),
 });

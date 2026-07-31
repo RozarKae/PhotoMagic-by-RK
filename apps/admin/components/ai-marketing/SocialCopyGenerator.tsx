@@ -8,12 +8,12 @@ export const SocialCopyGenerator: React.FC = () => {
   const [platform, setPlatform] = useState('instagram');
   const [tone, setTone] = useState('luxury');
   const [generatedCaption, setGeneratedCaption] = useState(
-    '✨ Capturing timeless elegance & royal moments. Every frame is a tribute to heritage and romance. Limited booking slots open for 2026-2027 Destination Weddings. 🏰💍\n\n#PhotoMagicStudio #RoyalWedding #LuxuryWeddingPhotographer #UdaipurWeddings #DestinationBride #CinematicPhotography'
+    '✨ Capturing timeless elegance & royal moments. Every frame is a tribute to heritage and romance. Limited booking slots open for 2026-2027 Destination Weddings. 🏰💍\n\n#PhotoMagicStudio #RoyalWedding #LuxuryWeddingPhotographer #UdaipurWeddings #DestinationBride #CinematicPhotography',
   );
 
   const handleGenerateCopy = () => {
     setGeneratedCaption(
-      '✨ Unveiling our latest Royal Wedding Collection. Crafted with precision, fine-art lighting, and timeless storytelling. Inquire now to secure your dates. 👑✨\n\n#FineArtWedding #VogueWeddings #PhotoMagicByRK #BrideAndGroom #BridalCouture'
+      '✨ Unveiling our latest Royal Wedding Collection. Crafted with precision, fine-art lighting, and timeless storytelling. Inquire now to secure your dates. 👑✨\n\n#FineArtWedding #VogueWeddings #PhotoMagicByRK #BrideAndGroom #BridalCouture',
     );
   };
 
@@ -22,7 +22,9 @@ export const SocialCopyGenerator: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Social Media Copywriter & Caption Synthesizer</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Social Media Copywriter & Caption Synthesizer
+          </h3>
         </div>
         <Badge variant="gold">Multi-Platform Optimized</Badge>
       </div>
@@ -68,10 +70,20 @@ export const SocialCopyGenerator: React.FC = () => {
       </div>
 
       <div className="flex justify-between items-center pt-2">
-        <Button variant="ghost" size="sm" onClick={() => navigator.clipboard.writeText(generatedCaption)} className="flex items-center gap-1">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigator.clipboard.writeText(generatedCaption)}
+          className="flex items-center gap-1"
+        >
           <Copy size={14} /> Copy Caption
         </Button>
-        <Button variant="primary" size="sm" onClick={handleGenerateCopy} className="flex items-center gap-1.5">
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={handleGenerateCopy}
+          className="flex items-center gap-1.5"
+        >
           <Sparkles size={14} /> Generate Fresh Variation
         </Button>
       </div>

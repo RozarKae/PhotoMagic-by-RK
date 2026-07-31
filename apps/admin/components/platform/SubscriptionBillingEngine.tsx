@@ -21,7 +21,12 @@ export const SubscriptionBillingEngine: React.FC = () => {
       price: '$299/mo',
       credits: '25,000 AI Credits/mo',
       storage: '2 TB High-Speed Storage',
-      features: ['Multi-Branch Support', 'AI Album Designer', 'White-Label Portals', 'Unlimited Proofing'],
+      features: [
+        'Multi-Branch Support',
+        'AI Album Designer',
+        'White-Label Portals',
+        'Unlimited Proofing',
+      ],
       current: true,
     },
     {
@@ -30,7 +35,12 @@ export const SubscriptionBillingEngine: React.FC = () => {
       price: '$1,299/mo',
       credits: 'Unlimited AI Credits',
       storage: '10 TB Storage + Custom S3',
-      features: ['Dedicated Supabase DB', 'Custom Domain', 'SLA 99.99%', 'Dedicated Account Manager'],
+      features: [
+        'Dedicated Supabase DB',
+        'Custom Domain',
+        'SLA 99.99%',
+        'Dedicated Account Manager',
+      ],
       current: false,
     },
   ];
@@ -40,7 +50,9 @@ export const SubscriptionBillingEngine: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <DollarSign size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">SaaS Subscription & Billing Engine</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            SaaS Subscription & Billing Engine
+          </h3>
         </div>
         <Badge variant="gold">Active Tier: Studio Pro ($299/mo)</Badge>
       </div>
@@ -58,7 +70,11 @@ export const SubscriptionBillingEngine: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <span className="font-bold text-text-primary text-sm">{p.name}</span>
-                {p.current && <Badge variant="gold" className="text-[9px]">Current Plan</Badge>}
+                {p.current && (
+                  <Badge variant="gold" className="text-[9px]">
+                    Current Plan
+                  </Badge>
+                )}
               </div>
 
               <span className="text-2xl font-extrabold text-gold-500 font-mono">{p.price}</span>

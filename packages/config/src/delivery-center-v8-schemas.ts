@@ -11,7 +11,14 @@ export const SmartDeliveryLinkV8Schema = z.object({
 
 export const DeliveryVideoAssetV8Schema = z.object({
   videoTitle: z.string().min(2),
-  videoType: z.enum(['wedding_film', 'highlight_reel', 'teaser', 'reels', 'drone_footage', 'raw_video']),
+  videoType: z.enum([
+    'wedding_film',
+    'highlight_reel',
+    'teaser',
+    'reels',
+    'drone_footage',
+    'raw_video',
+  ]),
   resolution: z.enum(['1080p', '4k', '8k']),
   streamUrl: z.string().url(),
   downloadUrl: z.string().url(),

@@ -6,15 +6,18 @@ import { CameraSimulationControls } from '../../components/ai-generator/CameraSi
 import { ProviderSelector } from '../../components/ai-generator/ProviderSelector';
 import { PromptBuilderDrawer } from '../../components/ai-generator/PromptBuilderDrawer';
 import { BatchGeneratorBar } from '../../components/ai-generator/BatchGeneratorBar';
-import { GenerationResultGallery, GeneratedPhotoResult } from '../../components/ai-generator/GenerationResultGallery';
+import {
+  GenerationResultGallery,
+  GeneratedPhotoResult,
+} from '../../components/ai-generator/GenerationResultGallery';
 import { Sparkles, Sliders, Dices, Layers, Camera, BookOpen } from 'lucide-react';
 
 export default function AIGeneratorWorkspacePage() {
   const [prompt, setPrompt] = useState(
-    'Ultra-cinematic 8k resolution, royal Indian wedding bride in raw silk golden lehenga, Udaipur city palace sunset, soft bokeh, Leica 50mm f/1.4 optics...'
+    'Ultra-cinematic 8k resolution, royal Indian wedding bride in raw silk golden lehenga, Udaipur city palace sunset, soft bokeh, Leica 50mm f/1.4 optics...',
   );
   const [negativePrompt, setNegativePrompt] = useState(
-    'blurry, low resolution, bad anatomy, extra limbs, distorted face, oversaturated, amateur photography'
+    'blurry, low resolution, bad anatomy, extra limbs, distorted face, oversaturated, amateur photography',
   );
   const [provider, setProvider] = useState('flux');
   const [aspectRatio, setAspectRatio] = useState('16:9');
@@ -73,21 +76,24 @@ export default function AIGeneratorWorkspacePage() {
     setIsGenerating(true);
     setTimeout(() => {
       setIsGenerating(false);
-      const newItems: GeneratedPhotoResult[] = Array.from({ length: Number(batchSize) }).map((_, i) => ({
-        id: `res-${Date.now()}-${i}`,
-        url: i % 2 === 0
-          ? 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'
-          : 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
-        prompt,
-        negativePrompt,
-        provider,
-        aspectRatio,
-        seed: Number(seed) + i,
-        camera: `${camera.brand}`,
-        lens: `${camera.lens} ${camera.aperture}`,
-        cost: '$0.040',
-        isFavorite: false,
-      }));
+      const newItems: GeneratedPhotoResult[] = Array.from({ length: Number(batchSize) }).map(
+        (_, i) => ({
+          id: `res-${Date.now()}-${i}`,
+          url:
+            i % 2 === 0
+              ? 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'
+              : 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
+          prompt,
+          negativePrompt,
+          provider,
+          aspectRatio,
+          seed: Number(seed) + i,
+          camera: `${camera.brand}`,
+          lens: `${camera.lens} ${camera.aperture}`,
+          cost: '$0.040',
+          isFavorite: false,
+        }),
+      );
       setResults(newItems);
     }, 1500);
   };
@@ -98,8 +104,13 @@ export default function AIGeneratorWorkspacePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.1 AI Generation Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Photo Generation Studio Workspace</h1>
-          <p className="text-sm text-text-secondary">Synthesize professional wedding concepts, high-fashion editorials, album spreads, and studio portraits.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Photo Generation Studio Workspace
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Synthesize professional wedding concepts, high-fashion editorials, album spreads, and
+            studio portraits.
+          </p>
         </div>
       </div>
 
@@ -108,7 +119,9 @@ export default function AIGeneratorWorkspacePage() {
         <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
           <div className="flex items-center gap-2">
             <Sparkles size={18} className="text-gold-500" />
-            <h3 className="text-sm font-bold text-text-primary">Primary Prompt & Negative Prompt Synthesis</h3>
+            <h3 className="text-sm font-bold text-text-primary">
+              Primary Prompt & Negative Prompt Synthesis
+            </h3>
           </div>
           <Badge variant="gold">Leica Optical Style Preset Active</Badge>
         </div>
@@ -125,7 +138,9 @@ export default function AIGeneratorWorkspacePage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="font-semibold text-text-tertiary">Negative Prompt (Excluded Elements)</label>
+            <label className="font-semibold text-text-tertiary">
+              Negative Prompt (Excluded Elements)
+            </label>
             <input
               type="text"
               value={negativePrompt}

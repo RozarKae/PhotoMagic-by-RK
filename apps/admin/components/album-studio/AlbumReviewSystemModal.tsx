@@ -2,7 +2,17 @@
 
 import React, { useState } from 'react';
 import { Card, Badge, Button, Modal } from '@photomagic/ui';
-import { Eye, CheckCircle2, XCircle, Lock, MessageSquare, BookOpen, ChevronLeft, ChevronRight, ShieldCheck } from 'lucide-react';
+import {
+  Eye,
+  CheckCircle2,
+  XCircle,
+  Lock,
+  MessageSquare,
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+} from 'lucide-react';
 
 interface AlbumReviewSystemModalProps {
   isOpen: boolean;
@@ -16,7 +26,13 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
   const [currentSpread, setCurrentSpread] = useState(1);
   const [spreadApproved, setSpreadApproved] = useState(false);
   const [reviewComments, setReviewComments] = useState([
-    { id: 'c-1', spread: 1, user: 'Eleanor Vance (Client)', text: 'Can we enhance the lighting on the bride brooch in photo #2?', time: '10:45 AM' },
+    {
+      id: 'c-1',
+      spread: 1,
+      user: 'Eleanor Vance (Client)',
+      text: 'Can we enhance the lighting on the bride brooch in photo #2?',
+      time: '10:45 AM',
+    },
   ]);
 
   if (!isOpen) return null;
@@ -27,7 +43,9 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
         <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
           <div className="flex items-center gap-2">
             <Eye size={18} className="text-gold-500" />
-            <span className="font-bold text-text-primary text-sm">Spread #{currentSpread} Digital Proof Review</span>
+            <span className="font-bold text-text-primary text-sm">
+              Spread #{currentSpread} Digital Proof Review
+            </span>
           </div>
           <Badge variant={spreadApproved ? 'success' : 'gold'}>
             {spreadApproved ? 'Spread Approved & Locked' : 'Pending Client Feedback'}
@@ -62,7 +80,9 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
             >
               <ChevronLeft size={14} /> Previous Spread
             </Button>
-            <span className="font-mono text-text-primary text-xs font-bold">Spread {currentSpread} / 15</span>
+            <span className="font-mono text-text-primary text-xs font-bold">
+              Spread {currentSpread} / 15
+            </span>
             <Button
               variant="secondary"
               size="sm"
@@ -78,7 +98,9 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 rounded-xl bg-surface-base border border-border-subtle flex flex-col gap-3">
             <h4 className="font-bold text-text-primary">Spread Approval Controls</h4>
-            <p className="text-[11px] text-text-secondary">Approving locks the spread layout from accidental modifications.</p>
+            <p className="text-[11px] text-text-secondary">
+              Approving locks the spread layout from accidental modifications.
+            </p>
             <div className="flex gap-2">
               <Button
                 variant={spreadApproved ? 'primary' : 'secondary'}
@@ -88,7 +110,11 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
               >
                 <CheckCircle2 size={14} /> {spreadApproved ? 'Approved & Locked' : 'Approve Spread'}
               </Button>
-              <Button variant="secondary" size="sm" className="flex items-center gap-1 text-xs text-status-error">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="flex items-center gap-1 text-xs text-status-error"
+              >
                 <XCircle size={14} /> Request Revision
               </Button>
             </div>
@@ -99,7 +125,10 @@ export const AlbumReviewSystemModal: React.FC<AlbumReviewSystemModalProps> = ({
               <MessageSquare size={14} className="text-gold-500" /> Client Notes & Revision Pin Log
             </h4>
             {reviewComments.map((c) => (
-              <div key={c.id} className="p-2.5 rounded-lg bg-surface-elevated text-[11px] flex flex-col gap-0.5">
+              <div
+                key={c.id}
+                className="p-2.5 rounded-lg bg-surface-elevated text-[11px] flex flex-col gap-0.5"
+              >
                 <span className="font-bold text-text-primary">{c.user}</span>
                 <span className="text-text-secondary">{c.text}</span>
                 <span className="text-[9px] text-text-tertiary font-mono self-end">{c.time}</span>

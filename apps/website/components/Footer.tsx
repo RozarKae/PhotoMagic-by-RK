@@ -16,7 +16,8 @@ export const Footer: React.FC = () => {
             <span className="font-bold tracking-tight text-lg">PHOTOMAGIC STUDIO</span>
           </div>
           <p className="text-xs text-text-tertiary leading-relaxed font-light">
-            Capturing timeless elegance, royal heritage weddings, and haute couture portraiture with uncompromising visual luxury.
+            Capturing timeless elegance, royal heritage weddings, and haute couture portraiture with
+            uncompromising visual luxury.
           </p>
           <div className="flex gap-4 text-text-secondary mt-2">
             <a
@@ -59,7 +60,10 @@ export const Footer: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href={ROUTES.PUBLIC.PORTFOLIO} className="hover:text-gold-500 transition-colors">
+              <Link
+                href={ROUTES.PUBLIC.PORTFOLIO}
+                className="hover:text-gold-500 transition-colors"
+              >
                 Curated Stories
               </Link>
             </li>
@@ -69,7 +73,10 @@ export const Footer: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href={ROUTES.PUBLIC.INVESTMENT} className="hover:text-gold-500 transition-colors">
+              <Link
+                href={ROUTES.PUBLIC.INVESTMENT}
+                className="hover:text-gold-500 transition-colors"
+              >
                 Collections & Investment
               </Link>
             </li>
@@ -88,17 +95,26 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/gallery" className="hover:text-gold-500 transition-colors">
+              <a
+                href="http://localhost:3000/gallery"
+                className="hover:text-gold-500 transition-colors"
+              >
                 Smart Proofing Galleries
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/album" className="hover:text-gold-500 transition-colors">
+              <a
+                href="http://localhost:3000/album"
+                className="hover:text-gold-500 transition-colors"
+              >
                 Album Approval Hub
               </a>
             </li>
             <li>
-              <a href="http://localhost:1314/admin" className="hover:text-gold-500 transition-colors">
+              <a
+                href="http://localhost:1314/admin"
+                className="hover:text-gold-500 transition-colors"
+              >
                 Studio Command Center
               </a>
             </li>

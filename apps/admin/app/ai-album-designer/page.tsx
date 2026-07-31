@@ -16,8 +16,13 @@ export default function AIAlbumDesignerWorkspacePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.3 AI Wedding Album Designer</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Wedding Album Designer Studio</h1>
-          <p className="text-sm text-text-secondary">Automated photo culling, 15-chapter ceremony timeline, 12x18 spread canvas editing, and CMYK 300 DPI print lab exports.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Wedding Album Designer Studio
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Automated photo culling, 15-chapter ceremony timeline, 12x18 spread canvas editing, and
+            CMYK 300 DPI print lab exports.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

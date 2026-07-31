@@ -18,14 +18,19 @@ export const AICullingTimeline: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Photo Culling & 15-Chapter Story Timeline</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Photo Culling & 15-Chapter Story Timeline
+          </h3>
         </div>
         <Badge variant="gold">329 Selected Photos</Badge>
       </div>
 
       <div className="flex flex-col gap-2.5">
         {chapters.map((ch, idx) => (
-          <div key={idx} className="p-3 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center text-xs">
+          <div
+            key={idx}
+            className="p-3 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center text-xs"
+          >
             <div className="flex items-center gap-3">
               <div className="w-6 h-6 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20 flex items-center justify-center font-mono font-bold text-[10px]">
                 {idx + 1}
@@ -37,7 +42,9 @@ export const AICullingTimeline: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <Badge variant="success" className="text-[10px]">{ch.status}</Badge>
+              <Badge variant="success" className="text-[10px]">
+                {ch.status}
+              </Badge>
               <ChevronRight size={16} className="text-text-tertiary" />
             </div>
           </div>

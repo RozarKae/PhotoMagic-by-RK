@@ -8,9 +8,27 @@ export const AlbumRevisionHistoryTimeline: React.FC = () => {
   const [selectedVersion, setSelectedVersion] = useState(3);
 
   const historyLogs = [
-    { version: 3, designer: 'Vikram Sethi (Lead Designer)', summary: 'Client requested lighting enhancement on Spread #01 & #04.', time: 'Today 11:20 AM', current: true },
-    { version: 2, designer: 'Ananya Roy (Album Specialist)', summary: 'AI Auto-Layout generated initial 30 spreads with Luxury Gold preset.', time: 'Yesterday 04:15 PM', current: false },
-    { version: 1, designer: 'System Bot', summary: 'Album Project initialized from Client Favorites selection.', time: '2 days ago', current: false },
+    {
+      version: 3,
+      designer: 'Vikram Sethi (Lead Designer)',
+      summary: 'Client requested lighting enhancement on Spread #01 & #04.',
+      time: 'Today 11:20 AM',
+      current: true,
+    },
+    {
+      version: 2,
+      designer: 'Ananya Roy (Album Specialist)',
+      summary: 'AI Auto-Layout generated initial 30 spreads with Luxury Gold preset.',
+      time: 'Yesterday 04:15 PM',
+      current: false,
+    },
+    {
+      version: 1,
+      designer: 'System Bot',
+      summary: 'Album Project initialized from Client Favorites selection.',
+      time: '2 days ago',
+      current: false,
+    },
   ];
 
   return (
@@ -18,7 +36,9 @@ export const AlbumRevisionHistoryTimeline: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <History size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Phase 7.8 Album Revision History & Version Restore Engine</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Phase 7.8 Album Revision History & Version Restore Engine
+          </h3>
         </div>
         <Badge variant="gold">3 Revisions Logged</Badge>
       </div>
@@ -41,7 +61,11 @@ export const AlbumRevisionHistoryTimeline: React.FC = () => {
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-text-primary">{log.designer}</span>
-                  {log.current && <Badge variant="success" className="text-[8px]">Active Layout</Badge>}
+                  {log.current && (
+                    <Badge variant="success" className="text-[8px]">
+                      Active Layout
+                    </Badge>
+                  )}
                 </div>
                 <span className="text-text-secondary">{log.summary}</span>
                 <span className="text-[9px] text-text-tertiary font-mono">{log.time}</span>

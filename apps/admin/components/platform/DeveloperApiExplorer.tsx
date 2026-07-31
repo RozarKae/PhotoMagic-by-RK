@@ -13,7 +13,9 @@ export const DeveloperApiExplorer: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Code size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Developer Platform & REST / GraphQL API Explorer</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Developer Platform & REST / GraphQL API Explorer
+          </h3>
         </div>
         <Badge variant="gold">API v1.4 Active</Badge>
       </div>
@@ -28,7 +30,12 @@ export const DeveloperApiExplorer: React.FC = () => {
               readOnly
               className="flex-1 h-9 px-3 rounded-lg bg-surface-elevated border border-border-subtle text-xs text-gold-500 font-mono focus:outline-none"
             />
-            <Button variant="ghost" size="sm" onClick={() => navigator.clipboard.writeText(apiKey)} className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigator.clipboard.writeText(apiKey)}
+              className="flex items-center gap-1"
+            >
               <Copy size={14} /> Copy Key
             </Button>
           </div>

@@ -14,8 +14,13 @@ export default function ClientDeliveryPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C10 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Final Delivery & Resolution Downloads</h1>
-          <p className="text-sm text-text-secondary">Access high-resolution RAW photos, 8K cinematic films, social media kits, and print-ready album master PDFs.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Final Delivery & Resolution Downloads
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Access high-resolution RAW photos, 8K cinematic films, social media kits, and
+            print-ready album master PDFs.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

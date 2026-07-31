@@ -26,7 +26,10 @@ export const BatchGeneratorBar: React.FC<BatchGeneratorBarProps> = ({
   const batchOptions = ['1', '2', '4', '8', '16'];
 
   return (
-    <Card variant="glass" className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <Card
+      variant="glass"
+      className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+    >
       <div className="flex flex-wrap items-center gap-6 text-xs">
         {/* Batch Selector */}
         <div className="flex items-center gap-2">
@@ -75,7 +78,9 @@ export const BatchGeneratorBar: React.FC<BatchGeneratorBarProps> = ({
         className="w-full sm:w-auto px-8 flex items-center justify-center gap-2 shadow-xl shadow-gold-500/10"
       >
         <Sparkles size={18} />
-        {isGenerating ? 'Synthesizing AI Batch...' : `Generate ${batchSize} Image${Number(batchSize) > 1 ? 's' : ''}`}
+        {isGenerating
+          ? 'Synthesizing AI Batch...'
+          : `Generate ${batchSize} Image${Number(batchSize) > 1 ? 's' : ''}`}
       </Button>
     </Card>
   );

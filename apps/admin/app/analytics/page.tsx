@@ -16,8 +16,13 @@ export default function BusinessIntelligencePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.6 AI Business Intelligence</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Business Intelligence & Studio Analytics</h1>
-          <p className="text-sm text-text-secondary">C-Suite financial overviews, 6-month AI revenue forecasting, strategic AI growth recommendations, and team productivity matrices.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Business Intelligence & Studio Analytics
+          </h1>
+          <p className="text-sm text-text-secondary">
+            C-Suite financial overviews, 6-month AI revenue forecasting, strategic AI growth
+            recommendations, and team productivity matrices.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -43,7 +48,9 @@ export default function BusinessIntelligencePage() {
       {/* Team Productivity Matrix & Custom Report Exporter */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card variant="glass" className="p-6">
-          <h3 className="text-lg font-bold text-text-primary mb-4">Team Performance & Delivery Matrix</h3>
+          <h3 className="text-lg font-bold text-text-primary mb-4">
+            Team Performance & Delivery Matrix
+          </h3>
           <TeamProductivityMatrix />
         </Card>
 

@@ -43,7 +43,9 @@ export const ProviderSelector: React.FC<ProviderSelectorProps> = ({
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sparkles size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Multi-Provider AI Engine & Resolution</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Multi-Provider AI Engine & Resolution
+          </h3>
         </div>
         <Badge variant="gold">High-Performance Adapter</Badge>
       </div>
@@ -85,8 +87,12 @@ export const ProviderSelector: React.FC<ProviderSelectorProps> = ({
       <div className="p-3 rounded-lg bg-surface-base border border-border-subtle flex justify-between items-center text-xs">
         <span className="font-semibold text-text-primary">{info.name}</span>
         <div className="flex items-center gap-4 text-text-tertiary">
-          <span>Est. Cost: <strong className="text-gold-500">{info.cost}</strong></span>
-          <span>Est. Latency: <strong className="text-status-success">{info.speed}</strong></span>
+          <span>
+            Est. Cost: <strong className="text-gold-500">{info.cost}</strong>
+          </span>
+          <span>
+            Est. Latency: <strong className="text-status-success">{info.speed}</strong>
+          </span>
         </div>
       </div>
     </Card>

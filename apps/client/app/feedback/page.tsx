@@ -20,8 +20,13 @@ export default function ClientFeedbackReferralPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase C14 Client Portal</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">Feedback, Reviews & Referral Program</h1>
-          <p className="text-sm text-text-secondary">Share your royal wedding experience, review studio services, and refer friends to earn luxury rewards.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            Feedback, Reviews & Referral Program
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Share your royal wedding experience, review studio services, and refer friends to earn
+            luxury rewards.
+          </p>
         </div>
       </div>
 
@@ -30,7 +35,9 @@ export default function ClientFeedbackReferralPage() {
         <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
           <div className="flex items-center gap-2">
             <Gift size={18} className="text-gold-500" />
-            <h3 className="text-sm font-bold text-text-primary">Client Personal Referral Code & Rewards</h3>
+            <h3 className="text-sm font-bold text-text-primary">
+              Client Personal Referral Code & Rewards
+            </h3>
           </div>
           <Badge variant="gold">10% Credit Per Successful Booking</Badge>
         </div>
@@ -42,7 +49,12 @@ export default function ClientFeedbackReferralPage() {
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Button variant="secondary" size="sm" onClick={handleCopy} className="flex items-center gap-1">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleCopy}
+              className="flex items-center gap-1"
+            >
               <Copy size={14} /> {copied ? 'Copied!' : 'Copy Referral Link'}
             </Button>
             <Button variant="primary" size="sm" className="flex items-center gap-1">

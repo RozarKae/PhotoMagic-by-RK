@@ -34,9 +34,7 @@ export const ApprovalWorkflowsPanel: React.FC = () => {
   ]);
 
   const handleAction = (id: string, newStatus: 'approved' | 'rejected') => {
-    setApprovals((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a))
-    );
+    setApprovals((prev) => prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a)));
   };
 
   return (
@@ -44,31 +42,50 @@ export const ApprovalWorkflowsPanel: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ShieldCheck size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Multi-Level Executive Approvals Queue</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Multi-Level Executive Approvals Queue
+          </h3>
         </div>
         <Badge variant="gold">{approvals.length} Requests Pending</Badge>
       </div>
 
       <div className="flex flex-col gap-3 text-xs">
         {approvals.map((app) => (
-          <div key={app.id} className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center">
+          <div
+            key={app.id}
+            className="p-3.5 rounded-xl bg-surface-base border border-border-subtle flex justify-between items-center"
+          >
             <div className="flex flex-col gap-0.5">
               <span className="font-bold text-text-primary">{app.title}</span>
-              <span className="text-[10px] text-text-tertiary">Requested by: {app.requestedBy} • {app.createdAt}</span>
+              <span className="text-[10px] text-text-tertiary">
+                Requested by: {app.requestedBy} • {app.createdAt}
+              </span>
             </div>
 
             <div className="flex items-center gap-2">
               {app.status === 'pending' ? (
                 <>
-                  <Button variant="ghost" size="sm" onClick={() => handleAction(app.id, 'approved')} className="text-status-success">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleAction(app.id, 'approved')}
+                    className="text-status-success"
+                  >
                     Approve
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => handleAction(app.id, 'rejected')} className="text-status-error">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleAction(app.id, 'rejected')}
+                    className="text-status-error"
+                  >
                     Reject
                   </Button>
                 </>
               ) : (
-                <Badge variant={app.status === 'approved' ? 'success' : 'error'}>{app.status}</Badge>
+                <Badge variant={app.status === 'approved' ? 'success' : 'error'}>
+                  {app.status}
+                </Badge>
               )}
             </div>
           </div>

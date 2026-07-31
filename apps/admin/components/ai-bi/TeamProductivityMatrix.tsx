@@ -27,7 +27,7 @@ export const TeamProductivityMatrix: React.FC = () => {
       role: 'Master Colorist & Editor',
       projectsCompleted: 38,
       avgDeliveryDays: 4,
-      rating: 4.90,
+      rating: 4.9,
     },
   ];
 

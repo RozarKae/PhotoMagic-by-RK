@@ -38,24 +38,33 @@ export default function ServicesPage() {
       <main className="flex-1 py-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">Bespoke Offerings</Badge>
+            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
+              Bespoke Offerings
+            </Badge>
             <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-2">
               Our Concierge Services
             </h1>
             <p className="text-sm text-text-secondary mt-2 font-light">
-              Uncompromising visual artistry and luxury client experience for life's most extraordinary celebrations.
+              Uncompromising visual artistry and luxury client experience for life's most
+              extraordinary celebrations.
             </p>
           </div>
 
           <Grid cols={2}>
             {serviceItems.map((item, idx) => (
-              <Card key={idx} variant="glass" className="p-8 flex flex-col justify-between border-border-subtle hover:border-gold-500/30 transition-all">
+              <Card
+                key={idx}
+                variant="glass"
+                className="p-8 flex flex-col justify-between border-border-subtle hover:border-gold-500/30 transition-all"
+              >
                 <div>
                   <div className="rounded-full bg-gold-500/10 w-14 h-14 flex items-center justify-center text-gold-500 mb-6 border border-gold-500/20">
                     {item.icon}
                   </div>
                   <h2 className="text-2xl font-bold text-text-primary mb-3">{item.title}</h2>
-                  <p className="text-sm text-text-secondary leading-relaxed font-light mb-6">{item.desc}</p>
+                  <p className="text-sm text-text-secondary leading-relaxed font-light mb-6">
+                    {item.desc}
+                  </p>
                 </div>
                 <Link href="/#inquiry">
                   <Button variant="secondary" size="sm" className="w-fit">

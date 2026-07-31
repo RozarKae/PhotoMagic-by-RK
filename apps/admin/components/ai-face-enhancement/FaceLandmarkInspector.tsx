@@ -12,7 +12,9 @@ export const FaceLandmarkInspector: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <ScanFace size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Facial Landmark Mesh & Identity Detection Stage</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Facial Landmark Mesh & Identity Detection Stage
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="gold">68-Point Mesh Overlay Active</Badge>
@@ -52,8 +54,12 @@ export const FaceLandmarkInspector: React.FC = () => {
         )}
 
         <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
-          <Badge variant="gold" className="text-[10px]">Bride Face #1 Detected (Confidence 99.8%)</Badge>
-          <Badge variant="success" className="text-[10px]">Natural Pore Texture Preserved</Badge>
+          <Badge variant="gold" className="text-[10px]">
+            Bride Face #1 Detected (Confidence 99.8%)
+          </Badge>
+          <Badge variant="success" className="text-[10px]">
+            Natural Pore Texture Preserved
+          </Badge>
         </div>
       </div>
     </Card>

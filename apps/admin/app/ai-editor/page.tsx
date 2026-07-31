@@ -11,10 +11,10 @@ import { SlidersHorizontal, Wand2, Download, RefreshCw, Undo, Redo } from 'lucid
 
 export default function AIEditorWorkspacePage() {
   const [originalUrl] = useState(
-    'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'
+    'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
   );
   const [editedUrl] = useState(
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80'
+    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
   );
 
   const [colorGrading, setColorGrading] = useState({
@@ -48,8 +48,13 @@ export default function AIEditorWorkspacePage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Phase 3.2 AI Editing Studio</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">AI Photo Editing Studio Workspace</h1>
-          <p className="text-sm text-text-secondary">Non-destructive 16-bit color grading, AI portrait beauty retouching, background removal, and layer stacks.</p>
+          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
+            AI Photo Editing Studio Workspace
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Non-destructive 16-bit color grading, AI portrait beauty retouching, background removal,
+            and layer stacks.
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

@@ -26,7 +26,9 @@ export const PortraitRetouchingPanel: React.FC<PortraitRetouchingPanelProps> = (
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <User size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">AI Portrait Retouching & Beauty Mode</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            AI Portrait Retouching & Beauty Mode
+          </h3>
         </div>
         <Badge variant="gold">Face Detection Active</Badge>
       </div>
@@ -35,7 +37,9 @@ export const PortraitRetouchingPanel: React.FC<PortraitRetouchingPanelProps> = (
         {/* Skin Smoothing */}
         <div className="flex flex-col gap-1">
           <div className="flex justify-between text-[11px]">
-            <span className="font-semibold text-text-primary">Skin Smoothing (Texture Preserved)</span>
+            <span className="font-semibold text-text-primary">
+              Skin Smoothing (Texture Preserved)
+            </span>
             <span className="font-mono text-gold-500">{skinSmoothing}%</span>
           </div>
           <input

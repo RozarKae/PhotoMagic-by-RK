@@ -13,14 +13,28 @@ export const EditingWorkspaceCanvas: React.FC = () => {
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
         <div className="flex items-center gap-2">
           <Sliders size={18} className="text-gold-500" />
-          <h3 className="text-sm font-bold text-text-primary">Interactive AI Editing Workspace Canvas</h3>
+          <h3 className="text-sm font-bold text-text-primary">
+            Interactive AI Editing Workspace Canvas
+          </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="gold">Split Comparison Stage</Badge>
           <div className="flex items-center gap-1 bg-surface-base p-1 rounded-lg border border-border-subtle text-xs">
-            <button onClick={() => setZoomLevel(Math.max(25, zoomLevel - 25))} className="p-1 hover:text-gold-500"><ZoomOut size={14} /></button>
-            <span className="font-mono text-[10px] text-text-primary w-10 text-center">{zoomLevel}%</span>
-            <button onClick={() => setZoomLevel(Math.min(400, zoomLevel + 25))} className="p-1 hover:text-gold-500"><ZoomIn size={14} /></button>
+            <button
+              onClick={() => setZoomLevel(Math.max(25, zoomLevel - 25))}
+              className="p-1 hover:text-gold-500"
+            >
+              <ZoomOut size={14} />
+            </button>
+            <span className="font-mono text-[10px] text-text-primary w-10 text-center">
+              {zoomLevel}%
+            </span>
+            <button
+              onClick={() => setZoomLevel(Math.min(400, zoomLevel + 25))}
+              className="p-1 hover:text-gold-500"
+            >
+              <ZoomIn size={14} />
+            </button>
           </div>
         </div>
       </div>
@@ -46,10 +60,14 @@ export const EditingWorkspaceCanvas: React.FC = () => {
             className="absolute inset-y-0 left-0 h-full max-w-none filter grayscale contrast-75"
             style={{ width: '100%', transform: `scale(${zoomLevel / 100})` }}
           />
-          <Badge variant="gold" className="absolute top-4 left-4 text-[9px] z-20">ORIGINAL RAW</Badge>
+          <Badge variant="gold" className="absolute top-4 left-4 text-[9px] z-20">
+            ORIGINAL RAW
+          </Badge>
         </div>
 
-        <Badge variant="gold" className="absolute top-4 right-4 text-[9px] z-20">AI EDITED v1.2</Badge>
+        <Badge variant="gold" className="absolute top-4 right-4 text-[9px] z-20">
+          AI EDITED v1.2
+        </Badge>
 
         {/* Interactive Split Slider Controller */}
         <input
