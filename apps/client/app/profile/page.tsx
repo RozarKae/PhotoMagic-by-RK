@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Card, Badge, Button } from '@photomagic/ui';
+import { Card, Badge, Button, Input, Avatar } from '@photomagic/ui';
+import { useAuth } from '@photomagic/auth';
 import {
   User,
   Mail,
@@ -15,10 +16,18 @@ import {
 } from 'lucide-react';
 
 export default function ClientProfilePage() {
-  const [name, setName] = useState('Eleanor Vance');
-  const [email, setEmail] = useState('eleanor.vance@example.com');
+  const { session } = useAuth();
+  const [name, setName] = useState(session?.fullName || 'Eleanor Vance');
+  const [email, setEmail] = useState(session?.email || 'eleanor.vance@example.com');
   const [phone, setPhone] = useState('+91 98765 43210');
   const [city, setCity] = useState('Udaipur, Rajasthan');
+  const [savedMsg, setSavedMsg] = useState('');
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavedMsg('Profile updated successfully.');
+    setTimeout(() => setSavedMsg(''), 3000);
+  };
 
   return (
     <main className="p-8 max-w-[1600px] mx-auto flex flex-col gap-8 pb-24">
@@ -36,11 +45,21 @@ export default function ClientProfilePage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="primary" className="flex items-center gap-2">
+          <Button
+            variant="primary"
+            onClick={handleSave}
+            className="flex items-center gap-2 font-bold"
+          >
             <User size={16} /> Save Profile Changes
           </Button>
         </div>
       </div>
+
+      {savedMsg && (
+        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold text-center">
+          {savedMsg}
+        </div>
+      )}
 
       {/* Profile Header Summary */}
       <Card
@@ -48,9 +67,7 @@ export default function ClientProfilePage() {
         className="p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6"
       >
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gold-500/20 border-2 border-gold-500 flex items-center justify-center font-extrabold text-gold-500 text-xl">
-            EV
-          </div>
+          <Avatar name={name} size="lg" />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-extrabold text-text-primary">{name}</h2>
@@ -77,35 +94,20 @@ export default function ClientProfilePage() {
           <h3 className="text-sm font-bold text-text-primary border-b border-border-subtle pb-2">
             Personal Contact Details
           </h3>
-          <div className="flex flex-col gap-3">
+          <form onSubmit={handleSave} className="flex flex-col gap-3">
             <div className="flex flex-col gap-1">
               <label className="font-semibold text-text-secondary">Full Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full h-9 px-3 rounded-lg bg-surface-base border border-border-subtle text-xs text-text-primary font-mono focus:outline-none"
-              />
+              <Input value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-semibold text-text-secondary">Email Address</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-9 px-3 rounded-lg bg-surface-base border border-border-subtle text-xs text-text-primary font-mono focus:outline-none"
-              />
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-semibold text-text-secondary">Mobile Number</label>
-              <input
-                type="text"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full h-9 px-3 rounded-lg bg-surface-base border border-border-subtle text-xs text-text-primary font-mono focus:outline-none"
-              />
+              <Input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
             </div>
-          </div>
+          </form>
         </Card>
 
         <Card variant="glass" className="p-6 flex flex-col gap-4 text-xs">
