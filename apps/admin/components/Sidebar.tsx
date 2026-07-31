@@ -39,6 +39,7 @@ export const Sidebar: React.FC = () => {
 
   const navItems = [
     { label: 'Command Center', href: '/admin', icon: LayoutDashboard },
+    { label: 'Studio Intelligence', href: '/studio-intelligence', icon: BarChart2 },
     { label: 'Business Growth Hub', href: '/business-growth', icon: TrendingUp },
     { label: 'Album Studio', href: '/album-studio', icon: BookOpen },
 

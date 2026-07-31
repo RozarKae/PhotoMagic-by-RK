@@ -9,6 +9,7 @@ import { ActivityTimeline } from '../components/ActivityTimeline';
 import { NotificationPanel } from '../components/NotificationPanel';
 import { CalendarWidget } from '../components/CalendarWidget';
 import { QuickActions } from '../components/QuickActions';
+import { StudioFinalExecutiveDashboard } from '../components/studio-intelligence/StudioFinalExecutiveDashboard';
 import { DollarSign, Calendar, AlertCircle, Camera } from 'lucide-react';
 
 export default function StudioDashboardPage() {
@@ -33,6 +34,9 @@ export default function StudioDashboardPage() {
             </div>
           )}
 
+          {/* Master Final Executive Dashboard (Phase 10.9) */}
+          <StudioFinalExecutiveDashboard />
+
           {/* Quick Actions Bar */}
           <QuickActions />
 
@@ -40,7 +44,7 @@ export default function StudioDashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <DashboardCard
               title="Total Revenue"
-              value="$148,500"
+              value="₹48.50 Lakhs"
               trend="+18.4%"
               trendDirection="up"
               subtitle="vs. previous quarter"
@@ -48,7 +52,7 @@ export default function StudioDashboardPage() {
             />
             <DashboardCard
               title="Active Bookings"
-              value="24 Events"
+              value="28 Events"
               trend="+4.2%"
               trendDirection="up"
               subtitle="Confirmed for Q3/Q4"
@@ -56,7 +60,7 @@ export default function StudioDashboardPage() {
             />
             <DashboardCard
               title="Pending Payments"
-              value="$12,800"
+              value="₹6.50 Lakhs"
               trend="-2.1%"
               trendDirection="down"
               subtitle="4 Outstanding Invoices"
