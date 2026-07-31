@@ -64,7 +64,7 @@ cp .env.example apps/admin/.env.local
 pnpm dev
 ```
 
-- **Public Website**: `http://localhost:1314`
+- **Public Website**: `http://localhost:3000`
 - **Client Portal**: `http://localhost:3001`
 - **Admin Dashboard**: `http://localhost:3002`
 

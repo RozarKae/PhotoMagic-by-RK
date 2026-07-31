@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '1314:1314'
+      - '3000:3000'
     environment:
       - NODE_ENV=production
-      - PORT=1314
+      - PORT=3000
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/photomagic
       - REDIS_URL=redis://redis:6379
     depends_on:

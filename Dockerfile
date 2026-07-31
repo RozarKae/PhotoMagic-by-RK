@@ -26,7 +26,7 @@ RUN pnpm build
 # Stage 3: Runner
 FROM base AS runner
 ENV NODE_ENV=production
-ENV PORT=1314
+ENV PORT=3000
 COPY --from=builder /app ./
-EXPOSE 1314
+EXPOSE 3000
 CMD ["pnpm", "--filter", "website", "start"]

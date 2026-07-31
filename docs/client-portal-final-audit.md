@@ -5,7 +5,7 @@
 > **Audit Status**: 100% Production-Ready Client Experience System Complete (v1.0)  
 > **Role**: Lead Client Experience Architect & Frontend Systems Engineer  
 > **Target App**: `apps/client`  
-> **Primary URL**: `http://localhost:1314` / `http://localhost:3000`  
+> **Primary URL**: `http://localhost:3000`  
 > **Design Theme**: Luxury Metallic Gold (`#D4AF37`) + Dark Mode Glassmorphism
 
 ---
@@ -51,6 +51,6 @@ pnpm --filter client dev
 
 Navigate to:
 
-- `http://localhost:3000` (or `http://localhost:1314` via proxy)
+- `http://localhost:3000` (or `http://localhost:3001` via proxy)
 
 All 15 Client Portal Phases (C1 through C15) are 100% complete, fully typed, and production-ready!

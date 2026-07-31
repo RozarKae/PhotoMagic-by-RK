@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 1314",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 1314",
+    "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },

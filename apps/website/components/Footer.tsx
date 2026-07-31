@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <a
-                href="http://localhost:1314/admin"
+                href="http://localhost:3002/admin"
                 className="hover:text-gold-500 transition-colors"
               >
                 Studio Command Center
