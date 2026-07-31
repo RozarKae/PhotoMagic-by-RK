@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Camera, Menu, X, Sparkles } from 'lucide-react';
+import { Camera, Menu, X } from 'lucide-react';
 import { Button } from '@photomagic/ui';
 import { ROUTES } from '@photomagic/config';
 
@@ -24,37 +24,39 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Home', href: ROUTES.PUBLIC.HOME },
+    { label: 'Exhibition', href: ROUTES.PUBLIC.HOME },
     { label: 'Portfolio', href: ROUTES.PUBLIC.PORTFOLIO },
-    { label: 'Services', href: '/services' },
+    { label: 'Atelier Services', href: '/services' },
     { label: 'Investment', href: ROUTES.PUBLIC.INVESTMENT },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Blog', href: '/blog' },
+    { label: 'Faq', href: '/faq' },
+    { label: 'Journal', href: '/blog' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-surface-glass/90 backdrop-blur-2xl border-b border-border-subtle transition-all duration-300">
-      {/* Scroll Progress Bar */}
-      <div className="w-full bg-surface-base h-0.5 overflow-hidden">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-canvas/80 backdrop-blur-2xl border-b border-gold-500/20 transition-all duration-300">
+      {/* Scroll Progress Indicator Line */}
+      <div className="w-full bg-canvas h-[1px] overflow-hidden">
         <div
           className="bg-gold-500 h-full transition-all duration-150"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Brand Logo */}
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Master Brand Hallmark */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-text-primary hover:text-gold-500 transition-colors group"
+          className="flex items-center gap-3 text-ivory hover:text-gold-500 transition-colors group"
         >
-          <div className="rounded-full bg-gold-500/10 p-2 text-gold-500 border border-gold-500/20 group-hover:scale-105 transition-transform">
-            <Camera size={20} />
+          <div className="rounded-full bg-gold-500/10 p-2 text-gold-500 border border-gold-500/30 group-hover:border-gold-500 transition-colors">
+            <Camera size={18} />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold tracking-tight text-lg leading-none">PHOTOMAGIC</span>
-            <span className="text-[9px] uppercase tracking-widest text-gold-500 font-semibold mt-0.5">
-              Luxury Studio
+            <span className="font-hero font-bold tracking-widest text-base leading-none">
+              PHOTOMAGIC
+            </span>
+            <span className="font-nav text-[9px] uppercase tracking-widest text-gold-500 font-semibold mt-1">
+              International Fine Art Atelier
             </span>
           </div>
         </Link>
@@ -67,13 +69,13 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-all relative py-1 ${
-                  isActive ? 'text-gold-500 font-bold' : 'text-text-secondary hover:text-gold-500'
+                className={`font-nav text-[11px] font-semibold uppercase tracking-widest transition-all relative py-1 ${
+                  isActive ? 'text-gold-500' : 'text-silver hover:text-ivory'
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-500 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-gold-500" />
                 )}
               </Link>
             );
@@ -83,8 +85,8 @@ export const Navbar: React.FC = () => {
         {/* Action Button */}
         <div className="hidden md:flex items-center gap-4">
           <Link href={ROUTES.PUBLIC.BOOKING}>
-            <Button variant="primary" size="sm" className="font-bold tracking-wide shadow-gold">
-              Inquire Consultation
+            <Button variant="primary" size="sm" className="font-bold tracking-widest shadow-watch">
+              Commission Inquiry
             </Button>
           </Link>
         </div>
@@ -93,15 +95,15 @@ export const Navbar: React.FC = () => {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Navigation Menu"
-          className="md:hidden p-2 text-text-secondary hover:text-text-primary focus:outline-none"
+          className="md:hidden p-2 text-silver hover:text-ivory focus:outline-none"
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden py-6 px-6 flex flex-col gap-4 border-t border-border-subtle bg-surface-base/95 backdrop-blur-2xl transition-all">
+        <div className="md:hidden py-6 px-6 flex flex-col gap-4 border-t border-gold-500/20 bg-canvas/95 backdrop-blur-2xl transition-all">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -109,8 +111,8 @@ export const Navbar: React.FC = () => {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-medium py-1 transition-colors ${
-                  isActive ? 'text-gold-500 font-bold' : 'text-text-secondary hover:text-gold-500'
+                className={`font-nav text-xs font-semibold uppercase tracking-widest py-1 transition-colors ${
+                  isActive ? 'text-gold-500' : 'text-silver hover:text-ivory'
                 }`}
               >
                 {link.label}
@@ -118,8 +120,8 @@ export const Navbar: React.FC = () => {
             );
           })}
           <Link href={ROUTES.PUBLIC.BOOKING} onClick={() => setMobileMenuOpen(false)}>
-            <Button variant="primary" className="w-full mt-2 font-bold">
-              Inquire Consultation
+            <Button variant="primary" className="w-full mt-2 font-bold tracking-widest">
+              Commission Inquiry
             </Button>
           </Link>
         </div>

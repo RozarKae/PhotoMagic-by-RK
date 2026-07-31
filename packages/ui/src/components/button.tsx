@@ -14,19 +14,23 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 disabled:opacity-50 disabled:pointer-events-none';
+      'inline-flex items-center justify-center font-nav uppercase tracking-widest rounded-full border transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold-500 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] cursor-pointer';
 
     const variants = {
-      primary: 'bg-gold-500 text-canvas hover:bg-gold-400',
-      secondary: 'bg-surface-elevated text-white border border-border-subtle hover:bg-surface-base',
-      ghost: 'bg-transparent text-white hover:bg-surface-base',
-      danger: 'bg-status-error text-white hover:opacity-90',
+      primary:
+        'bg-transparent text-gold-500 border-gold-500/50 hover:bg-gold-500 hover:text-canvas hover:border-gold-500 shadow-watch hover:-translate-y-0.5',
+      secondary:
+        'bg-surface-elevated text-ivory border-gold-500/20 hover:border-gold-500/60 hover:bg-surface-base hover:text-gold-400 hover:-translate-y-0.5',
+      ghost:
+        'bg-transparent text-ivory border-transparent hover:text-gold-400 hover:bg-surface-elevated/40',
+      danger:
+        'bg-status-error/10 text-status-error border-status-error/30 hover:bg-status-error hover:text-white',
     };
 
     const sizes = {
-      sm: 'h-8 px-3 text-xs',
-      md: 'h-10 px-4 text-sm',
-      lg: 'h-12 px-6 text-base',
+      sm: 'h-8 px-4 text-[11px] font-semibold',
+      md: 'h-10 px-6 text-xs font-semibold',
+      lg: 'h-12 px-8 text-xs font-bold',
     };
 
     return (

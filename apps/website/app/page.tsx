@@ -87,40 +87,46 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-canvas text-text-primary flex flex-col">
+    <div className="min-h-screen bg-canvas text-ivory flex flex-col selection:bg-gold-500 selection:text-canvas">
       <StructuredData />
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
-        {/* Background Ambient Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gold-500/10 rounded-full blur-[170px] pointer-events-none" />
+        {/* Ambient Emerald & Gold Museum Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/10 rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[140px] pointer-events-none" />
 
         <Container className="relative z-10 text-center flex flex-col items-center">
           <FadeIn>
-            <Badge variant="gold" className="mb-4 uppercase tracking-widest text-[10px]">
-              Architects of Timeless Luxury Photography
+            <Badge variant="gold" className="mb-6 uppercase tracking-widest">
+              Digital Headquarters • International Fine Art House
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-text-primary max-w-4xl leading-[1.1] mb-6">
-              Capturing Moments of <span className="text-gold-500">Uncompromising Elegance</span>
+
+            <h1 className="font-hero text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-ivory max-w-5xl leading-[1.08] mb-6">
+              Documenting{' '}
+              <span className="text-gold-500 italic font-heading font-normal">Legacy</span> Across
+              Generations
             </h1>
-            <p className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              We specialize in royal wedding celebrations, high-fashion cinema, and fine art studio
-              portraiture for discerning clients across Udaipur, Paris, Beverly Hills, and London.
+
+            <p className="text-base md:text-xl text-silver max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+              Fine art photography, 8K anamorphic cinema, and private atelier portraiture for royal
+              houses, luxury estates, and international celebrations.
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={ROUTES.PUBLIC.BOOKING}>
                 <Button
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto font-bold tracking-wide"
+                  className="w-full sm:w-auto font-bold tracking-widest shadow-watch"
                 >
-                  Request Concierge Consultation
+                  Request Private Concierge Consultation
                 </Button>
               </Link>
               <Link href={ROUTES.PUBLIC.PORTFOLIO}>
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto tracking-wide">
-                  Discover Curated Portfolio
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto font-semibold">
+                  View Curated Exhibition
                 </Button>
               </Link>
             </div>
@@ -128,64 +134,46 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Storytelling Heritage Block */}
-      <section className="py-16 bg-surface-base/60 border-y border-border-subtle">
-        <Container className="max-w-4xl text-center">
-          <Badge variant="gold" className="mb-3 uppercase tracking-widest text-[10px]">
-            Our Legacy & Philosophy
-          </Badge>
-          <h2 className="text-3xl font-extrabold text-text-primary mb-4">
-            Where Emotion Meets Fine Art
-          </h2>
-          <p className="text-sm md:text-base text-text-secondary leading-relaxed font-light italic">
-            "Founded on the philosophy that true luxury lies in emotion, light, and timeless
-            permanence, PhotoMagic Studio brings a cinematic, fine-art perspective to life's
-            grandest celebrations. Every frame is handcrafted to endure for generations."
-          </p>
-        </Container>
-      </section>
-
-      {/* Featured Stories Section */}
-      <section className="py-24">
+      {/* Section 01: Featured Exhibition */}
+      <section className="py-24 border-t border-gold-500/20 relative">
         <Container>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
             <div>
-              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-                Curated Stories
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
-                Featured Portfolio Chapters
+              <span className="font-mono text-xs text-gold-500 uppercase tracking-widest block mb-2">
+                01 / CURATED EXHIBITION
+              </span>
+              <h2 className="font-heading text-4xl md:text-5xl font-semibold text-ivory">
+                Masterpiece Portfolio Archives
               </h2>
             </div>
             <Link href={ROUTES.PUBLIC.PORTFOLIO}>
-              <Button variant="ghost" size="sm" className="text-gold-500">
-                View Complete Portfolio →
+              <Button variant="ghost" size="sm" className="text-gold-400">
+                View Full Archive →
               </Button>
             </Link>
           </div>
 
-          <Grid cols={3}>
+          <Grid cols={3} className="gap-8">
             {featuredStories.map((story) => (
               <Card
                 key={story.id}
                 variant="glass"
-                className="p-0 overflow-hidden group cursor-pointer border-border-subtle hover:border-gold-500/40 transition-all duration-300"
+                className="p-0 group overflow-hidden border-gold-500/20 hover:border-gold-500/50"
               >
-                <div className="relative h-80 w-full overflow-hidden bg-surface-base">
+                <div className="relative aspect-[4/5] overflow-hidden">
                   <img
                     src={story.image}
                     alt={story.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-3 right-3 bg-canvas/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-semibold text-gold-500 border border-gold-500/20">
-                    {story.category}
+                  <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/20 to-transparent opacity-80" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-1">
+                    <span className="font-mono text-[10px] uppercase text-gold-500 tracking-widest">
+                      {story.category}
+                    </span>
+                    <h3 className="font-heading text-2xl font-bold text-ivory">{story.title}</h3>
+                    <p className="text-xs text-silver font-light">{story.subtitle}</p>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-text-primary group-hover:text-gold-500 transition-colors">
-                    {story.title}
-                  </h3>
-                  <p className="text-xs text-text-tertiary mt-1 font-mono">{story.subtitle}</p>
                 </div>
               </Card>
             ))}
@@ -193,40 +181,32 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-surface-base/40 border-y border-border-subtle">
+      {/* Section 02: Royal Heritage Services */}
+      <section className="py-24 border-t border-gold-500/20 bg-surface-base/40 relative">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-              Craftsmanship & Artistry
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
-              Bespoke Concierge Offerings
+            <span className="font-mono text-xs text-gold-500 uppercase tracking-widest block mb-2">
+              02 / ROYAL HERITAGE SERVICES
+            </span>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-ivory">
+              Bespoke Photography & Cinema Atelier
             </h2>
-            <p className="text-sm text-text-secondary mt-2 font-light">
-              Tailored multi-crew collections engineered for world-class celebrations and
-              high-fashion portraiture.
-            </p>
           </div>
 
-          <Grid cols={2}>
-            {services.map((srv, idx) => {
-              const IconComponent = srv.icon;
+          <Grid cols={2} className="gap-8">
+            {services.map((service, idx) => {
+              const IconComp = service.icon;
               return (
                 <Card
                   key={idx}
                   variant="glass"
-                  className="p-8 flex flex-col justify-between hover:border-gold-500/30 transition-all"
+                  className="p-8 flex flex-col gap-4 border-gold-500/20 hover:border-gold-500/50"
                 >
-                  <div>
-                    <div className="rounded-full bg-gold-500/10 w-14 h-14 flex items-center justify-center text-gold-500 mb-6 border border-gold-500/20">
-                      <IconComponent size={26} />
-                    </div>
-                    <h3 className="text-2xl font-bold text-text-primary mb-3">{srv.title}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed font-light">
-                      {srv.desc}
-                    </p>
+                  <div className="p-3 rounded-full bg-gold-500/10 text-gold-500 border border-gold-500/20 w-fit">
+                    <IconComp size={24} />
                   </div>
+                  <h3 className="font-heading text-2xl font-bold text-ivory">{service.title}</h3>
+                  <p className="text-sm text-silver font-light leading-relaxed">{service.desc}</p>
                 </Card>
               );
             })}
@@ -234,38 +214,27 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24">
+      {/* Section 03: Testimonials */}
+      <section className="py-24 border-t border-gold-500/20 relative">
         <Container>
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-              Client Acclaim
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-2">
-              Praise From Distinguishing Clients
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="font-mono text-xs text-gold-500 uppercase tracking-widest block mb-2">
+              03 / LEGACY RECOGNITION
+            </span>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-ivory">
+              Patrons of Distinction
             </h2>
           </div>
 
-          <Grid cols={2}>
-            {testimonials.map((item, idx) => (
-              <Card
-                key={idx}
-                variant="glass"
-                className="p-8 flex flex-col justify-between border-border-subtle"
-              >
+          <Grid cols={2} className="gap-8">
+            {testimonials.map((t, idx) => (
+              <Card key={idx} variant="glass" className="p-8 flex flex-col justify-between gap-6">
+                <p className="font-heading text-xl italic text-ivory leading-relaxed">
+                  "{t.quote}"
+                </p>
                 <div>
-                  <div className="flex gap-1 text-gold-500 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="text-sm md:text-base text-text-secondary italic mb-6 leading-relaxed font-light">
-                    "{item.quote}"
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-border-subtle">
-                  <h4 className="text-sm font-bold text-text-primary">{item.client}</h4>
-                  <span className="text-xs text-gold-500 font-mono">{item.event}</span>
+                  <h4 className="font-bold text-sm text-gold-500">{t.client}</h4>
+                  <span className="text-xs text-silver font-mono">{t.event}</span>
                 </div>
               </Card>
             ))}
@@ -273,41 +242,25 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Contact & Inquiry Section */}
-      <section id="inquiry" className="py-24 bg-surface-base/40 border-t border-border-subtle">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-                Private Consultation
-              </Badge>
-              <h2 className="text-4xl font-extrabold text-text-primary mt-2 mb-4">
-                Initiate Your Studio Consultation
-              </h2>
-              <p className="text-sm text-text-secondary leading-relaxed mb-8 font-light">
-                Share your upcoming wedding date, celebration venue, or editorial project details.
-                Our Studio Director personally responds within 24 hours to confirm date availability
-                and provide a tailored collection proposal.
-              </p>
-              <div className="flex flex-col gap-4 text-xs text-text-secondary">
-                <div className="flex items-center gap-3">
-                  <Award className="text-gold-500 flex-shrink-0" size={22} />
-                  <span>Award-winning studio with ateliers in Udaipur, Beverly Hills & London</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <ShieldCheck className="text-gold-500 flex-shrink-0" size={22} />
-                  <span>
-                    Private client web proofing, 3D pin comments & Italian flush-mount album
-                    co-design
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <Card variant="glass" className="p-8 border-gold-500/30">
-              <InquiryForm />
-            </Card>
+      {/* Section 04: Concierge Inquiry */}
+      <section className="py-24 border-t border-gold-500/20 bg-surface-base/60 relative">
+        <Container className="max-w-3xl">
+          <div className="text-center mb-12">
+            <span className="font-mono text-xs text-gold-500 uppercase tracking-widest block mb-2">
+              04 / PRIVATE CONCIERGE
+            </span>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-ivory mb-4">
+              Commence Your Legacy Commission
+            </h2>
+            <p className="text-sm text-silver font-light">
+              Inquire regarding availability for royal wedding commissions, private studio ateliers,
+              or international editorial assignments.
+            </p>
           </div>
+
+          <Card variant="glass" className="p-8">
+            <InquiryForm />
+          </Card>
         </Container>
       </section>
 
