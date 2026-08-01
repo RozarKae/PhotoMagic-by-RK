@@ -17,3 +17,4 @@ export * from './components/data-table';
 export * from './components/layout';
 export * from './components/motion';
 export * from './providers/app-providers';
+export * from './design-system';

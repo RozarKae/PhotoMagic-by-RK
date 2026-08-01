@@ -28,12 +28,16 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <div className="w-full flex flex-col gap-1.5 text-left">
-      {label && <label className="text-xs font-medium text-text-secondary">{label}</label>}
+      {label && (
+        <label className="text-xs font-nav uppercase tracking-wider text-text-secondary font-medium">
+          {label}
+        </label>
+      )}
       <div className="relative w-full">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-10 w-full appearance-none rounded-md bg-surface-base px-3 pr-8 text-sm text-text-primary border border-border-subtle focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all cursor-pointer ${
+          className={`h-11 w-full appearance-none rounded-xl bg-surface-base/90 px-4 pr-10 text-sm text-ivory border border-border-subtle focus:outline-none focus:ring-1 focus:ring-gold-500 focus:border-gold-500 transition-all duration-200 cursor-pointer ${
             error ? 'border-status-error focus:ring-status-error' : ''
           } ${className}`}
           {...props}
@@ -42,13 +46,13 @@ export const Select: React.FC<SelectProps> = ({
             <option
               key={opt.value}
               value={opt.value}
-              className="bg-surface-elevated text-text-primary"
+              className="bg-surface-elevated text-ivory py-2"
             >
               {opt.label}
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-text-tertiary">
+        <div className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-gold-500">
           <ChevronDown size={16} />
         </div>
       </div>

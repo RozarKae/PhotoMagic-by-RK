@@ -1,19 +1,25 @@
 {
-  "name": "photomagic-studio-os",
+  "name": "photomagic-monorepo",
   "private": true,
   "version": "1.0.0",
-  "description": "Premium Photography Studio Management Platform Monorepo",
+  "description": "PhotoMagic Monorepo — Studio Marketing Website & OS Platform",
   "author": "PhotoMagic Engineering Team",
   "license": "MIT",
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:studio": "turbo run dev --filter=@photomagic/studio",
+    "dev:os": "turbo run dev --filter=@photomagic/os",
+    "build": "turbo run build",
+    "build:studio": "turbo run build --filter=@photomagic/studio",
+    "build:os": "turbo run build --filter=@photomagic/os",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.25",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",

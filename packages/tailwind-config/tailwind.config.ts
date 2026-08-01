@@ -5,14 +5,14 @@ const config: Omit<Config, 'content'> = {
   theme: {
     extend: {
       colors: {
-        canvas: '#060606', // Absolute Black
+        canvas: '#060606', // Deep Matte Black
         surface: {
           base: '#111111',
           elevated: '#171717',
-          glass: 'rgba(17, 17, 17, 0.75)',
+          glass: 'rgba(17, 17, 17, 0.85)',
         },
         border: {
-          subtle: 'rgba(212, 175, 55, 0.15)', // Hairline gold tint
+          subtle: 'rgba(212, 175, 55, 0.18)', // Hairline gold tint
         },
         gold: {
           400: '#E5C158',
@@ -24,14 +24,19 @@ const config: Omit<Config, 'content'> = {
           500: '#0B5D4C', // Deep Emerald
           600: '#074236',
         },
-        ivory: '#F6F3EE', // Luxury Cream/Ivory
+        ivory: '#F6F3EE', // Warm White / Ivory
+        silver: '#AEB4BA', // Muted Gray / Silver
         bronze: '#7B6B4F', // Muted Bronze
-        silver: '#AEB4BA', // Silver Accent
+        text: {
+          primary: '#F6F3EE',
+          secondary: '#AEB4BA',
+          tertiary: '#7B6B4F',
+        },
         status: {
           success: '#10B981',
-          warning: '#F59E0B',
-          error: '#EF4444',
-          info: '#3B82F6',
+          warning: '#D97706', // Luxury Amber
+          error: '#EF4444', // Soft Crimson
+          info: '#64748B', // Muted Slate (No Bright Blue)
         },
       },
       fontFamily: {
@@ -44,13 +49,25 @@ const config: Omit<Config, 'content'> = {
       borderRadius: {
         sm: '6px',
         md: '12px',
-        lg: '18px',
-        xl: '28px',
+        lg: '16px',
+        xl: '20px',
         full: '9999px',
       },
       boxShadow: {
         museum: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05)',
         watch: '0 4px 20px rgba(212, 175, 55, 0.15)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+      },
+      spacing: {
+        '1': '4px',
+        '2': '8px',
+        '3': '12px',
+        '4': '16px',
+        '6': '24px',
+        '8': '32px',
+        '12': '48px',
+        '16': '64px',
+        '24': '96px',
       },
     },
   },

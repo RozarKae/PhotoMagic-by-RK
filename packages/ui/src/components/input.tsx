@@ -15,12 +15,16 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type = 'text', label, error, ...props }, ref) => {
     return (
       <div className="w-full flex flex-col gap-1.5 text-left">
-        {label && <label className="text-xs font-medium text-text-secondary">{label}</label>}
+        {label && (
+          <label className="text-xs font-nav uppercase tracking-wider text-text-secondary font-medium">
+            {label}
+          </label>
+        )}
         <input
           type={type}
           ref={ref}
           className={cn(
-            'h-10 w-full rounded-md bg-surface-base px-3 text-sm text-text-primary placeholder:text-text-tertiary border border-border-subtle focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all',
+            'h-11 w-full rounded-xl bg-surface-base/90 px-4 text-sm text-ivory placeholder:text-silver/50 border border-border-subtle focus:outline-none focus:ring-1 focus:ring-gold-500 focus:border-gold-500 transition-all duration-200 shadow-inner',
             error && 'border-status-error focus:ring-status-error',
             className,
           )}

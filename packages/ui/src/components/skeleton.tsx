@@ -16,8 +16,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
   return (
     <div
-      className={`animate-pulse bg-surface-elevated/60 border border-border-subtle/30 ${
-        circle ? 'rounded-full' : 'rounded-md'
+      className={`animate-pulse bg-surface-elevated/80 border border-border-subtle/30 backdrop-blur-md transition-all ${
+        circle ? 'rounded-full' : 'rounded-xl'
       } ${className}`}
       style={{
         width: width ?? '100%',

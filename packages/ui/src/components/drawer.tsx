@@ -19,8 +19,8 @@ export const Drawer: React.FC<DrawerProps> = ({
   if (!isOpen) return null;
 
   const positionClasses = {
-    right: 'right-0 animate-in slide-in-from-right duration-300',
-    left: 'left-0 animate-in slide-in-from-left duration-300',
+    right: 'right-0 animate-in slide-in-from-right duration-300 border-l',
+    left: 'left-0 animate-in slide-in-from-left duration-300 border-r',
   };
 
   return (
@@ -28,19 +28,19 @@ export const Drawer: React.FC<DrawerProps> = ({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity"
       />
 
       {/* Drawer Panel */}
       <div
-        className={`fixed top-0 bottom-0 w-full max-w-md bg-surface-elevated border-l border-border-subtle p-6 shadow-modal flex flex-col ${positionClasses[position]}`}
+        className={`fixed top-0 bottom-0 w-full max-w-md bg-surface-glass backdrop-blur-2xl border-border-subtle p-8 shadow-museum flex flex-col ${positionClasses[position]}`}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-border-subtle mb-4">
-          {title && <h3 className="text-lg font-semibold text-text-primary">{title}</h3>}
+        <div className="flex items-center justify-between pb-4 border-b border-border-subtle mb-6">
+          {title && <h3 className="font-heading text-2xl font-bold text-ivory">{title}</h3>}
           <button
             onClick={onClose}
             aria-label="Close Drawer"
-            className="rounded-full p-1 text-text-tertiary hover:text-text-primary hover:bg-surface-base transition-colors"
+            className="rounded-full p-1.5 text-silver hover:text-gold-400 hover:bg-surface-elevated transition-colors cursor-pointer"
           >
             <X size={20} />
           </button>

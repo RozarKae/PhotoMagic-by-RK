@@ -1,0 +1,40 @@
+:root {
+  /* Colors */
+  --color-canvas: #060606;
+  --color-surface-base: #111111;
+  --color-surface-elevated: #171717;
+  --color-surface-glass: rgba(17, 17, 17, 0.85);
+  --color-border-subtle: rgba(212, 175, 55, 0.18);
+  --color-border-elevated: rgba(212, 175, 55, 0.35);
+
+  --color-gold-400: #E5C158;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #B59226;
+
+  --color-emerald-400: #149177;
+  --color-emerald-500: #0B5D4C;
+  --color-emerald-600: #074236;
+
+  --color-ivory: #F6F3EE;
+  --color-silver: #AEB4BA;
+  --color-bronze: #7B6B4F;
+
+  --color-status-success: #10B981;
+  --color-status-warning: #D97706;
+  --color-status-error: #EF4444;
+  --color-status-info: #64748B;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-xxl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.03);
+  --shadow-museum: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05);
+  --shadow-watch: 0 4px 20px rgba(212, 175, 55, 0.15);
+}

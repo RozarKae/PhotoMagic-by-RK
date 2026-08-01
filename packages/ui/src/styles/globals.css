@@ -1,33 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+@import './design-system.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-canvas: #060606;
-    --color-surface-base: #111111;
-    --color-surface-elevated: #171717;
-    --color-surface-glass: rgba(17, 17, 17, 0.85);
-    --color-border-subtle: rgba(212, 175, 55, 0.18);
-    --color-text-primary: #F6F3EE; /* Ivory */
-    --color-text-secondary: #AEB4BA; /* Silver Accent */
-    --color-text-tertiary: #7B6B4F; /* Muted Bronze */
-    --color-gold-500: #D4AF37; /* Royal Gold */
-    --color-emerald-500: #0B5D4C; /* Deep Emerald */
-  }
-
   body {
-    background-color: var(--color-canvas);
-    color: var(--color-text-primary);
+    background-color: #0A0A0C;
+    color: #F6F3EE;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(ellipse at 50% 0%, rgba(11, 93, 76, 0.04) 0%, transparent 65%),
-      radial-gradient(ellipse at 80% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 60%);
+      radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.04) 0%, transparent 65%),
+      radial-gradient(ellipse at 80% 100%, rgba(11, 93, 76, 0.03) 0%, transparent 60%);
     background-attachment: fixed;
   }
 
@@ -43,40 +31,88 @@
   .font-nav {
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
   }
 
   .font-mono {
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  /* Sotheby's Exhibition Museum Glass Card */
-  .glass-card {
-    background: var(--color-surface-glass);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--color-border-subtle);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.03);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .glass-card:hover {
-    border-color: rgba(212, 175, 55, 0.35);
-  }
-
-  /* Custom Subtle Scrollbar */
+  /* Luxury Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-canvas);
+    background: #0A0A0C;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(212, 175, 55, 0.25);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-gold-500);
+    background: #D4AF37;
+  }
+}
+
+/* Luxury Atelier Fine Art Utilities */
+@layer utilities {
+  /* Subtle Vignette Overlays */
+  .vignette-hero {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 12, 0.4) 0%,
+      rgba(10, 10, 12, 0.2) 40%,
+      rgba(10, 10, 12, 0.85) 85%,
+      #0A0A0C 100%
+    );
+  }
+
+  .vignette-card {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(10, 10, 12, 0.3) 50%,
+      rgba(10, 10, 12, 0.95) 100%
+    );
+  }
+
+  /* Archival Glass & Matte Containers */
+  .luxury-glass {
+    background: rgba(18, 18, 22, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  }
+
+  .luxury-glass-hover {
+    transition: all 0.5s ease;
+  }
+  .luxury-glass-hover:hover {
+    background: rgba(22, 22, 28, 0.8);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.08);
+  }
+
+  /* Luxury Metallic Text Gradients */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #FFF 0%, #F8F3E6 35%, #D4AF37 75%, #B59226 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-emerald-gradient {
+    background: linear-gradient(135deg, #FFF 0%, #A7F3D0 40%, #10B981 80%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Subtle Smooth Scale Effect */
+  .hover-scale-slow {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-scale-slow:hover {
+    transform: scale(1.04);
   }
 }
