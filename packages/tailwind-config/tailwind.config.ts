@@ -1,42 +1,44 @@
-import type { Config } from 'tailwindcss';
-
-const config: Omit<Config, 'content'> = {
+/** @type {import('tailwindcss').Config} */
+const config: any = {
   darkMode: ['class'],
   theme: {
     extend: {
       colors: {
-        canvas: '#060606', // Deep Matte Black
+        canvas: '#060608', // Deep Obsidian Black
         surface: {
-          base: '#111111',
-          elevated: '#171717',
-          glass: 'rgba(17, 17, 17, 0.85)',
+          base: '#0E0E12', // Matte Graphite / Charcoal
+          elevated: '#14141A', // Elevated Charcoal
+          glass: 'rgba(14, 14, 18, 0.85)',
         },
         border: {
-          subtle: 'rgba(212, 175, 55, 0.18)', // Hairline gold tint
+          subtle: 'rgba(212, 175, 55, 0.14)', // Hairline gold tint
+          muted: 'rgba(255, 255, 255, 0.08)',
         },
         gold: {
+          300: '#F3E5AB',
           400: '#E5C158',
-          500: '#D4AF37', // Royal Gold
+          500: '#D4AF37', // Royal Warm Gold
           600: '#B59226',
+          700: '#8C7323',
         },
         emerald: {
-          400: '#149177',
-          500: '#0B5D4C', // Deep Emerald
-          600: '#074236',
+          400: '#34D399',
+          500: '#10B981', // Emerald Accent
+          600: '#059669',
         },
-        ivory: '#F6F3EE', // Warm White / Ivory
-        silver: '#AEB4BA', // Muted Gray / Silver
-        bronze: '#7B6B4F', // Muted Bronze
+        ivory: '#F6F3EE', // Warm Off-White / Ivory
+        silver: '#A0A0AA', // Muted Gray / Silver
+        bronze: '#C5A059', // Metallic Muted Bronze
         text: {
           primary: '#F6F3EE',
-          secondary: '#AEB4BA',
-          tertiary: '#7B6B4F',
+          secondary: '#A0A0AA',
+          tertiary: '#70707B',
         },
         status: {
           success: '#10B981',
-          warning: '#D97706', // Luxury Amber
+          warning: '#F59E0B', // Luxury Amber
           error: '#EF4444', // Soft Crimson
-          info: '#64748B', // Muted Slate (No Bright Blue)
+          info: '#64748B', // Muted Slate
         },
       },
       fontFamily: {
@@ -48,15 +50,17 @@ const config: Omit<Config, 'content'> = {
       },
       borderRadius: {
         sm: '6px',
-        md: '12px',
-        lg: '16px',
-        xl: '20px',
+        md: '10px',
+        lg: '14px',
+        xl: '18px',
+        '2xl': '24px',
         full: '9999px',
       },
       boxShadow: {
         museum: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05)',
         watch: '0 4px 20px rgba(212, 175, 55, 0.15)',
-        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
+        goldGlow: '0 0 25px rgba(212, 175, 55, 0.20)',
       },
       spacing: {
         '1': '4px',

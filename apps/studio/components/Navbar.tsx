@@ -83,19 +83,19 @@ export const Navbar: React.FC = () => {
 
         {/* Action Controls: Client Portal Login & Commission Inquiry */}
         <div className="hidden sm:flex items-center gap-6">
-          <a
-            href="http://localhost:3001"
-            className="font-nav text-[10px] uppercase tracking-[0.2em] text-gray-400 hover:text-amber-300 transition-colors flex items-center gap-1.5"
+          <Link
+            href="/portal"
+            className="font-nav text-[10px] uppercase tracking-[0.2em] text-silver hover:text-gold-300 transition-colors flex items-center gap-1.5"
           >
-            <UserCheck size={13} className="text-amber-400/80" />
-            <span>Client Login</span>
-          </a>
+            <UserCheck size={13} className="text-gold-400" />
+            <span>Client Portal</span>
+          </Link>
 
           <Link href={ROUTES.PUBLIC.BOOKING}>
             <Button
               variant="primary"
               size="sm"
-              className="font-nav text-[9px] font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-amber-500 via-[#F8F3E6] to-amber-400 text-black border border-amber-300/40 shadow-[0_0_20px_rgba(212,175,55,0.25)] hover:shadow-[0_0_30px_rgba(212,175,55,0.45)] transition-all duration-300 py-2.5 px-5"
+              className="font-nav text-[9px] font-bold uppercase tracking-[0.25em] py-2.5 px-5"
             >
               Commission Inquiry
             </Button>
@@ -106,7 +106,7 @@ export const Navbar: React.FC = () => {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
-          className="lg:hidden p-2 text-gray-300 hover:text-white focus:outline-none"
+          className="lg:hidden p-2 text-silver hover:text-ivory focus:outline-none"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -114,7 +114,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-6 py-8 flex flex-col gap-5 bg-[#0A0A0C]/98 border-b border-amber-500/20 backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="lg:hidden px-6 py-8 flex flex-col gap-5 bg-surface-glass border-b border-border-subtle backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-300">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -123,7 +123,7 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`font-nav text-xs font-semibold uppercase tracking-[0.2em] py-2 transition-colors ${
-                  isActive ? 'text-amber-400' : 'text-gray-300 hover:text-white'
+                  isActive ? 'text-gold-400' : 'text-silver hover:text-ivory'
                 }`}
               >
                 {link.label}
@@ -131,18 +131,19 @@ export const Navbar: React.FC = () => {
             );
           })}
 
-          <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
-            <a
-              href="http://localhost:3001"
-              className="font-nav text-xs uppercase tracking-[0.2em] text-gray-300 hover:text-amber-400 py-2 flex items-center gap-2"
+          <div className="pt-4 border-t border-border-subtle flex flex-col gap-3">
+            <Link
+              href="/portal"
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-nav text-xs uppercase tracking-[0.2em] text-silver hover:text-gold-400 py-2 flex items-center gap-2"
             >
-              <UserCheck size={14} className="text-amber-400" />
-              <span>Client Portal Login (PhotoMagic OS)</span>
-            </a>
+              <UserCheck size={14} className="text-gold-400" />
+              <span>Client Portal</span>
+            </Link>
             <Link href={ROUTES.PUBLIC.BOOKING} onClick={() => setMobileMenuOpen(false)}>
               <Button
                 variant="primary"
-                className="w-full font-nav text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-amber-500 to-amber-400 text-black py-3"
+                className="w-full font-nav text-xs font-bold uppercase tracking-[0.2em] py-3"
               >
                 Commission Inquiry
               </Button>

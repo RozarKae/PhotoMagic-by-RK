@@ -18,15 +18,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        'bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 text-canvas font-bold border border-gold-400 shadow-watch hover:shadow-lg hover:brightness-110 hover:-translate-y-0.5 rounded-full',
+        'bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 text-canvas font-bold border border-gold-300/50 shadow-watch hover:shadow-goldGlow hover:brightness-105 active:scale-[0.98] rounded-xl',
       secondary:
-        'bg-surface-glass text-ivory border border-border-subtle hover:border-gold-500/50 hover:bg-surface-elevated hover:text-gold-400 hover:-translate-y-0.5 backdrop-blur-md rounded-xl',
+        'bg-surface-elevated/90 text-ivory border border-border-subtle hover:border-gold-500/40 hover:bg-surface-elevated hover:text-gold-300 backdrop-blur-md rounded-xl',
       outline:
-        'bg-transparent text-gold-400 border border-gold-500/40 hover:bg-gold-500/10 hover:border-gold-500 hover:text-gold-400 hover:-translate-y-0.5 rounded-full',
+        'bg-transparent text-gold-400 border border-gold-500/40 hover:bg-gold-500/10 hover:border-gold-500 hover:text-gold-300 rounded-xl',
       ghost:
-        'bg-transparent text-ivory border border-transparent hover:text-gold-400 hover:bg-surface-elevated/50 rounded-xl',
+        'bg-transparent text-silver border border-transparent hover:text-ivory hover:bg-surface-elevated/70 rounded-xl',
       danger:
-        'bg-status-error/10 text-status-error border border-status-error/30 hover:bg-status-error hover:text-white rounded-xl',
+        'bg-status-error/15 text-status-error border border-status-error/30 hover:bg-status-error hover:text-white rounded-xl',
     };
 
     const sizes = {
