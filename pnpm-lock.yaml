@@ -296,7 +296,11 @@ importers:
         specifier: ^5.4.5
         version: 5.9.3
 
-  packages/tailwind-config: {}
+  packages/tailwind-config:
+    devDependencies:
+      tailwindcss:
+        specifier: ^3.4.3
+        version: 3.4.19(yaml@2.9.0)
 
   packages/types:
     devDependencies:
