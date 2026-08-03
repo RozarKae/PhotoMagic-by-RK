@@ -7,7 +7,7 @@ export const PDL_STUDIO_THEME = {
   colors: {
     bg: PDL_COLORS.base.bg,
     cardBg: PDL_COLORS.base.surface,
-    accent: PDL_COLORS.brand.raw,
+    accent: PDL_COLORS.brand.kodakGold,
     textPrimary: PDL_COLORS.text.primary,
     textSecondary: PDL_COLORS.text.secondary,
     border: PDL_COLORS.border.subtle,

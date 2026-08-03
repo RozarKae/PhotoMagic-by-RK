@@ -2,6 +2,8 @@ module.exports = {
   extends: ['next/core-web-vitals', 'prettier'],
   rules: {
     '@next/next/no-html-link-for-pages': 'off',
-    'react/jsx-key': 'off',
+    'react/jsx-key': 'warn',
+    '@next/next/no-img-element': 'warn',
+    'react/no-unescaped-entities': 'off',
   },
 };

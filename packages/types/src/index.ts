@@ -37,6 +37,22 @@ export interface Project {
   coverImage: string;
 }
 
+export interface CloudinaryAssetMetadata {
+  public_id: string;
+  secure_url: string;
+  width: number;
+  height: number;
+  bytes: number;
+  format: string;
+  created_at: string;
+  clientId?: string;
+  projectId?: string;
+  eventId?: string;
+  photographer?: string;
+  tags?: string[];
+  folder?: string;
+}
+
 export interface GalleryImage {
   id: string;
   url: string;
@@ -48,6 +64,14 @@ export interface GalleryImage {
   isFavorite?: boolean;
   aiTags?: string[];
   score?: number;
+  public_id?: string;
+  secure_url?: string;
+  bytes?: number;
+  format?: string;
+  created_at?: string;
+  clientId?: string;
+  projectId?: string;
+  photographer?: string;
 }
 
 export interface AlbumSpread {

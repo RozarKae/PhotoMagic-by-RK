@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Modal, Button, Alert } from '@photomagic/ui';
-import { requestUploadPresignedUrlsAction } from '../app/actions/gallery-actions';
-import { UploadCloud, CheckCircle2, Image as ImageIcon } from 'lucide-react';
+import React from 'react';
+import { Modal, ImageUploader } from '@photomagic/ui';
+import {
+  generateCloudinarySignatureAction,
+  saveCloudinaryAssetMetadataAction,
+} from '../app/actions/cloudinary-actions';
 
 interface PhotoUploaderModalProps {
   isOpen: boolean;
@@ -18,106 +20,49 @@ export const PhotoUploaderModal: React.FC<PhotoUploaderModalProps> = ({
   galleryId,
   onUploadComplete,
 }) => {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const handleSignatureRequest = async (params: {
+    clientId: string;
+    folderType: any;
+    fileName: string;
+  }) => {
+    const res = await generateCloudinarySignatureAction({
+      clientId: params.clientId || galleryId || 'client_demo',
+      folderType: params.folderType || 'proofs',
+      fileName: params.fileName,
+    });
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFiles(Array.from(e.target.files));
+    if (!res.success) {
+      throw new Error(res.error?.message || 'Failed to generate Cloudinary upload signature');
     }
+    return res.data;
   };
 
-  const handleStartUpload = async () => {
-    if (selectedFiles.length === 0) return;
-    setIsUploading(true);
-    setProgress(10);
-
-    for (let i = 0; i < selectedFiles.length; i++) {
-      const file = selectedFiles[i];
-      // 1. Request presigned URL from backend
-      const res = await requestUploadPresignedUrlsAction({
-        galleryId,
-        fileName: file.name,
-        contentType: file.type || 'image/webp',
-        fileSizeBytes: file.size,
-      });
-
-      if (res.success) {
-        // 2. Direct browser upload to Cloudflare R2 presigned URL
-        try {
-          await fetch(res.data.presignedPutUrl, {
-            method: 'PUT',
-            body: file,
-            headers: { 'Content-Type': file.type || 'image/webp' },
-          });
-        } catch {
-          // Fallback simulation
-        }
-      }
-
-      setProgress(Math.round(((i + 1) / selectedFiles.length) * 100));
-    }
-
-    setIsUploading(false);
-    onUploadComplete();
-    onClose();
+  const handleSingleSuccess = async (asset: { publicId: string; secureUrl: string }) => {
+    await saveCloudinaryAssetMetadataAction({
+      public_id: asset.publicId,
+      secure_url: asset.secureUrl,
+      width: 1920,
+      height: 1080,
+      bytes: 1024000,
+      format: 'webp',
+      created_at: new Date().toISOString(),
+      clientId: galleryId,
+    });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Cloudflare R2 Direct Photo Upload">
-      <div className="flex flex-col gap-6">
-        <div className="border-2 border-dashed border-border-subtle rounded-xl p-8 text-center flex flex-col items-center justify-center gap-3 bg-surface-base hover:border-gold-500/50 transition-colors">
-          <div className="rounded-full bg-gold-500/10 p-3 text-gold-500 border border-gold-500/20">
-            <UploadCloud size={28} />
-          </div>
-          <span className="text-sm font-semibold text-text-primary">
-            Drag & Drop RAW or WebP photos here
-          </span>
-          <span className="text-xs text-text-tertiary">
-            Direct presigned S3 upload bypassing serverless memory limits
-          </span>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileSelect}
-            className="mt-2 text-xs text-text-secondary cursor-pointer"
-          />
-        </div>
-
-        {selectedFiles.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-semibold text-text-primary">
-                {selectedFiles.length} files selected
-              </span>
-              {isUploading && <span className="text-gold-500 font-bold">{progress}%</span>}
-            </div>
-
-            {isUploading && (
-              <div className="h-1.5 w-full bg-surface-elevated rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gold-500 transition-all duration-300"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            )}
-          </div>
-        )}
-
-        <div className="flex justify-end gap-3 pt-2">
-          <Button variant="ghost" onClick={onClose} disabled={isUploading}>
-            Cancel
-          </Button>
-          <Button
-            variant="primary"
-            onClick={handleStartUpload}
-            disabled={isUploading || selectedFiles.length === 0}
-          >
-            {isUploading ? 'Uploading to R2...' : 'Start Presigned Upload'}
-          </Button>
-        </div>
+    <Modal isOpen={isOpen} onClose={onClose} title="Cloudinary High-Speed Direct Upload">
+      <div className="flex flex-col gap-4">
+        <ImageUploader
+          clientId={galleryId || 'client_demo'}
+          defaultFolder="proofs"
+          allowMultiple
+          uploadSignatureAction={handleSignatureRequest}
+          onSingleSuccess={handleSingleSuccess}
+          onUploadComplete={() => {
+            onUploadComplete();
+          }}
+        />
       </div>
     </Modal>
   );

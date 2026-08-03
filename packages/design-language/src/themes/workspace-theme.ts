@@ -7,8 +7,8 @@ export const PDL_WORKSPACE_THEME = {
   colors: {
     bg: '#0A0A0A',
     panelBg: '#121212',
-    accent: PDL_COLORS.brand.raw,
-    aiAccent: PDL_COLORS.ai.violet,
+    accent: PDL_COLORS.brand.kodakGold,
+    aiAccent: PDL_COLORS.ai.gold,
     textPrimary: PDL_COLORS.text.primary,
     textSecondary: PDL_COLORS.text.secondary,
     border: PDL_COLORS.border.subtle,

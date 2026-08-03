@@ -6,9 +6,8 @@ RUN npm install -g pnpm
 # Stage 1: Dependencies
 FROM base AS deps
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
-COPY apps/website/package.json ./apps/website/
-COPY apps/client/package.json ./apps/client/
-COPY apps/admin/package.json ./apps/admin/
+COPY apps/studio/package.json ./apps/studio/
+COPY apps/os/package.json ./apps/os/
 COPY packages/ui/package.json ./packages/ui/
 COPY packages/database/package.json ./packages/database/
 COPY packages/storage/package.json ./packages/storage/
@@ -29,4 +28,4 @@ ENV NODE_ENV=production
 ENV PORT=3000
 COPY --from=builder /app ./
 EXPOSE 3000
-CMD ["pnpm", "--filter", "website", "start"]
+CMD ["pnpm", "--filter", "@photomagic/studio", "start"]

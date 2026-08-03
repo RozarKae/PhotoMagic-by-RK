@@ -8,10 +8,10 @@ import {
   PhotoItem,
 } from '@photomagic/config';
 import {
-  generatePresignedUploadUrl,
-  buildPhotoStorageKeys,
-  STORAGE_BUCKETS,
-} from '@photomagic/storage';
+  generateUploadSignature,
+  buildCloudinaryFolderPath,
+  generateCloudinaryPublicId,
+} from '@photomagic/storage/server';
 
 export type { PhotoItem };
 
@@ -19,22 +19,29 @@ export async function requestUploadPresignedUrlsAction(payload: unknown) {
   try {
     const validated = uploadPhotoSchema.parse(payload);
     const photoId = 'photo_' + Date.now();
-    const workspaceId = 'ws_photomagic_demo';
+    const clientId = 'client_demo';
 
-    const keys = buildPhotoStorageKeys(workspaceId, photoId, 'webp');
-    const presignedPutUrl = await generatePresignedUploadUrl({
-      bucket: STORAGE_BUCKETS.PROOFS,
-      key: keys.proofKey,
-      contentType: validated.contentType,
+    const folder = buildCloudinaryFolderPath(clientId, 'proofs');
+    const publicId = generateCloudinaryPublicId(clientId, 'proofs', validated.fileName);
+
+    const sig = generateUploadSignature({
+      public_id: publicId,
+      folder,
     });
 
     return createSuccessResponse({
       photoId,
-      presignedPutUrl,
-      keys,
+      presignedPutUrl: `https://api.cloudinary.com/v1_1/${sig.cloudName}/image/upload`,
+      keys: {
+        rawKey: publicId,
+        proofKey: publicId,
+        thumbnailKey: publicId,
+      },
+      cloudinarySignature: sig,
     });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Failed to generate upload presigned URL';
+    const msg =
+      err instanceof Error ? err.message : 'Failed to generate Cloudinary upload parameters';
     return createErrorResponse('INVALID_INPUT', msg);
   }
 }

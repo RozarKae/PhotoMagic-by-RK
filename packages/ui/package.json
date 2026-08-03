@@ -12,10 +12,12 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@photomagic/auth": "workspace:*",
+    "@photomagic/storage": "workspace:*",
     "@tanstack/react-query": "^5.28.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.368.0",
+    "next": "^14.2.0",
     "react-hook-form": "^7.51.0",
     "tailwind-merge": "^2.2.2",
     "zod": "^3.23.0"

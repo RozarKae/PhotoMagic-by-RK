@@ -3,5 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@next/eslint-plugin-next": "^14.2.25",
+    "eslint-config-next": "^14.2.25",
+    "eslint-config-prettier": "^9.1.0"
+  }
 }
