@@ -43,18 +43,19 @@ export default function ClientsPage() {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <Badge variant="gold">Customer Directory</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
-            Client Management Engine
+          <Badge variant="gold">Cast Roster Directory</Badge>
+          <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
+            Cast Roster & Lead Engine
           </h1>
-          <p className="text-sm text-text-secondary">
-            Manage client contacts, family participants, custom tags, and communication history.
+          <p className="text-sm text-silver font-mono">
+            Manage cast profiles, lead family participants, custom production tags, and
+            communication history.
           </p>
         </div>
 
-        <Button variant="primary" className="flex items-center gap-2">
+        <Button variant="primary" className="flex items-center gap-2 font-bold">
           <UserPlus size={16} />
-          Add New Client Profile
+          Add Cast Member
         </Button>
       </div>
 

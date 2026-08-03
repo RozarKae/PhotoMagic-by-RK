@@ -47,60 +47,60 @@ export const Sidebar: React.FC = () => {
 
   const navGroups: NavGroup[] = [
     {
-      groupName: 'Workspace',
+      groupName: 'Film Studio Command',
       items: [
-        { label: 'Command HUD', href: '/dashboard', icon: LayoutDashboard },
-        { label: 'Executive Admin', href: '/admin', icon: ShieldCheck },
+        { label: 'Production HUD', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Executive Studio Admin', href: '/admin', icon: ShieldCheck },
       ],
     },
     {
-      groupName: 'Clients & CRM',
+      groupName: 'Cast & Productions',
       items: [
-        { label: 'Clients & Leads', href: '/clients', icon: Users },
-        { label: 'Projects & Pipeline', href: '/projects', icon: Calendar },
-        { label: 'Bookings & Schedule', href: '/bookings', icon: Calendar },
-        { label: 'Financials & Invoices', href: '/financials', icon: DollarSign },
+        { label: 'Cast & Roster', href: '/clients', icon: Users },
+        { label: 'Productions & Pipeline', href: '/projects', icon: Calendar },
+        { label: 'Production Schedule', href: '/bookings', icon: Calendar },
+        { label: 'Financials & Ledger', href: '/financials', icon: DollarSign },
       ],
     },
     {
-      groupName: 'Media & Deliverables',
+      groupName: 'Media & Final Cuts',
       items: [
-        { label: 'Gallery Management', href: '/gallery', icon: ImageIcon },
-        { label: 'Album Studio', href: '/albums', icon: BookOpen },
-        { label: 'Smart Delivery Center', href: '/delivery', icon: Send },
+        { label: 'Rushes Management', href: '/gallery', icon: ImageIcon },
+        { label: 'Final Cut Suite', href: '/albums', icon: BookOpen },
+        { label: 'Release Hub', href: '/delivery', icon: Send },
       ],
     },
     {
       groupName: 'AI Studio Suite',
       items: [
-        { label: 'AI Command Hub', href: '/ai', icon: Bot },
-        { label: 'AI Album Designer', href: '/ai-album-designer', icon: BookMarked },
-        { label: 'AI Editing Engine', href: '/ai-editing-studio', icon: Wand2 },
+        { label: 'AI Director Hub', href: '/ai', icon: Bot },
+        { label: 'AI Final Cut Designer', href: '/ai-album-designer', icon: BookMarked },
+        { label: 'AI Color & Edit Engine', href: '/ai-editing-studio', icon: Wand2 },
         { label: 'AI Face Enhancement', href: '/ai-face-enhancement', icon: ScanFace },
       ],
     },
     {
-      groupName: 'Production & Workflow',
+      groupName: 'Production & Crew Workflow',
       items: [
         { label: 'Studio Workflow', href: '/studio-workflow', icon: GitBranch },
-        { label: 'Workflow Automation', href: '/automation', icon: GitBranch },
-        { label: 'Equipment & Gear', href: '/equipment', icon: HardDrive },
+        { label: 'Crew Automation', href: '/automation', icon: GitBranch },
+        { label: 'Camera & Lighting Gear', href: '/equipment', icon: HardDrive },
       ],
     },
     {
-      groupName: 'Business Intelligence',
+      groupName: 'Studio Intelligence',
       items: [
         { label: 'Analytics & Reports', href: '/analytics', icon: BarChart2 },
-        { label: 'Studio Intelligence', href: '/studio-intelligence', icon: BarChart2 },
+        { label: 'Production Intelligence', href: '/studio-intelligence', icon: BarChart2 },
         { label: 'Business Growth', href: '/business-growth', icon: TrendingUp },
       ],
     },
     {
-      groupName: 'System & Security',
+      groupName: 'System & Vault Security',
       items: [
         { label: 'Studio Settings', href: '/settings', icon: Settings },
         { label: 'Integrations Hub', href: '/integrations', icon: Radio },
-        { label: 'Security & Access Control', href: '/security', icon: ShieldCheck },
+        { label: 'Vault Access Control', href: '/security', icon: ShieldCheck },
         { label: 'DevOps & Deploy', href: '/devops', icon: Server },
       ],
     },
@@ -108,14 +108,14 @@ export const Sidebar: React.FC = () => {
 
   return (
     <aside
-      className={`relative h-screen bg-canvas border-r border-gold-500/20 flex flex-col justify-between transition-all duration-300 z-40 selection:bg-gold-500 selection:text-canvas ${
+      className={`relative h-screen bg-[#090909] border-r border-gold-500/20 flex flex-col justify-between transition-all duration-300 z-40 selection:bg-gold-500 selection:text-black film-grain ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
       {/* Brand Hallmark Header */}
       <div className="p-4 flex items-center justify-between border-b border-gold-500/20">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="rounded-full bg-gold-500/10 p-2 text-gold-500 border border-gold-500/30 flex-shrink-0">
+          <div className="rounded-lg bg-[#1D1D1D] p-2 text-gold-400 border border-gold-500/40 flex-shrink-0 shadow-kodakGlow">
             <Camera size={20} />
           </div>
           {!isCollapsed && (
@@ -123,8 +123,8 @@ export const Sidebar: React.FC = () => {
               <span className="font-hero font-bold text-ivory text-sm tracking-wider">
                 PHOTOMAGIC
               </span>
-              <span className="font-nav text-[9px] text-gold-500 uppercase tracking-widest font-semibold">
-                Studio OS Headquarters
+              <span className="font-mono text-[9px] text-gold-500 uppercase tracking-widest font-semibold">
+                Film Studio Headquarters
               </span>
             </div>
           )}
@@ -132,7 +132,7 @@ export const Sidebar: React.FC = () => {
 
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1.5 rounded-lg text-silver hover:text-ivory hover:bg-surface-elevated transition-colors"
+          className="p-1.5 rounded-lg text-silver hover:text-ivory hover:bg-[#1D1D1D] transition-colors"
           aria-label="Toggle Sidebar"
         >
           {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
@@ -144,7 +144,7 @@ export const Sidebar: React.FC = () => {
         {navGroups.map((group, idx) => (
           <div key={idx} className="flex flex-col gap-1">
             {!isCollapsed && (
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold-500/70 px-3 py-1 font-semibold">
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold-500/80 px-3 py-1 font-semibold">
                 {group.groupName}
               </span>
             )}
@@ -160,15 +160,15 @@ export const Sidebar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-xl font-nav text-[11px] uppercase tracking-wider font-semibold transition-all ${
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-nav text-[11px] uppercase tracking-wider font-semibold transition-all ${
                     isActive
-                      ? 'bg-gold-500/15 text-gold-400 border border-gold-500/40 shadow-watch'
-                      : 'text-silver hover:text-ivory hover:bg-surface-elevated/60'
+                      ? 'bg-[#1D1D1D] text-gold-400 border border-gold-500/50 shadow-kodakGlow'
+                      : 'text-silver hover:text-ivory hover:bg-[#141414]'
                   }`}
                 >
                   <Icon
                     size={16}
-                    className={`flex-shrink-0 ${isActive ? 'text-gold-500' : 'text-silver'}`}
+                    className={`flex-shrink-0 ${isActive ? 'text-gold-400' : 'text-silver'}`}
                   />
                   {!isCollapsed && <span>{item.label}</span>}
                 </Link>
@@ -179,15 +179,15 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Footer Profile Hallmark */}
-      <div className="p-4 border-t border-gold-500/20 flex items-center gap-3 bg-surface-base/50">
-        <div className="w-9 h-9 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 flex items-center justify-center font-bold text-xs flex-shrink-0 font-mono">
+      <div className="p-4 border-t border-gold-500/20 flex items-center gap-3 bg-[#141414]">
+        <div className="w-9 h-9 rounded-lg bg-[#1D1D1D] border border-gold-500/40 text-gold-400 flex items-center justify-center font-bold text-xs flex-shrink-0 font-mono shadow-kodakGlow">
           RK
         </div>
         {!isCollapsed && (
           <div className="flex flex-col truncate">
-            <span className="text-xs font-bold text-ivory truncate">RK Studio Headquarters</span>
+            <span className="text-xs font-bold text-ivory truncate">RK Film Studio Studio</span>
             <span className="font-mono text-[9px] text-gold-500 uppercase tracking-wider truncate">
-              Master Admin OS
+              Master Executive OS
             </span>
           </div>
         )}

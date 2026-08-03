@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
 @import './design-system.css';
 
 @tailwind base;
@@ -7,64 +7,113 @@
 
 @layer base {
   body {
-    background-color: #060608;
-    color: #F6F3EE;
+    background-color: #090909;
+    color: #F5F3EF;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.04) 0%, transparent 65%),
-      radial-gradient(ellipse at 80% 100%, rgba(16, 185, 129, 0.02) 0%, transparent 60%);
+      radial-gradient(ellipse at 50% 0%, rgba(216, 177, 90, 0.04) 0%, transparent 65%),
+      radial-gradient(ellipse at 80% 100%, rgba(83, 26, 26, 0.03) 0%, transparent 60%);
     background-attachment: fixed;
   }
 
   h1, .font-hero {
     font-family: 'Cinzel', serif;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
   }
 
   h2, h3, h4, .font-heading {
     font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
   }
 
   .font-nav {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
   }
 
   .font-mono {
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  /* Luxury Scrollbar */
+  /* Cinematic Film Studio Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0A0A0C;
+    background: #090909;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.25);
+    background: rgba(216, 177, 90, 0.25);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #D4AF37;
+    background: #D8B15A;
   }
 }
 
-/* Luxury Atelier Fine Art Utilities */
+/* Cinematic Film Studio Utilities */
 @layer utilities {
-  /* Subtle Vignette Overlays */
+  /* Analog Film Grain Overlay */
+  .film-grain {
+    position: relative;
+  }
+  .film-grain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    z-index: 10;
+  }
+
+  /* Anamorphic Letterbox Framing (2.39:1) */
+  .letterbox-frame {
+    position: relative;
+    overflow: hidden;
+  }
+  .letterbox-frame::before,
+  .letterbox-frame::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4%;
+    background: #000000;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .letterbox-frame::before {
+    top: 0;
+  }
+  .letterbox-frame::after {
+    bottom: 0;
+  }
+
+  /* Dolby Cinema Soft Vignette */
+  .vignette-cinematic {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(9, 9, 9, 0) 40%,
+      rgba(9, 9, 9, 0.6) 80%,
+      rgba(9, 9, 9, 0.95) 100%
+    );
+  }
+
   .vignette-hero {
     background: linear-gradient(
       180deg,
-      rgba(10, 10, 12, 0.4) 0%,
-      rgba(10, 10, 12, 0.2) 40%,
-      rgba(10, 10, 12, 0.85) 85%,
-      #0A0A0C 100%
+      rgba(9, 9, 9, 0.4) 0%,
+      rgba(9, 9, 9, 0.2) 40%,
+      rgba(9, 9, 9, 0.85) 85%,
+      #090909 100%
     );
   }
 
@@ -72,47 +121,45 @@
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(10, 10, 12, 0.3) 50%,
-      rgba(10, 10, 12, 0.95) 100%
+      rgba(9, 9, 9, 0.4) 50%,
+      rgba(9, 9, 9, 0.95) 100%
     );
   }
 
-  /* Archival Glass & Matte Containers */
-  .luxury-glass {
-    background: rgba(18, 18, 22, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  /* Dark Matte Film Case Containers */
+  .film-case {
+    background: #1D1D1D;
+    border: 1px solid rgba(200, 200, 200, 0.12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
   }
 
-  .luxury-glass-hover {
-    transition: all 0.5s ease;
+  .film-case-hover {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .luxury-glass-hover:hover {
-    background: rgba(22, 22, 28, 0.8);
-    border-color: rgba(212, 175, 55, 0.35);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.08);
+  .film-case-hover:hover {
+    background: #242424;
+    border-color: rgba(216, 177, 90, 0.40);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(216, 177, 90, 0.12);
   }
 
-  /* Luxury Metallic Text Gradients */
+  /* Kodak Gold Metallic Gradients */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #FFF 0%, #F8F3E6 35%, #D4AF37 75%, #B59226 100%);
+    background: linear-gradient(135deg, #F5F3EF 0%, #E6C678 40%, #D8B15A 75%, #B8923F 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-emerald-gradient {
-    background: linear-gradient(135deg, #FFF 0%, #A7F3D0 40%, #10B981 80%, #059669 100%);
+  .text-silver-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 50%, #C8C8C8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Subtle Smooth Scale Effect */
+  /* Film Studio Shutter Transition */
   .hover-scale-slow {
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .hover-scale-slow:hover {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
 }

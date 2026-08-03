@@ -16,20 +16,20 @@ export default function AIStudioFoundationPage() {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <Badge variant="gold">Phase 3.0 AI Infrastructure Engine</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
-            AI Studio Foundation Hub
+          <Badge variant="gold">AI Director Engine v3.0</Badge>
+          <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
+            AI Director Engine & Studio Hub
           </h1>
-          <p className="text-sm text-text-secondary">
-            Manage multi-provider AI model connectors, background worker queues, prompt template
-            versioning, and asset libraries.
+          <p className="text-sm text-silver font-mono">
+            Manage AI model connectors, background rendering queues, prompt template versioning, and
+            35mm film asset libraries.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <Button variant="primary" className="flex items-center gap-2">
             <Plus size={16} />
-            New Prompt Template
+            New Director Prompt
           </Button>
         </div>
       </div>

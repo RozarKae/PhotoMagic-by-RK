@@ -40,14 +40,14 @@ export default function AlbumStudioPage() {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <Badge variant="gold">Phases 6.1 – 7.9 Complete Master Album Studio Suite</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
-            Professional Album Studio Workspace
+          <Badge variant="gold">Final Cut Suite v7.0</Badge>
+          <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
+            Final Cut Suite & Archival Book Designer
           </h1>
-          <p className="text-sm text-text-secondary">
-            AI auto-layout builder, 12x18 spread canvas, 3D cover designer with 24K gold foil
-            stamping, client digital proof review, approval workflow locking, 600 DPI CMYK print lab
-            export engine, version history timeline, and delivery certificate verification.
+          <p className="text-sm text-silver font-mono">
+            AI auto-scene layout builder, spread canvas, 3D cover designer with 24K gold foil
+            stamping, client digital proof review, approval workflow locking, and 600 DPI CMYK print
+            lab export engine.
           </p>
         </div>
 
@@ -57,14 +57,14 @@ export default function AlbumStudioPage() {
             onClick={() => setReviewModalOpen(true)}
             className="flex items-center gap-2"
           >
-            <Eye size={16} /> Open Review Proofing Hub
+            <Eye size={16} /> Open Final Cut Review Hub
           </Button>
           <Button
             variant="primary"
             onClick={() => setAutoBuilderOpen(true)}
             className="flex items-center gap-2 font-bold"
           >
-            <Wand2 size={16} /> AI Auto Album Builder
+            <Wand2 size={16} /> AI Auto Final Cut Builder
           </Button>
         </div>
       </div>

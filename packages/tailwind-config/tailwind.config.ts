@@ -4,63 +4,67 @@ const config: any = {
   theme: {
     extend: {
       colors: {
-        canvas: '#060608', // Deep Obsidian Black
+        canvas: '#090909', // Obsidian Black
+        charcoal: '#141414', // Charcoal
         surface: {
-          base: '#0E0E12', // Matte Graphite / Charcoal
-          elevated: '#14141A', // Elevated Charcoal
-          glass: 'rgba(14, 14, 18, 0.85)',
+          base: '#1D1D1D', // Graphite Surface
+          elevated: '#242424', // Elevated Graphite
+          glass: 'rgba(29, 29, 29, 0.85)',
         },
         border: {
-          subtle: 'rgba(212, 175, 55, 0.14)', // Hairline gold tint
+          subtle: 'rgba(200, 200, 200, 0.10)',
           muted: 'rgba(255, 255, 255, 0.08)',
+          gold: 'rgba(216, 177, 90, 0.35)',
         },
         gold: {
-          300: '#F3E5AB',
-          400: '#E5C158',
-          500: '#D4AF37', // Royal Warm Gold
-          600: '#B59226',
-          700: '#8C7323',
+          300: '#F5E3BD',
+          400: '#E6C678',
+          500: '#D8B15A', // Kodak Gold Accent
+          600: '#B8923F',
+          700: '#967836',
         },
-        emerald: {
-          400: '#34D399',
-          500: '#10B981', // Emerald Accent
-          600: '#059669',
-        },
-        ivory: '#F6F3EE', // Warm Off-White / Ivory
-        silver: '#A0A0AA', // Muted Gray / Silver
-        bronze: '#C5A059', // Metallic Muted Bronze
+        silver: '#C8C8C8', // Film Silver Highlight
+        burgundy: '#531A1A', // Deep Burgundy Accent
+        emerald: '#0E6B56', // Occasional Emerald Accent
+        ivory: '#F5F3EF', // Warm White Text
+        mutedText: '#A7A7A7', // Muted Text
         text: {
-          primary: '#F6F3EE',
-          secondary: '#A0A0AA',
-          tertiary: '#70707B',
+          primary: '#F5F3EF',
+          secondary: '#A7A7A7',
+          tertiary: '#7D7D7D',
         },
         status: {
-          success: '#10B981',
-          warning: '#F59E0B', // Luxury Amber
-          error: '#EF4444', // Soft Crimson
-          info: '#64748B', // Muted Slate
+          success: '#0E6B56',
+          warning: '#D8B15A',
+          error: '#531A1A',
+          info: '#C8C8C8',
         },
       },
       fontFamily: {
         hero: ['Cinzel', 'serif'],
         heading: ['Cormorant Garamond', 'serif'],
         body: ['Inter', 'sans-serif'],
-        nav: ['Poppins', 'sans-serif'],
+        nav: ['Inter', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
       },
+      aspectRatio: {
+        '2.39/1': '2.39 / 1', // Anamorphic Letterbox
+        cinematic: '2.39 / 1',
+      },
       borderRadius: {
-        sm: '6px',
-        md: '10px',
-        lg: '14px',
-        xl: '18px',
-        '2xl': '24px',
+        sm: '4px',
+        md: '8px',
+        lg: '12px',
+        xl: '16px',
+        '2xl': '20px',
         full: '9999px',
       },
       boxShadow: {
-        museum: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05)',
-        watch: '0 4px 20px rgba(212, 175, 55, 0.15)',
-        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
-        goldGlow: '0 0 25px rgba(212, 175, 55, 0.20)',
+        museum: '0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(216, 177, 90, 0.06)',
+        watch: '0 4px 20px rgba(216, 177, 90, 0.15)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.65)',
+        kodakGlow: '0 0 25px rgba(216, 177, 90, 0.20)',
+        burgundyGlow: '0 0 25px rgba(83, 26, 26, 0.40)',
       },
       spacing: {
         '1': '4px',

@@ -14,17 +14,18 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'glass', children, ...props }, ref) => {
     const variants = {
       glass:
-        'bg-surface-glass backdrop-blur-2xl border border-border-subtle shadow-museum hover:border-gold-500/40',
+        'bg-[#1D1D1D]/90 backdrop-blur-xl border border-white/10 shadow-museum hover:border-gold-500/50 hover:shadow-kodakGlow',
       elevated:
-        'bg-surface-elevated border border-border-subtle shadow-museum hover:border-gold-500/40',
-      outline: 'bg-transparent border border-border-subtle hover:border-gold-500/40',
+        'bg-[#1D1D1D] border border-white/10 shadow-museum hover:border-gold-500/40 hover:bg-[#242424]',
+      outline:
+        'bg-transparent border border-white/15 hover:border-gold-500/50 hover:bg-[#1D1D1D]/40',
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          'rounded-2xl p-6 transition-all duration-300 ease-out relative overflow-hidden',
+          'rounded-xl p-6 transition-all duration-500 ease-out relative overflow-hidden film-case film-case-hover',
           variants[variant],
           className,
         )}

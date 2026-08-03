@@ -16,7 +16,7 @@ export default function StudioDashboardPage() {
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
-    <div className="flex h-screen bg-canvas text-text-primary overflow-hidden">
+    <div className="flex h-screen bg-[#090909] text-[#F5F3EF] overflow-hidden film-grain selection:bg-gold-500 selection:text-black">
       {/* Collapsible Left Sidebar */}
       <Sidebar />
 
@@ -43,7 +43,7 @@ export default function StudioDashboardPage() {
           {/* Overview Stat Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <DashboardCard
-              title="Total Revenue"
+              title="Total Studio Revenue"
               value="₹48.50 Lakhs"
               trend="+18.4%"
               trendDirection="up"
@@ -51,25 +51,25 @@ export default function StudioDashboardPage() {
               icon={<DollarSign size={20} />}
             />
             <DashboardCard
-              title="Active Bookings"
-              value="28 Events"
+              title="Active Productions"
+              value="28 Feature Films"
               trend="+4.2%"
               trendDirection="up"
-              subtitle="Confirmed for Q3/Q4"
+              subtitle="In production across 4 states"
               icon={<Calendar size={20} />}
             />
             <DashboardCard
-              title="Pending Payments"
+              title="Pending Ledger"
               value="₹6.50 Lakhs"
               trend="-2.1%"
               trendDirection="down"
-              subtitle="4 Outstanding Invoices"
+              subtitle="4 Pending Ledger Manifests"
               icon={<AlertCircle size={20} />}
             />
             <DashboardCard
-              title="Upcoming Shoots"
+              title="Upcoming Photography"
               value="8 Shoots"
-              subtitle="Next 14 Days"
+              subtitle="Principal Photography in Next 14 Days"
               icon={<Camera size={20} />}
             />
           </div>

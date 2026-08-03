@@ -16,12 +16,12 @@ export default function DeliveryCenterPage() {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <Badge variant="gold">Phases 8.1 – 8.9 Complete Master Delivery Center Platform</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
-            Branded Smart Delivery & Archival Platform
+          <Badge variant="gold">Release Hub & Vault v8.0</Badge>
+          <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
+            Release Hub & Archival Vault Platform
           </h1>
-          <p className="text-sm text-text-secondary">
-            Secure client delivery links, 8K RAW file download center, dynamic watermark protection
+          <p className="text-sm text-silver font-mono">
+            Secure client release links, 8K RAW master download center, dynamic watermark protection
             engine, adaptive 4K video HLS streaming platform, vector QR code sharing, project
             archival vault, and automated closeout checklist.
           </p>
@@ -29,7 +29,7 @@ export default function DeliveryCenterPage() {
 
         <div className="flex items-center gap-3">
           <Button variant="primary" className="flex items-center gap-2 font-bold">
-            <Send size={16} /> Dispatch Client Delivery Package
+            <Send size={16} /> Dispatch Production Release Package
           </Button>
         </div>
       </div>

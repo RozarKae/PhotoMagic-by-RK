@@ -42,23 +42,21 @@ export default function ProjectsPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Production Lifecycle</Badge>
-          <h1 className="text-3xl font-extrabold text-text-primary mt-1">
-            15-Step Project Management Engine
+          <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
+            15-Stage Production Management Engine
           </h1>
-          <p className="text-sm text-text-secondary">
-            Track projects from lead consultation through 4K cinema editing, album design, and print
-            delivery.
+          <p className="text-sm text-silver font-mono">
+            Track productions from pre-production through principal photography, 8K color grading,
+            final cut, and vault release.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center bg-surface-elevated p-1 rounded-lg border border-border-subtle">
+          <div className="flex items-center bg-[#1D1D1D] p-1 rounded-lg border border-white/10">
             <button
               onClick={() => setViewMode('kanban')}
               className={`p-1.5 rounded-md text-xs font-semibold transition-colors ${
-                viewMode === 'kanban'
-                  ? 'bg-gold-500 text-canvas'
-                  : 'text-text-secondary hover:text-text-primary'
+                viewMode === 'kanban' ? 'bg-gold-500 text-black' : 'text-silver hover:text-ivory'
               }`}
             >
               <LayoutGrid size={16} />
@@ -66,18 +64,16 @@ export default function ProjectsPage() {
             <button
               onClick={() => setViewMode('list')}
               className={`p-1.5 rounded-md text-xs font-semibold transition-colors ${
-                viewMode === 'list'
-                  ? 'bg-gold-500 text-canvas'
-                  : 'text-text-secondary hover:text-text-primary'
+                viewMode === 'list' ? 'bg-gold-500 text-black' : 'text-silver hover:text-ivory'
               }`}
             >
               <List size={16} />
             </button>
           </div>
 
-          <Button variant="primary" className="flex items-center gap-2">
+          <Button variant="primary" className="flex items-center gap-2 font-bold">
             <Plus size={16} />
-            Create Project
+            Create Production
           </Button>
         </div>
       </div>

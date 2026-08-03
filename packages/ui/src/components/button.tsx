@@ -14,25 +14,25 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-nav uppercase tracking-widest transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] cursor-pointer select-none';
+      'inline-flex items-center justify-center font-nav uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:opacity-40 disabled:pointer-events-none active:scale-[0.98] cursor-pointer select-none';
 
     const variants = {
       primary:
-        'bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 text-canvas font-bold border border-gold-300/50 shadow-watch hover:shadow-goldGlow hover:brightness-105 active:scale-[0.98] rounded-xl',
+        'bg-[#141414] text-ivory font-semibold border border-gold-500/60 shadow-watch hover:border-gold-500 hover:shadow-kodakGlow hover:text-gold-300 rounded-lg',
       secondary:
-        'bg-surface-elevated/90 text-ivory border border-border-subtle hover:border-gold-500/40 hover:bg-surface-elevated hover:text-gold-300 backdrop-blur-md rounded-xl',
+        'bg-[#1D1D1D] text-ivory border border-border-subtle hover:border-silver/40 hover:bg-[#242424] hover:text-silver rounded-lg',
       outline:
-        'bg-transparent text-gold-400 border border-gold-500/40 hover:bg-gold-500/10 hover:border-gold-500 hover:text-gold-300 rounded-xl',
+        'bg-transparent text-gold-400 border border-gold-500/50 hover:bg-gold-500/10 hover:border-gold-500 hover:shadow-kodakGlow rounded-lg',
       ghost:
-        'bg-transparent text-silver border border-transparent hover:text-ivory hover:bg-surface-elevated/70 rounded-xl',
+        'bg-transparent text-silver/80 border border-transparent hover:text-ivory hover:bg-[#1D1D1D] rounded-lg',
       danger:
-        'bg-status-error/15 text-status-error border border-status-error/30 hover:bg-status-error hover:text-white rounded-xl',
+        'bg-burgundy/30 text-red-300 border border-burgundy hover:bg-burgundy hover:text-white rounded-lg',
     };
 
     const sizes = {
-      sm: 'h-8 px-4 text-[10px] font-semibold tracking-widest',
-      md: 'h-10 px-6 text-xs font-semibold tracking-widest',
-      lg: 'h-12 px-8 text-xs font-bold tracking-widest',
+      sm: 'h-8 px-4 text-[10px] font-medium tracking-[0.15em]',
+      md: 'h-10 px-5 text-xs font-semibold tracking-[0.18em]',
+      lg: 'h-11 px-7 text-xs font-bold tracking-[0.2em]',
     };
 
     return (
