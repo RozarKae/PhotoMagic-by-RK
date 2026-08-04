@@ -45,7 +45,17 @@ export const Sidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
 
-  const navGroups: NavGroup[] = [
+  // Read role from cookie
+  const [userRole, setUserRole] = useState<string>('super_admin');
+
+  React.useEffect(() => {
+    const match = document.cookie.match(/photomagic_user_role=([^;]+)/);
+    if (match) {
+      setUserRole(match[1]);
+    }
+  }, []);
+
+  const allNavGroups: NavGroup[] = [
     {
       groupName: 'Photography Studio Command',
       items: [
@@ -65,6 +75,7 @@ export const Sidebar: React.FC = () => {
     {
       groupName: 'Media & Album Suite',
       items: [
+        { label: 'Client Portal Vault', href: '/portal', icon: Sparkles },
         { label: 'Photo Proofing Vault', href: '/gallery', icon: ImageIcon },
         { label: 'Album Design Studio', href: '/albums', icon: BookOpen },
         { label: 'Client Delivery Hub', href: '/delivery', icon: Send },
@@ -105,6 +116,25 @@ export const Sidebar: React.FC = () => {
       ],
     },
   ];
+
+  // Filter navigation items by role
+  const navGroups = allNavGroups
+    .map((group) => {
+      const filteredItems = group.items.filter((item) => {
+        if (userRole === 'client') {
+          return ['/portal', '/gallery', '/albums', '/delivery'].includes(item.href);
+        }
+        if (userRole === 'photographer' || userRole === 'editor') {
+          return !['/admin', '/financials', '/security', '/devops'].includes(item.href);
+        }
+        if (userRole === 'studio_manager') {
+          return !['/security', '/devops'].includes(item.href);
+        }
+        return true;
+      });
+      return { ...group, items: filteredItems };
+    })
+    .filter((group) => group.items.length > 0);
 
   return (
     <aside

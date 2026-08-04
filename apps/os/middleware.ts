@@ -50,6 +50,36 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginRedirectUrl);
   }
 
+  // Role-Based Route Protection Enforcement
+  const userRole = request.cookies.get('photomagic_user_role')?.value || 'super_admin';
+
+  // 1. Client Role Restrictions (Client accounts are strictly restricted to Client Portal & Proofing Vault)
+  if (userRole === 'client') {
+    const isClientAllowedRoute =
+      path.startsWith('/portal') ||
+      path.startsWith('/gallery') ||
+      path.startsWith('/albums') ||
+      path.startsWith('/delivery');
+
+    if (!isClientAllowedRoute) {
+      return NextResponse.redirect(new URL('/portal', request.url));
+    }
+  }
+
+  // 2. Photographer / Editor Role Restrictions (Cannot access Admin, Financials, DevOps, or Security)
+  if (userRole === 'photographer' || userRole === 'editor') {
+    if (isAdminRoute) {
+      return NextResponse.redirect(new URL('/gallery', request.url));
+    }
+  }
+
+  // 3. Studio Manager Role Restrictions (Cannot access DevOps or Security)
+  if (userRole === 'studio_manager') {
+    if (path.startsWith('/devops') || path.startsWith('/security')) {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 

@@ -16,10 +16,28 @@ export default function ClientLoginPage() {
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Set authenticated session cookie across subdomains/paths
-    document.cookie = `photomagic_os_session=sess_demo_${Date.now()}; path=/; max-age=86400; SameSite=Lax`;
+
+    const lowerEmail = email.toLowerCase();
+    let role = 'super_admin';
+    let targetPath = '/dashboard';
+
+    if (lowerEmail.includes('client')) {
+      role = 'client';
+      targetPath = '/portal';
+    } else if (lowerEmail.includes('photographer') || lowerEmail.includes('editor')) {
+      role = 'photographer';
+      targetPath = '/gallery';
+    } else if (lowerEmail.includes('manager')) {
+      role = 'studio_manager';
+      targetPath = '/dashboard';
+    }
+
+    // Set authenticated session and role cookies
+    document.cookie = `photomagic_os_session=sess_${role}_${Date.now()}; path=/; max-age=86400; SameSite=Lax`;
+    document.cookie = `photomagic_user_role=${role}; path=/; max-age=86400; SameSite=Lax`;
+    document.cookie = `photomagic_user_email=${encodeURIComponent(email)}; path=/; max-age=86400; SameSite=Lax`;
+
     setTimeout(() => {
-      const targetPath = email.toLowerCase().includes('client') ? '/portal' : '/dashboard';
       window.location.href = `${osUrl}${targetPath}`;
     }, 400);
   };

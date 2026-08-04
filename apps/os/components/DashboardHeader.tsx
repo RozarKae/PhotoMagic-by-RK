@@ -14,6 +14,28 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   unreadCount = 3,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [userRole, setUserRole] = useState<string>('Studio Owner');
+  const [userEmail, setUserEmail] = useState<string>('admin@photomagic.studio');
+
+  React.useEffect(() => {
+    const roleMatch = document.cookie.match(/photomagic_user_role=([^;]+)/);
+    const emailMatch = document.cookie.match(/photomagic_user_email=([^;]+)/);
+
+    if (roleMatch) {
+      const r = roleMatch[1];
+      const roleLabels: Record<string, string> = {
+        super_admin: 'Studio Owner',
+        studio_manager: 'Studio Manager',
+        photographer: 'Lead Photographer',
+        editor: 'Fine Art Editor',
+        client: 'Client Portal User',
+      };
+      setUserRole(roleLabels[r] || r);
+    }
+    if (emailMatch) {
+      setUserEmail(decodeURIComponent(emailMatch[1]));
+    }
+  }, []);
 
   return (
     <header className="h-16 px-8 bg-surface-glass/80 backdrop-blur-2xl border-b border-border-subtle flex items-center justify-between sticky top-0 z-30">
@@ -50,10 +72,14 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
         {/* User Profile */}
         <div className="flex items-center gap-3 pl-3 border-l border-border-subtle">
-          <Avatar name="RK Director" size="sm" />
+          <Avatar name={userEmail.split('@')[0]} size="sm" />
           <div className="hidden md:flex flex-col text-left">
-            <span className="text-xs font-bold text-text-primary">RK Director</span>
-            <span className="text-[10px] text-text-tertiary">Studio Owner</span>
+            <span className="text-xs font-bold text-text-primary truncate max-w-[140px]">
+              {userEmail}
+            </span>
+            <span className="text-[10px] text-gold-400 font-mono tracking-wider font-semibold uppercase">
+              {userRole}
+            </span>
           </div>
         </div>
       </div>
