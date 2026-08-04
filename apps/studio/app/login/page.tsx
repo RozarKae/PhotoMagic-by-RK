@@ -16,10 +16,12 @@ export default function ClientLoginPage() {
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Redirect seamlessly to PhotoMagic OS authentication
+    // Set authenticated session cookie across subdomains/paths
+    document.cookie = `photomagic_os_session=sess_demo_${Date.now()}; path=/; max-age=86400; SameSite=Lax`;
     setTimeout(() => {
-      window.location.href = `${osUrl}/dashboard`;
-    }, 600);
+      const targetPath = email.toLowerCase().includes('client') ? '/portal' : '/dashboard';
+      window.location.href = `${osUrl}${targetPath}`;
+    }, 400);
   };
 
   return (
