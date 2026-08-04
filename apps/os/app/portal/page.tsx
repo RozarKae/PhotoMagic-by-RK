@@ -33,40 +33,43 @@ import {
   Camera,
   Tv,
 } from 'lucide-react';
+import { WorkspacePanel, MetadataPanel, InspectorSidebar, Filmstrip } from '@photomagic/ui';
 
 export default function ClientPortalPage() {
   const [activeNav, setActiveNav] = useState('Your Story');
+  const [inspectorOpen, setInspectorOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState('/images/hindu_wedding_ceremony.png');
 
   const navItems = [
-    { label: 'Your Story', icon: LayoutDashboard, href: '/portal' },
-    { label: 'Current Production', icon: FolderHeart, href: '/portal' },
-    { label: 'Scenes', icon: ImageIcon, href: '/portal' },
+    { label: 'Overview', icon: LayoutDashboard, href: '/portal' },
+    { label: 'Event Collection', icon: FolderHeart, href: '/portal' },
+    { label: 'Photo Proofs', icon: ImageIcon, href: '/portal' },
     { label: 'Favorite Moments', icon: Heart, href: '/portal', badge: '24' },
-    { label: 'Final Cut Review', icon: BookOpen, href: '/portal' },
-    { label: "Director's Notes", icon: MessageCircle, href: '/portal' },
-    { label: 'Archive', icon: Download, href: '/portal' },
-    { label: 'Production Timeline', icon: Clock, href: '/portal' },
-    { label: 'Production Ledger', icon: CreditCard, href: '/portal' },
-    { label: 'Cast Profile', icon: User, href: '/portal' },
+    { label: 'Album Selection', icon: BookOpen, href: '/portal' },
+    { label: 'Studio Notes', icon: MessageCircle, href: '/portal' },
+    { label: 'High-Res Downloads', icon: Download, href: '/portal' },
+    { label: 'Timeline', icon: Clock, href: '/portal' },
+    { label: 'Billing Ledger', icon: CreditCard, href: '/portal' },
+    { label: 'Client Profile', icon: User, href: '/portal' },
     { label: 'Studio Concierge', icon: HelpCircle, href: '/portal' },
   ];
 
   return (
     <div className="flex min-h-screen bg-[#090909] text-[#F5F3EF] font-body selection:bg-gold-500 selection:text-black film-grain">
-      {/* Sleek Screening Room Navigation Sidebar */}
+      {/* Client Gallery Navigation Sidebar */}
       <aside className="w-64 bg-[#141414] border-r border-white/10 flex flex-col justify-between flex-shrink-0 min-h-screen">
         <div>
           {/* Top Brand Logo Hallmark */}
           <div className="p-6 border-b border-white/10 flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-[#1D1D1D] border border-gold-500/40 p-[1px] flex items-center justify-center shadow-kodakGlow">
-              <Film size={20} className="text-gold-400" />
+              <Camera size={20} className="text-gold-400" />
             </div>
             <div className="flex flex-col">
               <span className="font-hero font-bold text-sm tracking-[0.2em] text-ivory">
                 PHOTOMAGIC
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-gold-500 font-semibold">
-                SCREENING ROOM
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold-500 font-semibold">
+                CLIENT GALLERY
               </span>
             </div>
           </div>
@@ -107,7 +110,7 @@ export default function ClientPortalPage() {
           {/* Hallmark Quote Box */}
           <div className="p-4 rounded-xl bg-[#1D1D1D] border border-gold-500/20 text-center film-case">
             <span className="font-heading italic text-xs text-gold-300 tracking-wide block">
-              EVERY WEDDING IS TREATED LIKE A BLOCKBUSTER FILM.
+              PRESERVING TIMELESS MEMORIES WITH LUXURY ELEGANCE.
             </span>
             <div className="w-8 h-[1px] bg-gold-500/40 mx-auto my-2" />
           </div>
@@ -123,7 +126,7 @@ export default function ClientPortalPage() {
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-ivory">Arifa Bivi</span>
                 <span className="text-[10px] text-gold-400 font-mono font-medium">
-                  VIP Cast Member
+                  Client Account
                 </span>
               </div>
             </div>
@@ -138,11 +141,11 @@ export default function ClientPortalPage() {
         <header className="h-20 px-8 bg-[#090909]/90 backdrop-blur-2xl border-b border-white/10 flex items-center justify-between sticky top-0 z-30">
           <div>
             <h1 className="font-heading text-2xl font-bold text-ivory flex items-center gap-2">
-              Welcome to Your Private Screening Room{' '}
+              Welcome to Your Client Photo Gallery{' '}
               <Sparkles size={18} className="text-gold-400 animate-pulse" />
             </h1>
             <p className="text-xs text-silver/70 font-mono">
-              Relive your production moments in cinematic resolution
+              Relive your memories in high-resolution photography
             </p>
           </div>
 
@@ -165,7 +168,15 @@ export default function ClientPortalPage() {
               <MessageSquare size={18} />
             </button>
 
-            <button className="px-4 py-2 rounded-lg bg-[#1D1D1D] border border-gold-500/40 text-xs font-nav text-gold-400 hover:bg-gold-500/10 flex items-center gap-2 transition-colors">
+            <button
+              onClick={() => setInspectorOpen(!inspectorOpen)}
+              className="px-4 py-2 rounded-lg bg-[#1D1D1D] border border-gold-500/40 text-xs font-nav text-gold-400 hover:bg-gold-500/10 flex items-center gap-2 transition-colors"
+            >
+              <Camera size={15} />
+              <span>{inspectorOpen ? 'Close Inspector' : 'EXIF Inspector'}</span>
+            </button>
+
+            <button className="px-4 py-2 rounded-lg bg-[#1D1D1D] border border-white/10 text-xs font-nav text-silver hover:text-ivory flex items-center gap-2 transition-colors">
               <Headphones size={15} />
               <span>Studio Concierge</span>
             </button>
@@ -534,6 +545,24 @@ export default function ClientPortalPage() {
           </footer>
         </main>
       </div>
+
+      {/* Right Workspace Inspector Panel */}
+      <InspectorSidebar
+        isOpen={inspectorOpen}
+        onClose={() => setInspectorOpen(false)}
+        title="EXIF & Photo Inspector"
+        imageSrc={selectedPhoto}
+      >
+        <MetadataPanel
+          cameraModel="Leica SL2-S"
+          lensSpec="Summilux-SL 50mm f/1.4 ASPH"
+          aperture="f/1.4"
+          shutterSpeed="1/1000s"
+          iso="ISO 100"
+          resolution="6000 × 4000 (24 MP)"
+          fileSize="42.8 MB RAW"
+        />
+      </InspectorSidebar>
     </div>
   );
 }

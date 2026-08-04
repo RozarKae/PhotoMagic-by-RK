@@ -47,51 +47,51 @@ export const Sidebar: React.FC = () => {
 
   const navGroups: NavGroup[] = [
     {
-      groupName: 'Film Studio Command',
+      groupName: 'Photography Studio Command',
       items: [
-        { label: 'Production HUD', href: '/dashboard', icon: LayoutDashboard },
-        { label: 'Executive Studio Admin', href: '/admin', icon: ShieldCheck },
+        { label: 'Studio Dashboard', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Executive OS Admin', href: '/admin', icon: ShieldCheck },
       ],
     },
     {
-      groupName: 'Cast & Productions',
+      groupName: 'Clients & Projects',
       items: [
-        { label: 'Cast & Roster', href: '/clients', icon: Users },
-        { label: 'Productions & Pipeline', href: '/projects', icon: Calendar },
-        { label: 'Production Schedule', href: '/bookings', icon: Calendar },
+        { label: 'Clients Directory', href: '/clients', icon: Users },
+        { label: 'Photography Projects', href: '/projects', icon: Calendar },
+        { label: 'Event Booking Schedule', href: '/bookings', icon: Calendar },
         { label: 'Financials & Ledger', href: '/financials', icon: DollarSign },
       ],
     },
     {
-      groupName: 'Media & Final Cuts',
+      groupName: 'Media & Album Suite',
       items: [
-        { label: 'Rushes Management', href: '/gallery', icon: ImageIcon },
-        { label: 'Final Cut Suite', href: '/albums', icon: BookOpen },
-        { label: 'Release Hub', href: '/delivery', icon: Send },
+        { label: 'Photo Proofing Vault', href: '/gallery', icon: ImageIcon },
+        { label: 'Album Design Studio', href: '/albums', icon: BookOpen },
+        { label: 'Client Delivery Hub', href: '/delivery', icon: Send },
       ],
     },
     {
-      groupName: 'AI Studio Suite',
+      groupName: 'AI Photography Suite',
       items: [
-        { label: 'AI Director Hub', href: '/ai', icon: Bot },
-        { label: 'AI Final Cut Designer', href: '/ai-album-designer', icon: BookMarked },
+        { label: 'AI Studio Assistant', href: '/ai', icon: Bot },
+        { label: 'AI Album Layout Engine', href: '/ai-album-designer', icon: BookMarked },
         { label: 'AI Color & Edit Engine', href: '/ai-editing-studio', icon: Wand2 },
         { label: 'AI Face Enhancement', href: '/ai-face-enhancement', icon: ScanFace },
       ],
     },
     {
-      groupName: 'Production & Crew Workflow',
+      groupName: 'Studio Workflow & Crew',
       items: [
         { label: 'Studio Workflow', href: '/studio-workflow', icon: GitBranch },
         { label: 'Crew Automation', href: '/automation', icon: GitBranch },
-        { label: 'Camera & Lighting Gear', href: '/equipment', icon: HardDrive },
+        { label: 'Photography Equipment', href: '/equipment', icon: HardDrive },
       ],
     },
     {
       groupName: 'Studio Intelligence',
       items: [
         { label: 'Analytics & Reports', href: '/analytics', icon: BarChart2 },
-        { label: 'Production Intelligence', href: '/studio-intelligence', icon: BarChart2 },
+        { label: 'Studio Intelligence', href: '/studio-intelligence', icon: BarChart2 },
         { label: 'Business Growth', href: '/business-growth', icon: TrendingUp },
       ],
     },
@@ -124,7 +124,7 @@ export const Sidebar: React.FC = () => {
                 PHOTOMAGIC
               </span>
               <span className="font-mono text-[9px] text-gold-500 uppercase tracking-widest font-semibold">
-                Film Studio Headquarters
+                Photography Studio OS
               </span>
             </div>
           )}
@@ -185,7 +185,7 @@ export const Sidebar: React.FC = () => {
         </div>
         {!isCollapsed && (
           <div className="flex flex-col truncate">
-            <span className="text-xs font-bold text-ivory truncate">RK Film Studio Studio</span>
+            <span className="text-xs font-bold text-ivory truncate">PhotoMagic Studio</span>
             <span className="font-mono text-[9px] text-gold-500 uppercase tracking-wider truncate">
               Master Executive OS
             </span>

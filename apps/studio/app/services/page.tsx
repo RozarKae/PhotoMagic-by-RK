@@ -11,23 +11,33 @@ export default function ServicesPage() {
   const serviceItems = [
     {
       icon: <Camera size={28} />,
-      title: 'Royal Heritage Wedding Photography',
-      desc: 'Multi-day wedding coverage featuring master lead photographers, secondary associate shooters, continuous venue lighting teams, and real-time backup architecture.',
+      title: 'Wedding Photography & Cinematography',
+      desc: 'Candid photography, traditional photography, traditional videography, 4K wedding cinematography, Haldi, Mehendi, Sangeet, Engagement, and Reception coverage across Tamil Nadu & Kerala.',
     },
     {
       icon: <Film size={28} />,
-      title: '8K Anamorphic Cinema & Scoring',
-      desc: 'Cinematic wedding films recorded on RED/ARRI cinema cameras with orchestral audio scoring, aerial drone choreography, and same-day reception reels.',
+      title: 'Pre-Wedding & Post-Wedding Shoots',
+      desc: 'Outdoor cinematic pre-wedding shoot sessions, couple portraits in Alleppey backwaters, Chettinad heritage palaces, and scenic Kerala hill stations.',
     },
     {
       icon: <ImageIcon size={28} />,
-      title: 'Fine Art Studio & Haute Couture',
-      desc: 'Studio portrait sessions featuring Rembrandt lighting setups, professional hair & makeup styling, master skin retouching, and museum-grade canvas prints.',
+      title: 'Family & Milestone Celebrations',
+      desc: 'Baby shower, maternity photography, newborn portraits, naming ceremonies, and birthday celebrations captured with warmth and emotional authenticity.',
     },
     {
       icon: <Sparkles size={28} />,
-      title: 'Italian Flush-Mount Album Co-Design',
-      desc: 'Custom leather-bound and velvet flush-mount wedding albums crafted in Italy with 24K gold foil stamping and 3D digital client review.',
+      title: 'School & Institutional Events',
+      desc: 'School annual day coverage, sports day photography, graduation & convocation ceremonies, and college cultural fests with rapid multi-category photo sorting.',
+    },
+    {
+      icon: <Camera size={28} />,
+      title: 'Corporate & Commercial Photography',
+      desc: 'Corporate conferences, executive headshots, product photography, fashion shoots, commercial campaigns, interior & architectural documentation.',
+    },
+    {
+      icon: <Film size={28} />,
+      title: '4K Live Streaming & Aerial Drone',
+      desc: 'High-definition 4K live streaming for relatives worldwide and ultra-smooth 4K aerial drone photography for grand venues.',
     },
   ];
 
@@ -39,14 +49,15 @@ export default function ServicesPage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-              Bespoke Offerings
+              Services & Coverage
             </Badge>
             <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-2">
-              Our Concierge Services
+              Photography & Cinematography Services
             </h1>
             <p className="text-sm text-text-secondary mt-2 font-light">
-              Uncompromising visual artistry and luxury client experience for life's most
-              extraordinary celebrations.
+              Professional photography coverage across Madurai, Chennai, Coimbatore, Trichy, Salem,
+              Tirunelveli, Nagercoil, Kochi, Trivandrum, Kozhikode, and all major cities in Tamil
+              Nadu & Kerala.
             </p>
           </div>
 
@@ -66,9 +77,9 @@ export default function ServicesPage() {
                     {item.desc}
                   </p>
                 </div>
-                <Link href="/#inquiry">
+                <Link href="/book">
                   <Button variant="secondary" size="sm" className="w-fit">
-                    Inquire Availability & Rates
+                    Book Studio Session
                   </Button>
                 </Link>
               </Card>

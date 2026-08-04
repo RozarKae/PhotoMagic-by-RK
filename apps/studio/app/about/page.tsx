@@ -5,9 +5,9 @@ import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 
 export const metadata = {
-  title: 'About Studio | PhotoMagic Studio — Luxury Editorial Atelier',
+  title: 'About Studio | PhotoMagic Studio — Photography & Cinematography',
   description:
-    'Learn about PhotoMagic Studio, our fine art photography philosophy, master photographers, and international editorial commissions.',
+    'Learn about PhotoMagic Studio, our candid photography philosophy, master photographers, and event coverage across Tamil Nadu & Kerala.',
 };
 
 export default function AboutPage() {
@@ -18,14 +18,15 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-20 px-6 max-w-7xl mx-auto text-center">
         <span className="font-nav text-xs uppercase tracking-[0.3em] text-amber-400 font-medium">
-          Our Heritage & Philosophy
+          Our Heritage & Photography Philosophy
         </span>
         <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide text-white mt-4 max-w-4xl mx-auto leading-tight">
-          Crafting Visual Legacies with Uncompromising Elegance
+          Preserving Timeless Memories with Uncompromising Elegance
         </h1>
         <p className="font-sans text-gray-300 text-lg sm:text-xl font-light max-w-2xl mx-auto mt-6 leading-relaxed">
-          PhotoMagic Studio is an international fine art atelier dedicated to capturing iconic
-          moments with editorial mastery, artistic precision, and timeless storytelling.
+          PhotoMagic Studio is a premier photography and cinematography studio in Tamil Nadu and
+          Kerala dedicated to capturing weddings, candid portraits, corporate events, and milestone
+          celebrations.
         </p>
       </section>
 

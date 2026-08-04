@@ -2,8 +2,8 @@ export const ROUTES = {
   PUBLIC: {
     HOME: '/',
     PORTFOLIO: '/portfolio',
-    INVESTMENT: '/investment',
-    EXPERIENCE: '/experience',
+    INVESTMENT: '/packages',
+    EXPERIENCE: '/about',
     BOOKING: '/book',
     CONTACT: '/contact',
   },

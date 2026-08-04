@@ -21,7 +21,7 @@ const COLUMNS: Array<{ id: LeadItem['status']; label: string }> = [
 
 export const LeadKanbanBoard: React.FC<LeadKanbanBoardProps> = ({ leads, onStatusChange }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 overflow-x-auto pb-6">
+    <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 overflow-x-auto pb-6 scrollbar-thin">
       {COLUMNS.map((col) => {
         const columnLeads = leads.filter((l) => l.status === col.id);
 

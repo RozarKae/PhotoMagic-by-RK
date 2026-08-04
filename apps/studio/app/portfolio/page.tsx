@@ -13,39 +13,35 @@ export default function PortfolioPage() {
   const stories = [
     {
       id: 'p1',
-      title: 'Grand Palace Celebration',
+      title: 'Chettinad Heritage Mandap Vows',
       category: 'weddings',
-      location: 'City Palace • Udaipur, India',
-      desc: '3-Day Royal Destination Wedding capturing heritage courtyard vows, sunset fireworks, and intricate bridal heirloom detailing.',
-      image:
-        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+      location: 'Madurai Palace • Tamil Nadu',
+      desc: 'Traditional South Indian wedding ceremony capturing Kanjeevaram silk sarees, temple gold jewelry, and royal mandap rituals.',
+      image: '/images/hindu_wedding_ceremony.png',
     },
     {
       id: 'p2',
-      title: 'Monaco Yacht Sunset',
+      title: 'Kerala Coastal Church Ceremony',
       category: 'weddings',
-      location: 'Port Hercule • Monte Carlo, Monaco',
-      desc: 'Intimate Mediterranean yacht celebration with anamorphic cinematic highlight film scoring and sunset portraiture.',
-      image:
-        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
+      location: 'Kochi Cathedral • Kerala',
+      desc: 'Elegant Kerala Christian cathedral ceremony featuring cathedral veils, white lace bridal gowns, and stained glass sunlight.',
+      image: '/images/christian_church_wedding.png',
     },
     {
       id: 'p3',
-      title: 'Haute Couture Editorial',
-      category: 'editorial',
-      location: 'Hôtel de Crillon • Paris, France',
-      desc: 'High-fashion editorial session featuring custom silk gowns, dynamic Rembrandt studio lighting, and Vogue Paris styling.',
-      image:
-        'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+      title: 'Muslim Nikkah Celebration',
+      category: 'weddings',
+      location: 'Trivandrum Grand Hall • Kerala',
+      desc: 'Nikkah ceremony with gold embroidered lehenga detailing, traditional veil rituals, and intimate family moments.',
+      image: '/images/nikkah_ceremony.png',
     },
     {
       id: 'p4',
-      title: 'Studio Fine Art Portrait',
+      title: 'Bespoke Aerial Coastal Resort',
       category: 'portraits',
-      location: 'Private Atelier • Beverly Hills',
-      desc: 'Fine art portrait session with master skin retouching, museum-grade canvas printing, and Italian velvet binding.',
-      image:
-        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+      location: 'Kovalam Beach Resort • Kerala',
+      desc: '4K aerial drone photography of a grand coastal wedding resort surrounded by palm trees and ocean turquoise waters.',
+      image: '/images/drone_aerial_wedding.png',
     },
   ];
 

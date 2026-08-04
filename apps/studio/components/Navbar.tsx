@@ -26,10 +26,10 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Feature Films', href: ROUTES.PUBLIC.PORTFOLIO },
-    { label: 'Productions', href: '/services' },
+    { label: 'Portfolio Showcase', href: ROUTES.PUBLIC.PORTFOLIO },
+    { label: 'Services', href: '/services' },
     { label: 'About Studio', href: '/about' },
-    { label: 'Begin Your Journey', href: ROUTES.PUBLIC.BOOKING },
+    { label: 'Reserve Date', href: ROUTES.PUBLIC.BOOKING },
   ];
 
   return (
@@ -49,13 +49,13 @@ export const Navbar: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-        {/* Film Studio Hallmark */}
+        {/* Studio Hallmark */}
         <Link href="/" className="flex flex-col group">
           <span className="font-hero font-bold tracking-[0.3em] text-lg sm:text-xl text-gold-gradient group-hover:opacity-90 transition-opacity">
             PHOTOMAGIC
           </span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-gold-500/80 font-medium">
-            Cinematic Film Studio
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold-500/80 font-medium">
+            Photography & Cinematography
           </span>
         </Link>
 
@@ -80,14 +80,14 @@ export const Navbar: React.FC = () => {
           })}
         </nav>
 
-        {/* Action Controls: Private Screening Room & Begin Your Journey */}
+        {/* Action Controls: Client Portal & Book Studio */}
         <div className="hidden sm:flex items-center gap-6">
           <Link
             href="/portal"
             className="font-nav text-[10px] uppercase tracking-[0.2em] text-silver hover:text-gold-300 transition-colors flex items-center gap-1.5"
           >
             <UserCheck size={13} className="text-gold-400" />
-            <span>Screening Room</span>
+            <span>Client Gallery</span>
           </Link>
 
           <Link href={ROUTES.PUBLIC.BOOKING}>
@@ -96,7 +96,7 @@ export const Navbar: React.FC = () => {
               size="sm"
               className="font-nav text-[9px] font-bold uppercase tracking-[0.25em] py-2.5 px-5"
             >
-              ▶ Begin Your Journey
+              Book Studio
             </Button>
           </Link>
         </div>
@@ -104,8 +104,10 @@ export const Navbar: React.FC = () => {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Menu"
-          className="lg:hidden p-2 text-silver hover:text-ivory focus:outline-none"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+          className="lg:hidden p-2 text-silver hover:text-ivory focus:outline-none focus:ring-1 focus:ring-gold-400 rounded-lg"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -113,7 +115,10 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-6 py-8 flex flex-col gap-5 bg-surface-glass border-b border-border-subtle backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-300">
+        <div
+          id="mobile-menu"
+          className="lg:hidden px-6 py-8 flex flex-col gap-5 bg-surface-glass border-b border-border-subtle backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-300"
+        >
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (

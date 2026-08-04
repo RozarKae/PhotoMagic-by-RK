@@ -12,28 +12,25 @@ export const metadata = {
 export default function TestimonialsPage() {
   const stories = [
     {
-      client: 'Lady Victoria & Sir Richard Sterling',
-      event: 'Destination Wedding — Lake Como, Italy',
+      client: 'Anitha & Karthik',
+      event: 'Traditional Wedding — Madurai, Tamil Nadu',
       quote:
-        'PhotoMagic Studio delivered sheer perfection. Every frame captured the romance, drama, and intimate joy of our celebration with cinematic elegance. Looking through our heirloom album brought us to tears.',
-      image:
-        'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80',
+        'PhotoMagic Studio delivered sheer perfection. Every frame captured the romance, tradition, and candid joy of our Chettinad wedding with natural color science. Looking through our 24K gold foil album brought our family to tears.',
+      image: '/images/hindu_wedding_ceremony.png',
     },
     {
-      client: 'Elena & Marcus Vance',
-      event: 'Luxury Editorial Portrait Collection — Paris',
+      client: 'Rahul & Meera',
+      event: 'Pre-Wedding & Cinematography — Kochi, Kerala',
       quote:
-        'Working with the PhotoMagic team was effortless. They made us feel comfortable instantly, and the resulting art pieces now grace our private gallery in Geneva. Incomparable artistry.',
-      image:
-        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80',
+        'Working with the PhotoMagic team in Alleppey and Kochi was completely effortless. They made us feel natural instantly, and the resulting pre-wedding photos and 4K film feel like a luxury magazine shoot.',
+      image: '/images/prewedding_backwaters.png',
     },
     {
-      client: 'Alexander Wright',
-      event: 'Executive Legacy & Brand Commission — New York',
+      client: 'Dr. Vignesh Kumar',
+      event: 'Corporate Summit & Commercial Portfolio — Chennai, Tamil Nadu',
       quote:
-        'The attention to detail and lighting control is unparalleled. They captured the true essence of our brand identity with magazine-cover caliber artistry.',
-      image:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80',
+        'The attention to detail, lighting control, and rapid delivery of 1,200+ event photos was unprecedented. They captured our Chennai IT summit with corporate elegance.',
+      image: '/images/corporate_conference_summit.png',
     },
   ];
 
