@@ -59,6 +59,8 @@ export default function ClientsPage() {
       email: newEmail,
       password: isInvite ? undefined : newPassword,
       fullName: newName,
+      phone: newPhone,
+      address: newAddress,
       role: 'client',
       sendInviteEmail: isInvite,
     });
@@ -69,15 +71,19 @@ export default function ClientsPage() {
       return;
     }
 
+    const authUserId = res.data.userId;
+
     const newRecord: ClientRecord = {
       id: `cli-${Date.now()}`,
       fullName: newName,
       email: newEmail,
       phone: newPhone,
       familyMembers: [newAddress],
-      notes: isInvite
-        ? `Supabase password setup email dispatched to ${newEmail}.`
-        : `Manual password generated (${newPassword}). Change required on first login.`,
+      notes: `Auth User ID: ${authUserId}. ${
+        isInvite
+          ? `Supabase password setup email dispatched to ${newEmail}.`
+          : `Manual password generated (${newPassword}). Change required on first login.`
+      }`,
       tags: ['Active', isInvite ? 'Invite Sent' : 'Password Issued'],
       totalBookings: 1,
     };
@@ -86,8 +92,8 @@ export default function ClientsPage() {
     setIsSubmitting(false);
     setStatusMessage(
       isInvite
-        ? `✅ Option A: Supabase password setup email dispatched to ${newEmail}!`
-        : `✅ Option B: Account created for ${newEmail} with initial password: ${newPassword}`,
+        ? `✅ Supabase Auth User Created (ID: ${authUserId}). Password setup email sent to ${newEmail}!`
+        : `✅ Supabase Auth User Created (ID: ${authUserId}) with initial password: ${newPassword}`,
     );
 
     setTimeout(() => {
