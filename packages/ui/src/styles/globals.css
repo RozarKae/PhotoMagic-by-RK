@@ -40,6 +40,10 @@
   }
 
   /* Cinematic Film Studio Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(216, 177, 90, 0.3) #090909;
+  }
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
