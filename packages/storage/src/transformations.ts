@@ -72,8 +72,9 @@ export function buildCloudinaryUrl(
 
   const transformString = transforms.join(',');
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || DEFAULT_CLOUD_NAME;
+  const cleanPublicId = publicId.startsWith('/') ? publicId.slice(1) : publicId;
 
-  return `https://res.cloudinary.com/${cloudName}/image/upload/${transformString}/${publicId}`;
+  return `https://res.cloudinary.com/${cloudName}/image/upload/${transformString}/${cleanPublicId}`;
 }
 
 /**
