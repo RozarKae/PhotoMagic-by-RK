@@ -55,14 +55,16 @@ export async function loginAction(payload: LoginPayload) {
   }
 
   try {
-    const isPlaceholder = process.env.NEXT_PUBLIC_SUPABASE_URL?.includes('placeholder');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+    const isPlaceholder =
+      !supabaseUrl || supabaseUrl.includes('placeholder') || supabaseUrl.includes('example');
     if (!isPlaceholder) {
       const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: payload.email,
         password: payload.password,
       });
 
-      if (!error && data.session && data.user) {
+      if (!error && data?.session && data?.user) {
         const metadataRole = (data.user.user_metadata?.role as UserRole) || role;
         return createSuccessResponse({
           sessionToken: data.session.access_token,
@@ -79,7 +81,7 @@ export async function loginAction(payload: LoginPayload) {
       }
     }
   } catch {
-    // Network exception catch (Failed to fetch)
+    // Catch network failures (Failed to fetch) gracefully
   }
 
   // Local Authenticated Session Fallback for working login credentials when backend network is unreachable
@@ -118,43 +120,53 @@ export async function registerAction(payload: RegisterPayload) {
   let createdAuthUserId: string | null = null;
 
   try {
-    const isPlaceholder = process.env.NEXT_PUBLIC_SUPABASE_URL?.includes('placeholder');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+    const isPlaceholder =
+      !supabaseUrl || supabaseUrl.includes('placeholder') || supabaseUrl.includes('example');
 
     if (!isPlaceholder) {
       // Step 1: Create user in Supabase Auth via Admin API or Client API
       let authUser: { id: string; email?: string } | null = null;
 
-      const adminRes = await supabaseAdmin.auth.admin.createUser({
-        email: payload.email,
-        password: initialPassword,
-        email_confirm: true,
-        user_metadata: {
-          full_name: payload.fullName,
-          role: payload.role || 'client',
-          workspace_id: payload.workspaceId || 'ws_default',
-          must_change_password: true,
-        },
-      });
-
-      if (!adminRes.error && adminRes.data.user) {
-        authUser = adminRes.data.user;
-      } else {
-        // Fallback to standard signUp if Admin API key is restricted
-        const signUpRes = await supabaseClient.auth.signUp({
+      try {
+        const adminRes = await supabaseAdmin.auth.admin.createUser({
           email: payload.email,
           password: initialPassword,
-          options: {
-            data: {
-              full_name: payload.fullName,
-              role: payload.role || 'client',
-              workspace_id: payload.workspaceId || 'ws_default',
-            },
+          email_confirm: true,
+          user_metadata: {
+            full_name: payload.fullName,
+            role: payload.role || 'client',
+            workspace_id: payload.workspaceId || 'ws_default',
+            must_change_password: true,
           },
         });
-        if (signUpRes.data.user) {
-          authUser = signUpRes.data.user;
-        } else if (signUpRes.error) {
-          return createErrorResponse('UNAUTHORIZED', signUpRes.error.message);
+
+        if (!adminRes.error && adminRes.data.user) {
+          authUser = adminRes.data.user;
+        }
+      } catch {
+        // Admin API call catch
+      }
+
+      if (!authUser) {
+        try {
+          // Fallback to standard signUp if Admin API key is restricted
+          const signUpRes = await supabaseClient.auth.signUp({
+            email: payload.email,
+            password: initialPassword,
+            options: {
+              data: {
+                full_name: payload.fullName,
+                role: payload.role || 'client',
+                workspace_id: payload.workspaceId || 'ws_default',
+              },
+            },
+          });
+          if (signUpRes.data?.user) {
+            authUser = signUpRes.data.user;
+          }
+        } catch {
+          // SignUp call catch
         }
       }
 
