@@ -16,8 +16,14 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
           queries: {
             staleTime: 1000 * 60 * 5, // 5 Minutes
             gcTime: 1000 * 60 * 30, // 30 Minutes
-            retry: 1,
+            retry: 2,
+            retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+            networkMode: 'online',
             refetchOnWindowFocus: false,
+          },
+          mutations: {
+            retry: 1,
+            networkMode: 'online',
           },
         },
       }),
