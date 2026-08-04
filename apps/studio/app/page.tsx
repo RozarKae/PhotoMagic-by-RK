@@ -2,10 +2,22 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { StructuredData } from '../components/StructuredData';
-import { InquiryForm } from '../components/InquiryForm';
+
+const StructuredData = dynamic(
+  () => import('../components/StructuredData').then((m) => m.StructuredData),
+  { ssr: true },
+);
+
+const InquiryForm = dynamic(() => import('../components/InquiryForm').then((m) => m.InquiryForm), {
+  loading: () => (
+    <div className="p-8 rounded-2xl bg-black/40 border border-amber-500/20 animate-pulse h-96 flex items-center justify-center">
+      <span className="font-mono text-xs text-amber-400">Loading Concierge Desk...</span>
+    </div>
+  ),
+});
 import { Button, Card, Container, Grid } from '@photomagic/ui';
 import {
   Film,

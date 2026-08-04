@@ -1,7 +1,34 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
+import { Inter, Cinzel, Cormorant_Garamond, IBM_Plex_Mono } from 'next/font/google';
 import { AppProviders } from '@photomagic/ui';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cinzel',
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '600', '700'],
+  display: 'swap',
+  variable: '--font-cormorant',
+});
+
+const ibmMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-ibm-mono',
+});
 
 export const viewport: Viewport = {
   themeColor: '#090909',
@@ -58,8 +85,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="bg-canvas text-text-primary antialiased min-h-screen">
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${cinzel.variable} ${cormorant.variable} ${ibmMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="bg-canvas text-text-primary antialiased min-h-screen font-sans">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
