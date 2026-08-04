@@ -63,19 +63,31 @@ export async function loginAction(payload: LoginPayload) {
   });
 }
 
+export interface RegisterPayload {
+  email: string;
+  password?: string;
+  fullName: string;
+  role?: UserRole;
+  workspaceId?: string;
+  sendInviteEmail?: boolean;
+}
+
 export async function registerAction(payload: RegisterPayload) {
-  if (!payload.email || !payload.fullName || !payload.password) {
-    return createErrorResponse('INVALID_INPUT', 'Email, Full Name, and Password are required.');
+  if (!payload.email || !payload.fullName) {
+    return createErrorResponse('INVALID_INPUT', 'Email and Full Name are required.');
   }
+
+  const initialPassword = payload.password || `PhotoMagic#${Math.random().toString(36).slice(-8)}!`;
 
   const { data, error } = await supabaseClient.auth.signUp({
     email: payload.email,
-    password: payload.password,
+    password: initialPassword,
     options: {
       data: {
         full_name: payload.fullName,
         role: payload.role || 'client',
         workspace_id: payload.workspaceId || 'ws_default',
+        must_change_password: true,
       },
     },
   });
@@ -84,9 +96,18 @@ export async function registerAction(payload: RegisterPayload) {
     return createErrorResponse('UNAUTHORIZED', error.message);
   }
 
+  // Option A: Send Supabase Password Setup Email Invite
+  if (payload.sendInviteEmail) {
+    await supabaseClient.auth.resetPasswordForEmail(payload.email);
+  }
+
   return createSuccessResponse({
-    message: 'Account successfully registered.',
+    message: payload.sendInviteEmail
+      ? 'Client account created and Supabase password setup email dispatched.'
+      : 'Client account created with initial password.',
     userId: data.user?.id || 'usr_' + Date.now(),
+    initialPassword: payload.password || initialPassword,
+    inviteEmailDispatched: !!payload.sendInviteEmail,
   });
 }
 

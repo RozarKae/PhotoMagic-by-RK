@@ -18,7 +18,12 @@ export default function ClientsPage() {
   const [newEmail, setNewEmail] = useState('testclient@photomagic.studio');
   const [newPhone, setNewPhone] = useState('9876543210');
   const [newAddress, setNewAddress] = useState('Madurai');
-  const [newPassword, setNewPassword] = useState('Client#2026!Pass');
+
+  // Credential Strategy Selection (Option A vs Option B)
+  const [credentialMethod, setCredentialMethod] = useState<'invite_email' | 'manual_password'>(
+    'manual_password',
+  );
+  const [newPassword, setNewPassword] = useState('Temp@12345');
 
   const [clients, setClients] = useState<ClientRecord[]>([
     {
@@ -48,12 +53,21 @@ export default function ClientsPage() {
     setIsSubmitting(true);
     setStatusMessage(null);
 
+    const isInvite = credentialMethod === 'invite_email';
+
     const res = await registerAction({
       email: newEmail,
-      password: newPassword,
+      password: isInvite ? undefined : newPassword,
       fullName: newName,
       role: 'client',
+      sendInviteEmail: isInvite,
     });
+
+    if (!res.success) {
+      setStatusMessage(`❌ Error: ${res.error.message}`);
+      setIsSubmitting(false);
+      return;
+    }
 
     const newRecord: ClientRecord = {
       id: `cli-${Date.now()}`,
@@ -61,21 +75,25 @@ export default function ClientsPage() {
       email: newEmail,
       phone: newPhone,
       familyMembers: [newAddress],
-      notes: `Registered client account located in ${newAddress}.`,
-      tags: ['Active', 'New Client'],
+      notes: isInvite
+        ? `Supabase password setup email dispatched to ${newEmail}.`
+        : `Manual password generated (${newPassword}). Change required on first login.`,
+      tags: ['Active', isInvite ? 'Invite Sent' : 'Password Issued'],
       totalBookings: 1,
     };
 
     setClients((prev) => [newRecord, ...prev]);
     setIsSubmitting(false);
     setStatusMessage(
-      `✅ Real Client Account successfully provisioned for ${newName} (${newEmail})!`,
+      isInvite
+        ? `✅ Option A: Supabase password setup email dispatched to ${newEmail}!`
+        : `✅ Option B: Account created for ${newEmail} with initial password: ${newPassword}`,
     );
 
     setTimeout(() => {
       setIsAddModalOpen(false);
       setStatusMessage(null);
-    }, 1500);
+    }, 2000);
   };
 
   const filteredClients = clients.filter(
@@ -252,16 +270,64 @@ export default function ClientsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-silver mb-1">
-                  Initial Portal Passcode
+                <label className="block text-xs font-mono text-silver mb-2">
+                  Credential Generation Strategy (STEP 2)
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm font-mono text-gold-400 rounded-lg focus:outline-none focus:border-gold-500"
-                />
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <button
+                    type="button"
+                    onClick={() => setCredentialMethod('invite_email')}
+                    className={`p-3 rounded-lg border text-left transition-all ${
+                      credentialMethod === 'invite_email'
+                        ? 'bg-gold-500/10 border-gold-500 text-gold-300 font-bold'
+                        : 'bg-[#141414] border-white/10 text-silver hover:border-white/20'
+                    }`}
+                  >
+                    <span className="block text-xs font-semibold">Option A (Preferred)</span>
+                    <span className="text-[10px] text-silver/70 font-mono block mt-0.5">
+                      Send Supabase password setup email
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setCredentialMethod('manual_password')}
+                    className={`p-3 rounded-lg border text-left transition-all ${
+                      credentialMethod === 'manual_password'
+                        ? 'bg-gold-500/10 border-gold-500 text-gold-300 font-bold'
+                        : 'bg-[#141414] border-white/10 text-silver hover:border-white/20'
+                    }`}
+                  >
+                    <span className="block text-xs font-semibold">Option B</span>
+                    <span className="text-[10px] text-silver/70 font-mono block mt-0.5">
+                      Set manual initial password
+                    </span>
+                  </button>
+                </div>
+
+                {credentialMethod === 'manual_password' ? (
+                  <div>
+                    <label className="block text-[11px] font-mono text-gold-400 mb-1">
+                      Initial Temporary Password (e.g. Temp@12345)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Temp@12345"
+                      className="w-full bg-[#141414] border border-gold-500/40 px-3 py-2 text-sm font-mono text-gold-300 rounded-lg focus:outline-none focus:border-gold-500"
+                    />
+                    <span className="text-[10px] text-silver/60 font-mono mt-1 block">
+                      Client will be required to update password upon first portal login.
+                    </span>
+                  </div>
+                ) : (
+                  <div className="p-3 rounded-lg bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-mono">
+                    📧 A secure password creation link will be dispatched to {newEmail} via Supabase
+                    Auth.
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
