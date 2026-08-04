@@ -32,13 +32,36 @@ import {
   Clapperboard,
   Camera,
   Tv,
+  LogOut,
 } from 'lucide-react';
 import { WorkspacePanel, MetadataPanel, InspectorSidebar, Filmstrip } from '@photomagic/ui';
+import { logoutAction } from '@photomagic/auth';
 
 export default function ClientPortalPage() {
   const [activeNav, setActiveNav] = useState('Your Story');
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState('/images/hindu_wedding_ceremony.png');
+  const [clientEmail, setClientEmail] = useState('client@photomagic.studio');
+
+  React.useEffect(() => {
+    const match = document.cookie.match(/photomagic_user_email=([^;]+)/);
+    if (match) {
+      setClientEmail(decodeURIComponent(match[1]));
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logoutAction();
+    } catch {
+      // ignore
+    }
+    document.cookie = 'photomagic_os_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'photomagic_user_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'photomagic_user_email=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    const studioUrl = process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
+    window.location.replace(`${studioUrl}/login`);
+  };
 
   const navItems = [
     { label: 'Overview', icon: LayoutDashboard, href: '/portal' },
@@ -174,6 +197,16 @@ export default function ClientPortalPage() {
             >
               <Camera size={15} />
               <span>{inspectorOpen ? 'Close Inspector' : 'EXIF Inspector'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-xs font-nav text-red-300 hover:bg-red-500 hover:text-white flex items-center gap-2 transition-all shadow-sm"
+              title="Sign out of Client Gallery"
+            >
+              <LogOut size={15} />
+              <span>Logout</span>
             </button>
 
             <button className="px-4 py-2 rounded-lg bg-[#1D1D1D] border border-white/10 text-xs font-nav text-silver hover:text-ivory flex items-center gap-2 transition-colors">

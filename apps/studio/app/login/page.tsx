@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Lock, ShieldCheck } from 'lucide-react';
+import { loginAction } from '@photomagic/auth';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 
@@ -10,36 +11,46 @@ export default function ClientLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(true);
 
   const osUrl = process.env.NEXT_PUBLIC_OS_URL || 'http://localhost:3001';
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setAuthError(null);
 
-    const lowerEmail = email.toLowerCase();
-    let role = 'super_admin';
-    let targetPath = '/dashboard';
+    const res = await loginAction({ email, password });
 
-    if (lowerEmail.includes('client')) {
-      role = 'client';
-      targetPath = '/portal';
-    } else if (lowerEmail.includes('photographer') || lowerEmail.includes('editor')) {
-      role = 'photographer';
-      targetPath = '/gallery';
-    } else if (lowerEmail.includes('manager')) {
-      role = 'studio_manager';
-      targetPath = '/dashboard';
+    if (!res.success) {
+      setAuthError(
+        res.error.message || 'Invalid login credentials. Please check your email and password.',
+      );
+      setIsSubmitting(false);
+      return;
     }
 
-    // Set authenticated session and role cookies
-    document.cookie = `photomagic_os_session=sess_${role}_${Date.now()}; path=/; max-age=86400; SameSite=Lax`;
-    document.cookie = `photomagic_user_role=${role}; path=/; max-age=86400; SameSite=Lax`;
-    document.cookie = `photomagic_user_email=${encodeURIComponent(email)}; path=/; max-age=86400; SameSite=Lax`;
+    if (!('user' in res.data)) {
+      setIsSubmitting(false);
+      return;
+    }
 
-    setTimeout(() => {
-      window.location.href = `${osUrl}${targetPath}`;
-    }, 400);
+    const { user, sessionToken } = res.data;
+    const maxAge = rememberMe ? 86400 * 30 : 86400; // 30 days vs 1 day persistence
+
+    // Set real Supabase session token and user metadata cookies
+    document.cookie = `photomagic_os_session=${sessionToken}; path=/; max-age=${maxAge}; SameSite=Lax`;
+    document.cookie = `photomagic_user_role=${user.role}; path=/; max-age=${maxAge}; SameSite=Lax`;
+    document.cookie = `photomagic_user_email=${encodeURIComponent(user.email)}; path=/; max-age=${maxAge}; SameSite=Lax`;
+
+    const targetPath =
+      user.role === 'client'
+        ? '/portal'
+        : user.role === 'photographer' || user.role === 'editor'
+          ? '/gallery'
+          : '/dashboard';
+    window.location.href = `${osUrl}${targetPath}`;
   };
 
   return (
@@ -65,6 +76,11 @@ export default function ClientLoginPage() {
           onSubmit={handleLoginSubmit}
           className="space-y-5 bg-[#0B0B0E] p-8 border border-white/10 shadow-2xl"
         >
+          {authError && (
+            <div className="p-3 rounded bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono">
+              {authError}
+            </div>
+          )}
           <div>
             <label className="block font-nav text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-2">
               Email Address

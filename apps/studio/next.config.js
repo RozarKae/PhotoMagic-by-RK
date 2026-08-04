@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: [
+    '@photomagic/auth',
     '@photomagic/ui',
     '@photomagic/design-language',
     '@photomagic/tailwind-config',

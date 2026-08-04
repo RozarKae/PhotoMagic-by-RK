@@ -2,7 +2,12 @@
   "extends": "@photomagic/typescript-config/nextjs.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@photomagic/auth": ["../../packages/auth/src/index.ts"],
+      "@photomagic/config": ["../../packages/config/src/index.ts"],
+      "@photomagic/ui": ["../../packages/ui/src/index.ts"],
+      "@photomagic/types": ["../../packages/types/src/index.ts"],
+      "@photomagic/storage": ["../../packages/storage/src/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

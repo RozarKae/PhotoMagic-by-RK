@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@photomagic/auth": "workspace:*",
     "@photomagic/config": "workspace:*",
     "@photomagic/shared": "workspace:*",
     "@photomagic/types": "workspace:*",
