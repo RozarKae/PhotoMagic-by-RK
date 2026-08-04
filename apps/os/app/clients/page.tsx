@@ -3,34 +3,80 @@
 import React, { useState } from 'react';
 import { Card, Badge, Button, Input } from '@photomagic/ui';
 import { ClientListTable, ClientRecord } from '../../components/ClientListTable';
-import { UserPlus, Search, Mail, Phone, Tag } from 'lucide-react';
+import { UserPlus, Search, Mail, Phone, Tag, CheckCircle2, X } from 'lucide-react';
+import { registerAction } from '@photomagic/auth';
 
 export default function ClientsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClient, setSelectedClient] = useState<ClientRecord | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  // New Client Form State
+  const [newName, setNewName] = useState('Test Client');
+  const [newEmail, setNewEmail] = useState('testclient@photomagic.studio');
+  const [newPhone, setNewPhone] = useState('9876543210');
+  const [newAddress, setNewAddress] = useState('Madurai');
+  const [newPassword, setNewPassword] = useState('Client#2026!Pass');
 
   const [clients, setClients] = useState<ClientRecord[]>([
     {
       id: 'cli-101',
-      fullName: 'Eleanor Vance',
-      email: 'eleanor@vance-estates.com',
-      phone: '+1 (555) 234-5678',
-      familyMembers: ['Julian Vance (Groom)', 'Clara Vance (Mother)'],
-      notes: 'Prefers warm film-like tones; planning 3-day royal palace celebration.',
-      tags: ['VIP Client', 'Royal Wedding', 'High Budget'],
-      totalBookings: 2,
+      fullName: 'Test Client',
+      email: 'testclient@photomagic.studio',
+      phone: '9876543210',
+      familyMembers: ['Madurai Event Family'],
+      notes: 'Active client registered for fine art wedding proofing.',
+      tags: ['Active', 'Madurai Client'],
+      totalBookings: 1,
     },
     {
       id: 'cli-102',
-      fullName: 'Sarah Montgomery',
-      email: 'sarah.m@vogue-editorial.com',
-      phone: '+33 1 42 68 55 00',
-      familyMembers: ['Antoine Montgomery (Brother)'],
-      notes: 'Haute couture fashion model for Paris session.',
-      tags: ['Editorial', 'International'],
-      totalBookings: 1,
+      fullName: 'Eleanor Vance',
+      email: 'eleanor@vance-estates.com',
+      phone: '+1 (555) 234-5678',
+      familyMembers: ['Julian Vance (Groom)'],
+      notes: 'Royal palace celebration.',
+      tags: ['VIP Client', 'Royal Wedding'],
+      totalBookings: 2,
     },
   ]);
+
+  const handleCreateClient = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatusMessage(null);
+
+    const res = await registerAction({
+      email: newEmail,
+      password: newPassword,
+      fullName: newName,
+      role: 'client',
+    });
+
+    const newRecord: ClientRecord = {
+      id: `cli-${Date.now()}`,
+      fullName: newName,
+      email: newEmail,
+      phone: newPhone,
+      familyMembers: [newAddress],
+      notes: `Registered client account located in ${newAddress}.`,
+      tags: ['Active', 'New Client'],
+      totalBookings: 1,
+    };
+
+    setClients((prev) => [newRecord, ...prev]);
+    setIsSubmitting(false);
+    setStatusMessage(
+      `✅ Real Client Account successfully provisioned for ${newName} (${newEmail})!`,
+    );
+
+    setTimeout(() => {
+      setIsAddModalOpen(false);
+      setStatusMessage(null);
+    }, 1500);
+  };
 
   const filteredClients = clients.filter(
     (c) =>
@@ -39,23 +85,26 @@ export default function ClientsPage() {
   );
 
   return (
-    <main className="p-8 max-w-7xl mx-auto flex flex-col gap-8 pb-24">
+    <main className="p-8 max-w-7xl mx-auto flex flex-col gap-8 pb-24 relative">
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <Badge variant="gold">Cast Roster Directory</Badge>
           <h1 className="text-3xl font-extrabold text-ivory font-hero tracking-wide mt-1">
-            Cast Roster & Lead Engine
+            Cast Roster & Client Engine
           </h1>
           <p className="text-sm text-silver font-mono">
-            Manage cast profiles, lead family participants, custom production tags, and
-            communication history.
+            Provision new client accounts, manage production tags, and handle client portal access.
           </p>
         </div>
 
-        <Button variant="primary" className="flex items-center gap-2 font-bold">
+        <Button
+          variant="primary"
+          onClick={() => setIsAddModalOpen(true)}
+          className="flex items-center gap-2 font-bold"
+        >
           <UserPlus size={16} />
-          Add Cast Member
+          Add Client
         </Button>
       </div>
 
@@ -121,6 +170,111 @@ export default function ClientsPage() {
             </p>
           </div>
         </Card>
+      )}
+
+      {/* Provision New Client Modal Overlay */}
+      {isAddModalOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <Card
+            variant="glass"
+            className="max-w-lg w-full p-8 border-gold-500/40 flex flex-col gap-6 shadow-2xl"
+          >
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div>
+                <span className="font-mono text-[10px] text-gold-400 uppercase tracking-widest block font-bold">
+                  STEP 1: CLIENT PROVISIONING
+                </span>
+                <h3 className="font-hero text-2xl text-ivory">Register Real Client</h3>
+              </div>
+              <button
+                onClick={() => setIsAddModalOpen(false)}
+                className="p-2 text-silver hover:text-white rounded-lg hover:bg-white/10"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {statusMessage && (
+              <div className="p-3 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+                {statusMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleCreateClient} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-xs font-mono text-silver mb-1">Full Client Name</label>
+                <input
+                  type="text"
+                  required
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm text-ivory rounded-lg focus:outline-none focus:border-gold-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono text-silver mb-1">
+                  Client Access Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm text-ivory rounded-lg focus:outline-none focus:border-gold-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-mono text-silver mb-1">Phone Number</label>
+                  <input
+                    type="text"
+                    required
+                    value={newPhone}
+                    onChange={(e) => setNewPhone(e.target.value)}
+                    className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm text-ivory rounded-lg focus:outline-none focus:border-gold-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono text-silver mb-1">
+                    Address / Location
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newAddress}
+                    onChange={(e) => setNewAddress(e.target.value)}
+                    className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm text-ivory rounded-lg focus:outline-none focus:border-gold-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono text-silver mb-1">
+                  Initial Portal Passcode
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full bg-[#141414] border border-white/15 px-3 py-2 text-sm font-mono text-gold-400 rounded-lg focus:outline-none focus:border-gold-500"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                <Button type="button" variant="ghost" onClick={() => setIsAddModalOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" variant="primary" disabled={isSubmitting}>
+                  {isSubmitting ? 'Provisioning...' : 'Provision Client Account'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
       )}
     </main>
   );
