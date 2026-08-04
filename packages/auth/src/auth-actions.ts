@@ -143,9 +143,11 @@ export async function registerAction(payload: RegisterPayload) {
 
         if (!adminRes.error && adminRes.data.user) {
           authUser = adminRes.data.user;
+        } else if (adminRes.error) {
+          console.warn('[Supabase Auth Admin] createUser warning:', adminRes.error.message);
         }
-      } catch {
-        // Admin API call catch
+      } catch (err: unknown) {
+        console.warn('[Supabase Auth Admin] Exception:', err);
       }
 
       if (!authUser) {
@@ -164,9 +166,15 @@ export async function registerAction(payload: RegisterPayload) {
           });
           if (signUpRes.data?.user) {
             authUser = signUpRes.data.user;
+          } else if (signUpRes.error) {
+            return createErrorResponse(
+              'UNAUTHORIZED',
+              `Supabase Auth Error: ${signUpRes.error.message}`,
+            );
           }
-        } catch {
-          // SignUp call catch
+        } catch (err: unknown) {
+          const msg = err instanceof Error ? err.message : 'Supabase Auth connection failed';
+          return createErrorResponse('UNAUTHORIZED', `Supabase Auth Network Error: ${msg}`);
         }
       }
 
