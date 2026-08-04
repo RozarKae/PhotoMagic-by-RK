@@ -12,14 +12,23 @@ import {
   buildCloudinaryFolderPath,
   generateCloudinaryPublicId,
 } from '@photomagic/storage/server';
+import { requirePermission, UserSession } from '@photomagic/auth';
 
 export type { PhotoItem };
 
-export async function requestUploadPresignedUrlsAction(payload: unknown) {
+export async function requestUploadPresignedUrlsAction(
+  payload: unknown,
+  session: UserSession | null = null,
+) {
   try {
+    // RBAC & Permission Enforcement
+    if (session) {
+      requirePermission(session, 'gallery:upload');
+    }
+
     const validated = uploadPhotoSchema.parse(payload);
     const photoId = 'photo_' + Date.now();
-    const clientId = 'client_demo';
+    const clientId = session?.userId || 'client_demo';
 
     const folder = buildCloudinaryFolderPath(clientId, 'proofs');
     const publicId = generateCloudinaryPublicId(clientId, 'proofs', validated.fileName);
@@ -42,7 +51,7 @@ export async function requestUploadPresignedUrlsAction(payload: unknown) {
   } catch (err: unknown) {
     const msg =
       err instanceof Error ? err.message : 'Failed to generate Cloudinary upload parameters';
-    return createErrorResponse('INVALID_INPUT', msg);
+    return createErrorResponse('UNAUTHORIZED', msg);
   }
 }
 

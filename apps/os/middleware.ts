@@ -4,10 +4,15 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Protected OS route patterns
-  const isProtectedOsRoute =
-    path.startsWith('/dashboard') ||
+  // Protected OS & Admin route patterns
+  const isAdminRoute =
     path.startsWith('/admin') ||
+    path.startsWith('/financials') ||
+    path.startsWith('/security') ||
+    path.startsWith('/devops');
+  const isProtectedOsRoute =
+    isAdminRoute ||
+    path.startsWith('/dashboard') ||
     path.startsWith('/projects') ||
     path.startsWith('/bookings') ||
     path.startsWith('/gallery') ||
@@ -15,22 +20,25 @@ export function middleware(request: NextRequest) {
     path.startsWith('/ai') ||
     path.startsWith('/delivery') ||
     path.startsWith('/clients') ||
-    path.startsWith('/financials') ||
     path.startsWith('/settings') ||
     path.startsWith('/analytics') ||
     path.startsWith('/automation');
 
-  // Allow next static resources, api routes, and public assets
+  // Allow static resources, api routes, and public assets
   if (path.startsWith('/_next') || path.startsWith('/api') || path.includes('.')) {
     return NextResponse.next();
   }
 
-  // In production, session verification token or cookie check
-  const sessionToken = request.cookies.get('photomagic_os_session')?.value;
+  // Session verification token check
+  const sessionToken =
+    request.cookies.get('photomagic_os_session')?.value ||
+    request.cookies.get('sb-access-token')?.value;
 
-  if (isProtectedOsRoute && !sessionToken && process.env.NODE_ENV === 'production') {
-    const websiteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
-    return NextResponse.redirect(new URL('/login', websiteUrl));
+  if (isProtectedOsRoute && !sessionToken) {
+    const studioUrl = process.env.NEXT_PUBLIC_WEBSITE_URL || 'http://localhost:3000';
+    const loginRedirectUrl = new URL('/login', studioUrl);
+    loginRedirectUrl.searchParams.set('redirect', request.nextUrl.pathname);
+    return NextResponse.redirect(loginRedirectUrl);
   }
 
   return NextResponse.next();
