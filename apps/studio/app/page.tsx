@@ -223,92 +223,185 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#090909] text-[#F5F3EF] flex flex-col selection:bg-gold-500 selection:text-black relative overflow-x-hidden font-body film-grain">
+    <div className="min-h-screen bg-[#0F051D] text-[#FFF5F7] flex flex-col selection:bg-purple-600 selection:text-white relative overflow-x-hidden font-body film-grain">
       <StructuredData />
       <Navbar />
 
-      {/* AMBIENT STUDIO LIGHTING */}
+      {/* AMBIENT PURPLE & ROSE ATMOSPHERIC LIGHTING */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-emerald/10 rounded-full blur-[160px]" />
-        <div className="absolute top-20 -right-40 w-[700px] h-[700px] bg-gold-500/10 rounded-full blur-[180px]" />
-        <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-burgundy/20 rounded-full blur-[180px]" />
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[180px]" />
+        <div className="absolute top-20 -right-40 w-[700px] h-[700px] bg-rose-500/15 rounded-full blur-[180px]" />
+        <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-purple-900/25 rounded-full blur-[180px]" />
       </div>
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center pt-28 pb-24 overflow-hidden z-10 border-b border-white/10 letterbox-frame">
-        {/* Full-Screen Hero Background */}
-        <div className="absolute inset-0 z-0">
+      {/* HERO SECTION WITH RESPONSIVE MULTI-IMAGE ARCHITECTURE */}
+      <section className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-24 overflow-hidden z-10 border-b border-purple-500/20">
+        {/* ========================================================================= */}
+        {/* 1. PC / DESKTOP VIEW (lg: & xl:): ASYMMETRICAL SPLIT COLLAGE OF MULTIPLE EVENTS */}
+        {/* ========================================================================= */}
+        <div className="hidden lg:grid absolute inset-0 z-0 grid-cols-12 grid-rows-6 gap-3.5 p-6 opacity-45 pointer-events-none">
+          {/* Main Stage (Span 7 cols, 6 rows): Royal Wedding Muhurtham */}
+          <div className="relative col-span-7 row-span-6 rounded-3xl overflow-hidden border border-purple-500/35 group shadow-2xl">
+            <img
+              src="/images/hero_wedding_couple.png"
+              alt="Royal Wedding Muhurtham & Couple"
+              className="w-full h-full object-cover object-center filter brightness-[0.82] contrast-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-[#0F051D]/60" />
+            <div className="absolute bottom-6 left-6 flex items-center gap-2 bg-[#1C0D36]/90 backdrop-blur-md px-4 py-2 rounded-full border border-purple-500/40 text-[11px] font-bold text-rose-300">
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+              ROYAL SOUTH INDIAN WEDDINGS & CINEMA
+            </div>
+          </div>
+
+          {/* Top Right (Span 5 cols, 3 rows): Project BabyBliss & Fine Art */}
+          <div className="relative col-span-5 row-span-3 rounded-2xl overflow-hidden border border-rose-400/35 group shadow-xl">
+            <img
+              src="/images/babybliss_portrait.jpg"
+              alt="Project BabyBliss & Toddler Portraiture"
+              className="w-full h-full object-cover object-center filter brightness-[0.88] contrast-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 bg-[#1C0D36]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-400/40 text-[10px] font-bold text-rose-300">
+              PROJECT BABYBLISS • HEIRLOOM PORTRAITS
+            </div>
+          </div>
+
+          {/* Bottom Right Left (Span 3 cols, 3 rows): Grand Destination Pre-Wedding */}
+          <div className="relative col-span-3 row-span-3 rounded-2xl overflow-hidden border border-purple-500/30 group shadow-xl">
+            <img
+              src="/images/prewedding_backwaters.png"
+              alt="Destination Pre-Wedding"
+              className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 bg-[#1C0D36]/90 backdrop-blur-md px-3 py-1 rounded-full border border-purple-500/40 text-[9px] font-bold text-purple-200">
+              DESTINATION UNIONS
+            </div>
+          </div>
+
+          {/* Bottom Right Right (Span 2 cols, 3 rows): Handcrafted 12x18 Archival Bookmaking */}
+          <div className="relative col-span-2 row-span-3 rounded-2xl overflow-hidden border border-purple-500/30 group shadow-xl">
+            <img
+              src="/images/album_print_craftsmanship.png"
+              alt="12x18 Archival Album Craft"
+              className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 bg-[#1C0D36]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-purple-500/40 text-[9px] font-bold text-rose-300">
+              12x18 ALBUMS
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 2. TABLET VIEW (md: to lg:): COMBINATION OF EVENTS SPLIT */}
+        {/* ========================================================================= */}
+        <div className="hidden md:grid lg:hidden absolute inset-0 z-0 grid-cols-2 grid-rows-2 gap-3 p-4 opacity-40 pointer-events-none">
+          <div className="relative col-span-1 row-span-2 rounded-2xl overflow-hidden border border-purple-500/30">
+            <img
+              src="/images/hero_wedding_couple.png"
+              alt="Royal Weddings"
+              className="w-full h-full object-cover object-center filter brightness-[0.78]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 bg-[#1C0D36]/90 px-3 py-1 rounded-full text-[9px] font-bold text-rose-300">
+              ROYAL WEDDINGS
+            </div>
+          </div>
+          <div className="relative col-span-1 row-span-1 rounded-2xl overflow-hidden border border-rose-400/30">
+            <img
+              src="/images/babybliss_portrait.jpg"
+              alt="BabyBliss Studio"
+              className="w-full h-full object-cover object-center filter brightness-[0.85]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-2 left-2 bg-[#1C0D36]/90 px-2.5 py-0.5 rounded-full text-[8px] font-bold text-rose-300">
+              PROJECT BABYBLISS
+            </div>
+          </div>
+          <div className="relative col-span-1 row-span-1 rounded-2xl overflow-hidden border border-purple-500/30">
+            <img
+              src="/images/prewedding_backwaters.png"
+              alt="Pre-Wedding"
+              className="w-full h-full object-cover object-center filter brightness-[0.78]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-transparent" />
+            <div className="absolute bottom-2 left-2 bg-[#1C0D36]/90 px-2.5 py-0.5 rounded-full text-[8px] font-bold text-purple-200">
+              DESTINATION UNIONS
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 3. PHONE / MOBILE VIEW (< md:): SINGLE POWERFUL STORYTELLING IMAGE */}
+        {/* ========================================================================= */}
+        <div className="block md:hidden absolute inset-0 z-0 opacity-45 pointer-events-none">
           <img
             src="/images/hero_wedding_couple.png"
-            alt="PhotoMagic Studio Background"
-            className="w-full h-full object-cover object-center scale-105 filter brightness-[0.55] contrast-125 transition-transform duration-1000 ease-out"
+            alt="Rozar Khan Storytelling Portrait"
+            className="w-full h-full object-cover object-center filter brightness-[0.72] contrast-115 scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#090909]/80 via-transparent to-[#090909]" />
-          <div className="absolute inset-0 vignette-cinematic" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F051D]/90 via-[#0F051D]/30 to-[#0F051D]" />
         </div>
+
+        {/* Universal Vignette Overlay */}
+        <div className="absolute inset-0 bg-radial-vignette pointer-events-none" />
 
         {/* Location HUD Badges */}
-        <div className="hidden lg:flex absolute top-28 left-8 items-center gap-3 px-4 py-2 rounded-lg bg-[#141414]/90 backdrop-blur-xl border border-white/10 text-xs font-mono text-silver">
-          <div className="w-2 h-2 rounded-full bg-gold-500 animate-ping" />
-          <span className="text-[10px] text-gold-400 tracking-widest font-semibold uppercase">
-            TAMIL NADU & KERALA
+        <div className="hidden lg:flex absolute top-28 left-8 items-center gap-3 px-4 py-2 rounded-xl bg-[#1C0D36]/90 backdrop-blur-xl border border-purple-500/30 text-xs font-mono text-purple-200 shadow-lg">
+          <div className="w-2 h-2 rounded-full bg-rose-400 animate-ping" />
+          <span className="text-[10px] text-rose-300 tracking-widest font-bold uppercase">
+            ROZAR KHAN ATELIER
           </span>
           <span className="text-white/20">|</span>
-          <span className="text-[10px] tracking-widest uppercase">
-            MADURAI • CHENNAI • KOCHI • TRIVANDRUM
+          <span className="text-[10px] tracking-widest uppercase text-purple-200">
+            CHENNAI • BANGALORE • KOCHI • DESTINATIONS
           </span>
         </div>
 
-        <div className="hidden lg:flex absolute top-28 right-8 items-center gap-3 px-4 py-2 rounded-lg bg-[#141414]/90 backdrop-blur-xl border border-gold-500/30 text-xs font-mono text-gold-400">
-          <Camera size={14} className="text-gold-400" />
-          <span className="text-[10px] tracking-widest uppercase font-semibold">
-            PREMIUM PHOTOGRAPHY STUDIO
+        <div className="hidden lg:flex absolute top-28 right-8 items-center gap-3 px-4 py-2 rounded-xl bg-[#1C0D36]/90 backdrop-blur-xl border border-rose-400/40 text-xs font-mono text-rose-300 shadow-lg">
+          <Camera size={14} className="text-rose-400" />
+          <span className="text-[10px] tracking-widest uppercase font-bold">
+            FINE ART & CINEMATOGRAPHY
           </span>
         </div>
 
         <Container className="relative z-10 text-center flex flex-col items-center max-w-5xl px-6">
           {/* Hallmark Badge */}
-          <div className="mb-6 inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#141414]/90 backdrop-blur-2xl border border-gold-500/40 text-gold-300 font-mono text-[10px] uppercase tracking-[0.25em] shadow-kodakGlow">
-            <Camera size={14} className="text-gold-400" />
-            <span>PhotoMagic Studio • Tamil Nadu & Kerala</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+          <div className="mb-6 inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#1C0D36]/90 backdrop-blur-2xl border border-purple-500/40 text-purple-200 font-mono text-[11px] uppercase tracking-[0.2em] shadow-[0_0_25px_rgba(124,58,237,0.3)]">
+            <Camera size={14} className="text-rose-400" />
+            <span>PhotoMagic by Rozar Khan • South India & Worldwide</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
           </div>
 
-          {/* Title */}
-          <h1 className="font-hero text-5xl sm:text-7xl md:text-8xl font-black tracking-[0.06em] leading-[1.02] text-ivory mb-6 drop-shadow-2xl">
+          {/* Title with Corporate-Friendly Typography and Rose/Purple Gradient */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.04] text-white mb-6 drop-shadow-2xl">
             YOUR STORY
             <br />
-            <span className="text-gold-gradient font-heading italic font-normal">
+            <span className="bg-gradient-to-r from-rose-300 via-purple-300 to-purple-500 bg-clip-text text-transparent italic font-normal">
               CAPTURED WITH
             </span>
             <br />
             TIMELESS ELEGANCE
           </h1>
 
-          <p className="text-base sm:text-xl text-silver/90 max-w-2xl mx-auto mb-10 font-light leading-relaxed tracking-wide">
-            We preserve timeless memories through luxury wedding photography, candid portraits, and
-            cinematic wedding films across Tamil Nadu and Kerala.
+          <p className="text-base sm:text-xl text-purple-100/90 max-w-2xl mx-auto mb-10 font-normal leading-relaxed tracking-wide">
+            Directed personally by <strong>Rozar Khan</strong>. Documenting royal wedding unions,
+            Project BabyBliss portraiture, and handcrafted 12x18 archival albums.
           </p>
 
           {/* Primary CTA Buttons */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href={ROUTES.PUBLIC.BOOKING}>
-              <Button
-                variant="primary"
-                size="lg"
-                className="font-nav text-xs font-bold uppercase tracking-[0.25em] bg-[#141414] text-ivory border border-gold-500 shadow-kodakGlow hover:border-gold-400 hover:text-gold-300 py-4 px-8 rounded-lg"
-              >
-                Book Your Studio Session
-              </Button>
+              <button className="font-nav text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-purple-600 to-rose-500 text-white shadow-[0_0_25px_rgba(251,113,133,0.35)] hover:opacity-95 py-4 px-8 rounded-xl transition-all">
+                Book Studio Session
+              </button>
             </Link>
             <Link href="/portal">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="font-nav text-xs font-semibold uppercase tracking-[0.2em] py-4 px-7 rounded-lg"
-              >
+              <button className="font-nav text-xs font-semibold uppercase tracking-[0.18em] bg-[#1C0D36]/90 text-purple-200 border border-purple-500/40 hover:border-rose-400 hover:text-white py-4 px-7 rounded-xl transition-all">
                 Client Photo Gallery
-              </Button>
+              </button>
             </Link>
           </div>
         </Container>
