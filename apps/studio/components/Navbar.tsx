@@ -36,14 +36,14 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#090909]/90 backdrop-blur-2xl py-4 border-b border-gold-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.9)]'
-          : 'bg-gradient-to-b from-black/90 via-black/50 to-transparent py-6'
+          ? 'bg-[#0F051D]/95 backdrop-blur-2xl py-4 border-b border-purple-500/20 shadow-[0_10px_30px_rgba(15,5,29,0.9)]'
+          : 'bg-gradient-to-b from-[#0F051D]/90 via-[#0F051D]/50 to-transparent py-6'
       }`}
     >
-      {/* Scroll Progress Kodak Gold Line */}
-      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-white/5 overflow-hidden">
+      {/* Scroll Progress Purple & Rose Line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-gold-500 via-silver to-gold-500 transition-all duration-150"
+          className="h-full bg-gradient-to-r from-purple-500 via-rose-400 to-purple-500 transition-all duration-150"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>

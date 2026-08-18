@@ -9,54 +9,68 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.35);
+  border-color: rgba(251, 113, 133, 0.45);
+  box-shadow: 0 20px 40px rgba(15, 5, 29, 0.9), 0 0 30px rgba(124, 58, 237, 0.25);
 }
 
 .glass-futuristic-pastel {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 245, 247, 0.05);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(244, 226, 222, 0.06);
+  border: 1px solid rgba(251, 113, 133, 0.2);
+  box-shadow: 0 20px 50px rgba(15, 5, 29, 0.8), 0 0 30px rgba(251, 113, 133, 0.12);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-futuristic-pastel:hover {
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15);
+  border-color: rgba(251, 113, 133, 0.5);
+  box-shadow: 0 25px 60px rgba(15, 5, 29, 0.85), 0 0 40px rgba(124, 58, 237, 0.3);
 }
 
+/* Atmospheric Glow Gradients */
 .pastel-rose-glow {
-  background: radial-gradient(circle, rgba(244, 226, 222, 0.15) 0%, rgba(244, 226, 222, 0) 70%);
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.25) 0%, rgba(251, 113, 133, 0) 70%);
   filter: blur(120px);
 }
 
+.pastel-purple-glow {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.28) 0%, rgba(124, 58, 237, 0) 70%);
+  filter: blur(140px);
+}
+
 .pastel-champagne-glow {
-  background: radial-gradient(circle, rgba(248, 243, 230, 0.15) 0%, rgba(248, 243, 230, 0) 70%);
+  background: radial-gradient(circle, rgba(254, 205, 211, 0.2) 0%, rgba(254, 205, 211, 0) 70%);
   filter: blur(140px);
 }
 
-.pastel-mint-glow {
-  background: radial-gradient(circle, rgba(190, 235, 230, 0.12) 0%, rgba(190, 235, 230, 0) 70%);
-  filter: blur(140px);
-}
-
-.luxury-gradient-text {
-  background: linear-gradient(135deg, #F6F3EE 0%, #D4AF37 50%, #E5C158 100%);
+/* Gradients for Text and Accents */
+.luxury-gradient-text,
+.purple-rose-gradient-text {
+  background: linear-gradient(135deg, #FFF5F7 0%, #FDA4AF 40%, #C084FC 75%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.pastel-gold-gradient-text {
-  background: linear-gradient(135deg, #F8F3E6 0%, #F4E2DE 40%, #D4AF37 100%);
+.rose-gold-gradient-text {
+  background: linear-gradient(135deg, #FFF1F2 0%, #FB7185 50%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gold-glow {
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF5F7 0%, #FDA4AF 40%, #C084FC 80%, #A855F7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.emerald-glow {
-  box-shadow: 0 0 25px rgba(11, 93, 76, 0.3);
+.purple-glow {
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.35);
+}
+
+.rose-glow {
+  box-shadow: 0 0 25px rgba(251, 113, 133, 0.35);
+}
+
+.shadow-kodakGlow {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import './design-system.css';
 
 @tailwind base;
@@ -7,62 +7,64 @@
 
 @layer base {
   body {
-    background-color: #090909;
-    color: #F5F3EF;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #0F051D;
+    color: #FFF5F7;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(ellipse at 50% 0%, rgba(216, 177, 90, 0.04) 0%, transparent 65%),
-      radial-gradient(ellipse at 80% 100%, rgba(83, 26, 26, 0.03) 0%, transparent 60%);
+      radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 100%, rgba(251, 113, 133, 0.14) 0%, transparent 60%),
+      radial-gradient(ellipse at 15% 50%, rgba(147, 51, 234, 0.10) 0%, transparent 50%);
     background-attachment: fixed;
   }
 
   h1, .font-hero {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.06em;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: -0.03em;
+    font-weight: 800;
   }
 
   h2, h3, h4, .font-heading {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.02em;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   .font-nav {
-    font-family: 'Inter', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    font-weight: 600;
   }
 
   .font-mono {
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  /* Cinematic Film Studio Scrollbar */
+  /* Royal Purple & Rose Scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(216, 177, 90, 0.3) #090909;
+    scrollbar-color: rgba(168, 85, 247, 0.4) #0F051D;
   }
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #090909;
+    background: #0F051D;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(216, 177, 90, 0.25);
+    background: rgba(168, 85, 247, 0.35);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #D8B15A;
+    background: #C084FC;
   }
 }
 
-/* Cinematic Film Studio Utilities */
+/* Utilities */
 @layer utilities {
-  /* Analog Film Grain Overlay */
   .film-grain {
     position: relative;
   }
@@ -74,11 +76,10 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     z-index: 10;
   }
 
-  /* Anamorphic Letterbox Framing (2.39:1) */
   .letterbox-frame {
     position: relative;
     overflow: hidden;
@@ -90,7 +91,7 @@
     left: 0;
     right: 0;
     height: 4%;
-    background: #000000;
+    background: #0F051D;
     z-index: 20;
     pointer-events: none;
   }
@@ -99,71 +100,5 @@
   }
   .letterbox-frame::after {
     bottom: 0;
-  }
-
-  /* Dolby Cinema Soft Vignette */
-  .vignette-cinematic {
-    background: radial-gradient(
-      ellipse at center,
-      rgba(9, 9, 9, 0) 40%,
-      rgba(9, 9, 9, 0.6) 80%,
-      rgba(9, 9, 9, 0.95) 100%
-    );
-  }
-
-  .vignette-hero {
-    background: linear-gradient(
-      180deg,
-      rgba(9, 9, 9, 0.4) 0%,
-      rgba(9, 9, 9, 0.2) 40%,
-      rgba(9, 9, 9, 0.85) 85%,
-      #090909 100%
-    );
-  }
-
-  .vignette-card {
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(9, 9, 9, 0.4) 50%,
-      rgba(9, 9, 9, 0.95) 100%
-    );
-  }
-
-  /* Dark Matte Film Case Containers */
-  .film-case {
-    background: #1D1D1D;
-    border: 1px solid rgba(200, 200, 200, 0.12);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
-  }
-
-  .film-case-hover {
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .film-case-hover:hover {
-    background: #242424;
-    border-color: rgba(216, 177, 90, 0.40);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(216, 177, 90, 0.12);
-  }
-
-  /* Kodak Gold Metallic Gradients */
-  .text-gold-gradient {
-    background: linear-gradient(135deg, #F5F3EF 0%, #E6C678 40%, #D8B15A 75%, #B8923F 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .text-silver-gradient {
-    background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 50%, #C8C8C8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Film Studio Shutter Transition */
-  .hover-scale-slow {
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .hover-scale-slow:hover {
-    transform: scale(1.03);
   }
 }

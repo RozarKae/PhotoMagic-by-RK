@@ -7,9 +7,10 @@ export const Footer: React.FC = () => {
   const osUrl = process.env.NEXT_PUBLIC_OS_URL || 'http://localhost:3001';
 
   return (
-    <footer className="bg-[#090909] border-t border-gold-500/20 pt-24 pb-12 text-silver text-xs relative overflow-hidden">
+    <footer className="bg-[#0F051D] border-t border-purple-500/20 pt-24 pb-12 text-silver text-xs relative overflow-hidden">
       {/* Subtle Vignette Background */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-gold-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-rose-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
         {/* Brand & Ethos Column */}
