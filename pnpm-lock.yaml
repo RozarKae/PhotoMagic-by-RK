@@ -119,6 +119,9 @@ importers:
 
   apps/studio:
     dependencies:
+      '@photomagic/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@photomagic/config':
         specifier: workspace:*
         version: link:../../packages/config
