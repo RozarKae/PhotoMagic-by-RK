@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Badge, Button, Card } from '@photomagic/ui';
 import { supabaseClient } from '@photomagic/auth';
+import { sendSelectionsLockedNotification } from '../actions/notification-actions';
 import {
   Camera,
   Image as ImageIcon,
@@ -790,13 +791,19 @@ export default function GalleryManagementPage() {
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => {
+                onClick={async () => {
                   setIsApproved(true);
                   setIsApprovalModalOpen(false);
                   realtimeChannelRef.current?.send({
                     type: 'broadcast',
                     event: 'selections-locked',
                     payload: { author: 'Arifa Bivi & Julian' },
+                  });
+                  await sendSelectionsLockedNotification({
+                    clientName: 'Arifa Bivi & Julian',
+                    clientPhone: '+919876543210',
+                    eventTitle: 'Royal Udaipur Destination Wedding',
+                    selectedCount,
                   });
                 }}
                 className="font-bold flex items-center gap-1.5"
