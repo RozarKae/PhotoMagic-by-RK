@@ -16,41 +16,42 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <span className="font-hero font-bold tracking-[0.3em] text-lg text-gold-gradient">
-              PHOTOMAGIC
+              PHOTOMAGIC <span className="text-white font-light text-xs">BY RK</span>
             </span>
             <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-gold-500 font-medium mt-0.5">
-              Photography & Cinematography
+              Rozar Khan • Fine Art Atelier
             </span>
           </div>
 
           <p className="text-xs text-silver/80 font-light leading-relaxed">
-            Preserving timeless memories through luxury wedding photography, candid portraits, and
-            cinematic wedding films across Tamil Nadu and Kerala.
+            Founded by <strong>Rozar Khan</strong>. Preserving regal wedding unions, Project
+            BabyBliss portraiture, and cinematic heirloom films across Tamil Nadu, Kerala, and
+            worldwide.
           </p>
 
           <div className="flex gap-4 text-silver mt-2">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/rozarkhan_photography"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram Profile"
-              title="PhotoMagic Instagram"
+              title="Rozar Khan Instagram"
               className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-gold-400 transition-colors border border-gold-500/20"
             >
               <Instagram size={16} />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://facebook.com/rkaephotography"
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook Page"
-              title="PhotoMagic Facebook"
+              title="RKae Photography Facebook"
               className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-gold-400 transition-colors border border-gold-500/20"
             >
               <Facebook size={16} />
             </a>
             <a
-              href="mailto:contact@photomagic.studio"
+              href="mailto:hello@batpaiyancatponnu.online"
               aria-label="Send Email Inquiry"
               title="Email Concierge"
               className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-gold-400 transition-colors border border-gold-500/20"

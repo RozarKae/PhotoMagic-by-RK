@@ -52,10 +52,10 @@ export const Navbar: React.FC = () => {
         {/* Studio Hallmark */}
         <Link href="/" className="flex flex-col group">
           <span className="font-hero font-bold tracking-[0.3em] text-lg sm:text-xl text-gold-gradient group-hover:opacity-90 transition-opacity">
-            PHOTOMAGIC
+            PHOTOMAGIC <span className="text-white font-light text-xs sm:text-sm">BY RK</span>
           </span>
           <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold-500/80 font-medium">
-            Photography & Cinematography
+            Rozar Khan • Fine Art & Cinema
           </span>
         </Link>
 
