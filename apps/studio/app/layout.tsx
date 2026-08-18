@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Inter, Plus_Jakarta_Sans, IBM_Plex_Mono } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans, IBM_Plex_Mono, Great_Vibes } from 'next/font/google';
 import { AppProviders } from '@photomagic/ui';
 import { CornerArtistMascot } from '../components/CornerArtistMascot';
 import './globals.css';
@@ -16,6 +16,13 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-plus-jakarta',
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+  variable: '--font-calligraphy',
 });
 
 const ibmMono = IBM_Plex_Mono({
@@ -56,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${plusJakarta.variable} ${ibmMono.variable}`}
+      className={`dark ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable}`}
       suppressHydrationWarning
     >
       <body className="bg-canvas text-text-primary antialiased min-h-screen font-body">

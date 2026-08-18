@@ -80,6 +80,7 @@ const config: any = {
       fontFamily: {
         hero: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
         heading: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        calligraphy: ['var(--font-calligraphy)', '"Great Vibes"', '"Alex Brush"', 'cursive'],
         body: ['Inter', '"Plus Jakarta Sans"', 'sans-serif'],
         nav: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],

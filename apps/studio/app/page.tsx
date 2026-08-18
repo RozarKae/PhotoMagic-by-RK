@@ -375,12 +375,12 @@ export default function HomePage() {
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
           </div>
 
-          {/* Title with Corporate-Friendly Typography and Rose/Purple Gradient */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.04] text-white mb-6 drop-shadow-2xl">
+          {/* Title with Corporate-Friendly Typography and Calligraphy Accent */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.08] text-white mb-6 drop-shadow-2xl">
             YOUR STORY
             <br />
-            <span className="bg-gradient-to-r from-rose-300 via-purple-300 to-purple-500 bg-clip-text text-transparent italic font-normal">
-              CAPTURED WITH
+            <span className="font-calligraphy font-normal text-5xl sm:text-7xl md:text-8xl lg:text-9xl bg-gradient-to-r from-rose-300 via-purple-300 to-rose-400 bg-clip-text text-transparent normal-case tracking-normal inline-block my-1 drop-shadow-[0_0_35px_rgba(251,113,133,0.4)]">
+              Captured with
             </span>
             <br />
             TIMELESS ELEGANCE
