@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Inter, Cinzel, Cormorant_Garamond, IBM_Plex_Mono } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { AppProviders } from '@photomagic/ui';
+import { CornerArtistMascot } from '../components/CornerArtistMascot';
 import './globals.css';
 
 const inter = Inter({
@@ -10,17 +11,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const cinzel = Cinzel({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
-  variable: '--font-cinzel',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  display: 'swap',
-  variable: '--font-cormorant',
+  variable: '--font-plus-jakarta',
 });
 
 const ibmMono = IBM_Plex_Mono({
@@ -31,67 +26,44 @@ const ibmMono = IBM_Plex_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#090909',
+  themeColor: '#0F051D',
   width: 'device-width',
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://photomagic.studio'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://batpaiyancatponnu.online/photomagic',
+  ),
   title: {
-    default: 'PhotoMagic Studio | Luxury Wedding Photography & Fine Art Films',
-    template: '%s | PhotoMagic Studio',
+    default: 'PhotoMagic by RK | Rozar Khan Fine Art Photography & Cinema',
+    template: '%s | PhotoMagic by RK',
   },
   description:
-    'Luxury wedding photography, candid portraits, and fine art cinematic films across Madurai, Chennai, Kochi, and South India.',
+    'Luxury wedding photography, Project BabyBliss heirloom portraits, and 4K cinematic films by Rozar Khan across Chennai, Bangalore, Kochi, and worldwide destinations.',
   keywords: [
-    'Wedding Photography',
-    'Cinematography',
-    'Madurai Wedding Photographer',
-    'South India Wedding Films',
-    'Candid Photography',
-    'Luxury Wedding Atelier',
+    'Rozar Khan Photographer',
+    'PhotoMagic by RK',
+    'Project BabyBliss',
+    'South India Wedding Photography',
+    'Destination Wedding Cinematography',
+    '12x18 Archival Photo Albums',
   ],
-  authors: [{ name: 'PhotoMagic Studio Team' }],
-  openGraph: {
-    title: 'PhotoMagic Studio | Luxury Wedding Photography & Fine Art Films',
-    description:
-      'Luxury wedding photography, candid portraits, and fine art cinematic films across Madurai, Chennai, Kochi, and South India.',
-    url: 'https://photomagic.studio',
-    siteName: 'PhotoMagic Studio',
-    locale: 'en_IN',
-    type: 'website',
-    images: [
-      {
-        url: '/images/hero_wedding_banner.png',
-        width: 1200,
-        height: 630,
-        alt: 'PhotoMagic Studio Luxury Wedding Showcase',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'PhotoMagic Studio | Luxury Wedding Photography',
-    description:
-      'Luxury wedding photography, candid portraits, and fine art cinematic films across South India.',
-    images: ['/images/hero_wedding_banner.png'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  authors: [{ name: 'Rozar Khan (RK)' }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${cinzel.variable} ${cormorant.variable} ${ibmMono.variable}`}
+      className={`dark ${inter.variable} ${plusJakarta.variable} ${ibmMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-canvas text-text-primary antialiased min-h-screen font-sans">
-        <AppProviders>{children}</AppProviders>
+      <body className="bg-canvas text-text-primary antialiased min-h-screen font-body">
+        <AppProviders>
+          {children}
+          <CornerArtistMascot />
+        </AppProviders>
       </body>
     </html>
   );
