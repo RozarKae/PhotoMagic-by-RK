@@ -6,7 +6,7 @@
 > **Role**: Senior Software Architect  
 > **Target Audience**: Core Engineering Team, DevOps, Lead Developers  
 > **Repository Model**: Monorepo (pnpm Workspaces + Turborepo)  
-> **Infrastructure Model**: Serverless / Edge First (Vercel + Supabase + Cloudflare R2)  
+> **Infrastructure Model**: Serverless / Edge First (Vercel + Supabase + Cloudflare R2)
 
 ---
 
@@ -19,10 +19,10 @@ PhotoMagic Studio OS is architected as an Edge-First, Serverless Multi-Applicati
 ```
 +---------------------------------------------------------------------------------------------------+
 |                                      CLIENT INTERFACE LAYER                                       |
-|  +--------------------+    +-----------------------+    +-------------------+   +------------------+  |
-|  |   apps/web         |    |   apps/client-portal  |    |   apps/studio-os  |   |  Native iOS/Android| |
-|  |   (Public Website) |    |   (Client Experience) |    |   (Staff / Owner) |   |  (Future PWA/App)| |
-|  +---------+----------+    +-----------+-----------+    +---------+---------+   +--------+---------+  |
+|  +--------------------+    +-------------------------------------------------------+  |
+|  |   apps/studio      |    |   apps/os (Unified Client Portal, Admin OS & AI Suite) |  |
+|  |   (Public Website) |    |   (Client Experience + Studio Owner + Staff Workspace)    |  |
+|  +---------+----------+    +---------------------------+---------------------------+  |
 +------------|---------------------------|--------------------------|--------------------|----------+
              |                           |                          |                    |
              +---------------------------+------------+-------------+--------------------+
@@ -118,13 +118,13 @@ graph TD
 
 ## 3. Deployment Architecture
 
-| Tier | Provider / Technology | Description & Responsibility |
-|:---|:---|:---|
-| **Edge & Frontend** | **Vercel Enterprise / Pro** | Deploys Next.js App Router applications across global Edge nodes with zero-cold-start Serverless Functions. |
-| **Primary Database & Auth** | **Supabase Cloud (AWS)** | Managed PostgreSQL 15+ instance with pooling via PgBouncer, auto-scaling storage, automated WAL backups, and Supabase Auth. |
-| **Heavy Asset Storage** | **Cloudflare R2** | Stores RAW uploads, proofing web assets, final delivered high-res JPEGs, and zip archives with **zero egress fee** economics. |
-| **Media Processing** | **Cloudflare Workers / Image Resizing** | On-the-fly image resizing, AVIF/WebP conversion, metadata stripping, and BlurHash extraction. |
-| **CDN & DNS** | **Cloudflare Enterprise DNS** | DDoS protection, SSL termination, custom domain routing for client portals, and caching layers. |
+| Tier                        | Provider / Technology                   | Description & Responsibility                                                                                                  |
+| :-------------------------- | :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| **Edge & Frontend**         | **Vercel Enterprise / Pro**             | Deploys Next.js App Router applications across global Edge nodes with zero-cold-start Serverless Functions.                   |
+| **Primary Database & Auth** | **Supabase Cloud (AWS)**                | Managed PostgreSQL 15+ instance with pooling via PgBouncer, auto-scaling storage, automated WAL backups, and Supabase Auth.   |
+| **Heavy Asset Storage**     | **Cloudflare R2**                       | Stores RAW uploads, proofing web assets, final delivered high-res JPEGs, and zip archives with **zero egress fee** economics. |
+| **Media Processing**        | **Cloudflare Workers / Image Resizing** | On-the-fly image resizing, AVIF/WebP conversion, metadata stripping, and BlurHash extraction.                                 |
+| **CDN & DNS**               | **Cloudflare Enterprise DNS**           | DDoS protection, SSL termination, custom domain routing for client portals, and caching layers.                               |
 
 ---
 
@@ -188,14 +188,14 @@ photo-magic-monorepo/
 
 ## 7. Package Organization
 
-| Package Name | Scope | Exports / Responsibilities |
-|:---|:---|:---|
-| `@photomagic/ui` | Shared UI | Buttons, Modals, Drawers, Glass Cards, Typography, Icons, Skeleton Loaders. |
-| `@photomagic/database` | Data Access | Supabase browser/server clients, generated TypeScript DB definitions, custom query helpers. |
-| `@photomagic/auth` | Identity | Auth context providers, session hooks, RBAC permission checkers (`hasPermission()`). |
-| `@photomagic/storage` | Object Storage | R2 bucket client, presigned upload/download URL generator, multipart upload manager. |
-| `@photomagic/payments` | Financials | Razorpay instance initializer, signature verification, invoice payload builders. |
-| `@photomagic/ai` | AI Engine | Gemini prompt templates, Vision API image analyzer for auto-culling & tagging. |
+| Package Name           | Scope          | Exports / Responsibilities                                                                  |
+| :--------------------- | :------------- | :------------------------------------------------------------------------------------------ |
+| `@photomagic/ui`       | Shared UI      | Buttons, Modals, Drawers, Glass Cards, Typography, Icons, Skeleton Loaders.                 |
+| `@photomagic/database` | Data Access    | Supabase browser/server clients, generated TypeScript DB definitions, custom query helpers. |
+| `@photomagic/auth`     | Identity       | Auth context providers, session hooks, RBAC permission checkers (`hasPermission()`).        |
+| `@photomagic/storage`  | Object Storage | R2 bucket client, presigned upload/download URL generator, multipart upload manager.        |
+| `@photomagic/payments` | Financials     | Razorpay instance initializer, signature verification, invoice payload builders.            |
+| `@photomagic/ai`       | AI Engine      | Gemini prompt templates, Vision API image analyzer for auto-culling & tagging.              |
 
 ---
 
@@ -237,17 +237,17 @@ Authorization is enforced at **two distinct levels**:
 
 ### 10.1 Persona Role Matrix
 
-| Role | Access Scope | Workspace Isolation |
-|:---|:---|:---|
-| `super_admin` | Full System Access | Multi-Tenant Global |
-| `studio_owner` | Full Studio Management, Financials, Staff Control | Single Tenant (`workspace_id`) |
-| `reception_sales` | Leads, CRM, Bookings, Contracts | Single Tenant (`workspace_id`) |
-| `photographer` | Assigned Shoots, Field Briefs, Shot Lists | Single Tenant (`workspace_id`) |
-| `videographer` | Assigned Shoots, Video Logs | Single Tenant (`workspace_id`) |
-| `editor` | Assigned Media Collections, Retouching Queue | Single Tenant (`workspace_id`) |
-| `album_designer` | Assigned Album Proofing Workspaces | Single Tenant (`workspace_id`) |
-| `client` | Specific Event Portal, Own Proofing Gallery | Client ID + Event PIN |
-| `visitor` | Public Portfolio & Booking Form | Unauthenticated |
+| Role              | Access Scope                                      | Workspace Isolation            |
+| :---------------- | :------------------------------------------------ | :----------------------------- |
+| `super_admin`     | Full System Access                                | Multi-Tenant Global            |
+| `studio_owner`    | Full Studio Management, Financials, Staff Control | Single Tenant (`workspace_id`) |
+| `reception_sales` | Leads, CRM, Bookings, Contracts                   | Single Tenant (`workspace_id`) |
+| `photographer`    | Assigned Shoots, Field Briefs, Shot Lists         | Single Tenant (`workspace_id`) |
+| `videographer`    | Assigned Shoots, Video Logs                       | Single Tenant (`workspace_id`) |
+| `editor`          | Assigned Media Collections, Retouching Queue      | Single Tenant (`workspace_id`) |
+| `album_designer`  | Assigned Album Proofing Workspaces                | Single Tenant (`workspace_id`) |
+| `client`          | Specific Event Portal, Own Proofing Gallery       | Client ID + Event PIN          |
+| `visitor`         | Public Portfolio & Booking Form                   | Unauthenticated                |
 
 ### 10.2 Database RLS Example (PostgreSQL)
 
@@ -335,9 +335,13 @@ sequenceDiagram
 - **Standardized Response Contract**:
 
 ```typescript
-type APIResponse<T> = 
+type APIResponse<T> =
   | { success: true; data: T; timestamp: string }
-  | { success: false; error: { code: string; message: string; details?: unknown }; timestamp: string };
+  | {
+      success: false;
+      error: { code: string; message: string; details?: unknown };
+      timestamp: string;
+    };
 ```
 
 ---
@@ -439,11 +443,11 @@ ALTER TABLE galleries ADD COLUMN workspace_id UUID REFERENCES workspaces(id) ON 
 
 ## 23. Environment Strategy
 
-| Environment | URL Pattern | Database Instance | Storage Bucket |
-|:---|:---|:---|:---|
-| **Development** | `localhost:3000` | Supabase Local CLI / Branch | `photomagic-dev-r2` |
-| **Staging** | `*.vercel.app` | Supabase Staging Project | `photomagic-staging-r2` |
-| **Production** | `photomagic.studio` / App domains | Supabase Production Tier | `photomagic-prod-r2` |
+| Environment     | URL Pattern                       | Database Instance           | Storage Bucket          |
+| :-------------- | :-------------------------------- | :-------------------------- | :---------------------- |
+| **Development** | `localhost:3000`                  | Supabase Local CLI / Branch | `photomagic-dev-r2`     |
+| **Staging**     | `*.vercel.app`                    | Supabase Staging Project    | `photomagic-staging-r2` |
+| **Production**  | `photomagic.studio` / App domains | Supabase Production Tier    | `photomagic-prod-r2`    |
 
 ---
 
@@ -508,12 +512,12 @@ docs/
 
 ## 30. Architecture Risks & Mitigation Matrix
 
-| Identified Risk | Severity | Impact | Mitigation Strategy |
-|:---|:---:|:---|:---|
-| **Egress Cost Explosion** | High | Massive cloud bills from high-res image distribution. | Use **Cloudflare R2** (Zero Egress fees) for all media asset downloads. |
-| **Gallery Performance Degradation** | High | UI freezes when rendering 2,000+ photo DOM nodes. | Mandatory **DOM Virtualization** (`@tanstack/react-virtual`) & BlurHash skeleton loading. |
-| **Cross-Tenant Data Leakage** | Critical | Client A views Client B's private photos. | Enforce multi-tenant **PostgreSQL Row Level Security (RLS)** at database tier. |
-| **Upload Network Disruption** | Medium | Large SD card uploads fail midway due to connection drop. | Implement **Multipart Resumable Uploads** directly from browser to R2 via S3 SDK chunking. |
+| Identified Risk                     | Severity | Impact                                                    | Mitigation Strategy                                                                        |
+| :---------------------------------- | :------: | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| **Egress Cost Explosion**           |   High   | Massive cloud bills from high-res image distribution.     | Use **Cloudflare R2** (Zero Egress fees) for all media asset downloads.                    |
+| **Gallery Performance Degradation** |   High   | UI freezes when rendering 2,000+ photo DOM nodes.         | Mandatory **DOM Virtualization** (`@tanstack/react-virtual`) & BlurHash skeleton loading.  |
+| **Cross-Tenant Data Leakage**       | Critical | Client A views Client B's private photos.                 | Enforce multi-tenant **PostgreSQL Row Level Security (RLS)** at database tier.             |
+| **Upload Network Disruption**       |  Medium  | Large SD card uploads fail midway due to connection drop. | Implement **Multipart Resumable Uploads** directly from browser to R2 via S3 SDK chunking. |
 
 ---
 

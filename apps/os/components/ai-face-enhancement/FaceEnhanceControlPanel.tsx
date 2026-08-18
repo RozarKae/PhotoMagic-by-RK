@@ -1,18 +1,46 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Badge, Button } from '@photomagic/ui';
 import { Sparkles, Sliders, Eye, Sun, CheckCircle2 } from 'lucide-react';
 
-export const FaceEnhanceControlPanel: React.FC = () => {
-  const [masterStrength, setMasterStrength] = useState(75);
-  const [skinSmoothing, setSkinSmoothing] = useState(60);
-  const [blemishRemoval, setBlemishRemoval] = useState(85);
-  const [eyeBrightening, setEyeBrightening] = useState(40);
-  const [lipDetail, setLipDetail] = useState(30);
-  const [teethWhitening, setTeethWhitening] = useState(35);
-  const [relighting, setRelighting] = useState(25);
+interface FaceEnhanceControlPanelProps {
+  masterStrength: number;
+  setMasterStrength: (v: number) => void;
+  skinSmoothing: number;
+  setSkinSmoothing: (v: number) => void;
+  blemishRemoval: number;
+  setBlemishRemoval: (v: number) => void;
+  eyeBrightening: number;
+  setEyeBrightening: (v: number) => void;
+  lipDetail: number;
+  setLipDetail: (v: number) => void;
+  teethWhitening: number;
+  setTeethWhitening: (v: number) => void;
+  relighting: number;
+  setRelighting: (v: number) => void;
+  onApplyEnhancement: () => void;
+  isProcessing: boolean;
+}
 
+export const FaceEnhanceControlPanel: React.FC<FaceEnhanceControlPanelProps> = ({
+  masterStrength,
+  setMasterStrength,
+  skinSmoothing,
+  setSkinSmoothing,
+  blemishRemoval,
+  setBlemishRemoval,
+  eyeBrightening,
+  setEyeBrightening,
+  lipDetail,
+  setLipDetail,
+  teethWhitening,
+  setTeethWhitening,
+  relighting,
+  setRelighting,
+  onApplyEnhancement,
+  isProcessing,
+}) => {
   return (
     <Card variant="glass" className="p-6 flex flex-col gap-5">
       <div className="flex justify-between items-center pb-2 border-b border-border-subtle">
@@ -134,6 +162,18 @@ export const FaceEnhanceControlPanel: React.FC = () => {
             className="w-full accent-gold-500 cursor-pointer"
           />
         </div>
+      </div>
+
+      <div className="pt-2">
+        <Button
+          variant="primary"
+          onClick={onApplyEnhancement}
+          disabled={isProcessing}
+          className="w-full flex items-center justify-center gap-2 py-3"
+        >
+          <Sparkles size={16} />
+          {isProcessing ? 'Processing Cloud AI Inference...' : 'Apply Real AI Face Enhancement'}
+        </Button>
       </div>
     </Card>
   );

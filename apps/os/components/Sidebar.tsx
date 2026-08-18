@@ -88,6 +88,7 @@ export const Sidebar: React.FC = () => {
         { label: 'AI Album Layout Engine', href: '/ai-album-designer', icon: BookMarked },
         { label: 'AI Color & Edit Engine', href: '/ai-editing-studio', icon: Wand2 },
         { label: 'AI Face Enhancement', href: '/ai-face-enhancement', icon: ScanFace },
+        { label: 'AI Backdrop & Relighting', href: '/ai-background-removal', icon: Sparkles },
       ],
     },
     {

@@ -11,18 +11,23 @@ Managed via **pnpm Workspaces** and **Turborepo**.
 ```
 photo-magic-monorepo/
 ├── apps/
-│   ├── website/             # Public Showcase & Lead Generation Engine (Next.js)
-│   ├── client/              # Private Client Experience & Web Proofing Hub (Next.js)
-│   └── admin/               # Studio Owner Command Center & Staff Workspace (Next.js)
+│   ├── studio/              # Public Luxury Marketing Website & Showcase (Next.js, Port 3000)
+│   └── os/                  # Unified Studio Command Center, Client Portal & AI Suite (Next.js, Port 3001)
 ├── packages/
 │   ├── ui/                  # Shared Design System Component Library
-│   ├── database/            # Supabase Client & Database Specifications
+│   ├── design-language/     # Shared Master Design Tokens, Colors, Radii & Typography
+│   ├── database/            # Supabase Client & 32 PostgreSQL DDL Migrations
 │   ├── storage/             # Cloudflare R2 Presigned S3 Storage Wrapper
+│   ├── auth/                # Supabase Auth helpers & RBAC middleware guards
+│   ├── config/              # Centralized Zod validation schemas & env validator
+│   ├── types/               # Centralized TypeScript interface definitions
+│   ├── shared/              # Common utilities & helpers
 │   ├── typescript-config/   # Shared TypeScript configurations
 │   ├── eslint-config/       # Shared ESLint rules
 │   └── tailwind-config/     # Shared Tailwind CSS design system tokens
-├── docs/                    # Master Architectural & UX Blueprints (Phases 0.1 - 0.9)
+├── docs/                    # Master Architectural & Execution Blueprints
 ├── PhotoMagicBible.md       # Master Single-Source-of-Truth Project Bible
+├── PhotoMagicDesignBible2.md # Master Design System Specification
 ├── turbo.json               # Turborepo task pipeline configuration
 └── pnpm-workspace.yaml      # pnpm workspace definition
 ```
@@ -52,9 +57,8 @@ pnpm install
 Copy `.env.example` to local environment files in each app:
 
 ```bash
-cp .env.example apps/website/.env.local
-cp .env.example apps/client/.env.local
-cp .env.example apps/admin/.env.local
+cp .env.example apps/studio/.env.local
+cp .env.example apps/os/.env.local
 ```
 
 ### 4. Running Development Servers
@@ -62,11 +66,14 @@ cp .env.example apps/admin/.env.local
 ```bash
 # Start all applications simultaneously via Turborepo
 pnpm dev
+
+# Or start individual applications
+pnpm dev:studio   # Runs apps/studio on http://localhost:3000
+pnpm dev:os       # Runs apps/os on http://localhost:3001
 ```
 
-- **Public Website**: `http://localhost:3000`
-- **Client Portal**: `http://localhost:3001`
-- **Admin Dashboard**: `http://localhost:3002`
+- **Studio Marketing Website**: `http://localhost:3000`
+- **Studio OS & Client Portal**: `http://localhost:3001`
 
 ---
 

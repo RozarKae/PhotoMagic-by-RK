@@ -21,6 +21,8 @@ export const envSchema = z.object({
 
   GEMINI_API_KEY: z.string().optional(),
   GOOGLE_VISION_API_KEY: z.string().optional(),
+  HUGGINGFACE_API_KEY: z.string().optional(),
+  HF_TOKEN: z.string().optional(),
 
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 });
