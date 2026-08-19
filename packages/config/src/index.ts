@@ -38,3 +38,5 @@ export * from './workflow-completion-v9-schemas';
 export * from './business-growth-v10-schemas';
 export * from './studio-intelligence-v10-schemas';
 export * from './studio-data';
+export * from './website-registry';
+export * from './website-cms-store';

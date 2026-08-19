@@ -27,3 +27,4 @@ export * from './components/inspector-sidebar';
 export * from './components/filmstrip';
 export * from './providers/app-providers';
 export * from './design-system';
+export * from './components/cms/StudioPageRenderer';

@@ -1,4 +1,10 @@
 {
   "extends": "@photomagic/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@photomagic/types": ["../types/src"]
+    }
+  },
   "include": ["src"]
 }

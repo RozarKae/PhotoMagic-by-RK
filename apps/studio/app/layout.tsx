@@ -1,7 +1,15 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Inter, Plus_Jakarta_Sans, IBM_Plex_Mono, Great_Vibes } from 'next/font/google';
+import {
+  Inter,
+  Plus_Jakarta_Sans,
+  IBM_Plex_Mono,
+  Great_Vibes,
+  Noto_Sans_Tamil,
+} from 'next/font/google';
 import { AppProviders } from '@photomagic/ui';
+import { FloatingControls } from '../components/FloatingControls';
+import { OttLoader } from '../components/OttLoader';
 import { CornerArtistMascot } from '../components/CornerArtistMascot';
 import './globals.css';
 
@@ -27,9 +35,16 @@ const greatVibes = Great_Vibes({
 
 const ibmMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600'],
   display: 'swap',
   variable: '--font-ibm-mono',
+});
+
+const notoTamil = Noto_Sans_Tamil({
+  subsets: ['tamil'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-tamil',
 });
 
 export const viewport: Viewport = {
@@ -43,32 +58,36 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || 'https://batpaiyancatponnu.online/photomagic',
   ),
   title: {
-    default: 'PhotoMagic by RK | Rozar Khan Fine Art Photography & Cinema',
-    template: '%s | PhotoMagic by RK',
+    default: 'PhotoMagic Studios by RK | Moments Through Our Eyes',
+    template: '%s | PhotoMagic Studios by RK',
   },
   description:
-    'Luxury wedding photography, Project BabyBliss heirloom portraits, and 4K cinematic films by Rozar Khan across Chennai, Bangalore, Kochi, and worldwide destinations.',
+    'Moments Through Our Eyes (இல்லத்தின் இன்ப நிகழ்வுகள், விழிகளின் வழியே). Photography for Indian celebrations, families, people, fashion and stories across Tamil Nadu, Pondicherry, Kerala, and all of India.',
   keywords: [
+    'PhotoMagic Studios by RK',
     'Rozar Khan Photographer',
-    'PhotoMagic by RK',
-    'Project BabyBliss',
+    'Moments Through Our Eyes',
     'South India Wedding Photography',
-    'Destination Wedding Cinematography',
-    '12x18 Archival Photo Albums',
+    'Tamil Nadu Wedding Cinematography',
+    'Kerala Destination Weddings',
+    'Project BabyBliss',
+    'Indian Fashion Editorial Photography',
   ],
-  authors: [{ name: 'Rozar Khan (RK)' }],
+  authors: [{ name: 'PhotoMagic Studios by RK (Rozar Khan)' }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`light ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable}`}
+      className={`light ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable} ${notoTamil.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-[#FFF5F7] text-[#1E0A3C] antialiased min-h-screen font-body selection:bg-purple-200 selection:text-purple-900">
+      <body className="bg-[var(--color-canvas,#FFF5F7)] text-[var(--color-text-primary,#1E0A3C)] antialiased min-h-screen font-body selection:bg-purple-200 selection:text-purple-900 dark:selection:bg-purple-900 dark:selection:text-purple-100">
         <AppProviders>
+          <OttLoader />
           {children}
+          <FloatingControls />
           <CornerArtistMascot />
         </AppProviders>
       </body>

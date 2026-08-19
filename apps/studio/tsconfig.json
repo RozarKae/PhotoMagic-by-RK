@@ -7,6 +7,7 @@
       "@photomagic/config": ["../../packages/config/src/index.ts"],
       "@photomagic/ui": ["../../packages/ui/src/index.ts"],
       "@photomagic/types": ["../../packages/types/src/index.ts"],
+      "@photomagic/shared": ["../../packages/shared/src/index.ts"],
       "@photomagic/storage": ["../../packages/storage/src/index.ts"]
     }
   },

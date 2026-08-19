@@ -1,4 +1,11 @@
-export function formatCurrency(amount: number, currency = 'USD'): string {
+export function formatCurrency(amount: number, currency = 'INR'): string {
+  if (currency === 'INR') {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,
@@ -9,7 +16,7 @@ export function formatCurrency(amount: number, currency = 'USD'): string {
 export function formatDate(dateString: string): string {
   if (!dateString) return '';
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('en-IN', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -26,10 +33,27 @@ export function getStudioWebsiteUrl(path = '/'): string {
   return `${websiteDomain.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
+export function formatRelativeTime(dateString: string): string {
+  if (!dateString) return 'recently';
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
+  if (diffInMinutes < 1) return 'just now';
+  if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  return formatDate(dateString);
+}
+
 export const BRAND = {
-  name: 'PhotoMagic Studio',
-  osName: 'PhotoMagic OS',
-  tagline: 'Luxury Editorial Photography & Studio Operations',
-  domain: 'photomagicstudio.com',
-  osDomain: 'os.photomagicstudio.com',
+  name: 'PhotoMagic Studios by RK',
+  shortName: 'PhotoMagic',
+  brandLine: 'Moments Through Our Eyes',
+  tamilStatement: 'இல்லத்தின் இன்ப நிகழ்வுகள், விழிகளின் வழியே',
+  osName: 'PhotoMagic Studio OS',
+  tagline: 'Moments Through Our Eyes • Fine Art Photography & Cinema',
+  domain: 'batpaiyancatponnu.online/photomagic',
+  osDomain: 'os.batpaiyancatponnu.online',
+  phone: '7904943234',
+  instagram: 'rkae_photgraphs',
 };

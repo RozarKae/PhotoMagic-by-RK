@@ -1,37 +1,56 @@
 :root {
-  /* Royal Purple & Light Rose Theme (Light Mode Default) */
+  /* ========================================================================= */
+  /* LIGHT MODE (DEFAULT): Coordinated Pastel Purple, Lavender & Blush Palette */
+  /* ========================================================================= */
   --color-canvas: #FFF5F7;
   --color-surface-base: #FFFFFF;
   --color-surface-elevated: #FAF5FF;
-  --color-surface-glass: rgba(255, 255, 255, 0.90);
+  --color-surface-glass: rgba(255, 255, 255, 0.92);
   --color-surface-light: #FFF5F7;
   --color-border-subtle: rgba(124, 58, 237, 0.12);
-  --color-border-elevated: rgba(225, 29, 72, 0.25);
+  --color-border-elevated: rgba(225, 29, 72, 0.22);
+  --color-border-gold: rgba(216, 177, 90, 0.40);
 
+  /* Primary Brand Pastels */
+  --color-purple-50: #FAF5FF;
+  --color-purple-100: #F3E8FF;
+  --color-purple-200: #E9D5FF;
+  --color-purple-300: #D8B4FE;
   --color-purple-400: #C084FC;
   --color-purple-500: #A855F7;
   --color-purple-600: #7E22CE;
   --color-purple-900: #3B0764;
+  --color-purple-950: #250242;
 
+  --color-rose-50: #FFF1F2;
+  --color-rose-100: #FFE4E6;
+  --color-rose-200: #FECDD3;
   --color-rose-300: #FDA4AF;
   --color-rose-400: #FB7185;
   --color-rose-500: #F43F5E;
   --color-rose-600: #E11D48;
+  --color-rose-900: #881337;
 
-  --color-gold-400: #FB7185;
-  --color-gold-500: #9333EA;
-  --color-gold-600: #7E22CE;
+  /* Subtle Gold Jewelry Accent */
+  --color-gold-300: #E5C378;
+  --color-gold-400: #D8B15A;
+  --color-gold-500: #C49B38;
+  --color-gold-600: #A37C22;
 
+  /* Typography Colors */
   --color-ivory: #1E0A3C;
   --color-silver: #6B5B7B;
   --color-bronze: #7C3AED;
+  --color-text-primary: #1E0A3C;
+  --color-text-secondary: #4C1D95;
+  --color-text-tertiary: #6B5B7B;
 
   --color-status-success: #059669;
   --color-status-warning: #D97706;
   --color-status-error: #E11D48;
   --color-status-info: #7C3AED;
 
-  /* Radius */
+  /* Radii */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -46,4 +65,76 @@
   --shadow-watch: 0 4px 20px rgba(124, 58, 237, 0.12);
   --shadow-purple: 0 0 25px rgba(124, 58, 237, 0.15);
   --shadow-rose: 0 0 25px rgba(225, 29, 72, 0.18);
+  --shadow-gold: 0 0 20px rgba(216, 177, 90, 0.25);
 }
+
+/* ========================================================================= */
+/* DARK MODE: Deep Velvet Aubergine / Obsidian with Fine Gold & Violet Accents */
+/* ========================================================================= */
+.dark, [data-theme='dark'] {
+  --color-canvas: #0D0614;
+  --color-surface-base: #170C22;
+  --color-surface-elevated: #221233;
+  --color-surface-glass: rgba(23, 12, 34, 0.88);
+  --color-surface-light: #2D1845;
+  --color-border-subtle: rgba(216, 177, 90, 0.16);
+  --color-border-elevated: rgba(192, 132, 252, 0.28);
+  --color-border-gold: rgba(216, 177, 90, 0.50);
+
+  /* Typography Colors in Dark Mode */
+  --color-ivory: #FAF5FF;
+  --color-silver: #D8B4FE;
+  --color-bronze: #E5C378;
+  --color-text-primary: #FAF5FF;
+  --color-text-secondary: #E9D5FF;
+  --color-text-tertiary: #A855F7;
+
+  /* Shadows for Dark Mode */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(124, 58, 237, 0.15);
+  --shadow-museum: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(216, 177, 90, 0.12);
+  --shadow-watch: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-purple: 0 0 30px rgba(168, 85, 247, 0.25);
+  --shadow-rose: 0 0 30px rgba(244, 63, 94, 0.22);
+  --shadow-gold: 0 0 25px rgba(216, 177, 90, 0.35);
+}
+
+/* ========================================================================= */
+/* PASTEL THEME FAMILIES (LAVENDER, SOFT PINK, BLUSH, ROSE, MAUVE, MAROON)    */
+/* ========================================================================= */
+.theme-lavender {
+  --color-canvas: #FAF5FF;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F3E8FF;
+}
+
+.theme-soft-pink {
+  --color-canvas: #FFF1F2;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFE4E6;
+}
+
+.theme-blush {
+  --color-canvas: #FFF5F7;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FDF2F4;
+}
+
+.theme-rose {
+  --color-canvas: #FFF0F3;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFE0E6;
+}
+
+.theme-mauve {
+  --color-canvas: #F8F5FB;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #EFE8F7;
+}
+
+.theme-maroon {
+  --color-canvas: #FAF0F2;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F4E2E6;
+}
+

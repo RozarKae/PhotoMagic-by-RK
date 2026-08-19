@@ -60,6 +60,7 @@ export const Sidebar: React.FC = () => {
       groupName: 'Photography Studio Command',
       items: [
         { label: 'Studio Dashboard', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Website & Visual Builder', href: '/admin/builder', icon: Globe },
         { label: 'Executive OS Admin', href: '/admin', icon: ShieldCheck },
       ],
     },

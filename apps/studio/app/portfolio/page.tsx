@@ -3,204 +3,31 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
-import { Container, Grid, Card, Badge, Tabs, Button } from '@photomagic/ui';
-import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles, MapPin } from 'lucide-react';
+import { StudioPageRenderer } from '@photomagic/ui';
+import { getPublishedPageBySlug, INITIAL_WEBSITE_PAGES } from '@photomagic/config';
+import { WebsitePage } from '@photomagic/types';
 
 export default function PortfolioPage() {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [pageData, setPageData] = useState<WebsitePage>(() => {
+    const published = getPublishedPageBySlug('/portfolio');
+    return (published || INITIAL_WEBSITE_PAGES[2]) as WebsitePage;
+  });
 
-  const stories = [
-    {
-      id: 'p1',
-      title: 'Chettinad Heritage Mandap Vows',
-      category: 'weddings',
-      location: 'Madurai Palace • Tamil Nadu',
-      desc: 'Traditional South Indian wedding ceremony capturing Kanjeevaram silk sarees, temple gold jewelry, and royal mandap rituals.',
-      image: '/images/hindu_wedding_ceremony.png',
-    },
-    {
-      id: 'p2',
-      title: 'Kerala Coastal Church Ceremony',
-      category: 'weddings',
-      location: 'Kochi Cathedral • Kerala',
-      desc: 'Elegant Kerala Christian cathedral ceremony featuring cathedral veils, white lace bridal gowns, and stained glass sunlight.',
-      image: '/images/christian_church_wedding.png',
-    },
-    {
-      id: 'p3',
-      title: 'Muslim Nikkah Celebration',
-      category: 'weddings',
-      location: 'Trivandrum Grand Hall • Kerala',
-      desc: 'Nikkah ceremony with gold embroidered lehenga detailing, traditional veil rituals, and intimate family moments.',
-      image: '/images/nikkah_ceremony.png',
-    },
-    {
-      id: 'p4',
-      title: 'Bespoke Aerial Coastal Resort',
-      category: 'portraits',
-      location: 'Kovalam Beach Resort • Kerala',
-      desc: '4K aerial drone photography of a grand coastal wedding resort surrounded by palm trees and ocean turquoise waters.',
-      image: '/images/drone_aerial_wedding.png',
-    },
-  ];
-
-  const filteredStories =
-    activeCategory === 'all' ? stories : stories.filter((s) => s.category === activeCategory);
-
-  // Keyboard navigation for Lightbox
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImageIndex === null) return;
-      if (e.key === 'Escape') setSelectedImageIndex(null);
-      if (e.key === 'ArrowRight') {
-        setSelectedImageIndex((prev) => (prev !== null ? (prev + 1) % filteredStories.length : 0));
-      }
-      if (e.key === 'ArrowLeft') {
-        setSelectedImageIndex((prev) =>
-          prev !== null ? (prev - 1 + filteredStories.length) % filteredStories.length : 0,
-        );
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImageIndex, filteredStories.length]);
+    const published = getPublishedPageBySlug('/portfolio');
+    if (published) {
+      setPageData(published as WebsitePage);
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-canvas text-text-primary flex flex-col">
+    <main className="min-h-screen bg-[var(--color-canvas,#FFF5F7)] text-[var(--color-text-primary,#1E0A3C)] transition-colors duration-300 flex flex-col pt-16">
       <Navbar />
 
-      <main className="flex-1 py-28">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="gold" className="uppercase tracking-widest text-[10px]">
-              Cinematic Visual Portfolio
-            </Badge>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-2">
-              Curated Masterpiece Stories
-            </h1>
-            <p className="text-sm text-text-secondary mt-2 font-light">
-              Click any chapter story to enter the full-screen immersive gallery inspection.
-            </p>
-          </div>
-
-          <div className="flex justify-center mb-12">
-            <Tabs
-              tabs={[
-                { id: 'all', label: 'All Stories' },
-                { id: 'weddings', label: 'Royal Weddings' },
-                { id: 'portraits', label: 'Fine Art Portraits' },
-                { id: 'editorial', label: 'Haute Couture' },
-              ]}
-              activeTab={activeCategory}
-              onChange={(cat) => {
-                setActiveCategory(cat);
-                setSelectedImageIndex(null);
-              }}
-            />
-          </div>
-
-          <Grid cols={2}>
-            {filteredStories.map((story, idx) => (
-              <Card
-                key={story.id}
-                variant="glass"
-                onClick={() => setSelectedImageIndex(idx)}
-                className="p-0 overflow-hidden group cursor-pointer border-border-subtle hover:border-gold-500/50 hover:shadow-gold transition-all duration-500"
-              >
-                <div className="relative h-88 w-full overflow-hidden bg-surface-base">
-                  <img
-                    src={story.image}
-                    alt={story.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-canvas/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <span className="text-xs font-semibold text-gold-500 flex items-center gap-1.5 bg-canvas/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-gold-500/30">
-                      <Maximize2 size={14} /> Fullscreen Inspection
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3 bg-canvas/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-semibold text-gold-500 border border-gold-500/20">
-                    {story.category}
-                  </div>
-                </div>
-                <div className="p-6 flex flex-col gap-1.5">
-                  <h3 className="text-xl font-bold text-text-primary group-hover:text-gold-500 transition-colors">
-                    {story.title}
-                  </h3>
-                  <span className="text-xs text-gold-500 font-mono flex items-center gap-1">
-                    <MapPin size={12} /> {story.location}
-                  </span>
-                  <p className="text-xs text-text-secondary font-light leading-relaxed pt-1">
-                    {story.desc}
-                  </p>
-                </div>
-              </Card>
-            ))}
-          </Grid>
-        </Container>
-      </main>
-
-      {/* Fullscreen Immersive Lightbox Modal */}
-      {selectedImageIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-canvas/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8 animate-fadeIn">
-          {/* Top Controls */}
-          <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
-            <span className="text-xs text-text-tertiary font-mono">
-              {selectedImageIndex + 1} of {filteredStories.length} (Use ← → Arrow Keys)
-            </span>
-            <button
-              onClick={() => setSelectedImageIndex(null)}
-              className="p-2.5 rounded-full bg-surface-elevated text-text-secondary hover:text-gold-500 border border-border-subtle transition-colors"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={() =>
-              setSelectedImageIndex(
-                (selectedImageIndex - 1 + filteredStories.length) % filteredStories.length,
-              )
-            }
-            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-surface-elevated/80 backdrop-blur-md text-text-secondary hover:text-gold-500 border border-border-subtle transition-colors"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          <button
-            onClick={() => setSelectedImageIndex((selectedImageIndex + 1) % filteredStories.length)}
-            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-surface-elevated/80 backdrop-blur-md text-text-secondary hover:text-gold-500 border border-border-subtle transition-colors"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          {/* Lightbox Content */}
-          <div className="max-w-5xl w-full flex flex-col items-center gap-4">
-            <div className="relative max-h-[75vh] overflow-hidden rounded-2xl border border-gold-500/30 shadow-2xl">
-              <img
-                src={filteredStories[selectedImageIndex].image}
-                alt={filteredStories[selectedImageIndex].title}
-                className="max-h-[75vh] w-auto object-contain rounded-2xl"
-              />
-            </div>
-
-            <div className="text-center max-w-xl">
-              <h2 className="text-2xl font-bold text-text-primary">
-                {filteredStories[selectedImageIndex].title}
-              </h2>
-              <p className="text-xs text-gold-500 font-mono mt-1">
-                {filteredStories[selectedImageIndex].location}
-              </p>
-              <p className="text-xs text-text-secondary font-light mt-2">
-                {filteredStories[selectedImageIndex].desc}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Unified Public Page Renderer */}
+      <StudioPageRenderer page={pageData} mode="public" />
 
       <Footer />
-    </div>
+    </main>
   );
 }

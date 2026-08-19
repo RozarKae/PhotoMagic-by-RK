@@ -1,11 +1,19 @@
 export const ROUTES = {
   PUBLIC: {
     HOME: '/',
+    ABOUT: '/about',
     PORTFOLIO: '/portfolio',
+    SERVICES: '/services',
+    SERVICE_DETAIL: (slug: string) => `/services/${slug}`,
+    STORIES: '/stories',
+    STORY_DETAIL: (slug: string) => `/stories/${slug}`,
+    PACKAGES: '/packages',
     INVESTMENT: '/packages',
     EXPERIENCE: '/about',
     BOOKING: '/book',
+    CHECK_DATE: '/book',
     CONTACT: '/contact',
+    MY_EVENTS: '/portal',
   },
   CLIENT: {
     DASHBOARD: '/portal',
@@ -19,6 +27,8 @@ export const ROUTES = {
   },
   ADMIN: {
     COMMAND: '/admin',
+    BUILDER: '/admin/builder',
+    BUILDER_PAGE: (pageId: string) => `/admin/builder/${pageId}`,
     LEADS: '/admin/leads',
     PROJECTS: '/admin/projects',
     CALENDAR: '/admin/calendar',

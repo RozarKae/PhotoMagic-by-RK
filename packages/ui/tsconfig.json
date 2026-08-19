@@ -3,8 +3,12 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
     "paths": {
-      "@photomagic/storage": ["../storage/src/index.ts"]
+      "@photomagic/storage": ["../storage/src/index.ts"],
+      "@photomagic/types": ["../types/src/index.ts"],
+      "@photomagic/config": ["../config/src/index.ts"],
+      "@photomagic/shared": ["../shared/src/index.ts"]
     }
   },
   "include": ["src"]

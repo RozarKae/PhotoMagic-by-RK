@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Great+Vibes&family=Noto+Sans+Tamil:wght@300;400;500;600;700;800&family=Anek+Tamil:wght@400;600;700;800&display=swap');
 @import './design-system.css';
 
 @tailwind base;
@@ -7,31 +7,56 @@
 
 @layer base {
   body {
-    background-color: #FFF5F7;
-    color: #1E0A3C;
-    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--color-canvas, #FFF5F7);
+    color: var(--color-text-primary, #1E0A3C);
+    font-family: 'Plus Jakarta Sans', 'Inter', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Light mode subtle ambient radial lights */
+  html:not(.dark) body {
     background-image: 
-      radial-gradient(ellipse at 50% 0%, rgba(251, 113, 133, 0.10) 0%, transparent 60%),
-      radial-gradient(ellipse at 85% 100%, rgba(124, 58, 237, 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 15% 50%, rgba(243, 232, 255, 0.60) 0%, transparent 50%);
+      radial-gradient(ellipse at 50% 0%, rgba(251, 113, 133, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 100%, rgba(124, 58, 237, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 15% 50%, rgba(243, 232, 255, 0.50) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Dark mode subtle ambient lights */
+  html.dark body {
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 100%, rgba(216, 177, 90, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 15% 50%, rgba(225, 29, 72, 0.08) 0%, transparent 50%);
     background-attachment: fixed;
   }
 
   h1, .font-hero {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
     letter-spacing: -0.03em;
     font-weight: 800;
-    color: #1E0A3C;
+    color: var(--color-text-primary, #1E0A3C);
   }
 
   h2, h3, h4, .font-heading {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
     letter-spacing: -0.02em;
     font-weight: 700;
-    color: #1E0A3C;
+    color: var(--color-text-primary, #1E0A3C);
+  }
+
+  .font-tamil {
+    font-family: 'Noto Sans Tamil', 'Anek Tamil', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .font-tamil-heading {
+    font-family: 'Anek Tamil', 'Noto Sans Tamil', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   .font-calligraphy {
@@ -48,17 +73,17 @@
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  /* Royal Purple & Rose Scrollbar for Light Theme */
+  /* Royal Purple & Rose Scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(168, 85, 247, 0.4) #FFF5F7;
+    scrollbar-color: rgba(168, 85, 247, 0.4) transparent;
   }
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #FFF5F7;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: rgba(168, 85, 247, 0.35);
@@ -97,7 +122,7 @@
     left: 0;
     right: 0;
     height: 3%;
-    background: #FFF5F7;
+    background: var(--color-canvas, #FFF5F7);
     z-index: 20;
     pointer-events: none;
   }
@@ -107,4 +132,19 @@
   .letterbox-frame::after {
     bottom: 0;
   }
+
+  .gold-hairline {
+    background: linear-gradient(90deg, transparent, rgba(216, 177, 90, 0.6), transparent);
+  }
+
+  .gold-border {
+    border-color: rgba(216, 177, 90, 0.35);
+  }
+
+  .gold-badge {
+    background: rgba(216, 177, 90, 0.12);
+    border: 1px solid rgba(216, 177, 90, 0.40);
+    color: #D8B15A;
+  }
 }
+

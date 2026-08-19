@@ -1,7 +1,12 @@
 {
   "extends": "@photomagic/typescript-config/base.json",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@photomagic/types": ["../types/src"],
+      "@photomagic/config": ["../config/src"]
+    }
   },
   "include": ["src"]
 }

@@ -7,14 +7,14 @@ import { StudioPageRenderer } from '@photomagic/ui';
 import { getPublishedPageBySlug, INITIAL_WEBSITE_PAGES } from '@photomagic/config';
 import { WebsitePage } from '@photomagic/types';
 
-export default function ServicesPage() {
+export default function StoriesPage() {
   const [pageData, setPageData] = useState<WebsitePage>(() => {
-    const published = getPublishedPageBySlug('/services');
-    return (published || INITIAL_WEBSITE_PAGES[3]) as WebsitePage;
+    const published = getPublishedPageBySlug('/stories');
+    return (published || INITIAL_WEBSITE_PAGES[4]) as WebsitePage;
   });
 
   useEffect(() => {
-    const published = getPublishedPageBySlug('/services');
+    const published = getPublishedPageBySlug('/stories');
     if (published) {
       setPageData(published as WebsitePage);
     }
