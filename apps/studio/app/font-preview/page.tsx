@@ -94,69 +94,69 @@ export default function FontPreviewPage() {
   const [selectedPreset, setSelectedPreset] = useState<FontPreset>(FONT_PRESETS[0]);
 
   return (
-    <main className="min-h-screen bg-[#0F051D] text-[#FFF5F7] p-6 lg:p-12 relative overflow-hidden">
+    <main className="min-h-screen bg-[#FFF5F7] text-[#1E0A3C] p-6 lg:p-12 relative overflow-hidden">
       {/* Dynamic Font Stylesheet Injection */}
       <link rel="stylesheet" href={selectedPreset.googleFontUrl} />
 
       {/* Atmospheric Background Glows */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-rose-500/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-purple-300/25 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-rose-300/30 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-10 relative z-10">
         {/* Top Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-500/20 pb-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-200/80 pb-6">
           <div className="space-y-1">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors mb-2"
+              className="inline-flex items-center gap-2 text-xs font-bold text-rose-600 hover:text-rose-700 transition-colors mb-2"
             >
               <ArrowLeft size={14} /> Back to Studio Home
             </Link>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-              <Sparkles className="text-purple-400" size={28} /> Font Personality Selector
+            <h1 className="text-3xl font-extrabold text-[#1E0A3C] tracking-tight flex items-center gap-3">
+              <Sparkles className="text-purple-600" size={28} /> Font Personality Selector
             </h1>
-            <p className="text-xs text-purple-200/80">
+            <p className="text-xs text-[#6B5B7B]">
               Click any font suite below to preview how PhotoMagic by Rozar Khan looks in real time.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#1C0D36] border border-purple-500/30 px-4 py-2 rounded-xl text-xs">
-            <span className="text-purple-300">Active Suite:</span>
-            <strong className="text-rose-400">{selectedPreset.name}</strong>
+          <div className="flex items-center gap-2 bg-white border border-purple-200 px-4 py-2.5 rounded-2xl text-xs shadow-sm">
+            <span className="text-[#6B5B7B]">Active Suite:</span>
+            <strong className="text-rose-600 font-bold">{selectedPreset.name}</strong>
           </div>
         </div>
 
         {/* Font Selector Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
           {FONT_PRESETS.map((preset) => {
             const isSelected = selectedPreset.id === preset.id;
             return (
               <button
                 key={preset.id}
                 onClick={() => setSelectedPreset(preset)}
-                className={`p-4 rounded-2xl text-left transition-all duration-300 border flex flex-col justify-between ${
+                className={`p-5 rounded-3xl text-left transition-all duration-300 border flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-gradient-to-b from-purple-900/60 to-rose-950/40 border-rose-400 shadow-[0_0_25px_rgba(251,113,133,0.3)] ring-1 ring-rose-400'
-                    : 'bg-[#1C0D36]/80 hover:bg-[#28124D] border-purple-500/20 hover:border-purple-500/50'
+                    ? 'bg-white border-2 border-rose-500 shadow-[0_10px_25px_rgba(225,29,72,0.15)] ring-2 ring-rose-200'
+                    : 'bg-white/80 hover:bg-white border-purple-200/70 hover:border-purple-400 shadow-sm'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-rose-400">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-rose-600">
                       {preset.category}
                     </span>
-                    {isSelected && <Check size={14} className="text-rose-400" />}
+                    {isSelected && <Check size={14} className="text-rose-600 font-bold" />}
                   </div>
                   <h3
-                    className="text-base font-bold text-white mb-1"
+                    className="text-base font-extrabold text-[#1E0A3C] mb-1"
                     style={{ fontFamily: preset.headingFontFamily }}
                   >
                     {preset.headingFont}
                   </h3>
-                  <p className="text-[11px] text-purple-200/70 line-clamp-2">{preset.vibe}</p>
+                  <p className="text-[11px] text-[#6B5B7B] line-clamp-2">{preset.vibe}</p>
                 </div>
 
-                <span className="text-[10px] text-purple-400 mt-3 font-mono">
+                <span className="text-[10px] text-purple-700 mt-3 font-mono font-semibold">
                   + {preset.bodyFont} body
                 </span>
               </button>
@@ -166,29 +166,29 @@ export default function FontPreviewPage() {
 
         {/* Live Typography Preview Stage */}
         <div
-          className="bg-[#1C0D36]/90 border border-purple-500/30 rounded-3xl p-8 lg:p-12 shadow-2xl backdrop-blur-xl space-y-12"
+          className="bg-white border border-purple-200 rounded-3xl p-8 lg:p-12 shadow-xl backdrop-blur-xl space-y-12"
           style={{ fontFamily: selectedPreset.bodyFontFamily }}
         >
           {/* Hero Section Mockup */}
           <div className="text-center max-w-4xl mx-auto space-y-6">
             <span
-              className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-xs uppercase font-bold tracking-widest text-rose-400"
+              className="inline-block px-4 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-xs uppercase font-bold tracking-widest text-rose-600"
               style={{ fontFamily: selectedPreset.bodyFontFamily }}
             >
               PhotoMagic Studio by Rozar Khan
             </span>
 
             <h2
-              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight"
+              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1E0A3C] leading-tight"
               style={{ fontFamily: selectedPreset.headingFontFamily }}
             >
               Preserving Royal Unions with{' '}
-              <span className="bg-gradient-to-r from-rose-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-rose-600 via-purple-600 to-rose-500 bg-clip-text text-transparent">
                 Cinematic Artistry
               </span>
             </h2>
 
-            <p className="text-base sm:text-lg text-purple-100/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-[#4C1D95] max-w-2xl mx-auto leading-relaxed">
               Bespoke wedding cinematography, Project BabyBliss portraiture, and handcrafted 12x18
               archival Italian leather albums directed personally by Rozar Khan across Chennai,
               Bangalore, and royal destination palaces.
@@ -196,13 +196,13 @@ export default function FontPreviewPage() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
               <button
-                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-rose-500 text-white font-bold text-sm hover:opacity-95 transition-opacity shadow-[0_0_20px_rgba(251,113,133,0.4)]"
+                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-rose-500 text-white font-bold text-sm hover:opacity-95 transition-opacity shadow-[0_4px_20px_rgba(225,29,72,0.25)]"
                 style={{ fontFamily: selectedPreset.headingFontFamily }}
               >
                 Reserve Session with Rozar
               </button>
               <button
-                className="px-8 py-3.5 rounded-xl bg-[#28124D] border border-purple-500/40 text-purple-100 font-semibold text-sm hover:border-rose-400 hover:text-white transition-colors"
+                className="px-8 py-3.5 rounded-xl bg-[#FAF5FF] border border-purple-200 text-purple-950 font-bold text-sm hover:border-rose-400 hover:text-rose-600 transition-colors shadow-sm"
                 style={{ fontFamily: selectedPreset.bodyFontFamily }}
               >
                 Explore 8K Portfolio
@@ -211,53 +211,53 @@ export default function FontPreviewPage() {
           </div>
 
           {/* Cards & Specimen Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-purple-500/20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-purple-100">
             {/* Card 1 */}
-            <div className="p-6 rounded-2xl bg-[#0F051D]/70 border border-purple-500/25 space-y-3">
-              <span className="text-xs font-mono text-rose-400">01 / WEDDINGS</span>
+            <div className="p-6 rounded-3xl bg-[#FAF5FF] border border-purple-200/80 space-y-3 shadow-sm">
+              <span className="text-xs font-mono font-bold text-rose-600">01 / WEDDINGS</span>
               <h3
-                className="text-xl font-bold text-white"
+                className="text-xl font-extrabold text-[#1E0A3C]"
                 style={{ fontFamily: selectedPreset.headingFontFamily }}
               >
                 The Royal Heirloom
               </h3>
-              <p className="text-xs text-purple-200/75 leading-relaxed">
+              <p className="text-xs text-[#6B5B7B] leading-relaxed font-normal">
                 3-day comprehensive coverage with 4 senior cinematographers and gold-foiled 12x18
                 archival albums.
               </p>
-              <div className="pt-2 text-sm font-bold text-white">₹3,50,000</div>
+              <div className="pt-2 text-sm font-black text-rose-600">₹3,50,000</div>
             </div>
 
             {/* Card 2 */}
-            <div className="p-6 rounded-2xl bg-[#0F051D]/70 border border-purple-500/25 space-y-3">
-              <span className="text-xs font-mono text-rose-400">02 / PORTRAITURE</span>
+            <div className="p-6 rounded-3xl bg-[#FAF5FF] border border-purple-200/80 space-y-3 shadow-sm">
+              <span className="text-xs font-mono font-bold text-rose-600">02 / PORTRAITURE</span>
               <h3
-                className="text-xl font-bold text-white"
+                className="text-xl font-extrabold text-[#1E0A3C]"
                 style={{ fontFamily: selectedPreset.headingFontFamily }}
               >
                 Project BabyBliss
               </h3>
-              <p className="text-xs text-purple-200/75 leading-relaxed">
+              <p className="text-xs text-[#6B5B7B] leading-relaxed font-normal">
                 Fine-art studio lighting, newborn styling, and keepsake layflat albums for growing
                 families.
               </p>
-              <div className="pt-2 text-sm font-bold text-white">₹85,000</div>
+              <div className="pt-2 text-sm font-black text-rose-600">₹85,000</div>
             </div>
 
             {/* Card 3 */}
-            <div className="p-6 rounded-2xl bg-[#0F051D]/70 border border-purple-500/25 space-y-3">
-              <span className="text-xs font-mono text-rose-400">03 / TECHNOLOGY</span>
+            <div className="p-6 rounded-3xl bg-[#FAF5FF] border border-purple-200/80 space-y-3 shadow-sm">
+              <span className="text-xs font-mono font-bold text-rose-600">03 / TECHNOLOGY</span>
               <h3
-                className="text-xl font-bold text-white"
+                className="text-xl font-extrabold text-[#1E0A3C]"
                 style={{ fontFamily: selectedPreset.headingFontFamily }}
               >
                 AI Proofing & 8K Vault
               </h3>
-              <p className="text-xs text-purple-200/75 leading-relaxed">
+              <p className="text-xs text-[#6B5B7B] leading-relaxed font-normal">
                 Instant face-recognition search, multi-user real-time selection locking, and 60-day
                 master downloads.
               </p>
-              <div className="pt-2 text-sm font-bold text-purple-300">FastAPI + GPU</div>
+              <div className="pt-2 text-sm font-bold text-purple-700">FastAPI + GPU</div>
             </div>
           </div>
         </div>

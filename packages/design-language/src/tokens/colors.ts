@@ -1,47 +1,45 @@
 export const PDL_COLORS = {
   base: {
-    bg: '#120724', // Deep Royal Violet Aubergine
-    charcoal: '#1C0D36', // Deep Plum Surface
-    surface: '#28124D', // Royal Purple Card Surface
-    surfaceHover: '#351866', // Elevated Royal Purple
-    surfaceActive: '#441E80', // Active Purple
-    overlay: 'rgba(18, 7, 36, 0.92)',
-    lightBg: '#FFF5F7', // Light Rose Canvas Background
-    lightSurface: '#FFE4E9', // Light Rose Surface
+    bg: '#FFF5F7', // Light Rose Quartz Canvas
+    charcoal: '#FDF2F4', // Soft Blush Surface
+    surface: '#FFFFFF', // Pure White Elevated Card
+    surfaceHover: '#FAF5FF', // Soft Lavender Hover
+    surfaceActive: '#F3E8FF', // Active Lavender Tint
+    overlay: 'rgba(255, 245, 247, 0.95)',
+    darkCanvas: '#1E0A3C', // Deep Aubergine for contrast
   },
   brand: {
     purple: '#7C3AED', // Royal Purple Primary
-    purpleLight: '#A855F7', // Bright Violet
-    purpleDark: '#4C1D95', // Deep Royal Purple
-    rose: '#FB7185', // Rose Quartz / Blush Pink
-    roseLight: '#FDA4AF', // Soft Rose Tint
-    roseDark: '#E11D48', // Deep Rose Crimson
-    glow: 'rgba(124, 58, 237, 0.22)',
-    roseGlow: 'rgba(251, 113, 133, 0.25)',
-    muted: '#8B5CF6',
+    purpleLight: '#9333EA', // Bright Violet
+    purpleDark: '#581C87', // Deep Velvet Violet
+    rose: '#E11D48', // Deep Rose / Rose Quartz
+    roseLight: '#FB7185', // Soft Rose Tint
+    roseDark: '#BE123C', // Deep Rose Crimson
+    glow: 'rgba(124, 58, 237, 0.12)',
+    roseGlow: 'rgba(225, 29, 72, 0.14)',
+    muted: '#A855F7',
   },
   text: {
-    primary: '#FFF5F7', // Soft Rose Ivory
-    secondary: '#E9D5FF', // Soft Lavender
-    tertiary: '#C4B5FD', // Muted Violet
-    inverse: '#120724', // Deep Aubergine
-    darkPrimary: '#1E0A3C', // Deep Aubergine for light mode
-    darkSecondary: '#4C1D95', // Purple for light mode
+    primary: '#1E0A3C', // Deep Velvet Aubergine (Ultra-clear on light background)
+    secondary: '#4C1D95', // Rich Purple Subtext
+    tertiary: '#6B5B7B', // Soft Plum Slate
+    inverse: '#FFFFFF', // Pure White
+    lightPrimary: '#FFF5F7',
   },
   semantic: {
-    success: '#10B981', // Emerald Mint
-    warning: '#F59E0B', // Amber Coral
-    danger: '#F43F5E', // Rose Crimson
-    info: '#8B5CF6', // Purple Violet
+    success: '#059669', // Emerald Mint
+    warning: '#D97706', // Amber Coral
+    danger: '#E11D48', // Rose Crimson
+    info: '#7C3AED', // Royal Purple
   },
   ai: {
-    purple: '#8B5CF6',
-    rose: '#FB7185',
-    gradient: 'linear-gradient(135deg, #7C3AED 0%, #C084FC 50%, #FB7185 100%)',
+    purple: '#7C3AED',
+    rose: '#E11D48',
+    gradient: 'linear-gradient(135deg, #7C3AED 0%, #9333EA 50%, #E11D48 100%)',
   },
   border: {
-    subtle: 'rgba(124, 58, 237, 0.18)',
-    medium: 'rgba(124, 58, 237, 0.35)',
-    rose: 'rgba(251, 113, 133, 0.35)',
+    subtle: 'rgba(124, 58, 237, 0.12)',
+    medium: 'rgba(124, 58, 237, 0.22)',
+    rose: 'rgba(225, 29, 72, 0.25)',
   },
 } as const;

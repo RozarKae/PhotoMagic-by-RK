@@ -1,8 +1,8 @@
 import { PDL_COLORS } from '../tokens/colors';
 
 export const PDL_STUDIO_THEME = {
-  name: 'PhotoMagic Studio Purple & Rose Theme',
-  mode: 'purple-rose-corporate-luxury',
+  name: 'PhotoMagic Studio Light Rose & Purple Theme',
+  mode: 'light-rose-purple-corporate',
   density: 'spacious',
   colors: {
     bg: PDL_COLORS.base.bg,

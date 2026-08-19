@@ -33,7 +33,7 @@ const ibmMono = IBM_Plex_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#0F051D',
+  themeColor: '#FFF5F7',
   width: 'device-width',
   initialScale: 1,
 };
@@ -63,10 +63,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable}`}
+      className={`light ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-canvas text-text-primary antialiased min-h-screen font-body">
+      <body className="bg-[#FFF5F7] text-[#1E0A3C] antialiased min-h-screen font-body selection:bg-purple-200 selection:text-purple-900">
         <AppProviders>
           {children}
           <CornerArtistMascot />

@@ -1,12 +1,12 @@
 import { PDL_COLORS } from '../tokens/colors';
 
 export const PDL_WORKSPACE_THEME = {
-  name: 'PhotoMagic OS Workspace Theme',
-  mode: 'high-density-productivity-purple-rose',
+  name: 'PhotoMagic OS Workspace Light Theme',
+  mode: 'high-density-light-purple-rose',
   density: 'compact',
   colors: {
-    bg: '#100620',
-    panelBg: '#1A0B2E',
+    bg: '#FAF5FF',
+    panelBg: '#FFFFFF',
     accent: PDL_COLORS.brand.purple,
     aiAccent: PDL_COLORS.ai.purple,
     roseAccent: PDL_COLORS.brand.rose,

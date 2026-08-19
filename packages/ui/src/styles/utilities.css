@@ -9,68 +9,68 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(251, 113, 133, 0.45);
-  box-shadow: 0 20px 40px rgba(15, 5, 29, 0.9), 0 0 30px rgba(124, 58, 237, 0.25);
+  border-color: rgba(225, 29, 72, 0.35);
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.12), 0 0 30px rgba(225, 29, 72, 0.08);
 }
 
 .glass-futuristic-pastel {
-  background: rgba(255, 245, 247, 0.05);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(251, 113, 133, 0.2);
-  box-shadow: 0 20px 50px rgba(15, 5, 29, 0.8), 0 0 30px rgba(251, 113, 133, 0.12);
+  border: 1px solid rgba(225, 29, 72, 0.18);
+  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.06), 0 0 30px rgba(225, 29, 72, 0.05);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-futuristic-pastel:hover {
-  border-color: rgba(251, 113, 133, 0.5);
-  box-shadow: 0 25px 60px rgba(15, 5, 29, 0.85), 0 0 40px rgba(124, 58, 237, 0.3);
+  border-color: rgba(225, 29, 72, 0.4);
+  box-shadow: 0 25px 60px rgba(124, 58, 237, 0.12), 0 0 40px rgba(225, 29, 72, 0.10);
 }
 
-/* Atmospheric Glow Gradients */
+/* Atmospheric Glow Gradients for Light Theme */
 .pastel-rose-glow {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.25) 0%, rgba(251, 113, 133, 0) 70%);
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.20) 0%, rgba(251, 113, 133, 0) 70%);
   filter: blur(120px);
 }
 
 .pastel-purple-glow {
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.28) 0%, rgba(124, 58, 237, 0) 70%);
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, rgba(147, 51, 234, 0) 70%);
   filter: blur(140px);
 }
 
 .pastel-champagne-glow {
-  background: radial-gradient(circle, rgba(254, 205, 211, 0.2) 0%, rgba(254, 205, 211, 0) 70%);
+  background: radial-gradient(circle, rgba(254, 205, 211, 0.18) 0%, rgba(254, 205, 211, 0) 70%);
   filter: blur(140px);
 }
 
 /* Gradients for Text and Accents */
 .luxury-gradient-text,
 .purple-rose-gradient-text {
-  background: linear-gradient(135deg, #FFF5F7 0%, #FDA4AF 40%, #C084FC 75%, #A855F7 100%);
+  background: linear-gradient(135deg, #1E0A3C 0%, #7C3AED 45%, #E11D48 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .rose-gold-gradient-text {
-  background: linear-gradient(135deg, #FFF1F2 0%, #FB7185 50%, #A855F7 100%);
+  background: linear-gradient(135deg, #1E0A3C 0%, #E11D48 50%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gold-gradient {
-  background: linear-gradient(135deg, #FFF5F7 0%, #FDA4AF 40%, #C084FC 80%, #A855F7 100%);
+  background: linear-gradient(135deg, #1E0A3C 0%, #7C3AED 45%, #E11D48 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .purple-glow {
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.18);
 }
 
 .rose-glow {
-  box-shadow: 0 0 25px rgba(251, 113, 133, 0.35);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.18);
 }
 
 .shadow-kodakGlow {
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.18);
 }

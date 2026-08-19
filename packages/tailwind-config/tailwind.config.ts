@@ -11,20 +11,20 @@ const config: any = {
   theme: {
     extend: {
       colors: {
-        canvas: '#0F051D', // Deep Royal Violet Canvas
-        charcoal: '#1A0B2E', // Plum Surface
+        canvas: '#FFF5F7', // Light Rose Quartz Canvas
+        charcoal: '#FDF2F4', // Soft Rose Tint
         surface: {
-          base: '#1C0D36', // Deep Royal Purple Surface
-          elevated: '#28124D', // Elevated Royal Purple
-          glass: 'rgba(28, 13, 54, 0.85)',
-          light: '#FFF5F7', // Light Rose Surface
+          base: '#FFFFFF', // Pure Crisp White
+          elevated: '#FAF5FF', // Soft Lavender Elevated Surface
+          glass: 'rgba(255, 255, 255, 0.90)',
+          dark: '#1E0A3C', // Deep Velvet Aubergine
         },
         border: {
-          subtle: 'rgba(124, 58, 237, 0.15)',
-          muted: 'rgba(255, 255, 255, 0.08)',
-          purple: 'rgba(124, 58, 237, 0.40)',
-          rose: 'rgba(251, 113, 133, 0.40)',
-          gold: 'rgba(251, 113, 133, 0.35)', // mapped to rose for backward compatibility
+          subtle: 'rgba(124, 58, 237, 0.12)',
+          muted: 'rgba(0, 0, 0, 0.06)',
+          purple: 'rgba(124, 58, 237, 0.25)',
+          rose: 'rgba(225, 29, 72, 0.25)',
+          gold: 'rgba(225, 29, 72, 0.20)',
         },
         purple: {
           50: '#FAF5FF',
@@ -51,30 +51,30 @@ const config: any = {
           800: '#9F1239',
           900: '#881337',
         },
-        // Backward-compat aliases mapped to Purple & Rose
         gold: {
           300: '#FDA4AF',
           400: '#FB7185',
-          500: '#A855F7', // Mapped to vibrant violet
-          600: '#9333EA',
-          700: '#7E22CE',
+          500: '#9333EA',
+          600: '#7E22CE',
+          700: '#581C87',
         },
-        silver: '#E9D5FF', // Lavender Silver
-        burgundy: '#581C87', // Deep Royal Violet
-        emerald: '#10B981',
-        ivory: '#FFF5F7', // Soft Rose Ivory
-        mutedText: '#C4B5FD', // Soft Violet Text
+        silver: '#6B5B7B', // Refined Plum Slate
+        burgundy: '#BE123C', // Deep Rose Crimson
+        emerald: '#059669',
+        ivory: '#1E0A3C', // Primary text mapped to deep aubergine for legibility
+        mutedText: '#6B5B7B', // Soft Plum Slate
         text: {
-          primary: '#FFF5F7',
-          secondary: '#E9D5FF',
-          tertiary: '#A78BFA',
+          primary: '#1E0A3C', // Deep Aubergine
+          secondary: '#4C1D95', // Royal Purple Subtext
+          tertiary: '#6B5B7B', // Slate Violet
           dark: '#1E0A3C',
+          light: '#FFFFFF',
         },
         status: {
-          success: '#10B981',
-          warning: '#F59E0B',
-          error: '#F43F5E',
-          info: '#8B5CF6',
+          success: '#059669',
+          warning: '#D97706',
+          error: '#E11D48',
+          info: '#7C3AED',
         },
       },
       fontFamily: {
@@ -98,13 +98,13 @@ const config: any = {
         full: '9999px',
       },
       boxShadow: {
-        museum: '0 20px 50px rgba(15, 5, 29, 0.85), 0 0 30px rgba(124, 58, 237, 0.15)',
-        watch: '0 4px 20px rgba(124, 58, 237, 0.20)',
-        glass: '0 8px 32px 0 rgba(15, 5, 29, 0.65)',
-        kodakGlow: '0 0 25px rgba(168, 85, 247, 0.30)',
-        purpleGlow: '0 0 25px rgba(124, 58, 237, 0.30)',
-        roseGlow: '0 0 25px rgba(251, 113, 133, 0.35)',
-        burgundyGlow: '0 0 25px rgba(88, 28, 135, 0.40)',
+        museum: '0 20px 50px rgba(124, 58, 237, 0.08), 0 0 30px rgba(225, 29, 72, 0.05)',
+        watch: '0 4px 20px rgba(124, 58, 237, 0.12)',
+        glass: '0 8px 32px 0 rgba(124, 58, 237, 0.06)',
+        kodakGlow: '0 0 25px rgba(147, 51, 234, 0.18)',
+        purpleGlow: '0 0 25px rgba(124, 58, 237, 0.18)',
+        roseGlow: '0 0 25px rgba(225, 29, 72, 0.20)',
+        burgundyGlow: '0 0 25px rgba(190, 18, 60, 0.25)',
       },
       spacing: {
         '1': '4px',
