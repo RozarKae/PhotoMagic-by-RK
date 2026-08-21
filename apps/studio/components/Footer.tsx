@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram Profile"
-              title="Instagram @rkae_photgraphs"
+              title="Instagram @rkae_photographs"
               className="p-2.5 rounded-full bg-white dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/80 text-purple-900 dark:text-purple-200 hover:text-rose-600 dark:hover:text-rose-400 transition-colors border border-purple-200 dark:border-purple-800 shadow-sm"
             >
               <Instagram size={15} />

@@ -133,7 +133,7 @@ export default function ContactPage() {
                 >
                   <div className="flex items-center gap-2">
                     <Instagram size={16} className="text-rose-500" />
-                    <span>Instagram: @rkae_photgraphs</span>
+                    <span>Instagram: @rkae_photographs</span>
                   </div>
                   <span className="font-mono text-[10px] text-purple-500">Visit →</span>
                 </a>

@@ -55,5 +55,5 @@ export const BRAND = {
   domain: 'batpaiyancatponnu.online/photomagic',
   osDomain: 'os.batpaiyancatponnu.online',
   phone: '7904943234',
-  instagram: 'rkae_photgraphs',
+  instagram: 'rkae_photographs',
 };

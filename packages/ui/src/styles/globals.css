@@ -1,3 +1,6 @@
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+@import url('https://fonts.cdnfonts.com/css/now');
+@import url('https://fonts.cdnfonts.com/css/illuma');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Great+Vibes&family=Noto+Sans+Tamil:wght@300;400;500;600;700;800&family=Anek+Tamil:wght@400;600;700;800&display=swap');
 @import './design-system.css';
 
@@ -9,7 +12,7 @@
   body {
     background-color: var(--color-canvas, #FFF5F7);
     color: var(--color-text-primary, #1E0A3C);
-    font-family: 'Plus Jakarta Sans', 'Inter', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Plus Jakarta Sans', 'Inter', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -35,17 +38,21 @@
   }
 
   h1, .font-hero {
-    font-family: 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
-    letter-spacing: -0.03em;
+    font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
+    letter-spacing: -0.02em;
     font-weight: 800;
     color: var(--color-text-primary, #1E0A3C);
   }
 
   h2, h3, h4, .font-heading {
-    font-family: 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
-    letter-spacing: -0.02em;
+    font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
+    letter-spacing: -0.015em;
     font-weight: 700;
     color: var(--color-text-primary, #1E0A3C);
+  }
+
+  .font-body {
+    font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', 'Plus Jakarta Sans', sans-serif;
   }
 
   .font-tamil {
@@ -64,9 +71,9 @@
   }
 
   .font-nav {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-    letter-spacing: 0.05em;
-    font-weight: 600;
+    font-family: 'Glacial Indifference', 'Now', 'Illuma', 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: 0.08em;
+    font-weight: 700;
   }
 
   .font-mono {

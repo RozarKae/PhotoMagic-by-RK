@@ -10,6 +10,7 @@ import {
   CMS_SERVICES,
   CMS_STORIES,
   CMS_TESTIMONIALS,
+  CMS_PORTFOLIO_ITEMS,
   CUSTOM_PACKAGE_RATES,
   calculateCustomPackageDiscount,
 } from '@photomagic/config';
@@ -108,6 +109,7 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
   // Portfolio state
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<string>('all');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+  const [watermarkActive, setWatermarkActive] = useState<boolean>(true);
   const [shuffleKey, setShuffleKey] = useState<number>(0);
 
   // Stories filter state
@@ -142,113 +144,75 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
     return () => clearInterval(timer);
   }, [heroImages.length, isBuilder]);
 
-  // Portfolio sample items
-  const portfolioItems = [
+  // Comprehensive Portfolio Categories with Counts
+  const portfolioCategories = [
+    { slug: 'all', label: 'All Curations', count: CMS_PORTFOLIO_ITEMS.length },
     {
-      id: 'p-1',
-      title: 'A Dawn of Sacred Gold in Madurai',
-      category: 'weddings',
-      categoryName: 'Weddings',
-      location: 'Madurai Palace • Tamil Nadu',
-      year: '2026',
-      src: '/images/hindu_wedding_ceremony.png',
-      aspect: 'tall',
-      caption: 'Kanjeevaram silk drapes and royal mandap rituals beneath ancient carved pillars.',
+      slug: 'weddings',
+      label: 'Weddings',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'weddings').length,
     },
     {
-      id: 'p-2',
-      title: 'Kochi Cathedral Matrimony',
-      category: 'weddings',
-      categoryName: 'Weddings',
-      location: 'Kochi Cathedral • Kerala',
-      year: '2026',
-      src: '/images/christian_church_wedding.png',
-      aspect: 'portrait',
-      caption: 'Stained glass sunlight cascading over cathedral lace and timeless vows.',
+      slug: 'engagements',
+      label: 'Engagements',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'engagements').length,
     },
     {
-      id: 'p-3',
-      title: 'Misty Dawn Reflections',
-      category: 'pre-weddings',
-      categoryName: 'Pre-Weddings',
-      location: 'Alleppey Backwaters • Kerala',
-      year: '2026',
-      src: '/images/prewedding_backwaters.png',
-      aspect: 'wide',
-      caption: 'Early morning canoe reflections in coconut palm waterways.',
+      slug: 'baby-shower',
+      label: 'Baby Shower (Valaikappu)',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'baby-shower').length,
     },
     {
-      id: 'p-4',
-      title: 'The Prelude Ring Exchange',
-      category: 'engagements',
-      categoryName: 'Engagements',
-      location: 'Chennai Heritage Villa • Tamil Nadu',
-      year: '2026',
-      src: '/images/engagement_ceremony.png',
-      aspect: 'square',
-      caption: 'Intimate blessings and joyful promises with family elders.',
+      slug: '1st-birthday',
+      label: '1st Birthday',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === '1st-birthday').length,
     },
     {
-      id: 'p-5',
-      title: 'Intimate Palace Silhouettes',
-      category: 'couple-portraits',
-      categoryName: 'Couple Portraits',
-      location: 'Chettinad Palace • Tamil Nadu',
-      year: '2026',
-      src: '/images/hero_wedding_couple.png',
-      aspect: 'portrait',
-      caption: 'Quiet royal grandeur and effortless couple chemistry.',
+      slug: 'baby-kids',
+      label: 'Baby / Kids',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'baby-kids').length,
     },
     {
-      id: 'p-6',
-      title: 'Sculpted Silk & Gold Couture',
-      category: 'fashion',
-      categoryName: 'Fashion',
-      location: 'Atelier Studio • Chennai',
-      year: '2026',
-      src: '/images/fashion_editorial.png',
-      aspect: 'tall',
-      caption: 'High-contrast lighting highlighting intricate metallic textures.',
+      slug: 'pre-weddings',
+      label: 'Pre-Weddings',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'pre-weddings').length,
     },
     {
-      id: 'p-7',
-      title: 'Project BabyBliss Milestone',
-      category: 'baby-kids',
-      categoryName: 'Baby / Kids',
-      location: 'Chennai Atelier',
-      year: '2026',
-      src: '/images/babybliss_portrait.jpg',
-      aspect: 'square',
-      caption: 'Pure warmth, gentle curiosity, and innocent laughter preserved in print.',
+      slug: 'couple-portraits',
+      label: 'Couple Portraits',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'couple-portraits').length,
     },
     {
-      id: 'p-8',
-      title: 'The Motherhood Grace',
-      category: 'maternity',
-      categoryName: 'Maternity',
-      location: 'Kovalam Coastal Studio • Tamil Nadu',
-      year: '2026',
-      src: '/images/maternity_portrait.png',
-      aspect: 'portrait',
-      caption: 'Empowering maternity portraits sculpted by soft ambient natural light.',
+      slug: 'maternity',
+      label: 'Maternity',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'maternity').length,
     },
     {
-      id: 'p-9',
-      title: 'Grand Coastal Sangeet Gala',
-      category: 'events',
-      categoryName: 'Events',
-      location: 'Kovalam Beach Resort • Kerala',
-      year: '2026',
-      src: '/images/grand_event_celebration.png',
-      aspect: 'wide',
-      caption: 'Vibrant evening celebrations beneath illuminated coastal palms.',
+      slug: 'fashion',
+      label: 'Fashion & Couture',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'fashion').length,
+    },
+    {
+      slug: 'events',
+      label: 'Events & Culture',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'events').length,
+    },
+    {
+      slug: 'product',
+      label: 'Product & Jewelry',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'product').length,
+    },
+    {
+      slug: 'commercial',
+      label: 'Commercial & Summits',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'commercial').length,
     },
   ];
 
   const filteredPortfolio =
     selectedCategoryTab === 'all'
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === selectedCategoryTab);
+      ? CMS_PORTFOLIO_ITEMS
+      : CMS_PORTFOLIO_ITEMS.filter((item) => item.category === selectedCategoryTab);
 
   const visualJourneys = [
     {
@@ -368,86 +332,119 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
             )}
 
             {/* 1. HERO SECTION */}
-            {section.type === 'hero' && (
-              <div className="relative h-[90vh] min-h-[620px] w-full overflow-hidden bg-[#0A0412] text-white flex items-center justify-center">
-                {heroImages.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      idx === currentHeroIndex
-                        ? 'opacity-100 z-10 scale-100'
-                        : 'opacity-0 z-0 scale-105'
-                    }`}
-                    style={{ transition: 'opacity 1.2s ease, transform 6s ease' }}
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full h-full object-cover object-center brightness-[0.75] contrast-[1.05]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0412] via-transparent to-[#0A0412]/60" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0A0412]/50 via-transparent to-[#0A0412]/50" />
-                  </div>
-                ))}
-
-                <div className="relative z-20 max-w-5xl mx-auto px-6 text-center flex flex-col items-center gap-6 mt-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 dark:bg-purple-950/60 backdrop-blur-md border border-white/20 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
-                    <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold-300 font-semibold">
-                      PhotoMagic Studios by RK
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <h1 className="font-hero text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] drop-shadow-lg">
-                      Moments Through Our Eyes
-                    </h1>
-                    <p className="font-tamil text-sm sm:text-lg text-purple-200/90 font-medium tracking-wide mt-1">
-                      {STUDIO_PROFILE.tamilStatement}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
-                    <Link href="/book">
-                      <button className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 hover:opacity-95 text-white font-nav text-xs sm:text-sm font-bold uppercase tracking-[0.22em] shadow-[0_8px_30px_rgba(225,29,72,0.35)] transition-all flex items-center gap-3">
-                        <Calendar size={16} />
-                        <span>Check Your Date</span>
-                      </button>
-                    </Link>
-                    <Link href="/portfolio">
-                      <button className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-nav text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] backdrop-blur-md border border-white/25 transition-all flex items-center gap-2">
-                        <span>Explore Stories</span>
-                        <ArrowRight size={15} />
-                      </button>
-                    </Link>
-                  </div>
-
-                  <div className="flex items-center gap-4 mt-6 text-xs text-white/70 font-mono">
-                    <button
-                      onClick={() =>
-                        setCurrentHeroIndex(
-                          (prev) => (prev - 1 + heroImages.length) % heroImages.length,
-                        )
-                      }
-                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                      aria-label="Previous"
+            {section.type === 'hero' &&
+              (section.id === 'sec-home-hero' || page.id === 'home' ? (
+                <div className="relative h-[90vh] min-h-[620px] w-full overflow-hidden bg-[#0A0412] text-white flex items-center justify-center">
+                  {heroImages.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        idx === currentHeroIndex
+                          ? 'opacity-100 z-10 scale-100'
+                          : 'opacity-0 z-0 scale-105'
+                      }`}
+                      style={{ transition: 'opacity 1.2s ease, transform 6s ease' }}
                     >
-                      <ChevronLeft size={16} />
-                    </button>
-                    <span className="tracking-wider text-[11px] truncate max-w-xs sm:max-w-md">
-                      {heroImages[currentHeroIndex].caption}
-                    </span>
-                    <button
-                      onClick={() => setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length)}
-                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                      aria-label="Next"
-                    >
-                      <ChevronRight size={16} />
-                    </button>
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-full object-cover object-center brightness-[0.75] contrast-[1.05]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0412] via-transparent to-[#0A0412]/60" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0412]/50 via-transparent to-[#0A0412]/50" />
+                    </div>
+                  ))}
+
+                  <div className="relative z-20 max-w-5xl mx-auto px-6 text-center flex flex-col items-center gap-6 mt-12">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 dark:bg-purple-950/60 backdrop-blur-md border border-white/20 shadow-sm">
+                      <span className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
+                      <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold-300 font-semibold">
+                        PhotoMagic Studios by RK
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-2">
+                      <h1 className="font-hero text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] drop-shadow-lg">
+                        Moments Through Our Eyes
+                      </h1>
+                      <p className="font-tamil text-sm sm:text-lg text-purple-200/90 font-medium tracking-wide mt-1">
+                        {STUDIO_PROFILE.tamilStatement}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
+                      <Link href="/book">
+                        <button className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 hover:opacity-95 text-white font-nav text-xs sm:text-sm font-bold uppercase tracking-[0.22em] shadow-[0_8px_30px_rgba(225,29,72,0.35)] transition-all flex items-center gap-3">
+                          <Calendar size={16} />
+                          <span>Check Your Date</span>
+                        </button>
+                      </Link>
+                      <Link href="/portfolio">
+                        <button className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-nav text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] backdrop-blur-md border border-white/25 transition-all flex items-center gap-2">
+                          <span>Explore Stories</span>
+                          <ArrowRight size={15} />
+                        </button>
+                      </Link>
+                    </div>
+
+                    <div className="flex items-center gap-4 mt-6 text-xs text-white/70 font-mono">
+                      <button
+                        onClick={() =>
+                          setCurrentHeroIndex(
+                            (prev) => (prev - 1 + heroImages.length) % heroImages.length,
+                          )
+                        }
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        aria-label="Previous"
+                      >
+                        <ChevronLeft size={16} />
+                      </button>
+                      <span className="tracking-wider text-[11px] truncate max-w-xs sm:max-w-md">
+                        {heroImages[currentHeroIndex].caption}
+                      </span>
+                      <button
+                        onClick={() =>
+                          setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length)
+                        }
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        aria-label="Next"
+                      >
+                        <ChevronRight size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="relative pt-32 pb-16 px-6 max-w-5xl mx-auto text-center flex flex-col items-center gap-4">
+                  {section.elements.find((el) => el.type === 'badge' || el.id.includes('sub')) && (
+                    <span className="font-nav text-[10px] uppercase tracking-[0.28em] text-rose-600 dark:text-rose-400 font-bold block mb-1">
+                      {section.elements.find((el) => el.type === 'badge' || el.id.includes('sub'))
+                        ?.content?.text || 'PHOTOMAGIC STUDIOS BY RK'}
+                    </span>
+                  )}
+
+                  <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-purple-950 dark:text-purple-50 leading-tight">
+                    {section.elements.find((el) => el.type === 'heading')?.content?.text ||
+                      page.title}
+                  </h1>
+
+                  {section.elements.find((el) => el.type === 'tamil-text') && (
+                    <p className="font-tamil text-sm sm:text-base text-purple-800 dark:text-purple-300 font-medium">
+                      {section.elements.find((el) => el.type === 'tamil-text')?.content?.text ||
+                        STUDIO_PROFILE.tamilStatement}
+                    </p>
+                  )}
+
+                  {section.elements.find((el) => el.type === 'text' && !el.id.includes('sub')) && (
+                    <p className="text-xs sm:text-sm text-purple-900/80 dark:text-purple-300/80 max-w-2xl leading-relaxed mt-2">
+                      {
+                        section.elements.find((el) => el.type === 'text' && !el.id.includes('sub'))
+                          ?.content?.text
+                      }
+                    </p>
+                  )}
+                </div>
+              ))}
 
             {/* 2. PHILOSOPHY SECTION */}
             {section.type === 'philosophy' && (
@@ -854,38 +851,39 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
             {/* 11. PORTFOLIO GRID SECTION */}
             {section.type === 'portfolio-grid' && (
               <div className="py-12 px-6 max-w-7xl mx-auto w-full">
+                {/* Category Navigation Pills with Counts */}
                 <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-                  <button
-                    onClick={() => setSelectedCategoryTab('all')}
-                    className={`px-4 py-2 rounded-full font-nav text-xs uppercase tracking-wider transition-all ${
-                      selectedCategoryTab === 'all'
-                        ? 'bg-purple-900 text-white font-bold shadow-md'
-                        : 'bg-white dark:bg-[#170C22] text-purple-950/80 border border-purple-200'
-                    }`}
-                  >
-                    All Categories
-                  </button>
-                  {OFFICIAL_CATEGORIES.map((cat) => (
+                  {portfolioCategories.map((cat) => (
                     <button
-                      key={cat.id}
+                      key={cat.slug}
                       onClick={() => setSelectedCategoryTab(cat.slug)}
-                      className={`px-4 py-2 rounded-full font-nav text-xs uppercase tracking-wider transition-all ${
+                      className={`px-4 py-2 rounded-full font-nav text-[11px] sm:text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
                         selectedCategoryTab === cat.slug
-                          ? 'bg-gradient-to-r from-purple-600 to-rose-500 text-white font-bold shadow-md'
-                          : 'bg-white dark:bg-[#170C22] text-purple-950/80 border border-purple-200'
+                          ? 'bg-gradient-to-r from-purple-700 via-rose-600 to-purple-700 text-white font-bold shadow-md ring-2 ring-rose-400/30'
+                          : 'bg-white dark:bg-[#170C22] text-purple-950/80 dark:text-purple-200 border border-purple-200/80 dark:border-purple-800/60 hover:border-rose-400'
                       }`}
                     >
-                      {cat.actualName}
+                      <span>{cat.label}</span>
+                      <span
+                        className={`text-[9px] font-mono px-1.5 py-0.5 rounded-full ${
+                          selectedCategoryTab === cat.slug
+                            ? 'bg-white/20 text-white'
+                            : 'bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-300'
+                        }`}
+                      >
+                        {cat.count}
+                      </span>
                     </button>
                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+                {/* Asymmetric Fine Art Masonry Gallery */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[320px]">
                   {filteredPortfolio.map((item, idx) => (
                     <div
                       key={item.id}
                       onClick={() => setSelectedPhotoIndex(idx)}
-                      className={`group relative rounded-3xl overflow-hidden cursor-pointer bg-purple-100 dark:bg-purple-950 border border-purple-200/70 shadow-sm ${
+                      className={`group relative rounded-3xl overflow-hidden cursor-pointer bg-purple-100 dark:bg-purple-950 border border-purple-200/70 dark:border-purple-800/50 shadow-sm hover:shadow-museum transition-all duration-500 ${
                         item.aspect === 'tall' ? 'sm:row-span-2' : ''
                       } ${item.aspect === 'wide' ? 'sm:col-span-2' : ''}`}
                     >
@@ -894,17 +892,25 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col justify-end">
-                        <span className="font-mono text-[9px] uppercase tracking-widest text-rose-300 font-bold">
-                          {item.location}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-75 group-hover:opacity-95 transition-opacity" />
+
+                      {/* Floating Category Badge */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span className="font-mono text-[9px] uppercase tracking-widest text-white/90 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                          {item.categoryName}
                         </span>
-                        <h3 className="font-hero text-base font-bold text-white mt-0.5 leading-snug">
+                      </div>
+
+                      <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end z-10">
+                        <span className="font-mono text-[9px] uppercase tracking-widest text-rose-300 font-bold">
+                          {item.location} • {item.year}
+                        </span>
+                        <h3 className="font-hero text-base sm:text-lg font-bold text-white mt-1 leading-snug drop-shadow-sm">
                           {item.title}
                         </h3>
-                        <span className="text-[10px] text-purple-200/70 font-mono mt-1">
-                          {item.categoryName} • {item.year}
-                        </span>
+                        <p className="text-[11px] text-purple-200/80 line-clamp-2 mt-1 font-normal">
+                          {item.caption}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -950,63 +956,435 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
               </div>
             )}
 
-            {/* 13. STORIES LIST SECTION */}
-            {section.type === 'stories-list' && (
-              <div className="py-12 px-6 max-w-7xl mx-auto w-full flex flex-col gap-10">
-                <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
-                  {['All', 'Weddings', 'Family', 'Fashion', 'Culture', 'Personal'].map((f) => (
-                    <button
-                      key={f}
-                      onClick={() => setStoryFilter(f)}
-                      className={`px-5 py-2 rounded-full font-nav text-xs uppercase tracking-wider transition-all ${
-                        storyFilter === f
-                          ? 'bg-gradient-to-r from-purple-600 to-rose-500 text-white font-bold shadow-md'
-                          : 'bg-white dark:bg-[#170C22] text-purple-950/80 border border-purple-200'
-                      }`}
-                    >
-                      {f}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  {filteredStories.map((story) => (
-                    <article
-                      key={story.id}
-                      className="group flex flex-col rounded-3xl overflow-hidden bg-white dark:bg-[#170C22] border border-purple-200/80 shadow-sm"
-                    >
-                      <Link
-                        href={`/stories/${story.slug}`}
-                        className="block relative aspect-[16/10] w-full overflow-hidden bg-purple-100"
-                      >
-                        <img
-                          src={story.coverMedia}
-                          alt={story.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute top-4 left-4 font-mono text-[9px] uppercase tracking-widest text-white bg-purple-950/80 px-3 py-1 rounded-full backdrop-blur-md">
-                          {story.category} • {story.year}
-                        </div>
-                      </Link>
-                      <div className="p-8 flex flex-col gap-2">
-                        <span className="font-mono text-xs text-rose-600 font-semibold">
-                          {story.location}
-                        </span>
-                        <h2 className="text-2xl font-bold font-hero text-purple-950 dark:text-purple-100">
-                          {story.title}
-                        </h2>
-                        <p className="text-xs sm:text-sm text-purple-900/80 leading-relaxed">
-                          {story.minimalContext}
-                        </p>
+            {/* 14. BOOKING WIZARD SECTION */}
+            {section.type === 'booking-wizard' && (
+              <div className="py-12 px-6 max-w-4xl mx-auto w-full">
+                <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#170C22] border border-purple-200/80 dark:border-purple-800/40 shadow-museum flex flex-col gap-8">
+                  {bookSubmitted ? (
+                    <div className="text-center py-12 flex flex-col items-center gap-4">
+                      <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center">
+                        <CheckCircle2 size={32} />
                       </div>
-                    </article>
-                  ))}
+                      <h3 className="text-2xl font-bold font-hero text-purple-950 dark:text-purple-50">
+                        Date Inquiry Transmitted
+                      </h3>
+                      <p className="text-xs sm:text-sm text-purple-800 dark:text-purple-300 max-w-md">
+                        Thank you, {bookName || 'Celebration Host'}. Rozar Khan and the PhotoMagic
+                        concierge will verify timeline availability and reach out via WhatsApp at{' '}
+                        {bookPhone || 'your number'}.
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between border-b border-purple-100 dark:border-purple-900/40 pb-4">
+                        <div>
+                          <span className="font-mono text-[10px] uppercase tracking-widest text-rose-600 font-bold">
+                            Step {bookStep} of 4
+                          </span>
+                          <h3 className="text-xl font-bold font-hero text-purple-950 dark:text-purple-50 mt-0.5">
+                            {bookStep === 1 && 'Select Celebration Type'}
+                            {bookStep === 2 && 'Event Date & Location'}
+                            {bookStep === 3 && 'Preferred Package Collection'}
+                            {bookStep === 4 && 'Your Contact Coordinates'}
+                          </h3>
+                        </div>
+                        <span className="font-mono text-xs text-purple-400">
+                          {bookStep * 25}% Complete
+                        </span>
+                      </div>
+
+                      {bookStep === 1 && (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                          {OFFICIAL_CATEGORIES.slice(0, 8).map((cat) => (
+                            <button
+                              key={cat.id}
+                              onClick={() => setBookCategory(cat.slug)}
+                              className={`p-4 rounded-2xl border text-center transition-all flex flex-col items-center gap-2 ${
+                                bookCategory === cat.slug
+                                  ? 'bg-purple-900 text-white border-purple-900 shadow-md font-bold'
+                                  : 'bg-purple-50/50 dark:bg-purple-950/30 border-purple-200/70 text-purple-950 dark:text-purple-200'
+                              }`}
+                            >
+                              <span className="text-xs font-hero">{cat.actualName}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+
+                      {bookStep === 2 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs font-mono text-purple-900 dark:text-purple-200 font-semibold">
+                              Primary Event Date
+                            </label>
+                            <input
+                              type="date"
+                              value={bookDate}
+                              onChange={(e) => setBookDate(e.target.value)}
+                              className="p-3 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 text-xs font-mono text-purple-950 dark:text-white"
+                            />
+                          </div>
+
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs font-mono text-purple-900 dark:text-purple-200 font-semibold">
+                              City / Region
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="e.g. Chennai, Madurai, Kochi"
+                              value={bookCity}
+                              onChange={(e) => setBookCity(e.target.value)}
+                              className="p-3 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 text-xs text-purple-950 dark:text-white"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {bookStep === 3 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          {DEFAULT_PACKAGES.slice(0, 3).map((pkg) => (
+                            <div
+                              key={pkg.id}
+                              onClick={() => setBookPkg(pkg.id)}
+                              className={`p-4 rounded-2xl border cursor-pointer transition-all ${
+                                bookPkg === pkg.id
+                                  ? 'bg-purple-900 text-white border-purple-900 shadow-md font-bold'
+                                  : 'bg-purple-50/50 dark:bg-purple-950/30 border-purple-200/70 text-purple-950 dark:text-purple-200'
+                              }`}
+                            >
+                              <span className="font-mono text-[9px] uppercase tracking-wider block opacity-75">
+                                {pkg.creativeTier}
+                              </span>
+                              <h4 className="text-sm font-bold font-hero mt-1">{pkg.name}</h4>
+                              <span className="font-mono text-base font-extrabold block mt-2">
+                                {pkg.formattedPrice}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {bookStep === 4 && (
+                        <div className="flex flex-col gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input
+                              type="text"
+                              placeholder="Your Full Name"
+                              value={bookName}
+                              onChange={(e) => setBookName(e.target.value)}
+                              className="p-3 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 text-xs text-purple-950 dark:text-white"
+                            />
+                            <input
+                              type="tel"
+                              placeholder="WhatsApp Number (e.g. 7904943234)"
+                              value={bookPhone}
+                              onChange={(e) => setBookPhone(e.target.value)}
+                              className="p-3 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 text-xs font-mono text-purple-950 dark:text-white"
+                            />
+                          </div>
+                          <input
+                            type="email"
+                            placeholder="Email Address"
+                            value={bookEmail}
+                            onChange={(e) => setBookEmail(e.target.value)}
+                            className="p-3 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 text-xs font-mono text-purple-950 dark:text-white"
+                          />
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between pt-4 border-t border-purple-100 dark:border-purple-900/40">
+                        {bookStep > 1 ? (
+                          <button
+                            onClick={() => setBookStep((prev) => prev - 1)}
+                            className="px-5 py-2.5 rounded-xl border border-purple-200 text-xs font-nav font-bold uppercase tracking-wider text-purple-900 dark:text-purple-200"
+                          >
+                            Back
+                          </button>
+                        ) : (
+                          <div />
+                        )}
+
+                        {bookStep < 4 ? (
+                          <button
+                            onClick={() => setBookStep((prev) => prev + 1)}
+                            className="px-6 py-2.5 rounded-xl bg-purple-800 hover:bg-purple-700 text-white font-nav text-xs font-bold uppercase tracking-wider shadow-md"
+                          >
+                            Continue
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => setBookSubmitted(true)}
+                            className="px-7 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 text-white font-nav text-xs font-bold uppercase tracking-wider shadow-lg"
+                          >
+                            Lock Inquiry on Timeline
+                          </button>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* 15. CONTACT CONCIERGE SECTION */}
+            {section.type === 'contact-concierge' && (
+              <div className="py-12 px-6 max-w-7xl mx-auto w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                  <div className="lg:col-span-5 flex flex-col gap-6">
+                    <div className="p-8 rounded-3xl bg-white dark:bg-[#170C22] border border-purple-200/80 dark:border-purple-800/40 shadow-sm flex flex-col gap-6">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-rose-600 font-bold">
+                        Direct Studio Coordinates
+                      </span>
+
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 flex items-center justify-center text-purple-700 dark:text-purple-300 flex-shrink-0">
+                          <Phone size={20} />
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono text-purple-400 block">
+                            Phone / WhatsApp
+                          </span>
+                          <a
+                            href="tel:7904943234"
+                            className="text-base font-bold font-mono text-purple-950 dark:text-purple-100 hover:text-rose-600"
+                          >
+                            7904943234
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 flex items-center justify-center text-purple-700 dark:text-purple-300 flex-shrink-0">
+                          <Instagram size={20} />
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono text-purple-400 block">
+                            Instagram
+                          </span>
+                          <a
+                            href="https://instagram.com/rkae_photgraphs"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-base font-bold font-mono text-purple-950 dark:text-purple-100 hover:text-rose-600"
+                          >
+                            @rkae_photgraphs
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 flex items-center justify-center text-purple-700 dark:text-purple-300 flex-shrink-0">
+                          <MapPin size={20} />
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono text-purple-400 block">
+                            Regions Covered
+                          </span>
+                          <span className="text-xs font-semibold text-purple-950 dark:text-purple-100">
+                            Tamil Nadu · Pondicherry · Kerala · India
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-7">
+                    <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#170C22] border border-purple-200/80 dark:border-purple-800/40 shadow-sm flex flex-col gap-6">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-rose-600 font-bold">
+                        Studio Concierge Direct Inquiry
+                      </span>
+
+                      {contactSubmitted ? (
+                        <div className="text-center py-10 flex flex-col items-center gap-3">
+                          <CheckCircle2 size={32} className="text-emerald-500" />
+                          <h4 className="text-xl font-bold font-hero text-purple-950 dark:text-purple-50">
+                            Message Received
+                          </h4>
+                          <p className="text-xs text-purple-800 dark:text-purple-300">
+                            Thank you. Rozar Khan will respond promptly.
+                          </p>
+                        </div>
+                      ) : (
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            setContactSubmitted(true);
+                          }}
+                          className="flex flex-col gap-4"
+                        >
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input
+                              type="text"
+                              placeholder="Your Name"
+                              required
+                              value={contactName}
+                              onChange={(e) => setContactName(e.target.value)}
+                              className="p-3.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20 text-xs text-purple-950 dark:text-white"
+                            />
+                            <input
+                              type="tel"
+                              placeholder="WhatsApp / Phone (7904943234)"
+                              required
+                              value={contactPhone}
+                              onChange={(e) => setContactPhone(e.target.value)}
+                              className="p-3.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20 text-xs font-mono text-purple-950 dark:text-white"
+                            />
+                          </div>
+
+                          <input
+                            type="email"
+                            placeholder="Email Address"
+                            value={contactEmail}
+                            onChange={(e) => setContactEmail(e.target.value)}
+                            className="p-3.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20 text-xs font-mono text-purple-950 dark:text-white"
+                          />
+
+                          <textarea
+                            placeholder="Tell us about your celebration, wedding dates, or commission vision..."
+                            rows={4}
+                            required
+                            value={contactMessage}
+                            onChange={(e) => setContactMessage(e.target.value)}
+                            className="p-3.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20 text-xs text-purple-950 dark:text-white"
+                          />
+
+                          <button
+                            type="submit"
+                            className="py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 text-white font-nav text-xs font-bold uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
+                          >
+                            <Send size={14} />
+                            <span>Transmit Message</span>
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
           </section>
         );
       })}
+
+      {/* FULL INTERACTIVE FINE ART LIGHTBOX MODAL */}
+      {selectedPhotoIndex !== null && filteredPortfolio[selectedPhotoIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-8 animate-fadeIn"
+          onClick={() => setSelectedPhotoIndex(null)}
+        >
+          {/* Top Bar */}
+          <div
+            className="flex items-center justify-between w-full z-10 max-w-7xl mx-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-rose-400 bg-rose-950/80 px-3 py-1 rounded-full border border-rose-800/60">
+                {filteredPortfolio[selectedPhotoIndex].categoryName}
+              </span>
+              <span className="text-white/60 font-mono text-xs">
+                {selectedPhotoIndex + 1} / {filteredPortfolio.length}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setWatermarkActive(!watermarkActive)}
+                className={`p-2 rounded-xl border text-xs font-mono transition-colors flex items-center gap-1.5 ${
+                  watermarkActive
+                    ? 'bg-purple-950/80 border-purple-700 text-purple-200'
+                    : 'bg-white/10 border-white/20 text-white/60'
+                }`}
+                title="Toggle Studio Watermark"
+              >
+                <Shield size={14} />
+                <span className="hidden sm:inline">Watermark</span>
+              </button>
+
+              <button
+                onClick={() => setSelectedPhotoIndex(null)}
+                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Close Lightbox"
+              >
+                <X size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Central Image Viewport with Nav Arrows */}
+          <div
+            className="relative flex-1 flex items-center justify-center my-4 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() =>
+                setSelectedPhotoIndex(
+                  (prev) => (prev! - 1 + filteredPortfolio.length) % filteredPortfolio.length,
+                )
+              }
+              className="absolute left-2 sm:left-6 z-20 p-3.5 rounded-full bg-black/60 hover:bg-purple-900/90 text-white border border-white/20 backdrop-blur-md transition-all"
+              aria-label="Previous Photo"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <div className="relative max-h-[75vh] max-w-5xl w-full h-full flex items-center justify-center">
+              <img
+                src={filteredPortfolio[selectedPhotoIndex].src}
+                alt={filteredPortfolio[selectedPhotoIndex].title}
+                className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl border border-white/10"
+              />
+
+              {/* Cultural Watermark Stamp */}
+              {watermarkActive && (
+                <div className="absolute bottom-6 right-6 pointer-events-none bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 flex flex-col items-end">
+                  <span className="font-hero text-xs font-bold text-white tracking-wider">
+                    PhotoMagic Studios by RK
+                  </span>
+                  <span className="font-tamil text-[10px] text-rose-300 font-medium">
+                    இல்லத்தின் இன்ப நிகழ்வுகள், விழிகளின் வழியே
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() =>
+                setSelectedPhotoIndex((prev) => (prev! + 1) % filteredPortfolio.length)
+              }
+              className="absolute right-2 sm:right-6 z-20 p-3.5 rounded-full bg-black/60 hover:bg-purple-900/90 text-white border border-white/20 backdrop-blur-md transition-all"
+              aria-label="Next Photo"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* Bottom Caption & Action Bar */}
+          <div
+            className="flex flex-col sm:flex-row items-center justify-between gap-4 max-w-7xl mx-auto w-full z-10 bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-rose-400 font-bold block">
+                {filteredPortfolio[selectedPhotoIndex].location} •{' '}
+                {filteredPortfolio[selectedPhotoIndex].year}
+              </span>
+              <h4 className="text-base sm:text-lg font-bold font-hero text-white mt-0.5">
+                {filteredPortfolio[selectedPhotoIndex].title}
+              </h4>
+              <p className="text-xs text-white/70 max-w-2xl mt-1">
+                {filteredPortfolio[selectedPhotoIndex].caption}
+              </p>
+            </div>
+
+            <Link href="/book">
+              <button className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 hover:opacity-95 text-white font-nav text-xs font-bold uppercase tracking-wider shadow-lg flex items-center gap-2 whitespace-nowrap">
+                <Calendar size={14} />
+                <span>Inquire For This Style</span>
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
