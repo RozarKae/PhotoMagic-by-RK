@@ -90,7 +90,7 @@ export const Navbar: React.FC = () => {
                   className={`font-nav text-[11px] uppercase tracking-[0.18em] transition-all duration-200 relative py-1 ${
                     isActive
                       ? 'text-rose-600 dark:text-rose-400 font-bold'
-                      : 'text-purple-950/80 dark:text-purple-200/80 hover:text-purple-700 dark:hover:text-purple-100 font-medium'
+                      : 'text-slate-800 dark:text-slate-200 hover:text-purple-700 dark:hover:text-purple-300 font-semibold'
                   }`}
                 >
                   {link.label}
@@ -106,14 +106,14 @@ export const Navbar: React.FC = () => {
           <div className="hidden sm:flex items-center gap-4">
             <Link
               href={ROUTES.PUBLIC.MY_EVENTS}
-              className="font-nav text-[11px] uppercase tracking-[0.16em] text-purple-900 dark:text-purple-300 hover:text-rose-600 dark:hover:text-rose-400 font-semibold transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-950/40"
+              className="font-nav text-[11px] uppercase tracking-[0.16em] text-slate-800 dark:text-slate-200 hover:text-purple-700 dark:hover:text-rose-400 font-semibold transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-purple-950/40"
             >
-              <Sparkles size={13} className="text-purple-600 dark:text-purple-400" />
+              <Sparkles size={13} className="text-amber-500" />
               <span>My Events</span>
             </Link>
 
             <Link href={ROUTES.PUBLIC.BOOKING}>
-              <button className="font-nav text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 hover:opacity-95 text-white py-2.5 px-5 rounded-xl shadow-[0_4px_15px_rgba(225,29,72,0.22)] transition-all flex items-center gap-2">
+              <button className="font-nav text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-purple-700 via-rose-600 to-purple-700 hover:opacity-95 text-white py-2.5 px-5 rounded-xl shadow-[0_4px_15px_rgba(225,29,72,0.22)] transition-all flex items-center gap-2">
                 <Calendar size={13} />
                 <span>Check Your Date</span>
               </button>
@@ -123,7 +123,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-purple-950 dark:text-purple-200 hover:text-rose-600 transition-colors"
+            className="lg:hidden p-2 text-slate-900 dark:text-white hover:text-rose-600 transition-colors"
             aria-label="Open mobile menu"
           >
             <Menu size={24} />

@@ -6,6 +6,8 @@ import {
   CmsTestimonial,
 } from '@photomagic/types';
 
+export type PackageItem = CmsPackage;
+
 export interface StudioProfile {
   name: string;
   brandName: string;

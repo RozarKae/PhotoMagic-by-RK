@@ -12,6 +12,7 @@ export const ROUTES = {
     EXPERIENCE: '/about',
     BOOKING: '/book',
     CHECK_DATE: '/book',
+    CHECKOUT: '/checkout',
     CONTACT: '/contact',
     MY_EVENTS: '/portal',
   },

@@ -28,3 +28,5 @@ export * from './components/filmstrip';
 export * from './providers/app-providers';
 export * from './design-system';
 export * from './components/cms/StudioPageRenderer';
+export * from './components/packages/PackagePreviewModal';
+export * from './components/payment/PaymentGateway';

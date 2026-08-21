@@ -11,20 +11,40 @@ const config: any = {
   theme: {
     extend: {
       colors: {
-        canvas: '#FFF5F7', // Light Rose Quartz Canvas
-        charcoal: '#FDF2F4', // Soft Rose Tint
+        canvas: '#FAF8FC', // Crisp Soft Pastel Canvas
+        charcoal: '#F5F0FA', // Soft Pastel Tint
         surface: {
           base: '#FFFFFF', // Pure Crisp White
           elevated: '#FAF5FF', // Soft Lavender Elevated Surface
-          glass: 'rgba(255, 255, 255, 0.90)',
-          dark: '#1E0A3C', // Deep Velvet Aubergine
+          glass: 'rgba(255, 255, 255, 0.94)',
+          dark: '#0F091A', // Deep Midnight Aubergine
+        },
+        pastel: {
+          lavender: '#FAF5FF',
+          lavenderBorder: '#E9D5FF',
+          lavenderText: '#6B21A8',
+          rose: '#FFF1F2',
+          roseBorder: '#FECDD3',
+          roseText: '#9F1239',
+          mint: '#F0FDF4',
+          mintBorder: '#BBF7D0',
+          mintText: '#166534',
+          amber: '#FFFBEB',
+          amberBorder: '#FDE68A',
+          amberText: '#92400E',
+          sky: '#F0F9FF',
+          skyBorder: '#BAE6FD',
+          skyText: '#075985',
+          peach: '#FFF7ED',
+          peachBorder: '#FED7AA',
+          peachText: '#9A3412',
         },
         border: {
-          subtle: 'rgba(124, 58, 237, 0.12)',
-          muted: 'rgba(0, 0, 0, 0.06)',
-          purple: 'rgba(124, 58, 237, 0.25)',
-          rose: 'rgba(225, 29, 72, 0.25)',
-          gold: 'rgba(225, 29, 72, 0.20)',
+          subtle: 'rgba(0, 0, 0, 0.08)',
+          muted: 'rgba(0, 0, 0, 0.05)',
+          purple: 'rgba(124, 58, 237, 0.20)',
+          rose: 'rgba(225, 29, 72, 0.20)',
+          gold: 'rgba(217, 119, 6, 0.20)',
         },
         purple: {
           50: '#FAF5FF',
@@ -52,29 +72,52 @@ const config: any = {
           900: '#881337',
         },
         gold: {
-          300: '#FDA4AF',
-          400: '#FB7185',
-          500: '#9333EA',
-          600: '#7E22CE',
-          700: '#581C87',
+          300: '#FDE68A',
+          400: '#FCD34D',
+          500: '#F59E0B',
+          600: '#D97706',
+          700: '#B45309',
         },
-        silver: '#6B5B7B', // Refined Plum Slate
+        emerald: {
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          300: '#86EFAC',
+          400: '#4ADE80',
+          500: '#22C55E',
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+        },
+        sky: {
+          50: '#F0F9FF',
+          100: '#E0F2FE',
+          200: '#BAE6FD',
+          300: '#7DD3FC',
+          400: '#38BDF8',
+          500: '#0EA5E9',
+          600: '#0284C7',
+          700: '#0369A1',
+          800: '#075985',
+          900: '#0C4A6E',
+        },
+        silver: '#64748B', // Crisp Slate 500
         burgundy: '#BE123C', // Deep Rose Crimson
-        emerald: '#059669',
-        ivory: '#1E0A3C', // Primary text mapped to deep aubergine for legibility
-        mutedText: '#6B5B7B', // Soft Plum Slate
+        ivory: '#111827', // Crisp Primary Dark Ink
+        mutedText: '#4B5563', // Crisp Slate 600
         text: {
-          primary: '#1E0A3C', // Deep Aubergine
-          secondary: '#4C1D95', // Royal Purple Subtext
-          tertiary: '#6B5B7B', // Slate Violet
-          dark: '#1E0A3C',
+          primary: '#111827', // Deep Slate 900 Charcoal (Ultra-crisp & visible)
+          secondary: '#374151', // Slate 700
+          tertiary: '#6B7280', // Slate 500
+          dark: '#111827',
           light: '#FFFFFF',
         },
         status: {
           success: '#059669',
           warning: '#D97706',
           error: '#E11D48',
-          info: '#7C3AED',
+          info: '#0284C7',
         },
       },
       fontFamily: {

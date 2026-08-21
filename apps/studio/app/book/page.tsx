@@ -658,26 +658,45 @@ export default function CheckYourDatePage() {
                   </span>
                 </div>
 
-                <div className="flex justify-between pt-4 border-t border-purple-100 dark:border-purple-900/40">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-purple-100 dark:border-purple-900/40">
                   <button
                     type="button"
                     onClick={() => setStep(5)}
-                    className="px-6 py-3 rounded-xl border border-purple-200 dark:border-purple-800 text-purple-950 dark:text-purple-200 font-nav text-xs font-semibold uppercase tracking-wider flex items-center gap-2"
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-purple-200 dark:border-purple-800 text-purple-950 dark:text-purple-200 font-nav text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
                   >
                     <ArrowLeft size={14} />
                     <span>Back</span>
                   </button>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600 hover:opacity-95 text-white font-nav text-xs font-bold uppercase tracking-[0.2em] shadow-lg flex items-center gap-2"
-                  >
-                    <span>
-                      {isSubmitting ? 'Recording on Timeline...' : 'Record On Our Timeline'}
-                    </span>
-                    <Sparkles size={14} />
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-purple-300 dark:border-purple-700 text-purple-950 dark:text-white font-nav text-xs font-bold uppercase tracking-wider hover:bg-purple-50 dark:hover:bg-purple-950/40"
+                    >
+                      <span>
+                        {isSubmitting ? 'Recording on Timeline...' : 'Inquire Availability First'}
+                      </span>
+                    </button>
+
+                    <Link
+                      href={`/checkout?package=${selectedPackageId}&name=${encodeURIComponent(
+                        clientName,
+                      )}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(
+                        email,
+                      )}&date=${primaryDate}&city=${encodeURIComponent(city)}`}
+                      className="w-full sm:w-auto"
+                    >
+                      <button
+                        type="button"
+                        disabled={!clientName || !phone}
+                        className="w-full px-8 py-3.5 rounded-xl bg-gradient-to-r from-purple-700 via-rose-600 to-purple-700 hover:opacity-95 disabled:opacity-50 text-white font-nav text-xs font-bold uppercase tracking-[0.18em] shadow-lg flex items-center justify-center gap-2"
+                      >
+                        <span>Proceed to Payment Gateway</span>
+                        <Sparkles size={14} />
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </form>
             )}
