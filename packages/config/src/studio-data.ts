@@ -102,6 +102,22 @@ export const STUDIO_PROFILE: StudioProfile = {
 };
 
 // =============================================================================
+// OFFICIAL STUDIO BANKING & UPI CREDENTIALS
+// =============================================================================
+
+export const STUDIO_BANKING_DETAILS = {
+  accountName: 'Rozar Khan',
+  accountNumber: '501000389071617',
+  ifscCode: 'HDFC0003734',
+  bankName: 'HDFC Bank',
+  branch: 'Madurai Heritage / Tamil Nadu',
+  upiId: 'rozarkhan@ptyes',
+  phone: '7904943234',
+  email: 'hello@batpaiyancatponnu.online',
+  website: 'https://batpaiyancatponnu.online/photomagic',
+};
+
+// =============================================================================
 // 10 OFFICIAL PHOTOGRAPHY CATEGORIES (CREATIVE + ACTUAL DUAL NAMES)
 // =============================================================================
 

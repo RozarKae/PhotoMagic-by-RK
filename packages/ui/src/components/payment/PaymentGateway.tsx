@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { DEFAULT_PACKAGES, STUDIO_PROFILE, ROUTES } from '@photomagic/config';
 import { formatCurrency } from '@photomagic/shared';
 import {
@@ -44,16 +44,20 @@ export interface PaymentGatewayProps {
 }
 
 type PaymentStructure = 'token_25' | 'milestone_50' | 'full_100';
-type PaymentMethod = 'razorpay' | 'upi_qr' | 'netbanking' | 'bank_transfer';
+type PaymentMethod = 'razorpay' | 'upi_qr' | 'bank_transfer';
 
-const POPULAR_BANKS = [
-  { id: 'hdfc', name: 'HDFC Bank', code: 'HDFC' },
-  { id: 'icici', name: 'ICICI Bank', code: 'ICIC' },
-  { id: 'sbi', name: 'State Bank of India', code: 'SBIN' },
-  { id: 'axis', name: 'Axis Bank', code: 'UTIB' },
-  { id: 'kotak', name: 'Kotak Mahindra', code: 'KKBK' },
-  { id: 'canara', name: 'Canara Bank', code: 'CNRB' },
-];
+// Official Studio Banking & UPI Credentials
+export const STUDIO_BANKING_DETAILS = {
+  accountName: 'Rozar Khan',
+  accountNumber: '501000389071617',
+  ifscCode: 'HDFC0003734',
+  bankName: 'HDFC Bank',
+  branch: 'Madurai Heritage / Tamil Nadu',
+  upiId: 'rozarkhan@ptyes',
+  phone: '7904943234',
+  email: 'hello@batpaiyancatponnu.online',
+  website: 'https://batpaiyancatponnu.online/photomagic',
+};
 
 export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
   packageId = 'pkg-obsidian',
@@ -67,6 +71,8 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
   initialClientEmail = '',
   onPaymentSuccess,
 }) => {
+  const receiptRef = useRef<HTMLDivElement>(null);
+
   // Find selected package
   const matchedPackage = useMemo(() => {
     return DEFAULT_PACKAGES.find((p) => p.id === packageId) || DEFAULT_PACKAGES[2];
@@ -101,11 +107,11 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
   // Method specific state
   const [upiUtrNumber, setUpiUtrNumber] = useState<string>('');
   const [bankUtrNumber, setBankUtrNumber] = useState<string>('');
-  const [selectedBank, setSelectedBank] = useState<string>('hdfc');
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   // Processing & Success State
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState<boolean>(false);
   const [processingStep, setProcessingStep] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isPaid, setIsPaid] = useState<boolean>(false);
@@ -140,13 +146,13 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
     }
   }, [grossTotal, paymentStructure]);
 
-  // UPI Payload string according to NPCI specifications
-  const upiVpa = '7904943234@upi';
-  const upiPayeeName = 'PhotoMagic Studios by RK';
+  // UPI Payload string according to NPCI specifications with updated rozarkhan@ptyes
+  const upiVpa = STUDIO_BANKING_DETAILS.upiId;
+  const upiPayeeName = 'Rozar Khan PhotoMagic';
   const upiPayload = useMemo(() => {
     const note = `Token for ${packageName.slice(0, 25)}`;
     return `upi://pay?pa=${upiVpa}&pn=${encodeURIComponent(upiPayeeName)}&am=${payableAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
-  }, [packageName, payableAmount]);
+  }, [packageName, payableAmount, upiVpa]);
 
   const dynamicQrUrl = useMemo(() => {
     return `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=${encodeURIComponent(upiPayload)}`;
@@ -166,10 +172,69 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
     }
   }, []);
 
+  // Pre-load html2pdf script for client-side PDF generation
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !(window as any).html2pdf) {
+      const script = document.createElement('script');
+      script.src =
+        'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   const copyToClipboard = (text: string, fieldName: string) => {
     navigator.clipboard.writeText(text);
     setCopiedField(fieldName);
     setTimeout(() => setCopiedField(null), 2000);
+  };
+
+  // PDF GENERATION & DOWNLOAD ENGINE
+  const handleDownloadPdf = async () => {
+    if (!receiptData) return;
+    setIsGeneratingPdf(true);
+
+    const filename = `PhotoMagic_Tax_Invoice_${receiptData.referenceId || 'Receipt'}.pdf`;
+
+    try {
+      // Ensure html2pdf is available
+      if (typeof window !== 'undefined' && !(window as any).html2pdf) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src =
+            'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+          script.async = true;
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error('Failed to load html2pdf'));
+          document.body.appendChild(script);
+        });
+      }
+
+      if (typeof window !== 'undefined' && (window as any).html2pdf && receiptRef.current) {
+        const element = receiptRef.current;
+        const opt = {
+          margin: [8, 8, 8, 8],
+          filename: filename,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            backgroundColor: '#FFFFFF',
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        };
+
+        await (window as any).html2pdf().set(opt).from(element).save();
+      } else {
+        window.print();
+      }
+    } catch (pdfErr) {
+      console.warn('[PDF Generation Fallback]', pdfErr);
+      window.print();
+    } finally {
+      setIsGeneratingPdf(false);
+    }
   };
 
   // 1. RAZORPAY STANDARD GATEWAY EXECUTION
@@ -476,8 +541,12 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
             </p>
           </div>
 
-          {/* Itemized Official Tax Invoice & Archival Receipt */}
-          <div className="w-full max-w-2xl p-6 sm:p-8 rounded-2xl bg-[#FAF8FC] dark:bg-purple-950/30 border border-purple-200/90 dark:border-purple-800/50 text-left flex flex-col gap-5 text-xs font-mono print:bg-white print:border-slate-400">
+          {/* Itemized Official Tax Invoice & Archival Receipt Card (Referenced for PDF Export) */}
+          <div
+            ref={receiptRef}
+            id="official-tax-invoice-receipt"
+            className="w-full max-w-2xl p-6 sm:p-8 rounded-2xl bg-[#FAF8FC] dark:bg-purple-950/30 border border-purple-200/90 dark:border-purple-800/50 text-left flex flex-col gap-5 text-xs font-mono print:bg-white print:border-slate-400"
+          >
             {/* Header branding on receipt */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-purple-800/60 pb-4 gap-2">
               <div>
@@ -582,20 +651,35 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
             </div>
 
             {/* Official Studio Footer */}
-            <div className="pt-4 border-t border-slate-200 dark:border-purple-800 text-[10px] text-slate-500 flex justify-between items-center">
-              <span>Verified by PhotoMagic Gateway Core</span>
+            <div className="pt-4 border-t border-slate-200 dark:border-purple-800 text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-1">
+              <span>Verified by PhotoMagic Gateway Core · A/C: 501000389071617</span>
               <span>Phone: +91 7904943234 · hello@batpaiyancatponnu.online</span>
             </div>
           </div>
 
           {/* Action Triggers */}
           <div className="flex flex-wrap gap-4 justify-center print:hidden">
+            {/* Generate and Download PDF button */}
+            <button
+              onClick={handleDownloadPdf}
+              disabled={isGeneratingPdf}
+              className="px-6 py-3.5 rounded-xl bg-purple-900 hover:bg-purple-800 text-white text-xs font-nav font-bold uppercase tracking-wider flex items-center gap-2 shadow-md transition-all disabled:opacity-50"
+            >
+              {isGeneratingPdf ? (
+                <RefreshCw size={15} className="animate-spin" />
+              ) : (
+                <Download size={15} />
+              )}
+              <span>{isGeneratingPdf ? 'Generating PDF...' : 'Download Tax Invoice (PDF)'}</span>
+            </button>
+
+            {/* Print button */}
             <button
               onClick={() => window.print()}
-              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-purple-700 text-slate-900 dark:text-white text-xs font-nav font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-slate-50 shadow-sm"
+              className="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-purple-700 text-slate-900 dark:text-white text-xs font-nav font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-slate-50 shadow-sm transition-all"
             >
               <Printer size={15} />
-              <span>Print / Save Tax Invoice (PDF)</span>
+              <span>Print Invoice</span>
             </button>
 
             <a
@@ -909,11 +993,13 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                           <span className="text-[10px] text-slate-500 block">
                             Official Studio UPI ID
                           </span>
-                          <span className="font-bold text-slate-900 dark:text-white">{upiVpa}</span>
+                          <span className="font-bold text-purple-950 dark:text-purple-200 text-sm">
+                            {STUDIO_BANKING_DETAILS.upiId}
+                          </span>
                         </div>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard(upiVpa, 'upi')}
+                          onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.upiId, 'upi')}
                           className="px-3 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-900 dark:text-purple-200 hover:bg-purple-100 flex items-center gap-1 font-bold"
                         >
                           {copiedField === 'upi' ? <Check size={13} /> : <Copy size={13} />}
@@ -974,17 +1060,18 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                   </span>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-800 dark:text-slate-200">
+                    {/* Account Name */}
                     <div className="p-3 bg-white dark:bg-purple-950/60 rounded-xl border border-amber-200 flex justify-between items-center">
                       <div>
                         <span className="text-[10px] text-slate-500 block">Account Name</span>
                         <span className="font-bold text-slate-900 dark:text-white">
-                          Rozar Khan (PhotoMagic Studios)
+                          {STUDIO_BANKING_DETAILS.accountName}
                         </span>
                       </div>
                       <button
                         type="button"
-                        onClick={() => copyToClipboard('Rozar Khan (PhotoMagic Studios)', 'name')}
-                        className="p-1.5 hover:bg-slate-100 rounded"
+                        onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.accountName, 'name')}
+                        className="p-1.5 hover:bg-slate-100 dark:hover:bg-purple-900 rounded"
                       >
                         {copiedField === 'name' ? (
                           <Check size={14} className="text-emerald-600" />
@@ -994,17 +1081,18 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                       </button>
                     </div>
 
+                    {/* Account Number */}
                     <div className="p-3 bg-white dark:bg-purple-950/60 rounded-xl border border-amber-200 flex justify-between items-center">
                       <div>
                         <span className="text-[10px] text-slate-500 block">Account Number</span>
-                        <span className="font-bold text-slate-900 dark:text-white">
-                          50200084920194
+                        <span className="font-bold text-slate-900 dark:text-white tracking-wider">
+                          {STUDIO_BANKING_DETAILS.accountNumber}
                         </span>
                       </div>
                       <button
                         type="button"
-                        onClick={() => copyToClipboard('50200084920194', 'acc')}
-                        className="p-1.5 hover:bg-slate-100 rounded"
+                        onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.accountNumber, 'acc')}
+                        className="p-1.5 hover:bg-slate-100 dark:hover:bg-purple-900 rounded"
                       >
                         {copiedField === 'acc' ? (
                           <Check size={14} className="text-emerald-600" />
@@ -1014,17 +1102,18 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                       </button>
                     </div>
 
+                    {/* IFSC Code */}
                     <div className="p-3 bg-white dark:bg-purple-950/60 rounded-xl border border-amber-200 flex justify-between items-center">
                       <div>
                         <span className="text-[10px] text-slate-500 block">IFSC Code</span>
                         <span className="font-bold text-slate-900 dark:text-white">
-                          HDFC0001234
+                          {STUDIO_BANKING_DETAILS.ifscCode}
                         </span>
                       </div>
                       <button
                         type="button"
-                        onClick={() => copyToClipboard('HDFC0001234', 'ifsc')}
-                        className="p-1.5 hover:bg-slate-100 rounded"
+                        onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.ifscCode, 'ifsc')}
+                        className="p-1.5 hover:bg-slate-100 dark:hover:bg-purple-900 rounded"
                       >
                         {copiedField === 'ifsc' ? (
                           <Check size={14} className="text-emerald-600" />
@@ -1034,13 +1123,25 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                       </button>
                     </div>
 
+                    {/* UPI ID */}
                     <div className="p-3 bg-white dark:bg-purple-950/60 rounded-xl border border-amber-200 flex justify-between items-center">
                       <div>
-                        <span className="text-[10px] text-slate-500 block">Bank & Branch</span>
-                        <span className="font-bold text-slate-900 dark:text-white">
-                          HDFC Bank · KK Nagar, Madurai
+                        <span className="text-[10px] text-slate-500 block">UPI ID / VPA</span>
+                        <span className="font-bold text-purple-900 dark:text-purple-300">
+                          {STUDIO_BANKING_DETAILS.upiId}
                         </span>
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.upiId, 'vpa')}
+                        className="p-1.5 hover:bg-slate-100 dark:hover:bg-purple-900 rounded"
+                      >
+                        {copiedField === 'vpa' ? (
+                          <Check size={14} className="text-emerald-600" />
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </button>
                     </div>
                   </div>
 
