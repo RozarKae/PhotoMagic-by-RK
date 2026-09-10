@@ -108,8 +108,10 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
 
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
-  // Portfolio state
+  // Portfolio state & sub-filters
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<string>('all');
+  const [selectedCultureFilter, setSelectedCultureFilter] = useState<string>('all');
+  const [selectedSettingFilter, setSelectedSettingFilter] = useState<string>('all');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [watermarkActive, setWatermarkActive] = useState<boolean>(true);
   const [shuffleKey, setShuffleKey] = useState<number>(0);
@@ -163,6 +165,16 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
       count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'engagements').length,
     },
     {
+      slug: 'pre-weddings',
+      label: 'Pre-Weddings',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'pre-weddings').length,
+    },
+    {
+      slug: 'couple-portraits',
+      label: 'Couple Portraits',
+      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'couple-portraits').length,
+    },
+    {
       slug: 'baby-shower',
       label: 'Baby Shower (Valaikappu)',
       count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'baby-shower').length,
@@ -176,16 +188,6 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
       slug: 'baby-kids',
       label: 'Baby / Kids',
       count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'baby-kids').length,
-    },
-    {
-      slug: 'pre-weddings',
-      label: 'Pre-Weddings',
-      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'pre-weddings').length,
-    },
-    {
-      slug: 'couple-portraits',
-      label: 'Couple Portraits',
-      count: CMS_PORTFOLIO_ITEMS.filter((i) => i.category === 'couple-portraits').length,
     },
     {
       slug: 'maternity',
@@ -214,10 +216,29 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
     },
   ];
 
-  const filteredPortfolio =
-    selectedCategoryTab === 'all'
-      ? CMS_PORTFOLIO_ITEMS
-      : CMS_PORTFOLIO_ITEMS.filter((item) => item.category === selectedCategoryTab);
+  const filteredPortfolio = CMS_PORTFOLIO_ITEMS.filter((item) => {
+    // Primary Category Filter
+    if (selectedCategoryTab !== 'all' && item.category !== selectedCategoryTab) {
+      return false;
+    }
+    // Culture Sub-Filter (Tamil / Malayali)
+    if (selectedCultureFilter !== 'all') {
+      const matchCulture =
+        item.culture === selectedCultureFilter ||
+        item.region?.toLowerCase().includes(selectedCultureFilter.toLowerCase()) ||
+        item.tags?.includes(selectedCultureFilter.toLowerCase());
+      if (!matchCulture) return false;
+    }
+    // Location Setting Sub-Filter (Beach, Houseboat, Heritage, Nature, Resort)
+    if (selectedSettingFilter !== 'all') {
+      const matchSetting =
+        item.setting?.toLowerCase() === selectedSettingFilter.toLowerCase() ||
+        item.tags?.includes(selectedSettingFilter.toLowerCase()) ||
+        item.caption.toLowerCase().includes(selectedSettingFilter.toLowerCase());
+      if (!matchSetting) return false;
+    }
+    return true;
+  });
 
   const getCategoryPastelStyle = (slug: string) => {
     switch (slug) {
@@ -551,28 +572,10 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
 
             {/* 2. PHILOSOPHY SECTION */}
             {section.type === 'philosophy' && (
-              <div className="py-24 px-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                  <div className="lg:col-span-5 relative">
-                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-purple-200 dark:border-purple-900/40 shadow-museum">
-                      <img
-                        src="/images/hindu_wedding_ceremony.png"
-                        alt="PhotoMagic Philosophy"
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 dark:bg-[#170C22]/95 backdrop-blur-md border border-slate-200 dark:border-purple-800/40 shadow-lg">
-                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-400 font-bold block">
-                          Studio Philosophy
-                        </span>
-                        <p className="font-hero text-xs font-bold text-slate-900 dark:text-purple-100 mt-1">
-                          "Knowing what to add, what to remove, and what to intentionally skip."
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-7 flex flex-col gap-6">
+              <div className="py-20 lg:py-24 px-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                  {/* Content Column (Left on Desktop, First on Mobile) */}
+                  <div className="order-1 lg:order-1 lg:col-span-7 flex flex-col gap-6">
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-rose-600" />
                       <span className="font-nav text-[10px] uppercase tracking-[0.25em] text-rose-700 dark:text-rose-400 font-bold">
@@ -600,6 +603,26 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                         </span>
                         <p className="text-sm sm:text-base font-semibold text-slate-900 dark:text-purple-100 italic mt-1 leading-snug">
                           "{STUDIO_PROFILE.clientReactionQuote}"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Balanced Image Column (Right on Desktop, Compact on Tablet/Mobile) */}
+                  <div className="order-2 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end w-full">
+                    <div className="relative w-full max-w-[300px] sm:max-w-[350px] lg:max-w-[340px] xl:max-w-[370px] aspect-[4/5] rounded-3xl overflow-hidden border border-purple-200 dark:border-purple-900/40 shadow-museum group">
+                      <img
+                        src="/images/hindu_wedding_ceremony.png"
+                        alt="PhotoMagic Philosophy"
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-2xl bg-white/95 dark:bg-[#170C22]/95 backdrop-blur-md border border-slate-200 dark:border-purple-800/40 shadow-lg">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-400 font-bold block">
+                          Studio Philosophy
+                        </span>
+                        <p className="font-hero text-xs font-bold text-slate-900 dark:text-purple-100 mt-1">
+                          "Knowing what to add, what to remove, and what to intentionally skip."
                         </p>
                       </div>
                     </div>
@@ -752,32 +775,32 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                         {
                           border:
                             'border-slate-300 bg-white dark:bg-slate-900/60 hover:border-slate-500',
-                          pill: 'bg-slate-900 text-white border-slate-900',
-                          btn: 'bg-slate-900 hover:bg-slate-800 text-white',
+                          pill: 'bg-slate-900 text-white border-slate-900 dark:bg-slate-100 dark:text-slate-900 dark:border-slate-100',
+                          btn: 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200',
                         },
                         {
                           border:
                             'border-sky-300 bg-sky-50/50 dark:bg-sky-950/30 hover:border-sky-500',
-                          pill: 'bg-sky-100 text-sky-900 border-sky-300',
-                          btn: 'bg-sky-800 hover:bg-sky-700 text-white',
+                          pill: 'bg-sky-100 text-sky-900 border-sky-300 dark:bg-sky-950/80 dark:text-sky-300 dark:border-sky-700',
+                          btn: 'bg-sky-800 hover:bg-sky-700 text-white dark:bg-sky-600 dark:hover:bg-sky-500',
                         },
                         {
                           border:
                             'border-purple-300 bg-purple-50/50 dark:bg-purple-950/30 hover:border-purple-500',
-                          pill: 'bg-purple-100 text-purple-900 border-purple-300',
-                          btn: 'bg-purple-800 hover:bg-purple-700 text-white',
+                          pill: 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-950/80 dark:text-purple-300 dark:border-purple-700',
+                          btn: 'bg-purple-800 hover:bg-purple-700 text-white dark:bg-purple-600 dark:hover:bg-purple-500',
                         },
                         {
                           border:
                             'border-amber-300 bg-amber-50/50 dark:bg-amber-950/30 hover:border-amber-500',
-                          pill: 'bg-amber-100 text-amber-900 border-amber-300',
-                          btn: 'bg-amber-800 hover:bg-amber-700 text-white',
+                          pill: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-700',
+                          btn: 'bg-amber-800 hover:bg-amber-700 text-white dark:bg-amber-600 dark:hover:bg-amber-500',
                         },
                         {
                           border:
                             'border-emerald-300 bg-emerald-50/50 dark:bg-emerald-950/30 hover:border-emerald-500',
-                          pill: 'bg-emerald-100 text-emerald-900 border-emerald-300',
-                          btn: 'bg-emerald-800 hover:bg-emerald-700 text-white',
+                          pill: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-700',
+                          btn: 'bg-emerald-800 hover:bg-emerald-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-500',
                         },
                       ];
                       const style = tierPastels[pIdx % tierPastels.length];
@@ -1016,7 +1039,7 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
             {section.type === 'portfolio-grid' && (
               <div className="py-12 px-6 max-w-7xl mx-auto w-full">
                 {/* Category Navigation Pills with Counts & Pastel Colors */}
-                <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
                   {portfolioCategories.map((cat) => {
                     const pastel = getCategoryPastelStyle(cat.slug);
                     const isSelected = selectedCategoryTab === cat.slug;
@@ -1044,6 +1067,59 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                       </button>
                     );
                   })}
+                </div>
+
+                {/* Sub-Filters for Cultural & Location Settings */}
+                <div className="flex flex-wrap items-center justify-center gap-4 mb-10 pb-4 border-b border-slate-200/80 dark:border-purple-900/40">
+                  {/* Culture & Regional Filter */}
+                  <div className="flex items-center gap-1.5 bg-white dark:bg-purple-950/40 p-1.5 rounded-2xl border border-slate-200 dark:border-purple-800/40 shadow-sm">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-700 dark:text-rose-400 px-2">
+                      Culture:
+                    </span>
+                    {[
+                      { key: 'all', label: 'All South India' },
+                      { key: 'Tamil', label: 'Tamil Nadu' },
+                      { key: 'Malayali', label: 'Kerala / Malayali' },
+                    ].map((c) => (
+                      <button
+                        key={c.key}
+                        onClick={() => setSelectedCultureFilter(c.key)}
+                        className={`px-3 py-1 rounded-xl text-[10px] font-nav uppercase tracking-wider transition-all ${
+                          selectedCultureFilter === c.key
+                            ? 'bg-purple-900 text-white font-bold shadow-sm'
+                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-purple-900/40 font-medium'
+                        }`}
+                      >
+                        {c.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Location Setting Filter */}
+                  <div className="flex items-center gap-1.5 bg-white dark:bg-purple-950/40 p-1.5 rounded-2xl border border-slate-200 dark:border-purple-800/40 shadow-sm">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-700 dark:text-purple-400 px-2">
+                      Setting:
+                    </span>
+                    {[
+                      { key: 'all', label: 'All Environments' },
+                      { key: 'beach', label: 'Coast & Beach' },
+                      { key: 'houseboat', label: 'Backwaters / Boathouse' },
+                      { key: 'heritage', label: 'Heritage & Palace' },
+                      { key: 'nature', label: 'Forest & Hills' },
+                    ].map((s) => (
+                      <button
+                        key={s.key}
+                        onClick={() => setSelectedSettingFilter(s.key)}
+                        className={`px-3 py-1 rounded-xl text-[10px] font-nav uppercase tracking-wider transition-all ${
+                          selectedSettingFilter === s.key
+                            ? 'bg-rose-700 text-white font-bold shadow-sm'
+                            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-purple-900/40 font-medium'
+                        }`}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Asymmetric Fine Art Masonry Gallery */}
@@ -1093,29 +1169,29 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                 {CMS_SERVICES.map((service, sIdx) => {
                   const pastelThemes = [
                     {
-                      border: 'border-rose-200/90',
-                      bg: 'bg-rose-50/40',
-                      pill: 'bg-rose-100 text-rose-900 border-rose-300',
+                      border: 'border-rose-200/90 dark:border-rose-900/40',
+                      bg: 'bg-rose-50/40 dark:bg-rose-950/20',
+                      pill: 'bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-700',
                     },
                     {
-                      border: 'border-amber-200/90',
-                      bg: 'bg-amber-50/40',
-                      pill: 'bg-amber-100 text-amber-900 border-amber-300',
+                      border: 'border-amber-200/90 dark:border-amber-900/40',
+                      bg: 'bg-amber-50/40 dark:bg-amber-950/20',
+                      pill: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-700',
                     },
                     {
-                      border: 'border-emerald-200/90',
-                      bg: 'bg-emerald-50/40',
-                      pill: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+                      border: 'border-emerald-200/90 dark:border-emerald-900/40',
+                      bg: 'bg-emerald-50/40 dark:bg-emerald-950/20',
+                      pill: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-700',
                     },
                     {
-                      border: 'border-sky-200/90',
-                      bg: 'bg-sky-50/40',
-                      pill: 'bg-sky-100 text-sky-900 border-sky-300',
+                      border: 'border-sky-200/90 dark:border-sky-900/40',
+                      bg: 'bg-sky-50/40 dark:bg-sky-950/20',
+                      pill: 'bg-sky-100 text-sky-900 border-sky-300 dark:bg-sky-950/80 dark:text-sky-300 dark:border-sky-700',
                     },
                     {
-                      border: 'border-purple-200/90',
-                      bg: 'bg-purple-50/40',
-                      pill: 'bg-purple-100 text-purple-900 border-purple-300',
+                      border: 'border-purple-200/90 dark:border-purple-900/40',
+                      bg: 'bg-purple-50/40 dark:bg-purple-950/20',
+                      pill: 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-950/80 dark:text-purple-300 dark:border-purple-700',
                     },
                   ];
                   const theme = pastelThemes[sIdx % pastelThemes.length];

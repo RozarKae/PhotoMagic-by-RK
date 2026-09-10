@@ -11,13 +11,13 @@ const config: any = {
   theme: {
     extend: {
       colors: {
-        canvas: '#FAF8FC', // Crisp Soft Pastel Canvas
-        charcoal: '#F5F0FA', // Soft Pastel Tint
+        canvas: 'var(--color-canvas, #FAF8FC)',
+        charcoal: 'var(--color-surface-elevated, #F5F0FA)',
         surface: {
-          base: '#FFFFFF', // Pure Crisp White
-          elevated: '#FAF5FF', // Soft Lavender Elevated Surface
-          glass: 'rgba(255, 255, 255, 0.94)',
-          dark: '#0F091A', // Deep Midnight Aubergine
+          base: 'var(--color-surface-base, #FFFFFF)',
+          elevated: 'var(--color-surface-elevated, #FAF5FF)',
+          glass: 'var(--color-surface-glass, rgba(255, 255, 255, 0.94))',
+          dark: '#0E0617',
         },
         pastel: {
           lavender: '#FAF5FF',
@@ -102,15 +102,15 @@ const config: any = {
           800: '#075985',
           900: '#0C4A6E',
         },
-        silver: '#64748B', // Crisp Slate 500
-        burgundy: '#BE123C', // Deep Rose Crimson
-        ivory: '#111827', // Crisp Primary Dark Ink
-        mutedText: '#4B5563', // Crisp Slate 600
+        silver: 'var(--color-silver, #64748B)',
+        burgundy: '#BE123C',
+        ivory: 'var(--color-ivory, #0F172A)',
+        mutedText: 'var(--color-text-secondary, #475569)',
         text: {
-          primary: '#111827', // Deep Slate 900 Charcoal (Ultra-crisp & visible)
-          secondary: '#374151', // Slate 700
-          tertiary: '#6B7280', // Slate 500
-          dark: '#111827',
+          primary: 'var(--color-text-primary, #0F172A)',
+          secondary: 'var(--color-text-secondary, #334155)',
+          tertiary: 'var(--color-text-tertiary, #64748B)',
+          dark: '#0F172A',
           light: '#FFFFFF',
         },
         status: {

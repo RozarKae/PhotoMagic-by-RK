@@ -11,7 +11,7 @@
 @layer base {
   body {
     background-color: var(--color-canvas, #FAF8FC);
-    color: var(--color-text-primary, #111827);
+    color: var(--color-text-primary, #0F172A);
     font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Plus Jakarta Sans', 'Inter', 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -30,6 +30,8 @@
 
   /* Dark mode subtle ambient lights */
   html.dark body {
+    background-color: var(--color-canvas, #0E0617);
+    color: var(--color-text-primary, #F8FAFC);
     background-image:
       radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.10) 0%, transparent 60%),
       radial-gradient(ellipse at 85% 100%, rgba(216, 177, 90, 0.06) 0%, transparent 60%),
@@ -41,14 +43,34 @@
     font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
     letter-spacing: -0.02em;
     font-weight: 800;
-    color: var(--color-text-primary, #111827);
+    color: var(--color-text-primary, #0F172A);
+  }
+  html.dark h1, html.dark .font-hero {
+    color: var(--color-text-primary, #F8FAFC);
   }
 
   h2, h3, h4, .font-heading {
     font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', 'Inter', 'Anek Tamil', sans-serif;
     letter-spacing: -0.015em;
     font-weight: 700;
-    color: var(--color-text-primary, #111827);
+    color: var(--color-text-primary, #0F172A);
+  }
+  html.dark h2, html.dark h3, html.dark h4, html.dark .font-heading {
+    color: var(--color-text-primary, #F8FAFC);
+  }
+
+  p {
+    color: var(--color-text-secondary, #334155);
+  }
+  html.dark p {
+    color: var(--color-text-secondary, #E2E8F0);
+  }
+
+  label {
+    color: var(--color-text-secondary, #334155);
+  }
+  html.dark label {
+    color: var(--color-text-secondary, #E2E8F0);
   }
 
   .font-body {

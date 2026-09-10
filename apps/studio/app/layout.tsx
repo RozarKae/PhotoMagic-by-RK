@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`light ${inter.variable} ${plusJakarta.variable} ${greatVibes.variable} ${ibmMono.variable} ${notoTamil.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-[var(--color-canvas,#FFF5F7)] text-[var(--color-text-primary,#1E0A3C)] antialiased min-h-screen font-body selection:bg-purple-200 selection:text-purple-900 dark:selection:bg-purple-900 dark:selection:text-purple-100">
+      <body className="bg-[var(--color-canvas,#FAF8FC)] text-[var(--color-text-primary,#0F172A)] dark:bg-[#0E0617] dark:text-[#F8FAFC] antialiased min-h-screen font-body selection:bg-purple-200 selection:text-purple-900 dark:selection:bg-purple-900 dark:selection:text-purple-100 transition-colors duration-300">
         <AppProviders>
           <OttLoader />
           {children}

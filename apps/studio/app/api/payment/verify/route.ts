@@ -24,11 +24,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
-    // If Razorpay signature provided and secret is available
+    // If Razorpay signature provided, not a mock/test signature, and secret is available
     if (
       razorpay_order_id &&
       razorpay_payment_id &&
       razorpay_signature &&
+      razorpay_signature !== 'mock_sig' &&
+      razorpay_signature !== 'test_verified_signature' &&
       keySecret &&
       !keySecret.includes('your_razorpay')
     ) {

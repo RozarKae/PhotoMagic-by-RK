@@ -18,15 +18,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        'bg-[#141414] text-ivory font-semibold border border-gold-500/60 shadow-watch hover:border-gold-500 hover:shadow-kodakGlow hover:text-gold-300 rounded-lg',
+        'bg-gradient-to-r from-purple-700 via-purple-600 to-rose-600 text-white font-bold shadow-[0_4px_16px_rgba(124,58,237,0.3)] hover:opacity-95 hover:shadow-[0_6px_22px_rgba(225,29,72,0.35)] rounded-xl border border-white/20',
       secondary:
-        'bg-[#1D1D1D] text-ivory border border-border-subtle hover:border-silver/40 hover:bg-[#242424] hover:text-silver rounded-lg',
+        'bg-purple-50 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100 border border-purple-200 dark:border-purple-800/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 rounded-xl shadow-sm',
       outline:
-        'bg-transparent text-gold-400 border border-gold-500/50 hover:bg-gold-500/10 hover:border-gold-500 hover:shadow-kodakGlow rounded-lg',
+        'bg-transparent text-purple-900 dark:text-purple-200 border border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-950/40 rounded-xl',
       ghost:
-        'bg-transparent text-silver/80 border border-transparent hover:text-ivory hover:bg-[#1D1D1D] rounded-lg',
+        'bg-transparent text-slate-800 dark:text-purple-200 border border-transparent hover:text-purple-900 dark:hover:text-white hover:bg-purple-100/50 dark:hover:bg-purple-950/40 rounded-xl',
       danger:
-        'bg-burgundy/30 text-red-300 border border-burgundy hover:bg-burgundy hover:text-white rounded-lg',
+        'bg-rose-600 text-white border border-rose-700 hover:bg-rose-700 shadow-sm rounded-xl',
     };
 
     const sizes = {

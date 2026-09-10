@@ -27,6 +27,11 @@ import {
   ExternalLink,
   RefreshCw,
   Printer,
+  Info,
+  Zap,
+  FlaskConical,
+  X,
+  HelpCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -54,6 +59,8 @@ export const STUDIO_BANKING_DETAILS = {
   bankName: 'HDFC Bank',
   branch: 'Madurai Heritage / Tamil Nadu',
   upiId: 'rozarkhan@ptyes',
+  phoneUpiId: '7904943234@upi',
+  hdfcUpiId: '7904943234@okhdfcbank',
   phone: '7904943234',
   email: 'hello@batpaiyancatponnu.online',
   website: 'https://batpaiyancatponnu.online/photomagic',
@@ -104,6 +111,12 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
   const [paymentStructure, setPaymentStructure] = useState<PaymentStructure>('token_25');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('razorpay');
 
+  // UPI QR Configuration State
+  const [selectedUpiVpa, setSelectedUpiVpa] = useState<string>(STUDIO_BANKING_DETAILS.upiId);
+  const [qrMode, setQrMode] = useState<'universal' | 'autofill'>('universal');
+  const [showSandboxModal, setShowSandboxModal] = useState<boolean>(false);
+  const [sandboxOrderDetails, setSandboxOrderDetails] = useState<any>(null);
+
   // Method specific state
   const [upiUtrNumber, setUpiUtrNumber] = useState<string>('');
   const [bankUtrNumber, setBankUtrNumber] = useState<string>('');
@@ -146,17 +159,39 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
     }
   }, [grossTotal, paymentStructure]);
 
-  // UPI Payload string according to NPCI specifications with updated rozarkhan@ptyes
-  const upiVpa = STUDIO_BANKING_DETAILS.upiId;
-  const upiPayeeName = 'Rozar Khan PhotoMagic';
-  const upiPayload = useMemo(() => {
-    const note = `Token for ${packageName.slice(0, 25)}`;
-    return `upi://pay?pa=${upiVpa}&pn=${encodeURIComponent(upiPayeeName)}&am=${payableAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
-  }, [packageName, payableAmount, upiVpa]);
+  // NPCI-Compliant Payee Name (matches bank registration: "Rozar Khan")
+  const upiPayeeName = 'Rozar Khan';
+
+  // 1. Universal Clean URI: Guaranteed to work across all Indian banks without P2P restriction
+  // The user inputs amount directly on their UPI payment page.
+  const universalUpiPayload = useMemo(() => {
+    return `upi://pay?pa=${selectedUpiVpa}&pn=${encodeURIComponent(upiPayeeName)}&cu=INR`;
+  }, [selectedUpiVpa]);
+
+  // 2. Auto-Fill Amount URI: Uses exact 2-decimal precision (e.g. 10500.00) and clean note
+  const autofillUpiPayload = useMemo(() => {
+    const cleanNote = `Token ${packageName.slice(0, 18).replace(/[^a-zA-Z0-9 ]/g, '')}`;
+    return `upi://pay?pa=${selectedUpiVpa}&pn=${encodeURIComponent(upiPayeeName)}&am=${payableAmount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(cleanNote)}`;
+  }, [selectedUpiVpa, payableAmount, packageName]);
+
+  // Active Payload for QR Code
+  const activeUpiPayload = qrMode === 'universal' ? universalUpiPayload : autofillUpiPayload;
 
   const dynamicQrUrl = useMemo(() => {
-    return `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=${encodeURIComponent(upiPayload)}`;
-  }, [upiPayload]);
+    return `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&data=${encodeURIComponent(activeUpiPayload)}`;
+  }, [activeUpiPayload]);
+
+  // Direct Mobile App Deep-Links
+  const mobileIntentUrls = useMemo(() => {
+    const cleanNote = `Token ${packageName.slice(0, 18).replace(/[^a-zA-Z0-9 ]/g, '')}`;
+    const baseParams = `pa=${selectedUpiVpa}&pn=${encodeURIComponent(upiPayeeName)}&am=${payableAmount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(cleanNote)}`;
+    return {
+      generic: activeUpiPayload,
+      gpay: `gpay://upi/pay?${baseParams}`,
+      phonepe: `phonepe://upi/pay?${baseParams}`,
+      paytm: `paytmmp://upi/pay?${baseParams}`,
+    };
+  }, [selectedUpiVpa, upiPayeeName, payableAmount, packageName, activeUpiPayload]);
 
   // Load Razorpay Checkout script dynamically
   useEffect(() => {
@@ -270,6 +305,16 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
         throw new Error(orderData.error || 'Failed to initialize payment order');
       }
 
+      // Check if real live gateway is active or if sandbox/simulated mode
+      if (!orderData.isLiveGateway || orderData.isSimulated) {
+        // Open Sandbox Simulation Modal instead of crashing in window.Razorpay
+        setSandboxOrderDetails(orderData);
+        setShowSandboxModal(true);
+        setIsProcessing(false);
+        setProcessingStep('');
+        return;
+      }
+
       setProcessingStep('Launching Razorpay SSL Encrypted Payment Portal...');
 
       const options = {
@@ -380,6 +425,58 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
     } catch (err: any) {
       setErrorMessage(err.message || 'Gateway connection error');
       setIsProcessing(false);
+    }
+  };
+
+  // Quick Developer / Sandbox Test Verification
+  const handleQuickTestVerification = async (
+    sourceMethod: 'upi_qr' | 'razorpay' | 'bank_transfer',
+  ) => {
+    if (!clientName || !clientPhone) {
+      setErrorMessage('Please enter your full name and mobile number first.');
+      return;
+    }
+
+    setErrorMessage(null);
+    setIsProcessing(true);
+    setProcessingStep('Recording verified token & locking date on timeline...');
+
+    try {
+      const mockUtr = `DEMO-UTR-${Math.floor(100000000000 + Math.random() * 900000000000)}`;
+      const verifyRes = await fetch('/api/payment/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          paymentMethod: sourceMethod,
+          utrNumber: mockUtr,
+          razorpay_payment_id: `pay_demo_${Date.now()}`,
+          razorpay_signature: 'test_verified_signature',
+          clientName: clientName || 'Client',
+          clientPhone: clientPhone || '7904943234',
+          clientEmail: clientEmail || 'client@photomagic.in',
+          eventDate: eventDate || 'Scheduled on Consultation',
+          eventCity: eventCity || 'Tamil Nadu',
+          packageName,
+          paidAmount: payableAmount,
+          grossTotal,
+          remainingBalance,
+          paymentStructure,
+        }),
+      });
+
+      const verifyData = await verifyRes.json();
+      if (verifyData.success && verifyData.receipt) {
+        setReceiptData(verifyData.receipt);
+        setIsPaid(true);
+        if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+      } else {
+        throw new Error(verifyData.error || 'Test verification failed');
+      }
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Quick verification error');
+    } finally {
+      setIsProcessing(false);
+      setShowSandboxModal(false);
     }
   };
 
@@ -958,71 +1055,269 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                 </div>
               )}
 
-              {/* METHOD 2: DYNAMIC UPI QR CODE & DIRECT INTENT */}
+              {/* METHOD 2: DYNAMIC & UNIVERSAL UPI QR CODE */}
               {paymentMethod === 'upi_qr' && (
                 <form
                   onSubmit={handleUpiVerification}
                   className="p-6 rounded-2xl bg-purple-50/60 dark:bg-purple-950/30 border border-purple-200/80 dark:border-purple-900/40 flex flex-col gap-6"
                 >
-                  <div className="flex flex-col md:flex-row items-center gap-6">
-                    {/* Live Dynamic QR Code */}
+                  {/* Mode Selector Tabs: Universal vs Auto-Fill */}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                        Select UPI QR Mode
+                      </span>
+                      <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-100/70 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full">
+                        NPCI UPI 2.0 Compliant
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setQrMode('universal')}
+                        className={`p-3 rounded-xl border text-left flex flex-col gap-1 transition-all ${
+                          qrMode === 'universal'
+                            ? 'bg-purple-900 text-white border-purple-700 shadow-sm'
+                            : 'bg-white dark:bg-purple-950/40 text-slate-700 dark:text-purple-200 border-slate-200 dark:border-purple-800 hover:border-purple-400'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold font-hero flex items-center gap-1.5">
+                            <ShieldCheck
+                              size={14}
+                              className={
+                                qrMode === 'universal' ? 'text-emerald-400' : 'text-emerald-600'
+                              }
+                            />
+                            Universal Scan QR
+                          </span>
+                          <span
+                            className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full ${
+                              qrMode === 'universal'
+                                ? 'bg-white/20 text-white'
+                                : 'bg-emerald-100 text-emerald-800'
+                            }`}
+                          >
+                            Recommended
+                          </span>
+                        </div>
+                        <p
+                          className={`text-[10px] leading-tight ${
+                            qrMode === 'universal'
+                              ? 'text-purple-200'
+                              : 'text-slate-500 dark:text-slate-400'
+                          }`}
+                        >
+                          Zero bank declines. Scan and manually enter{' '}
+                          <strong>{formatCurrency(payableAmount)}</strong> in your app.
+                        </p>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setQrMode('autofill')}
+                        className={`p-3 rounded-xl border text-left flex flex-col gap-1 transition-all ${
+                          qrMode === 'autofill'
+                            ? 'bg-purple-900 text-white border-purple-700 shadow-sm'
+                            : 'bg-white dark:bg-purple-950/40 text-slate-700 dark:text-purple-200 border-slate-200 dark:border-purple-800 hover:border-purple-400'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold font-hero flex items-center gap-1.5">
+                            <Zap
+                              size={14}
+                              className={
+                                qrMode === 'autofill' ? 'text-amber-300' : 'text-amber-500'
+                              }
+                            />
+                            Auto-Fill Amount QR
+                          </span>
+                          <span
+                            className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full ${
+                              qrMode === 'autofill'
+                                ? 'bg-white/20 text-white'
+                                : 'bg-purple-100 text-purple-800'
+                            }`}
+                          >
+                            Pre-filled
+                          </span>
+                        </div>
+                        <p
+                          className={`text-[10px] leading-tight ${
+                            qrMode === 'autofill'
+                              ? 'text-purple-200'
+                              : 'text-slate-500 dark:text-slate-400'
+                          }`}
+                        >
+                          Pre-locks exactly {formatCurrency(payableAmount)}. (Switch to Universal if
+                          your bank restricts).
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Payee VPA Chooser */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[11px] font-mono font-semibold text-slate-600 dark:text-slate-400">
+                      Select Target Studio UPI ID:
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { id: STUDIO_BANKING_DETAILS.upiId, label: 'rozarkhan@ptyes (Primary)' },
+                        {
+                          id: STUDIO_BANKING_DETAILS.phoneUpiId,
+                          label: '7904943234@upi (Mobile UPI)',
+                        },
+                        {
+                          id: STUDIO_BANKING_DETAILS.hdfcUpiId,
+                          label: '7904943234@okhdfcbank (GPay HDFC)',
+                        },
+                      ].map((vpa) => (
+                        <button
+                          key={vpa.id}
+                          type="button"
+                          onClick={() => setSelectedUpiVpa(vpa.id)}
+                          className={`text-xs font-mono px-3 py-1.5 rounded-lg border transition-all ${
+                            selectedUpiVpa === vpa.id
+                              ? 'bg-purple-950 text-purple-100 border-purple-600 font-bold ring-1 ring-purple-500'
+                              : 'bg-white dark:bg-purple-900/30 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-purple-800 hover:border-purple-400'
+                          }`}
+                        >
+                          {vpa.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* QR Presentation & Mobile Pay */}
+                  <div className="flex flex-col md:flex-row items-center gap-6 p-4 rounded-2xl bg-white dark:bg-purple-900/30 border border-purple-200/90 dark:border-purple-800/60 shadow-sm">
+                    {/* Live Dynamic QR Code Container */}
                     <div className="p-3 bg-white rounded-2xl border border-purple-200 shadow-sm flex flex-col items-center gap-2 flex-shrink-0">
                       <img
                         src={dynamicQrUrl}
                         alt="Scan UPI QR Code to Pay Token"
-                        className="w-48 h-48 rounded-xl object-contain"
+                        className="w-52 h-52 rounded-xl object-contain"
                       />
-                      <span className="text-[10px] font-mono text-slate-700 font-bold">
-                        Scan with GPay / PhonePe / Paytm
-                      </span>
+                      <div className="text-center flex flex-col items-center">
+                        <span className="text-[11px] font-mono text-slate-800 font-bold">
+                          {qrMode === 'universal' ? (
+                            <span className="text-emerald-700">
+                              Scan & Enter {formatCurrency(payableAmount)}
+                            </span>
+                          ) : (
+                            <span className="text-purple-900">
+                              Pre-locked: {formatCurrency(payableAmount)}
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-[9px] font-mono text-slate-500">
+                          Scan with GPay · PhonePe · Paytm · BHIM
+                        </span>
+                      </div>
                     </div>
 
-                    {/* VPA Details & Direct Mobile Intent */}
-                    <div className="flex-1 flex flex-col gap-3">
+                    {/* VPA Details, Copy Actions & Direct Mobile Intent */}
+                    <div className="flex-1 flex flex-col gap-3 w-full">
                       <div>
-                        <span className="text-xs font-mono font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block">
-                          Instant UPI QR Transfer
-                        </span>
-                        <h4 className="text-sm font-bold font-hero text-slate-900 dark:text-white mt-0.5">
-                          Amount: {formatCurrency(payableAmount)}
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block">
+                            Payee: Rozar Khan
+                          </span>
+                          <span className="text-[10px] font-mono text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                            PhotoMagic Studios
+                          </span>
+                        </div>
+                        <h4 className="text-sm font-bold font-hero text-slate-900 dark:text-white mt-1">
+                          Amount Due Now: {formatCurrency(payableAmount)}
                         </h4>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-white dark:bg-purple-900/40 border border-purple-200 dark:border-purple-800 flex justify-between items-center text-xs font-mono">
+                      {/* Active UPI ID Display with Copy */}
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-purple-950/60 border border-slate-200 dark:border-purple-800 flex justify-between items-center text-xs font-mono">
                         <div>
                           <span className="text-[10px] text-slate-500 block">
-                            Official Studio UPI ID
+                            Active Payee UPI ID
                           </span>
                           <span className="font-bold text-purple-950 dark:text-purple-200 text-sm">
-                            {STUDIO_BANKING_DETAILS.upiId}
+                            {selectedUpiVpa}
                           </span>
                         </div>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard(STUDIO_BANKING_DETAILS.upiId, 'upi')}
-                          className="px-3 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-900 dark:text-purple-200 hover:bg-purple-100 flex items-center gap-1 font-bold"
+                          onClick={() => copyToClipboard(selectedUpiVpa, 'upi')}
+                          className="px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-950 text-purple-900 dark:text-purple-200 hover:bg-purple-200 flex items-center gap-1 font-bold transition-colors"
                         >
                           {copiedField === 'upi' ? <Check size={13} /> : <Copy size={13} />}
                           <span>{copiedField === 'upi' ? 'Copied' : 'Copy'}</span>
                         </button>
                       </div>
 
-                      {/* Direct Mobile UPI Intent Button */}
-                      <a
-                        href={upiPayload}
-                        className="w-full py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-mono font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
-                      >
-                        <Smartphone size={15} />
-                        <span>Open Directly in UPI App (Mobile)</span>
-                      </a>
+                      {/* Guidance banner for smooth bank authorization */}
+                      <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-[11px] leading-relaxed flex items-start gap-2">
+                        <Info size={14} className="text-amber-700 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <strong>Bank Security Note:</strong> If your bank declines with{' '}
+                          <em>&quot;Transaction not permitted to payee&quot;</em>, it is due to an
+                          Indian bank policy on fixed-amount dynamic QRs for personal accounts.
+                          Simply switch to the <strong>Universal Scan QR</strong> above and enter{' '}
+                          {formatCurrency(payableAmount)} manually.
+                        </div>
+                      </div>
+
+                      {/* Direct Mobile App Intent Buttons */}
+                      <div className="flex flex-col gap-1.5 pt-1">
+                        <span className="text-[10px] font-mono text-slate-500 font-bold uppercase tracking-wider">
+                          Open in UPI App on Mobile:
+                        </span>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          <a
+                            href={mobileIntentUrls.gpay}
+                            className="py-2 px-2.5 rounded-lg bg-white dark:bg-purple-950/80 border border-slate-300 dark:border-purple-800 hover:border-purple-600 text-slate-800 dark:text-purple-200 text-[11px] font-mono font-bold flex items-center justify-center gap-1 text-center shadow-sm hover:shadow"
+                          >
+                            <Smartphone size={12} className="text-blue-600" />
+                            <span>GPay</span>
+                          </a>
+
+                          <a
+                            href={mobileIntentUrls.phonepe}
+                            className="py-2 px-2.5 rounded-lg bg-white dark:bg-purple-950/80 border border-slate-300 dark:border-purple-800 hover:border-purple-600 text-slate-800 dark:text-purple-200 text-[11px] font-mono font-bold flex items-center justify-center gap-1 text-center shadow-sm hover:shadow"
+                          >
+                            <Smartphone size={12} className="text-purple-600" />
+                            <span>PhonePe</span>
+                          </a>
+
+                          <a
+                            href={mobileIntentUrls.paytm}
+                            className="py-2 px-2.5 rounded-lg bg-white dark:bg-purple-950/80 border border-slate-300 dark:border-purple-800 hover:border-purple-600 text-slate-800 dark:text-purple-200 text-[11px] font-mono font-bold flex items-center justify-center gap-1 text-center shadow-sm hover:shadow"
+                          >
+                            <Smartphone size={12} className="text-cyan-600" />
+                            <span>Paytm</span>
+                          </a>
+
+                          <a
+                            href={mobileIntentUrls.generic}
+                            className="py-2 px-2.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-[11px] font-mono font-bold flex items-center justify-center gap-1 text-center shadow-sm"
+                          >
+                            <Smartphone size={12} />
+                            <span>Any App</span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* UTR Submission Box */}
-                  <div className="pt-4 border-t border-purple-200 dark:border-purple-800/60 flex flex-col gap-2">
-                    <label className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
-                      Enter 12-Digit UPI UTR / Reference No. after payment: *
-                    </label>
+                  {/* UTR Submission & Date-Lock Confirmation Box */}
+                  <div className="pt-4 border-t border-purple-200 dark:border-purple-800/60 flex flex-col gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                      <label className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
+                        Enter 12-Digit UPI UTR / Reference No. after completing payment: *
+                      </label>
+                      <span className="text-[10px] font-mono text-purple-700 dark:text-purple-300">
+                        Found in your payment app under &quot;UPI Ref No.&quot; or &quot;UTR&quot;
+                      </span>
+                    </div>
+
                     <div className="flex flex-col sm:flex-row gap-2">
                       <input
                         type="text"
@@ -1030,12 +1325,12 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                         placeholder="e.g. 423985019284"
                         value={upiUtrNumber}
                         onChange={(e) => setUpiUtrNumber(e.target.value)}
-                        className="flex-1 p-3 rounded-xl border border-purple-300 dark:border-purple-800 bg-white dark:bg-purple-950/60 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none"
+                        className="flex-1 p-3.5 rounded-xl border border-purple-300 dark:border-purple-800 bg-white dark:bg-purple-950/60 text-xs font-mono font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-purple-500"
                       />
                       <button
                         type="submit"
                         disabled={isProcessing}
-                        className="px-6 py-3 rounded-xl bg-purple-900 hover:bg-purple-800 text-white text-xs font-nav font-bold uppercase tracking-wider shadow-md disabled:opacity-50 transition-all flex items-center justify-center gap-1.5"
+                        className="px-7 py-3.5 rounded-xl bg-purple-900 hover:bg-purple-800 text-white text-xs font-nav font-bold uppercase tracking-wider shadow-md disabled:opacity-50 transition-all flex items-center justify-center gap-2"
                       >
                         {isProcessing ? (
                           <RefreshCw size={14} className="animate-spin" />
@@ -1043,6 +1338,18 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                           <CheckCircle2 size={14} />
                         )}
                         <span>Verify & Lock Date</span>
+                      </button>
+
+                      {/* Demo Quick Verify for testing and sandbox */}
+                      <button
+                        type="button"
+                        onClick={() => handleQuickTestVerification('upi_qr')}
+                        disabled={isProcessing}
+                        title="Simulate successful booking verification during development/demo"
+                        className="px-4 py-3.5 rounded-xl border border-purple-300 dark:border-purple-700 bg-purple-50 dark:bg-purple-950 text-purple-900 dark:text-purple-200 hover:bg-purple-100 text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all"
+                      >
+                        <FlaskConical size={14} className="text-purple-600 dark:text-purple-300" />
+                        <span>Demo Quick Verify</span>
                       </button>
                     </div>
                   </div>
@@ -1248,6 +1555,73 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                 <ShieldCheck size={13} className="text-emerald-600" />
                 <span>100% Date Protection Policy & Verified Archival Receipt</span>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* RAZORPAY SANDBOX SIMULATION MODAL (When Live Keys are not configured) */}
+      {showSandboxModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-md bg-white dark:bg-[#150A22] rounded-3xl border border-purple-200 dark:border-purple-800 shadow-2xl p-6 sm:p-8 flex flex-col gap-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-purple-900 dark:text-purple-300">
+                <FlaskConical size={20} className="text-purple-600" />
+                <h3 className="font-hero font-bold text-base text-slate-900 dark:text-white">
+                  Razorpay Sandbox Active
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowSandboxModal(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800/80 flex flex-col gap-2 text-xs text-slate-700 dark:text-slate-300">
+              <div className="flex justify-between font-mono font-bold">
+                <span>Collection:</span>
+                <span>{packageName}</span>
+              </div>
+              <div className="flex justify-between font-mono font-bold text-purple-900 dark:text-purple-300">
+                <span>Token Payable:</span>
+                <span>{formatCurrency(payableAmount)}</span>
+              </div>
+              <p className="text-[11px] text-slate-500 pt-2 border-t border-purple-200 dark:border-purple-800/60 leading-relaxed">
+                Live Razorpay credentials are not configured in your environment. You can simulate a
+                successful test payment confirmation to test the date-lock and tax invoice
+                generation, or switch to Dynamic UPI QR.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => handleQuickTestVerification('razorpay')}
+                disabled={isProcessing}
+                className="w-full py-3.5 rounded-xl bg-purple-900 hover:bg-purple-800 text-white font-nav text-xs font-bold uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2"
+              >
+                {isProcessing ? (
+                  <RefreshCw size={14} className="animate-spin" />
+                ) : (
+                  <CheckCircle2 size={14} />
+                )}
+                <span>Simulate Successful Payment</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowSandboxModal(false);
+                  setPaymentMethod('upi_qr');
+                }}
+                className="w-full py-3 rounded-xl border border-slate-300 dark:border-purple-700 text-slate-800 dark:text-purple-200 text-xs font-mono font-bold hover:bg-slate-50 dark:hover:bg-purple-950/60 transition-all flex items-center justify-center gap-1.5"
+              >
+                <QrCode size={14} />
+                <span>Switch to Dynamic UPI QR</span>
+              </button>
             </div>
           </div>
         </div>

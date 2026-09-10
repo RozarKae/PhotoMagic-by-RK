@@ -86,7 +86,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       amount: amountInPaise,
       currency: 'INR',
       keyId: keyId || 'rzp_test_photomagic_demo',
-      isLiveGateway: Boolean(keyId && !keyId.includes('your_key')),
+      isLiveGateway: false,
+      isSimulated: true,
       receiptId,
       notes: {
         package_name: packageName,
