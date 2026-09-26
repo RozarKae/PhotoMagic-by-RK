@@ -54,6 +54,6 @@ export const BRAND = {
   tagline: 'Moments Through Our Eyes • Fine Art Photography & Cinema',
   domain: 'batpaiyancatponnu.online/photomagic',
   osDomain: 'os.batpaiyancatponnu.online',
-  phone: '7904943234',
+  phone: '7904933234',
   instagram: 'rkae_photographs',
 };

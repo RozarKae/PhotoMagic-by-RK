@@ -1368,7 +1368,7 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                             />
                             <input
                               type="tel"
-                              placeholder="WhatsApp Number (e.g. 7904943234)"
+                              placeholder="WhatsApp Number (e.g. 7904933234)"
                               value={bookPhone}
                               onChange={(e) => setBookPhone(e.target.value)}
                               className="p-3.5 rounded-xl border border-slate-300 dark:border-purple-800 bg-slate-50/50 dark:bg-purple-950/30 text-xs font-mono text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-purple-500 outline-none"
@@ -1437,7 +1437,7 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                             Phone / WhatsApp
                           </span>
                           <a
-                            href="tel:7904943234"
+                            href={`tel:${STUDIO_PROFILE.contact.phone}`}
                             className="text-base font-bold font-mono text-slate-900 dark:text-white hover:text-rose-600"
                           >
                             {STUDIO_PROFILE.contact.phone}
@@ -1454,12 +1454,12 @@ export const StudioPageRenderer: React.FC<StudioPageRendererProps> = ({
                             WhatsApp Direct
                           </span>
                           <a
-                            href="https://wa.me/917904943234"
+                            href={`https://wa.me/91${STUDIO_PROFILE.contact.phone}`}
                             target="_blank"
                             rel="noreferrer"
                             className="text-base font-bold font-mono text-emerald-800 hover:underline"
                           >
-                            +91 7904943234
+                            +91 {STUDIO_PROFILE.contact.phone}
                           </a>
                         </div>
                       </div>

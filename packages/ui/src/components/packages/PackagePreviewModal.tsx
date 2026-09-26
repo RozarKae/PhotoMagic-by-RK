@@ -380,7 +380,7 @@ export const PackagePreviewModal: React.FC<PackagePreviewModalProps> = ({
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <a
-              href={`https://wa.me/917904943234?text=Hi%20Rozar%20Khan,%20I%20am%20interested%20in%20${encodeURIComponent(
+              href={`https://wa.me/917904933234?text=Hi%20Rozar%20Khan,%20I%20am%20interested%20in%20${encodeURIComponent(
                 packageData.name,
               )}%20for%20my%20event.`}
               target="_blank"

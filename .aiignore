@@ -1,0 +1,39 @@
+# AI Context & Indexing Ignore Rules for PhotoMagic Monorepo
+# Prevents token bloat, slow indexing, and context degradation during AI prompts
+
+# Media and Image Directories (Binary & Large Dumps)
+apps/*/public/images/**
+public/images/**
+assets/**
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.svg
+*.ico
+*.mp4
+*.mov
+
+# Large Static JSON Manifests and Config Matrices
+packages/config/src/prewedding-pipeline-config.json
+packages/config/src/prewedding-generation-manifest.json
+
+# Lockfiles and Package Managers
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs & caches
+.turbo/**
+.next/**
+dist/**
+build/**
+out/**
+coverage/**
+*.tsbuildinfo
+
+# Logs & System artifacts
+*.log
+.DS_Store
+Thumbs.db

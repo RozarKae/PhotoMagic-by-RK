@@ -62,7 +62,7 @@ export const STUDIO_BANKING_DETAILS = {
   phoneUpiId: '7904943234@upi',
   hdfcUpiId: '7904943234@okhdfcbank',
   phone: '7904943234',
-  email: 'hello@batpaiyancatponnu.online',
+  email: 'photomagicphotographystudio@gmail.com',
   website: 'https://batpaiyancatponnu.online/photomagic',
 };
 
@@ -750,7 +750,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
             {/* Official Studio Footer */}
             <div className="pt-4 border-t border-slate-200 dark:border-purple-800 text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-1">
               <span>Verified by PhotoMagic Gateway Core · A/C: 501000389071617</span>
-              <span>Phone: +91 7904943234 · hello@batpaiyancatponnu.online</span>
+              <span>Phone: +91 7904943234 · photomagicphotographystudio@gmail.com</span>
             </div>
           </div>
 

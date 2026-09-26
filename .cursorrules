@@ -1,0 +1,15 @@
+# PhotoMagic Cursor Rules
+
+1. **Monorepo Boundaries**:
+   - `apps/*` MUST import UI, configs, and types exclusively from `@photomagic/*` (`@photomagic/ui`, `@photomagic/config`, `@photomagic/types`, etc.).
+   - NEVER cross-import between `apps/studio` and `apps/os`.
+
+2. **Design Language**:
+   - Aesthetic: Luxury, dark mode, high typography precision.
+   - Use tokens: `gold-500`, `surface-base`, `surface-elevated`, `text-primary`, `border-subtle`.
+   - Always prioritize existing `@photomagic/ui` components (`Card`, `Badge`, `Button`, `Input`).
+
+3. **Performance & Prompt Speed**:
+   - For AI inference, use cached actions in `apps/os/app/actions/ai-inference-actions.ts`.
+   - Never load or modify `packages/config/src/studio-data.ts` or large JSON manifests in bulk unless explicitly instructed.
+   - Verify code using `pnpm run type-check`.

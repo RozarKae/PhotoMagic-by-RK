@@ -1,0 +1,38 @@
+# Cursor & AI Context Indexing Ignore Rules for PhotoMagic Monorepo
+
+# Media and Image Directories
+apps/*/public/images/**
+public/images/**
+assets/**
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.svg
+*.ico
+*.mp4
+*.mov
+
+# Large Static JSON Manifests
+packages/config/src/prewedding-pipeline-config.json
+packages/config/src/prewedding-generation-manifest.json
+
+# Lockfiles
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs & caches
+.turbo/**
+.next/**
+dist/**
+build/**
+out/**
+coverage/**
+*.tsbuildinfo
+
+# Logs & System artifacts
+*.log
+.DS_Store
+Thumbs.db

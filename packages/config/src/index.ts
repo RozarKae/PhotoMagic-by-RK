@@ -40,3 +40,4 @@ export * from './studio-intelligence-v10-schemas';
 export * from './studio-data';
 export * from './website-registry';
 export * from './website-cms-store';
+export * from './prompt-cache';

@@ -1,5 +1,7 @@
 'use server';
 
+import { globalPromptCache } from '@photomagic/config';
+
 export interface InferenceResult<T> {
   success: boolean;
   data?: T;
@@ -18,22 +20,35 @@ export interface InferenceResult<T> {
 
 const LOCAL_WORKER_URL = process.env.LOCAL_AI_WORKER_URL || 'http://127.0.0.1:8000';
 
+let localWorkerHealthy: boolean | null = null;
+let lastProbeTime = 0;
+const PROBE_TTL_MS = 60_000; // Cache status for 60 seconds
+
 /**
  * Check if the local high-performance Python FastAPI worker is running.
+ * Uses a circuit breaker pattern with 60s TTL to avoid blocking cloud fallbacks by 600ms per call.
  */
 async function isLocalWorkerAvailable(): Promise<boolean> {
+  const now = Date.now();
+  if (localWorkerHealthy !== null && now - lastProbeTime < PROBE_TTL_MS) {
+    return localWorkerHealthy;
+  }
+
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 600); // 600ms quick probe
+    const timeoutId = setTimeout(() => controller.abort(), 200); // 200ms snappy probe
     const res = await fetch(`${LOCAL_WORKER_URL}/health`, {
       signal: controller.signal,
       cache: 'no-store',
     });
     clearTimeout(timeoutId);
-    return res.ok;
+    localWorkerHealthy = res.ok;
   } catch {
-    return false;
+    localWorkerHealthy = false;
   }
+
+  lastProbeTime = now;
+  return localWorkerHealthy;
 }
 
 /**
@@ -402,6 +417,24 @@ export async function generateImageImagenAction(
     aspectRatio: string;
   }>
 > {
+  const cacheKey = globalPromptCache.hashKey('imagen-3.0', prompt, { aspectRatio });
+  const cached =
+    globalPromptCache.get<
+      InferenceResult<{ imageUrl: string; promptUsed: string; aspectRatio: string }>
+    >(cacheKey);
+
+  if (cached && cached.success) {
+    return {
+      ...cached,
+      telemetry: {
+        ...cached.telemetry,
+        latencyMs: 2,
+        accelerator: 'In-Memory Prompt Cache (Instant)',
+        timestamp: new Date().toISOString(),
+      },
+    };
+  }
+
   const startTime = Date.now();
   const geminiKey = process.env.GEMINI_API_KEY;
 
@@ -431,7 +464,11 @@ export async function generateImageImagenAction(
         const base64Bytes = json.predictions?.[0]?.bytesBase64Encoded;
         if (base64Bytes) {
           const latencyMs = Date.now() - startTime;
-          return {
+          const result: InferenceResult<{
+            imageUrl: string;
+            promptUsed: string;
+            aspectRatio: string;
+          }> = {
             success: true,
             data: {
               imageUrl: `data:image/png;base64,${base64Bytes}`,
@@ -446,12 +483,18 @@ export async function generateImageImagenAction(
               accelerator: 'Google Cloud TPU v5e',
             },
           };
+          globalPromptCache.set(cacheKey, result, 7200);
+          return result;
         }
       }
     }
 
     const latencyMs = Date.now() - startTime;
-    return {
+    const fallbackResult: InferenceResult<{
+      imageUrl: string;
+      promptUsed: string;
+      aspectRatio: string;
+    }> = {
       success: true,
       data: {
         imageUrl:
@@ -467,6 +510,8 @@ export async function generateImageImagenAction(
         accelerator: 'Google Cloud TPU Cluster',
       },
     };
+    globalPromptCache.set(cacheKey, fallbackResult, 3600);
+    return fallbackResult;
   } catch (err: any) {
     return {
       success: false,
@@ -496,6 +541,36 @@ export async function analyzePhotoQualityGeminiAction(imageInput: string): Promi
     analysisNotes: string;
   }>
 > {
+  const cacheKey = globalPromptCache.hashKey(
+    'gemini-2.0-flash-vision',
+    imageInput.length > 300
+      ? imageInput.slice(0, 150) + imageInput.slice(-150) + imageInput.length
+      : imageInput,
+  );
+  const cached = globalPromptCache.get<
+    InferenceResult<{
+      overallScore: number;
+      lightingQuality: string;
+      eyesOpenRating: number;
+      smileNaturalness: number;
+      cullingRecommendation: 'KEEP' | 'REVIEW' | 'REJECT';
+      suggestedTags: string[];
+      analysisNotes: string;
+    }>
+  >(cacheKey);
+
+  if (cached && cached.success) {
+    return {
+      ...cached,
+      telemetry: {
+        ...cached.telemetry,
+        latencyMs: 2,
+        accelerator: 'In-Memory Prompt Cache (Instant)',
+        timestamp: new Date().toISOString(),
+      },
+    };
+  }
+
   const startTime = Date.now();
   const geminiKey = process.env.GEMINI_API_KEY;
 
@@ -539,7 +614,15 @@ export async function analyzePhotoQualityGeminiAction(imageInput: string): Promi
         if (rawText) {
           const parsed = JSON.parse(rawText);
           const latencyMs = Date.now() - startTime;
-          return {
+          const result: InferenceResult<{
+            overallScore: number;
+            lightingQuality: string;
+            eyesOpenRating: number;
+            smileNaturalness: number;
+            cullingRecommendation: 'KEEP' | 'REVIEW' | 'REJECT';
+            suggestedTags: string[];
+            analysisNotes: string;
+          }> = {
             success: true,
             data: parsed,
             telemetry: {
@@ -550,12 +633,22 @@ export async function analyzePhotoQualityGeminiAction(imageInput: string): Promi
               accelerator: 'Google Cloud TPU v5e',
             },
           };
+          globalPromptCache.set(cacheKey, result, 7200);
+          return result;
         }
       }
     }
 
     const latencyMs = Date.now() - startTime;
-    return {
+    const fallbackResult: InferenceResult<{
+      overallScore: number;
+      lightingQuality: string;
+      eyesOpenRating: number;
+      smileNaturalness: number;
+      cullingRecommendation: 'KEEP' | 'REVIEW' | 'REJECT';
+      suggestedTags: string[];
+      analysisNotes: string;
+    }> = {
       success: true,
       data: {
         overallScore: 96,
@@ -575,6 +668,8 @@ export async function analyzePhotoQualityGeminiAction(imageInput: string): Promi
         accelerator: 'Google Cloud TPU Cluster',
       },
     };
+    globalPromptCache.set(cacheKey, fallbackResult, 3600);
+    return fallbackResult;
   } catch (err: any) {
     return {
       success: false,
