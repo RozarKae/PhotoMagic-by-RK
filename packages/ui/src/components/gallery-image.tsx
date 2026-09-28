@@ -4,6 +4,7 @@ import React, { memo } from 'react';
 import { CloudinaryImage } from './cloudinary-image';
 import { Badge } from './badge';
 import { Heart, Eye, Download, Sparkles } from 'lucide-react';
+import { useSoundFX } from '../hooks/use-sound-fx';
 
 export interface GalleryImageProps {
   id: string;
@@ -35,9 +36,12 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
     onDownload,
     className = '',
   }) => {
+    const { playHoverTick, playMicroClick, playGlassTap, playSuccessChime } = useSoundFX();
+
     return (
       <div
-        className={`group relative rounded-xl overflow-hidden bg-[#1D1D1D] border border-white/10 hover:border-gold-500/50 transition-all duration-300 shadow-museum ${className}`}
+        onMouseEnter={playHoverTick}
+        className={`group relative rounded-xl overflow-hidden bg-[#1D1D1D] border border-white/10 hover:border-gold-500/60 transition-all duration-500 shadow-museum hover:shadow-2xl hover:-translate-y-1.5 cursor-pointer will-change-transform ${className}`}
       >
         {/* Cloudinary Image Display */}
         <CloudinaryImage
@@ -47,7 +51,7 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
           alt={title || 'Gallery Image'}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="w-full h-full transform group-hover:scale-108 transition-transform duration-700 ease-out"
         />
 
         {/* Badges Overlay (Top Bar) */}
@@ -67,7 +71,7 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
         </div>
 
         {/* Hover Action Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-4">
           {title && (
             <h4 className="font-heading font-bold text-ivory text-sm truncate mb-1">{title}</h4>
           )}
@@ -89,8 +93,11 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
           <div className="flex items-center justify-between pt-2 border-t border-white/10">
             <button
               type="button"
-              onClick={() => onSelect?.(id)}
-              className="flex items-center gap-1.5 text-xs font-semibold text-ivory hover:text-gold-400 transition-colors"
+              onClick={() => {
+                playMicroClick();
+                onSelect?.(id);
+              }}
+              className="flex items-center gap-1.5 text-xs font-semibold text-ivory hover:text-gold-400 transition-colors active:scale-95"
             >
               <Eye size={15} />
               <span>Preview</span>
@@ -99,8 +106,11 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => onToggleFavorite?.(id)}
-                className={`p-2 rounded-lg transition-colors ${
+                onClick={() => {
+                  playGlassTap();
+                  onToggleFavorite?.(id);
+                }}
+                className={`p-2 rounded-lg transition-all active:scale-90 ${
                   isFavorite
                     ? 'text-red-500 bg-red-500/10 border border-red-500/30'
                     : 'text-silver hover:text-ivory bg-white/10 hover:bg-white/20'
@@ -113,8 +123,11 @@ export const GalleryImage: React.FC<GalleryImageProps> = memo(
               {onDownload && (
                 <button
                   type="button"
-                  onClick={() => onDownload?.(id)}
-                  className="p-2 rounded-lg text-silver hover:text-gold-400 bg-white/10 hover:bg-white/20 transition-colors"
+                  onClick={() => {
+                    playSuccessChime();
+                    onDownload?.(id);
+                  }}
+                  className="p-2 rounded-lg text-silver hover:text-gold-400 bg-white/10 hover:bg-white/20 transition-all active:scale-90"
                   aria-label="Download Image"
                 >
                   <Download size={15} />

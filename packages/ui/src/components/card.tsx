@@ -8,10 +8,11 @@ function cn(...inputs: ClassValue[]) {
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'glass' | 'elevated' | 'outline';
+  interactive?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'glass', children, ...props }, ref) => {
+  ({ className, variant = 'glass', interactive = false, children, ...props }, ref) => {
     const variants = {
       glass:
         'bg-white/95 dark:bg-[#170C22]/95 backdrop-blur-xl border border-purple-200/80 dark:border-purple-800/40 text-slate-900 dark:text-white shadow-museum hover:border-rose-400 dark:hover:border-purple-400/50 hover:shadow-kodakGlow',
@@ -25,7 +26,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          'rounded-xl p-6 transition-all duration-500 ease-out relative overflow-hidden film-case film-case-hover',
+          'rounded-xl p-6 transition-all duration-300 ease-out relative overflow-hidden film-case film-case-hover',
+          interactive &&
+            'hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer active:scale-[0.99] will-change-transform',
           variants[variant],
           className,
         )}

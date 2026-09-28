@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Calendar, Sparkles, ArrowUpRight, Camera } from 'lucide-react';
 import { ROUTES, STUDIO_PROFILE } from '@photomagic/config';
+import { useSoundFX } from '@photomagic/ui';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
+  const { playHoverTick, playMicroClick } = useSoundFX();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,6 +89,8 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onMouseEnter={playHoverTick}
+                  onClick={playMicroClick}
                   className={`font-nav text-[11px] uppercase tracking-[0.18em] transition-all duration-200 relative py-1 ${
                     isActive
                       ? 'text-rose-600 dark:text-rose-400 font-bold'
@@ -106,6 +110,8 @@ export const Navbar: React.FC = () => {
           <div className="hidden sm:flex items-center gap-4">
             <Link
               href={ROUTES.PUBLIC.MY_EVENTS}
+              onMouseEnter={playHoverTick}
+              onClick={playMicroClick}
               className="font-nav text-[11px] uppercase tracking-[0.16em] text-slate-800 dark:text-slate-200 hover:text-purple-700 dark:hover:text-rose-400 font-semibold transition-colors flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-purple-950/40"
             >
               <Sparkles size={13} className="text-amber-500" />
@@ -113,7 +119,11 @@ export const Navbar: React.FC = () => {
             </Link>
 
             <Link href={ROUTES.PUBLIC.BOOKING}>
-              <button className="font-nav text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-purple-700 via-rose-600 to-purple-700 hover:opacity-95 text-white py-2.5 px-5 rounded-xl shadow-[0_4px_15px_rgba(225,29,72,0.22)] transition-all flex items-center gap-2">
+              <button
+                onMouseEnter={playHoverTick}
+                onClick={playMicroClick}
+                className="font-nav text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-purple-700 via-rose-600 to-purple-700 hover:opacity-95 active:scale-95 text-white py-2.5 px-5 rounded-xl shadow-[0_4px_15px_rgba(225,29,72,0.22)] transition-all flex items-center gap-2"
+              >
                 <Calendar size={13} />
                 <span>Check Your Date</span>
               </button>

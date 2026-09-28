@@ -13,13 +13,14 @@ import {
   VolumeX,
 } from 'lucide-react';
 import { ROUTES, STUDIO_PROFILE } from '@photomagic/config';
+import { SoundToggle, useSoundFX } from '@photomagic/ui';
 
 export const FloatingControls: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentTheme, setCurrentTheme] = useState('lavender');
   const [showThemePicker, setShowThemePicker] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const { playGlassTap, playMicroClick } = useSoundFX();
 
   useEffect(() => {
     // Check initial system / stored dark mode
@@ -51,6 +52,7 @@ export const FloatingControls: React.FC = () => {
   }, []);
 
   const toggleDarkMode = () => {
+    playMicroClick();
     const nextDark = !isDarkMode;
     setIsDarkMode(nextDark);
     if (nextDark) {
@@ -63,6 +65,7 @@ export const FloatingControls: React.FC = () => {
   };
 
   const handleSelectTheme = (theme: string) => {
+    playGlassTap();
     // Remove previous theme class
     const themeClasses = [
       'theme-lavender',
@@ -81,6 +84,7 @@ export const FloatingControls: React.FC = () => {
   };
 
   const scrollToTop = () => {
+    playMicroClick();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -162,6 +166,9 @@ export const FloatingControls: React.FC = () => {
         >
           <Palette size={16} />
         </button>
+
+        {/* Sound Haptics Toggle */}
+        <SoundToggle size="md" />
 
         {/* Light / Dark Mode Toggle */}
         <button

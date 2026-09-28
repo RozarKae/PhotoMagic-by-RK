@@ -35,6 +35,7 @@ import {
   HardDrive,
   LucideIcon,
 } from 'lucide-react';
+import { useSoundFX } from '@photomagic/ui';
 
 interface NavGroup {
   groupName: string;
@@ -138,6 +139,8 @@ export const Sidebar: React.FC = () => {
     })
     .filter((group) => group.items.length > 0);
 
+  const { playHoverTick, playMicroClick } = useSoundFX();
+
   return (
     <aside
       className={`relative h-screen bg-[#090909] border-r border-gold-500/20 flex flex-col justify-between transition-all duration-300 z-40 selection:bg-gold-500 selection:text-black film-grain ${
@@ -163,8 +166,11 @@ export const Sidebar: React.FC = () => {
         </div>
 
         <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1.5 rounded-lg text-silver hover:text-ivory hover:bg-[#1D1D1D] transition-colors"
+          onClick={() => {
+            playMicroClick();
+            setIsCollapsed(!isCollapsed);
+          }}
+          className="p-1.5 rounded-lg text-silver hover:text-ivory hover:bg-[#1D1D1D] transition-colors active:scale-95"
           aria-label="Toggle Sidebar"
         >
           {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
@@ -192,7 +198,9 @@ export const Sidebar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-nav text-[11px] uppercase tracking-wider font-semibold transition-all ${
+                  onMouseEnter={playHoverTick}
+                  onClick={playMicroClick}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-nav text-[11px] uppercase tracking-wider font-semibold transition-all active:scale-[0.98] ${
                     isActive
                       ? 'bg-[#1D1D1D] text-gold-400 border border-gold-500/50 shadow-kodakGlow'
                       : 'text-silver hover:text-ivory hover:bg-[#141414]'

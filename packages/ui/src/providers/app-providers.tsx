@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@photomagic/auth';
+import { SoundProvider } from '../hooks/use-sound-fx';
 
 export interface AppProvidersProps {
   children: React.ReactNode;
@@ -31,7 +32,9 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <SoundProvider>{children}</SoundProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };

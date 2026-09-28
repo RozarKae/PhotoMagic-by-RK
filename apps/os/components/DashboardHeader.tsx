@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Bell, Sparkles } from 'lucide-react';
-import { Input, Avatar } from '@photomagic/ui';
+import { Input, Avatar, SoundToggle, useSoundFX } from '@photomagic/ui';
 
 interface DashboardHeaderProps {
   onToggleNotifications: () => void;
@@ -16,6 +16,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [userRole, setUserRole] = useState<string>('Studio Owner');
   const [userEmail, setUserEmail] = useState<string>('admin@photomagic.studio');
+  const { playMicroClick } = useSoundFX();
 
   React.useEffect(() => {
     const roleMatch = document.cookie.match(/photomagic_user_role=([^;]+)/);
@@ -58,13 +59,19 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <span>Gemini AI Engine Active</span>
         </div>
 
+        {/* Acoustic Sound Haptics Toggle */}
+        <SoundToggle variant="minimal" size="sm" />
+
         {/* Notifications Bell */}
         <button
-          onClick={onToggleNotifications}
+          onClick={() => {
+            playMicroClick();
+            onToggleNotifications();
+          }}
           aria-label="Toggle Notifications"
-          className="relative p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-elevated transition-colors"
+          className="relative p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-elevated transition-colors active:scale-95"
         >
-          <Bell size={20} />
+          <Bell size={18} />
           {unreadCount > 0 && (
             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
           )}

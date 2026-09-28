@@ -1,5 +1,8 @@
+'use client';
+
 import * as React from 'react';
 import { Home, Image as ImageIcon, CheckCircle, User } from 'lucide-react';
+import { useSoundFX } from '../hooks/use-sound-fx';
 
 export interface DockItem {
   id: string;
@@ -10,6 +13,8 @@ export interface DockItem {
 }
 
 export const MobileNavigationDock: React.FC<{ items?: DockItem[] }> = ({ items }) => {
+  const { playMicroClick, playHoverTick } = useSoundFX();
+
   const defaultItems: DockItem[] = items || [
     { id: 'home', label: 'Home', icon: <Home size={20} />, active: true, onClick: () => {} },
     {
@@ -34,8 +39,12 @@ export const MobileNavigationDock: React.FC<{ items?: DockItem[] }> = ({ items }
       {defaultItems.map((item) => (
         <button
           key={item.id}
-          onClick={item.onClick}
-          className={`flex flex-col items-center justify-center gap-1 text-xs transition-colors ${
+          onMouseEnter={playHoverTick}
+          onClick={() => {
+            playMicroClick();
+            item.onClick();
+          }}
+          className={`flex flex-col items-center justify-center gap-1 text-xs transition-all duration-200 active:scale-90 ${
             item.active
               ? 'text-gold-500 font-semibold'
               : 'text-text-tertiary hover:text-text-primary'

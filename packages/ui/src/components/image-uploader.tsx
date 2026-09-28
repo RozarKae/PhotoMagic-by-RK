@@ -5,6 +5,7 @@ import { Button } from './button';
 import { UploadQueue, UploadQueueItem } from './upload-queue';
 import { UploadCloud, Folder, FileCheck, AlertCircle } from 'lucide-react';
 import { CloudinaryFolderType } from '@photomagic/storage';
+import { useSoundFX } from '../hooks/use-sound-fx';
 
 export interface ImageUploaderProps {
   clientId?: string;
@@ -48,6 +49,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   const [queue, setQueue] = useState<UploadQueueItem[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { playDragGrab, playDragDrop, playSuccessChime } = useSoundFX();
 
   const handleFilesAdded = (files: File[]) => {
     if (files.length === 0) return;
@@ -157,6 +159,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           .filter((i) => i.status === 'success' && i.publicId && i.secureUrl)
           .map((i) => ({ publicId: i.publicId!, secureUrl: i.secureUrl! }));
         if (completed.length > 0) {
+          playSuccessChime();
           onUploadComplete?.(completed);
         }
         return finalQueue;
@@ -209,12 +212,16 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
       <div
         onDragOver={(e) => {
           e.preventDefault();
-          setIsDragOver(true);
+          if (!isDragOver) {
+            playDragGrab();
+            setIsDragOver(true);
+          }
         }}
         onDragLeave={() => setIsDragOver(false)}
         onDrop={(e) => {
           e.preventDefault();
           setIsDragOver(false);
+          playDragDrop();
           if (e.dataTransfer.files) {
             handleFilesAdded(Array.from(e.dataTransfer.files));
           }

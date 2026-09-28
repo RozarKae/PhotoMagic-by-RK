@@ -30,3 +30,8 @@ export * from './design-system';
 export * from './components/cms/StudioPageRenderer';
 export * from './components/packages/PackagePreviewModal';
 export * from './components/payment/PaymentGateway';
+export * from './hooks/use-sound-fx';
+export * from './components/sound-toggle';
+export * from './components/draggable-item';
+export * from './components/interactive-tilt-card';
+export * from './components/interactive-button';
