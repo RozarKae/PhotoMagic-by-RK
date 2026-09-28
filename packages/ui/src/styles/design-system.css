@@ -1,4 +1,497 @@
-@import './theme.css';
-@import './typography.css';
-@import './animations.css';
-@import './utilities.css';
+/* ========================================================================= */
+/* PhotoMagic Design System — Consolidated Core Tokens & Utilities           */
+/* Self-contained bundle: Zero fragile nested @imports for rock-solid HMR    */
+/* ========================================================================= */
+
+:root {
+  /* ========================================================================= */
+  /* LIGHT MODE (DEFAULT): Multi-Pastel Luxury Palette (All Major Colors)     */
+  /* ========================================================================= */
+  --color-canvas: #FAF8FC;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FAF5FF;
+  --color-surface-glass: rgba(255, 255, 255, 0.94);
+  --color-surface-light: #F7F3FB;
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-border-elevated: rgba(124, 58, 237, 0.18);
+  --color-border-gold: rgba(217, 119, 6, 0.25);
+
+  /* 1. Pastel Lilac & Lavender */
+  --color-pastel-lavender-bg: #FAF5FF;
+  --color-pastel-lavender-border: #E9D5FF;
+  --color-pastel-lavender-text: #6B21A8;
+
+  /* 2. Pastel Rose & Blush */
+  --color-pastel-rose-bg: #FFF1F2;
+  --color-pastel-rose-border: #FECDD3;
+  --color-pastel-rose-text: #9F1239;
+
+  /* 3. Pastel Mint & Sage */
+  --color-pastel-mint-bg: #F0FDF4;
+  --color-pastel-mint-border: #BBF7D0;
+  --color-pastel-mint-text: #166534;
+
+  /* 4. Pastel Amber & Buttercream */
+  --color-pastel-amber-bg: #FFFBEB;
+  --color-pastel-amber-border: #FDE68A;
+  --color-pastel-amber-text: #92400E;
+
+  /* 5. Pastel Sky & Periwinkle */
+  --color-pastel-sky-bg: #F0F9FF;
+  --color-pastel-sky-border: #BAE6FD;
+  --color-pastel-sky-text: #075985;
+
+  /* 6. Pastel Peach & Coral */
+  --color-pastel-peach-bg: #FFF7ED;
+  --color-pastel-peach-border: #FED7AA;
+  --color-pastel-peach-text: #9A3412;
+
+  /* Primary Brand Pastels */
+  --color-purple-50: #FAF5FF;
+  --color-purple-100: #F3E8FF;
+  --color-purple-200: #E9D5FF;
+  --color-purple-300: #D8B4FE;
+  --color-purple-400: #C084FC;
+  --color-purple-500: #A855F7;
+  --color-purple-600: #7E22CE;
+  --color-purple-900: #3B0764;
+  --color-purple-950: #250242;
+
+  --color-rose-50: #FFF1F2;
+  --color-rose-100: #FFE4E6;
+  --color-rose-200: #FECDD3;
+  --color-rose-300: #FDA4AF;
+  --color-rose-400: #FB7185;
+  --color-rose-500: #F43F5E;
+  --color-rose-600: #E11D48;
+  --color-rose-900: #881337;
+
+  /* Subtle Gold Jewelry Accent */
+  --color-gold-300: #FDE68A;
+  --color-gold-400: #FCD34D;
+  --color-gold-500: #F59E0B;
+  --color-gold-600: #D97706;
+
+  /* Ultra-Crisp High-Contrast Typography */
+  --color-ivory: #0F172A;
+  --color-silver: #475569;
+  --color-bronze: #7C3AED;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-tertiary: #64748B;
+
+  --color-status-success: #059669;
+  --color-status-warning: #D97706;
+  --color-status-error: #E11D48;
+  --color-status-info: #0284C7;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-xxl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows for Light Mode */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 0 10px rgba(124, 58, 237, 0.03);
+  --shadow-museum: 0 15px 40px rgba(0, 0, 0, 0.06), 0 0 20px rgba(124, 58, 237, 0.04);
+  --shadow-watch: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-purple: 0 0 25px rgba(124, 58, 237, 0.12);
+  --shadow-rose: 0 0 25px rgba(225, 29, 72, 0.14);
+  --shadow-gold: 0 0 20px rgba(217, 119, 6, 0.18);
+}
+
+/* ========================================================================= */
+/* DARK MODE: Deep Velvet Aubergine / Obsidian with Fine Accents             */
+/* ========================================================================= */
+.dark, [data-theme='dark'] {
+  --color-canvas: #0E0617;
+  --color-surface-base: #170C22;
+  --color-surface-elevated: #211333;
+  --color-surface-glass: rgba(23, 12, 34, 0.92);
+  --color-surface-light: #2D1845;
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+  --color-border-elevated: rgba(192, 132, 252, 0.30);
+  --color-border-gold: rgba(251, 191, 36, 0.45);
+
+  /* Typography Colors in Dark Mode */
+  --color-ivory: #F8FAFC;
+  --color-silver: #E2E8F0;
+  --color-bronze: #FCD34D;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #E2E8F0;
+  --color-text-tertiary: #CBD5E1;
+
+  /* Shadows for Dark Mode */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(124, 58, 237, 0.20);
+  --shadow-museum: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(216, 177, 90, 0.15);
+  --shadow-watch: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-purple: 0 0 30px rgba(168, 85, 247, 0.28);
+  --shadow-rose: 0 0 30px rgba(244, 63, 94, 0.25);
+  --shadow-gold: 0 0 25px rgba(216, 177, 90, 0.40);
+}
+
+/* ========================================================================= */
+/* MULTI-PASTEL THEME FAMILIES (LIGHT & DARK DUAL DEFINITIONS)                */
+/* ========================================================================= */
+
+.theme-lavender {
+  --color-canvas: #FAF5FF;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F3E8FF;
+}
+.dark.theme-lavender, .dark .theme-lavender {
+  --color-canvas: #0E0617;
+  --color-surface-base: #170C22;
+  --color-surface-elevated: #211333;
+}
+
+.theme-soft-pink {
+  --color-canvas: #FFF1F2;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFE4E6;
+}
+.dark.theme-soft-pink, .dark .theme-soft-pink {
+  --color-canvas: #130713;
+  --color-surface-base: #1C0D1E;
+  --color-surface-elevated: #29142C;
+}
+
+.theme-blush {
+  --color-canvas: #FFF5F7;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFE4EC;
+}
+.dark.theme-blush, .dark .theme-blush {
+  --color-canvas: #120612;
+  --color-surface-base: #1B0C1C;
+  --color-surface-elevated: #281329;
+}
+
+.theme-rose {
+  --color-canvas: #FFF0F3;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFE4E9;
+}
+.dark.theme-rose, .dark .theme-rose {
+  --color-canvas: #130611;
+  --color-surface-base: #1C0B1B;
+  --color-surface-elevated: #291228;
+}
+
+.theme-mauve {
+  --color-canvas: #F8F5FB;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F0E8F8;
+}
+.dark.theme-mauve, .dark .theme-mauve {
+  --color-canvas: #0F0818;
+  --color-surface-base: #180D25;
+  --color-surface-elevated: #231435;
+}
+
+.theme-maroon {
+  --color-canvas: #FAF0F2;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #F6E2E6;
+}
+.dark.theme-maroon, .dark .theme-maroon {
+  --color-canvas: #14050D;
+  --color-surface-base: #1D0914;
+  --color-surface-elevated: #2B0F1E;
+}
+
+.theme-mint {
+  --color-canvas: #F0FDF4;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #DCFCE7;
+}
+.dark.theme-mint, .dark .theme-mint {
+  --color-canvas: #05140D;
+  --color-surface-base: #0B1E15;
+  --color-surface-elevated: #112B1E;
+}
+
+.theme-amber {
+  --color-canvas: #FFFBEB;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FEF3C7;
+}
+.dark.theme-amber, .dark .theme-amber {
+  --color-canvas: #140F05;
+  --color-surface-base: #1E170A;
+  --color-surface-elevated: #2B210F;
+}
+
+.theme-sky {
+  --color-canvas: #F0F9FF;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #E0F2FE;
+}
+.dark.theme-sky, .dark .theme-sky {
+  --color-canvas: #050F18;
+  --color-surface-base: #0B1724;
+  --color-surface-elevated: #112234;
+}
+
+.theme-peach {
+  --color-canvas: #FFF7ED;
+  --color-surface-base: #FFFFFF;
+  --color-surface-elevated: #FFEDD5;
+}
+.dark.theme-peach, .dark .theme-peach {
+  --color-canvas: #140B05;
+  --color-surface-base: #1E120A;
+  --color-surface-elevated: #2B1A0F;
+}
+
+/* ========================================================================= */
+/* TYPOGRAPHY UTILITIES                                                      */
+/* ========================================================================= */
+
+.text-display-xxl {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 4.5rem;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.text-display-xl {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 3.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+
+.text-display-l {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 3rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-heading-xl {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-heading-l {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.text-heading-m {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.text-heading-s {
+  font-family: 'Glacial Indifference', 'Illuma', 'Now', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.text-body-xl {
+  font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-body-l {
+  font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-body-m {
+  font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.text-body-s {
+  font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-caption {
+  font-family: 'Now', 'Glacial Indifference', 'Illuma', 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ========================================================================= */
+/* ANIMATION UTILITIES                                                       */
+/* ========================================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================================================= */
+/* GLASS, GLOW & GRADIENT UTILITIES                                          */
+/* ========================================================================= */
+
+.glass-panel,
+.glass-card {
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-museum);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(225, 29, 72, 0.35);
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.12), 0 0 30px rgba(225, 29, 72, 0.08);
+}
+
+.glass-futuristic-pastel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(225, 29, 72, 0.18);
+  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.06), 0 0 30px rgba(225, 29, 72, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-futuristic-pastel:hover {
+  border-color: rgba(225, 29, 72, 0.4);
+  box-shadow: 0 25px 60px rgba(124, 58, 237, 0.12), 0 0 40px rgba(225, 29, 72, 0.10);
+}
+
+.dark .glass-futuristic-pastel {
+  background: rgba(23, 12, 34, 0.88);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+.dark .glass-futuristic-pastel:hover {
+  border-color: rgba(244, 63, 94, 0.45);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(225, 29, 72, 0.20);
+}
+
+/* Atmospheric Glow Gradients for Light Theme */
+.pastel-rose-glow {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.20) 0%, rgba(251, 113, 133, 0) 70%);
+  filter: blur(120px);
+}
+
+.pastel-purple-glow {
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, rgba(147, 51, 234, 0) 70%);
+  filter: blur(140px);
+}
+
+.pastel-champagne-glow {
+  background: radial-gradient(circle, rgba(254, 205, 211, 0.18) 0%, rgba(254, 205, 211, 0) 70%);
+  filter: blur(140px);
+}
+
+/* Gradients for Text and Accents */
+.luxury-gradient-text,
+.purple-rose-gradient-text {
+  background: linear-gradient(135deg, #0F172A 0%, #7C3AED 45%, #E11D48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .luxury-gradient-text,
+.dark .purple-rose-gradient-text {
+  background: linear-gradient(135deg, #F8FAFC 0%, #C084FC 45%, #FB7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pastel-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.pastel-pill-lavender {
+  background: var(--color-pastel-lavender-bg);
+  border: 1px solid var(--color-pastel-lavender-border);
+  color: var(--color-pastel-lavender-text);
+}
+
+.pastel-pill-rose {
+  background: var(--color-pastel-rose-bg);
+  border: 1px solid var(--color-pastel-rose-border);
+  color: var(--color-pastel-rose-text);
+}
+
+.pastel-pill-mint {
+  background: var(--color-pastel-mint-bg);
+  border: 1px solid var(--color-pastel-mint-border);
+  color: var(--color-pastel-mint-text);
+}
+
+.pastel-pill-amber {
+  background: var(--color-pastel-amber-bg);
+  border: 1px solid var(--color-pastel-amber-border);
+  color: var(--color-pastel-amber-text);
+}
+
+.pastel-pill-sky {
+  background: var(--color-pastel-sky-bg);
+  border: 1px solid var(--color-pastel-sky-border);
+  color: var(--color-pastel-sky-text);
+}
+
+.pastel-pill-peach {
+  background: var(--color-pastel-peach-bg);
+  border: 1px solid var(--color-pastel-peach-border);
+  color: var(--color-pastel-peach-text);
+}
