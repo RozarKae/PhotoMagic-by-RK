@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { DEFAULT_PACKAGES, STUDIO_PROFILE, ROUTES } from '@photomagic/config';
+import { DEFAULT_PACKAGES, TEST_RUPEE_PACKAGE, STUDIO_PROFILE, ROUTES } from '@photomagic/config';
 import { formatCurrency } from '@photomagic/shared';
 import {
   ShieldCheck,
@@ -80,10 +80,23 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
 }) => {
   const receiptRef = useRef<HTMLDivElement>(null);
 
+  // REMOVABLE 1 RUPEE PAYMENT TESTING MODE
+  // When active or when packageId is 'pkg-test-rupee', payable amount is strictly ₹1.00 for live verification
+  const [isTestRupeeMode, setIsTestRupeeMode] = useState<boolean>(() => {
+    return packageId === 'pkg-test-rupee' || customPackagePrice === 1;
+  });
+
   // Find selected package
   const matchedPackage = useMemo(() => {
-    return DEFAULT_PACKAGES.find((p) => p.id === packageId) || DEFAULT_PACKAGES[2];
-  }, [packageId]);
+    if (packageId === 'pkg-test-rupee' || isTestRupeeMode) {
+      return TEST_RUPEE_PACKAGE;
+    }
+    return (
+      DEFAULT_PACKAGES.find((p) => p.id === packageId) ||
+      DEFAULT_PACKAGES.find((p) => p.id === 'pkg-obsidian') ||
+      DEFAULT_PACKAGES[0]
+    );
+  }, [packageId, isTestRupeeMode]);
 
   const packageName = customPackageName || matchedPackage.name;
   const basePrice = customPackagePrice || matchedPackage.price;
@@ -130,12 +143,6 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [receiptData, setReceiptData] = useState<any>(null);
   const [razorpayReady, setRazorpayReady] = useState<boolean>(false);
-
-  // REMOVABLE 1 RUPEE PAYMENT TESTING MODE
-  // When active or when packageId is 'pkg-test-rupee', payable amount is strictly ₹1.00 for live verification
-  const [isTestRupeeMode, setIsTestRupeeMode] = useState<boolean>(() => {
-    return packageId === 'pkg-test-rupee' || customPackagePrice === 1;
-  });
 
   // Calculated Payable Amount based on structure & test mode
   const { payableAmount, discountAmount, remainingBalance } = useMemo(() => {
@@ -632,9 +639,21 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-full border border-emerald-300 dark:border-emerald-800">
-          <Lock size={12} />
-          <span>256-Bit SSL Encrypted Bank Channel</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-xs font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-full border border-emerald-300 dark:border-emerald-800">
+            <Lock size={12} />
+            <span>256-Bit SSL Encrypted Bank Channel</span>
+          </div>
+          {!isTestRupeeMode && (
+            <button
+              type="button"
+              onClick={() => setIsTestRupeeMode(true)}
+              className="text-[11px] font-mono text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
+              title="Activate removable ₹1 live testing mode"
+            >
+              [QA ₹1 Test]
+            </button>
+          )}
         </div>
       </div>
 
@@ -835,61 +854,32 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
       ) : (
         /* CHECKOUT CONFIGURATOR & PAYMENT METHODS */
         <div className="flex flex-col gap-6">
-          {/* REMOVABLE 1 RUPEE PAYMENT TESTING BANNER */}
-          <div
-            className={`p-5 rounded-3xl border transition-all ${
-              isTestRupeeMode
-                ? 'bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-emerald-500/10 border-amber-500/50 dark:border-amber-400/50 shadow-sm'
-                : 'bg-white dark:bg-[#150A22] border-slate-200 dark:border-purple-900/40'
-            }`}
-          >
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex items-start gap-3.5">
-                <div
-                  className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-                    isTestRupeeMode
-                      ? 'bg-amber-500 text-slate-950 font-bold shadow-md'
-                      : 'bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300'
-                  }`}
-                >
-                  <FlaskConical size={20} />
+          {/* REMOVABLE 1 RUPEE PAYMENT TESTING BANNER (ONLY DISPLAYED IN TEST MODE) */}
+          {isTestRupeeMode && (
+            <div className="p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 dark:border-amber-400/30 flex flex-col md:flex-row md:items-center justify-between gap-4 animate-in fade-in duration-200">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 font-bold flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <FlaskConical size={18} />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-hero font-bold text-sm text-slate-900 dark:text-white">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-hero font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
                       Live Payment Gateway ₹1 Verification Mode
                     </span>
-                    <span
-                      className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                        isTestRupeeMode
-                          ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
-                          : 'bg-slate-100 dark:bg-purple-950/60 text-slate-700 dark:text-purple-300 border border-slate-300 dark:border-purple-800'
-                      }`}
-                    >
-                      {isTestRupeeMode ? '● Active: ₹1.00 Live Test' : 'Removable QA Mode'}
+                    <span className="text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 uppercase">
+                      Active: ₹1.00
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-                    {isTestRupeeMode ? (
-                      <>
-                        Payable amount is locked to <strong>₹1.00</strong> to test live UPI QR
-                        scanning, Google Pay / PhonePe deep-links, and Razorpay debit/credit cards
-                        with real settlement to <strong>{STUDIO_BANKING_DETAILS.phoneUpiId}</strong>{' '}
-                        (Rozar Khan).
-                      </>
-                    ) : (
-                      <>
-                        Need to test live UPI QR or Razorpay before client checkout? Switch to the
-                        removable <strong>₹1 test mode</strong> to test real payment processing for
-                        ₹1.00.
-                      </>
-                    )}
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug mt-1">
+                    Payable amount is locked to <strong>₹1.00</strong> to test UPI QR scanning,
+                    mobile apps, and Razorpay live cards to{' '}
+                    <strong>{STUDIO_BANKING_DETAILS.phoneUpiId}</strong> (Rozar Khan).
                   </p>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -899,37 +889,22 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
                     setEventCity('Madurai');
                     setEventDate(new Date().toISOString().split('T')[0]);
                   }}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-purple-950/60 hover:bg-slate-200 dark:hover:bg-purple-900/60 border border-slate-300 dark:border-purple-800 text-slate-800 dark:text-purple-200 text-xs font-mono font-semibold transition-colors flex items-center gap-1.5"
-                  title="Autofill test coordinates"
+                  className="px-3.5 py-2 rounded-xl bg-white dark:bg-purple-950/80 hover:bg-slate-100 border border-slate-300 dark:border-purple-800 text-slate-800 dark:text-purple-200 text-xs font-mono font-semibold transition-colors"
                 >
-                  <Sparkles size={13} className="text-amber-500" />
-                  <span>Autofill QA Data</span>
+                  Autofill QA Data
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setIsTestRupeeMode((prev) => !prev)}
-                  className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm ${
-                    isTestRupeeMode
-                      ? 'bg-amber-600 hover:bg-amber-700 text-white'
-                      : 'bg-purple-900 hover:bg-purple-800 text-white'
-                  }`}
+                  onClick={() => setIsTestRupeeMode(false)}
+                  className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 shadow-sm"
                 >
-                  {isTestRupeeMode ? (
-                    <>
-                      <X size={14} />
-                      <span>Exit ₹1 Mode ({formatCurrency(grossTotal)})</span>
-                    </>
-                  ) : (
-                    <>
-                      <Zap size={14} className="text-amber-300" />
-                      <span>Switch to ₹1 Mode</span>
-                    </>
-                  )}
+                  <X size={14} />
+                  <span>Exit ₹1 Mode</span>
                 </button>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Column: Client Info & Payment Channels */}

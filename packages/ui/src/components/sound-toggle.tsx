@@ -84,9 +84,6 @@ export const SoundToggle: React.FC<SoundToggleProps> = ({
           {!isMuted ? 'Audio' : 'Muted'}
         </span>
       )}
-      {!isMuted && (
-        <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-ping opacity-75" />
-      )}
     </button>
   );
 };
