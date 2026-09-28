@@ -3,6 +3,35 @@ import { CmsPackage } from '@photomagic/types';
 export type PackageItem = CmsPackage;
 
 export const DEFAULT_PACKAGES: CmsPackage[] = [
+  // =============================================================================
+  // REMOVABLE 1 RUPEE PAYMENT TESTING TOKEN (Delete or disable when testing is complete)
+  // =============================================================================
+  {
+    id: 'pkg-test-rupee',
+    name: 'Live Gateway ₹1 Testing Token',
+    creativeTier: 'Live Payment Gateway Verification • ₹1 Removable Test',
+    description:
+      'Removable ₹1 test transaction to test and verify live UPI QR codes, GPay/PhonePe deep-links, and Razorpay payment gateway.',
+    price: 1,
+    currency: 'INR',
+    formattedPrice: '₹1',
+    coverageDays: 1,
+    components: [
+      '₹1 Live Production Payment Test',
+      'Immediate UPI QR Code (Auto-fills ₹1.00)',
+      'GPay / PhonePe / Paytm Mobile Deep-Links',
+      'Instant Webhook & Tax Invoice Verification',
+    ],
+    deliverables: [
+      'Official Tax Invoice & Verification Receipt (PDF)',
+      'Instant Confirmation SMS & WhatsApp Dispatch',
+    ],
+    complimentaryItems: ['Live Gateway Testing Mode'],
+    media: '/images/hero_wedding_couple.png',
+    featured: false,
+    status: 'published',
+    badge: '₹1 Test Mode',
+  },
   {
     id: 'pkg-moonstone',
     name: 'The Moonstone Anthology',
