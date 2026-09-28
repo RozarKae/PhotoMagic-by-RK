@@ -13,6 +13,7 @@ export const ROUTES = {
     BOOKING: '/book',
     CHECK_DATE: '/book',
     CHECKOUT: '/checkout',
+    INVOICE: '/invoice',
     CONTACT: '/contact',
     MY_EVENTS: '/portal',
   },

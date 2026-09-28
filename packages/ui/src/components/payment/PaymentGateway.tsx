@@ -300,6 +300,54 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
     }
   };
 
+  // Unified Success Handler & Auto-Redirect to Dedicated Invoice Page
+  const handlePaymentComplete = (receipt: any) => {
+    setReceiptData(receipt);
+    setIsPaid(true);
+
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('photomagic_latest_receipt', JSON.stringify(receipt));
+        localStorage.setItem(`photomagic_receipt_${receipt.referenceId}`, JSON.stringify(receipt));
+        sessionStorage.setItem('photomagic_latest_receipt', JSON.stringify(receipt));
+      }
+    } catch (e) {
+      console.warn('[Storage Error]', e);
+    }
+
+    if (onPaymentSuccess) {
+      try {
+        onPaymentSuccess(receipt);
+      } catch (err) {
+        console.warn('[onPaymentSuccess Error]', err);
+      }
+    }
+
+    const searchParams = new URLSearchParams({
+      ref: receipt.referenceId || '',
+      pkg: receipt.packageName || effectivePackageName || '',
+      paid: String(receipt.paidAmount || payableAmount || 0),
+      total: String(receipt.grossTotal || effectiveGrossTotal || 0),
+      bal: String(receipt.remainingBalance || effectiveRemainingBalance || 0),
+      name: receipt.clientName || clientName || '',
+      phone: receipt.clientPhone || clientPhone || '',
+      email: receipt.clientEmail || clientEmail || '',
+      date: receipt.eventDate || eventDate || '',
+      city: receipt.eventCity || eventCity || '',
+      method: receipt.paymentMethod || paymentMethod || 'upi_qr',
+      tx: receipt.transactionId || '',
+      struct: receipt.paymentStructure || paymentStructure,
+      time: receipt.verifiedAt || new Date().toISOString(),
+    });
+
+    setProcessingStep('Payment Verified! Redirecting to your official invoice...');
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        window.location.href = `/invoice?${searchParams.toString()}`;
+      }
+    }, 1200);
+  };
+
   // 1. RAZORPAY STANDARD GATEWAY EXECUTION
   const handleRazorpayPayment = async () => {
     if (!clientName || !clientPhone) {
@@ -402,9 +450,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
 
             const verifyData = await verifyRes.json();
             if (verifyData.success && verifyData.receipt) {
-              setReceiptData(verifyData.receipt);
-              setIsPaid(true);
-              if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+              handlePaymentComplete(verifyData.receipt);
             } else {
               throw new Error(verifyData.error || 'Verification failed');
             }
@@ -450,10 +496,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
           });
           const verifyData = await verifyRes.json();
           if (verifyData.success && verifyData.receipt) {
-            setReceiptData(verifyData.receipt);
-            setIsPaid(true);
-            setIsProcessing(false);
-            if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+            handlePaymentComplete(verifyData.receipt);
           } else {
             throw new Error(verifyData.error || 'Simulated verification failed');
           }
@@ -503,9 +546,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
 
       const verifyData = await verifyRes.json();
       if (verifyData.success && verifyData.receipt) {
-        setReceiptData(verifyData.receipt);
-        setIsPaid(true);
-        if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+        handlePaymentComplete(verifyData.receipt);
       } else {
         throw new Error(verifyData.error || 'Test verification failed');
       }
@@ -556,9 +597,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
 
       const verifyData = await verifyRes.json();
       if (verifyData.success && verifyData.receipt) {
-        setReceiptData(verifyData.receipt);
-        setIsPaid(true);
-        if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+        handlePaymentComplete(verifyData.receipt);
       } else {
         throw new Error(verifyData.error || 'Verification failed');
       }
@@ -608,9 +647,7 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
 
       const verifyData = await verifyRes.json();
       if (verifyData.success && verifyData.receipt) {
-        setReceiptData(verifyData.receipt);
-        setIsPaid(true);
-        if (onPaymentSuccess) onPaymentSuccess(verifyData.receipt);
+        handlePaymentComplete(verifyData.receipt);
       } else {
         throw new Error(verifyData.error || 'Bank transfer logging failed');
       }
@@ -844,8 +881,16 @@ export const PaymentGateway: React.FC<PaymentGatewayProps> = ({
               <span>Send WhatsApp Dispatch</span>
             </a>
 
+            <Link
+              href={`/invoice?ref=${encodeURIComponent(receiptData.referenceId || '')}&pkg=${encodeURIComponent(receiptData.packageName || '')}&paid=${receiptData.paidAmount || 0}&total=${receiptData.grossTotal || 0}&bal=${receiptData.remainingBalance || 0}&name=${encodeURIComponent(receiptData.clientName || '')}&phone=${encodeURIComponent(receiptData.clientPhone || '')}&email=${encodeURIComponent(receiptData.clientEmail || '')}&date=${encodeURIComponent(receiptData.eventDate || '')}&city=${encodeURIComponent(receiptData.eventCity || '')}&method=${encodeURIComponent(receiptData.paymentMethod || '')}&tx=${encodeURIComponent(receiptData.transactionId || '')}&struct=${encodeURIComponent(receiptData.paymentStructure || '')}&time=${encodeURIComponent(receiptData.verifiedAt || '')}`}
+              className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-700 via-purple-600 to-rose-600 hover:opacity-95 text-white text-xs font-nav font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg transition-all"
+            >
+              <FileText size={15} />
+              <span>Open Dedicated Invoice & Share Page →</span>
+            </Link>
+
             <Link href={ROUTES.PUBLIC.MY_EVENTS}>
-              <button className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-700 to-rose-600 text-white text-xs font-nav font-bold uppercase tracking-wider shadow-lg">
+              <button className="px-7 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-nav font-bold uppercase tracking-wider shadow-lg border border-white/10">
                 Enter Client Portal (My Events)
               </button>
             </Link>
